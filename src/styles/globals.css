@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Official design tokens (owner-supplied design guide — do not alter).
+   Declared in @theme so Tailwind emits them as :root custom properties with
+   these exact names and generates matching utilities (bg-warm-ivory, …).
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-warm-ivory: #f7f0e4;
+  --color-soft-cream: #fff9f0;
+  --color-card-surface: #fffcf7;
+  --color-champagne-gold: #c5a36b;
+  --color-muted-gold: #a28a62;
+  --color-muted-sage: #899078;
+  --color-dark-walnut: #493628;
+  --color-secondary-text: #7b6a58;
+  --color-soft-border: #e5d5bd;
+  --color-primary: #b8860b;
+  --color-secondary: #a34836;
+
+  /* Radius: controls & cards 6px, larger interactive surfaces 12px. */
+  --radius-control: 6px;
+  --radius-surface: 12px;
+
+  /* Restrained, warm-tinted shadows. */
+  --shadow-soft: 0 1px 2px rgb(73 54 40 / 0.05), 0 6px 18px -10px rgb(73 54 40 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(73 54 40 / 0.05), 0 18px 40px -20px rgb(73 54 40 / 0.28);
+
+  --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --breakpoint-xs: 23.75rem;
+}
+
+@theme inline {
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+}
+
+/* ── Typography hierarchy ───────────────────────────────────────────────── */
+@utility text-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  @media (width >= 40rem) {
+    font-size: 48px;
+  }
+}
+@utility text-h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+@utility text-h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.25;
+}
+@utility text-h3 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+}
+@utility text-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+}
+@utility text-support {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+}
+@utility text-meta {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+/* Large serif numerals (countdown, winner positions). */
+@utility text-numeral {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    background-color: var(--color-warm-ivory);
+    color: var(--color-dark-walnut);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background-color: rgb(197 163 107 / 0.35);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  [id] {
+    scroll-margin-top: 96px;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+}
+
+/* Thin gold rule used to separate editorial blocks. */
+@utility rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-champagne-gold), transparent);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

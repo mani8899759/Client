@@ -1,0 +1,149 @@
+{
+  "generatedBy": "scripts/import-ai-assets.mjs",
+  "assets": [
+    {
+      "slot": "hero",
+      "file": "priya-arjun-hero.webp",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "slot": "couple-editorial-portrait",
+      "file": "couple-editorial-portrait.webp",
+      "width": 896,
+      "height": 1200
+    },
+    {
+      "slot": "bride-detail",
+      "file": "bride-detail.webp",
+      "width": 896,
+      "height": 1200
+    },
+    {
+      "slot": "groom-detail",
+      "file": "groom-detail.webp",
+      "width": 896,
+      "height": 1200
+    },
+    {
+      "slot": "wedding-environment",
+      "file": "wedding-environment.webp",
+      "width": 1152,
+      "height": 768
+    },
+    {
+      "slot": "wedding-details",
+      "file": "wedding-details.webp",
+      "width": 896,
+      "height": 1120
+    },
+    {
+      "slot": "story-first-meeting",
+      "file": "story-first-meeting.webp",
+      "width": 896,
+      "height": 1200
+    },
+    {
+      "slot": "couple-prewedding",
+      "file": "couple-prewedding.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "slot": "engagement-editorial",
+      "file": "engagement-editorial.webp",
+      "width": 896,
+      "height": 1120
+    },
+    {
+      "slot": "story-portrait",
+      "file": "story-portrait.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "slot": "event-engagement",
+      "file": "engagement-celebration.webp",
+      "width": 960,
+      "height": 768
+    },
+    {
+      "slot": "event-haldi",
+      "file": "haldi-celebration.webp",
+      "width": 1200,
+      "height": 896
+    },
+    {
+      "slot": "event-mehendi",
+      "file": "mehendi-celebration.webp",
+      "width": 1200,
+      "height": 896
+    },
+    {
+      "slot": "event-wedding",
+      "file": "wedding-ceremony.webp",
+      "width": 960,
+      "height": 768
+    },
+    {
+      "slot": "event-reception",
+      "file": "reception-celebration.webp",
+      "width": 960,
+      "height": 768
+    },
+    {
+      "slot": "gallery-01",
+      "file": "gallery-01.webp",
+      "width": 896,
+      "height": 1200
+    },
+    {
+      "slot": "gallery-02",
+      "file": "gallery-02.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "slot": "gallery-03",
+      "file": "gallery-03.webp",
+      "width": 716,
+      "height": 896
+    },
+    {
+      "slot": "gallery-04",
+      "file": "gallery-04.webp",
+      "width": 896,
+      "height": 896
+    },
+    {
+      "slot": "gallery-05",
+      "file": "gallery-05.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "slot": "gallery-06",
+      "file": "gallery-06.webp",
+      "width": 896,
+      "height": 1200
+    },
+    {
+      "slot": "gallery-07",
+      "file": "gallery-07.webp",
+      "width": 1152,
+      "height": 768
+    },
+    {
+      "slot": "gallery-08",
+      "file": "gallery-08.webp",
+      "width": 896,
+      "height": 1120
+    },
+    {
+      "slot": "location-venue",
+      "file": "venue-courtyard.webp",
+      "width": 1376,
+      "height": 768
+    }
+  ]
+}

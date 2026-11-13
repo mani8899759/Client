@@ -1,0 +1,221 @@
+{
+  "style": "Premium editorial Indian wedding photography, fictional South Asian couple, natural skin texture, realistic soft natural light, warm ivory, champagne gold, muted gold, dark walnut, soft cream and muted sage palette, shallow depth of field, medium-format film look, culturally authentic attire and decor, no text, no lettering, no watermark, no logos, no frames",
+  "slots": [
+    {
+      "slot": "hero",
+      "file": "priya-arjun-hero.webp",
+      "group": "homepage",
+      "ratio": "16:9",
+      "usedFor": "Homepage hero",
+      "alt": "An Indian bride and groom in wedding attire beneath a softly lit floral mandap",
+      "prompt": "Wide landscape: bride in an ivory and gold silk lehenga with fine zari work and groom in a champagne sherwani with a soft turban, standing close beneath a mandap draped in ivory fabric and marigold strands, golden-hour light from the left, the couple placed in the right third, generous calm negative space on the left and upper area for a heading"
+    },
+    {
+      "slot": "couple-editorial-portrait",
+      "file": "couple-editorial-portrait.webp",
+      "group": "homepage",
+      "ratio": "4:5",
+      "usedFor": "Welcome section",
+      "alt": "Editorial portrait of an Indian couple in wedding attire",
+      "prompt": "Vertical editorial portrait, couple facing each other, foreheads nearly touching, bride's dupatta catching light, haveli courtyard with carved sandstone arches softly out of focus"
+    },
+    {
+      "slot": "bride-detail",
+      "file": "bride-detail.webp",
+      "group": "homepage",
+      "ratio": "4:5",
+      "usedFor": "Couple introduction — bride",
+      "alt": "Close detail of a bride's hands with mehendi and gold bangles",
+      "prompt": "Vertical close-up: bride's hands with intricate mehendi, layered gold and ivory bangles, holding the edge of an embroidered ivory dupatta, face not shown"
+    },
+    {
+      "slot": "groom-detail",
+      "file": "groom-detail.webp",
+      "group": "homepage",
+      "ratio": "4:5",
+      "usedFor": "Couple introduction — groom",
+      "alt": "Close detail of a groom adjusting the cuff of his sherwani",
+      "prompt": "Vertical close-up: groom adjusting the cuff of a champagne silk sherwani with antique gold buttons, a pearl mala visible, face cropped out"
+    },
+    {
+      "slot": "wedding-environment",
+      "file": "wedding-environment.webp",
+      "group": "homepage",
+      "ratio": "3:2",
+      "usedFor": "Venue preview",
+      "alt": "A palace courtyard prepared for an Indian wedding with ivory drapes and floral garlands",
+      "prompt": "Landscape: heritage palace courtyard prepared for a wedding at dusk, ivory drapes, rows of brass diyas, marigold and rose garlands, no people"
+    },
+    {
+      "slot": "wedding-details",
+      "file": "wedding-details.webp",
+      "group": "homepage",
+      "ratio": "4:5",
+      "usedFor": "Story preview secondary image",
+      "alt": "Wedding details: brass thali, rose petals and gold jewellery on ivory silk",
+      "prompt": "Vertical still life: brass puja thali with rose petals, a kundan necklace and a folded ivory silk dupatta on a linen table, soft window light"
+    },
+    {
+      "slot": "story-first-meeting",
+      "file": "story-first-meeting.webp",
+      "group": "story",
+      "ratio": "4:5",
+      "usedFor": "Story chapter illustration",
+      "alt": "An Indian couple sharing a quiet laugh at a café",
+      "prompt": "Vertical: young couple in elegant everyday Indian clothing laughing over chai at a sunlit café table, candid, warm muted tones"
+    },
+    {
+      "slot": "couple-prewedding",
+      "file": "couple-prewedding.webp",
+      "group": "story",
+      "ratio": "3:2",
+      "usedFor": "Story preview and story chapter illustration",
+      "alt": "An Indian couple walking together through a garden at golden hour",
+      "prompt": "Landscape pre-wedding scene: couple walking hand in hand through a Mughal garden at golden hour, bride in a pastel sage anarkali, groom in an ivory kurta, seen from a distance"
+    },
+    {
+      "slot": "engagement-editorial",
+      "file": "engagement-editorial.webp",
+      "group": "story",
+      "ratio": "4:5",
+      "usedFor": "Engagement chapter / event illustration",
+      "alt": "Close view of an engagement ring being placed on a hand",
+      "prompt": "Vertical close-up of a ring exchange, hands only, soft champagne silk sleeves, blurred fairy lights and white flowers behind"
+    },
+    {
+      "slot": "story-portrait",
+      "file": "story-portrait.webp",
+      "group": "story",
+      "ratio": "3:2",
+      "usedFor": "Story closing illustration",
+      "alt": "An Indian couple silhouetted against a soft evening sky",
+      "prompt": "Landscape: couple seated on the steps of a stepwell at dusk, soft backlight, quiet and intimate, faces in gentle shadow"
+    },
+    {
+      "slot": "event-engagement",
+      "file": "engagement-celebration.webp",
+      "group": "events",
+      "ratio": "5:4",
+      "usedFor": "Engagement event",
+      "alt": "Engagement celebration with white flowers and soft lights",
+      "prompt": "Engagement ceremony setting with white florals, low brass lanterns and an ivory sofa, guests softly out of focus"
+    },
+    {
+      "slot": "event-haldi",
+      "file": "haldi-celebration.webp",
+      "group": "events",
+      "ratio": "5:4",
+      "usedFor": "Haldi event",
+      "alt": "Haldi ceremony with turmeric paste, marigolds and yellow drapes",
+      "prompt": "Haldi ceremony: brass bowls of turmeric paste, marigold petals mid-air, yellow and ivory drapes, joyful candid hands, natural daylight"
+    },
+    {
+      "slot": "event-mehendi",
+      "file": "mehendi-celebration.webp",
+      "group": "events",
+      "ratio": "5:4",
+      "usedFor": "Mehendi event",
+      "alt": "Mehendi ceremony with henna-decorated hands and floral cushions",
+      "prompt": "Mehendi afternoon: henna being applied to a bride's palms, sage and blush floor cushions, jasmine strands, soft shade light"
+    },
+    {
+      "slot": "event-wedding",
+      "file": "wedding-ceremony.webp",
+      "group": "events",
+      "ratio": "5:4",
+      "usedFor": "Wedding ceremony",
+      "alt": "Wedding ceremony around a sacred fire beneath a floral mandap",
+      "prompt": "Wedding pheras around a small sacred fire beneath a floral mandap, bride and groom seen from behind, warm firelight, ivory and gold decor"
+    },
+    {
+      "slot": "event-reception",
+      "file": "reception-celebration.webp",
+      "group": "events",
+      "ratio": "5:4",
+      "usedFor": "Reception event",
+      "alt": "Elegant evening reception with candlelit tables",
+      "prompt": "Evening reception: long candlelit tables with ivory linen, gold cutlery and low white florals, warm bokeh, no people in focus"
+    },
+    {
+      "slot": "gallery-01",
+      "file": "gallery-01.webp",
+      "group": "gallery",
+      "ratio": "4:5",
+      "usedFor": "Gallery",
+      "alt": "Bride's jewellery and dupatta detail",
+      "prompt": "Vertical detail of a maang tikka and kundan earrings against an ivory dupatta"
+    },
+    {
+      "slot": "gallery-02",
+      "file": "gallery-02.webp",
+      "group": "gallery",
+      "ratio": "3:2",
+      "usedFor": "Gallery",
+      "alt": "Couple portrait in a sandstone courtyard",
+      "prompt": "Landscape couple portrait in a sandstone courtyard, couple small in frame, symmetrical arches"
+    },
+    {
+      "slot": "gallery-03",
+      "file": "gallery-03.webp",
+      "group": "gallery",
+      "ratio": "4:5",
+      "usedFor": "Gallery",
+      "alt": "Marigold and rose floral decoration",
+      "prompt": "Vertical close-up of marigold and rose garlands hanging against ivory fabric"
+    },
+    {
+      "slot": "gallery-04",
+      "file": "gallery-04.webp",
+      "group": "gallery",
+      "ratio": "1:1",
+      "usedFor": "Gallery",
+      "alt": "Groom's turban and sehra detail",
+      "prompt": "Square detail of a champagne safa with a pearl sehra, shallow focus"
+    },
+    {
+      "slot": "gallery-05",
+      "file": "gallery-05.webp",
+      "group": "gallery",
+      "ratio": "3:2",
+      "usedFor": "Gallery",
+      "alt": "Celebration with family dancing",
+      "prompt": "Landscape candid celebration, family dancing in motion blur under string lights, faces not distinct"
+    },
+    {
+      "slot": "gallery-06",
+      "file": "gallery-06.webp",
+      "group": "gallery",
+      "ratio": "4:5",
+      "usedFor": "Gallery",
+      "alt": "Couple holding hands with mehendi and bangles",
+      "prompt": "Vertical: couple's joined hands, mehendi and bangles, ivory and gold fabrics"
+    },
+    {
+      "slot": "gallery-07",
+      "file": "gallery-07.webp",
+      "group": "gallery",
+      "ratio": "3:2",
+      "usedFor": "Gallery",
+      "alt": "Brass diyas lit along steps at dusk",
+      "prompt": "Landscape: rows of lit brass diyas along stone steps at dusk"
+    },
+    {
+      "slot": "gallery-08",
+      "file": "gallery-08.webp",
+      "group": "gallery",
+      "ratio": "4:5",
+      "usedFor": "Gallery",
+      "alt": "Bride in an ivory lehenga seen from behind",
+      "prompt": "Vertical: bride seen from behind walking down a corridor, long embroidered dupatta trailing"
+    },
+    {
+      "slot": "location-venue",
+      "file": "venue-courtyard.webp",
+      "group": "location",
+      "ratio": "16:9",
+      "usedFor": "Locations page header visual",
+      "alt": "A heritage venue courtyard lit for an evening celebration",
+      "prompt": "Wide: heritage haveli courtyard lit with lanterns for an evening celebration, no people, no signage"
+    }
+  ]
+}

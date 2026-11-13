@@ -1,0 +1,1306 @@
+# SUPER MASTER IMPLEMENTATION PROMPT
+# PRIYA & ARJUN — PREMIUM WEDDING WEBSITE
+
+## PROJECT IDENTITY
+
+**Website Name:** Priya & Arjun — Wedding Celebration
+
+**Bride:** Priya
+
+**Groom:** Arjun
+
+**Wedding Date:** December 1, 2026
+
+**Timezone:** Asia/Kolkata (IST, UTC+05:30)
+
+**Project Type:** Premium Indian Wedding Website + Guest Registration + QR Verification + Lucky Draw + Private Admin Dashboard.
+
+---
+
+# 1. YOUR ROLE AND RESPONSIBILITY
+
+Act as a senior full-stack developer, software architect, premium UI/UX designer, AI visual-content director, database engineer, authentication specialist and quality assurance engineer.
+
+Your responsibility is to complete the entire Priya & Arjun wedding website.
+
+This is not just a landing page.
+
+Build a complete, interconnected, production-ready application containing:
+
+1. Premium public wedding website.
+2. AI-generated wedding imagery.
+3. Wedding countdown.
+4. Love story and timeline.
+5. Wedding events and invitations.
+6. Wedding photography and video gallery.
+7. Wedding venues and directions.
+8. Open guest registration.
+9. Bride Side and Groom Side selection.
+10. Common QR-based verification.
+11. Automated participant verification.
+12. Secure lucky draw with 11 winners by default.
+13. Public winners announcement.
+14. YouTube live streaming.
+15. Complete admin dashboard.
+16. Secure email-and-password administrator authentication.
+17. Website content management.
+18. Registration and verification management.
+19. Participant management.
+20. Lucky draw management.
+21. Live-stream management.
+22. Production deployment readiness.
+
+Every module must work with the same application architecture and database.
+
+Do not develop these as disconnected systems.
+
+---
+
+# 2. FINAL WEDDING INFORMATION
+
+Use the following information throughout the entire application.
+
+```text
+Bride Name: Priya
+Groom Name: Arjun
+
+Website Title: Priya & Arjun
+Website Subtitle: Wedding Celebration
+
+Wedding Date: 01 December 2026
+Date Display: December 1, 2026
+
+Timezone: Asia/Kolkata
+Timezone Offset: UTC+05:30
+```
+
+Use these names everywhere appropriate:
+
+- Navigation branding.
+- Homepage hero.
+- Welcome message.
+- Countdown section.
+- Love story introduction.
+- Events page.
+- Gallery page.
+- Registration page.
+- QR verification page.
+- Winner announcement.
+- Footer.
+- SEO metadata.
+- Social sharing metadata.
+- Admin dashboard website settings.
+
+Do not leave generic placeholder names such as Bride Name, Groom Name, Couple A or Couple B on the published website.
+
+The admin should still be able to edit the couple names later.
+
+---
+
+# 3. WEDDING COUNTDOWN — DECEMBER 1, 2026
+
+Implement a fully functional live wedding countdown.
+
+The wedding date is December 1, 2026.
+
+Use the Asia/Kolkata timezone.
+
+Display:
+
+- Days
+- Hours
+- Minutes
+- Seconds
+
+Example visual:
+
+```text
+PRIYA & ARJUN
+
+ARE GETTING MARRIED
+
+01 DECEMBER 2026
+
+[ 18 DAYS ] [ 12 HOURS ] [ 35 MINUTES ] [ 40 SECONDS ]
+```
+
+The example countdown values above are illustrative only. Calculate the actual remaining time dynamically.
+
+## Countdown implementation rules
+
+1. Calculate using the configured event date and timezone.
+2. Do not hardcode a countdown value.
+3. Update every second.
+4. Avoid hydration mismatch errors in Next.js.
+5. Handle timezone conversion correctly.
+6. Avoid negative countdown values.
+7. When the wedding day arrives, show an elegant message such as:
+
+   **Today is the day!**
+
+8. After the configured wedding time, if an exact time is provided, show:
+
+   **The celebration has begun!**
+
+9. If the ceremony time is not configured, treat December 1, 2026 as a date-only event and count down to the beginning of that day in India.
+10. Allow an administrator to configure the precise wedding ceremony time later.
+
+The wedding date and countdown must come from central website settings, not from duplicated hardcoded values across components.
+
+The homepage must immediately display the correct wedding date.
+
+---
+
+# 4. AI-GENERATED WEDDING IMAGES — IMPORTANT REQUIREMENT
+
+I want AI-generated couple images and wedding-themed visuals integrated throughout the website wherever they genuinely improve the visual experience.
+
+Do not leave the website looking empty because actual wedding photographs are not yet available.
+
+Act as an AI visual-content director.
+
+Generate a consistent collection of high-quality, premium Indian wedding visuals.
+
+## 4.1 Visual direction
+
+Generate sophisticated Indian wedding imagery featuring a fictional South Asian couple as illustrative design assets.
+
+Visual characteristics:
+
+- Traditional Indian wedding styling.
+- Elegant Indian wedding clothing.
+- Rich but naturally balanced wedding colours.
+- Premium editorial photography.
+- Natural skin texture.
+- Realistic lighting.
+- Beautiful photography compositions.
+- Authentic-looking Indian wedding environments.
+- Sophisticated and culturally appropriate visual presentation.
+- No excessive artificial-looking filters.
+- No cartoonish appearance.
+- No watermarks.
+- No embedded text.
+- No logos.
+
+The imagery must complement the official wedding design system:
+
+- Warm ivory.
+- Champagne gold.
+- Muted gold.
+- Dark walnut.
+- Soft cream.
+- Muted sage.
+- Traditional wedding accents.
+
+## 4.2 Important image identity rule
+
+The generated couple is a fictional illustrative couple, not a verified photograph of the actual Priya and Arjun.
+
+Do not attempt to fabricate the actual couple's likeness using only their names.
+
+Where authentic couple photographs become available, the admin must be able to replace the illustrative images.
+
+Maintain an internal media flag:
+
+```text
+is_ai_generated
+is_placeholder
+```
+
+Identify illustrative assets in the admin media manager, so they can be replaced easily.
+
+Do not falsely represent generated portraits as verified real wedding photographs.
+
+## 4.3 Image-generation requirements
+
+Create a consistent visual collection.
+
+Where the image-generation tool supports reference images, use the same fictional couple reference to maintain continuity across scenes.
+
+Generate different compositions rather than repeating the same image everywhere.
+
+If consistent character generation is unavailable, prefer complementary wedding details, cropped portraits and environmental scenes rather than obviously inconsistent faces.
+
+## 4.4 Required image assets
+
+Generate the following assets.
+
+### A. Homepage hero
+
+Create a premium landscape wedding photograph.
+
+Composition:
+
+- A beautiful fictional Indian couple.
+- Elegant wedding attire.
+- Traditional Indian wedding atmosphere.
+- Editorial photography composition.
+- Cinematic but natural lighting.
+- Space for website heading and countdown overlay.
+- Wide horizontal composition.
+- No text.
+
+Preferred ratio: 16:9.
+
+### B. Homepage secondary visuals
+
+Generate:
+
+- Couple portrait.
+- Romantic pre-wedding scene.
+- Traditional Indian wedding environment.
+- Elegant wedding-detail photograph.
+
+### C. Love story imagery
+
+Generate different scenes representing:
+
+- First meeting.
+- Romantic outdoor moment.
+- Engagement.
+- Couple portrait.
+
+Preferred ratios: 4:5 and 3:2.
+
+These are illustrative story visuals. Do not invent factual details or dates about Priya and Arjun's real relationship.
+
+### D. Wedding events imagery
+
+Generate visually appropriate event imagery for:
+
+- Engagement.
+- Haldi.
+- Mehendi.
+- Wedding ceremony.
+- Reception.
+
+Use culturally appropriate attire, decorations and environments.
+
+### E. Gallery imagery
+
+Create a varied set of AI-generated illustrative gallery assets.
+
+Use:
+
+- Portrait compositions.
+- Landscape compositions.
+- Close-up wedding details.
+- Floral decoration.
+- Wedding attire.
+- Couple portraits.
+- Celebration scenes.
+
+Do not copy existing photographers' copyrighted wedding images.
+
+### F. Location and invitation visuals
+
+Generate appropriate supporting imagery where useful.
+
+Invitation layouts should remain editable. Never generate fake venue addresses, dates or important invitation text inside an image.
+
+## 4.5 Asset handling
+
+Store generated assets in the project's managed public asset directory or Supabase Storage, depending on their purpose.
+
+Use descriptive filenames:
+
+```text
+priyaa-arjun-hero
+couple-editorial-portrait
+couple-prewedding
+engagement-editorial
+haldi-celebration
+mehendi-celebration
+wedding-ceremony
+reception-celebration
+wedding-details
+```
+
+Maintain an image asset manifest and document the asset purpose.
+
+Optimise assets into WebP or AVIF where appropriate.
+
+Do not load all full-resolution images immediately.
+
+Use responsive image sizes and lazy loading.
+
+## 4.6 Image placement
+
+AI-generated imagery must appear where it supports the visual story:
+
+| Website section | Image requirement |
+|---|---|
+| Homepage | Large hero image |
+| Welcome section | Couple portrait |
+| Love Story | Editorial couple imagery |
+| Events | Event-specific imagery |
+| Gallery | Curated image collection |
+| Location | Venue-themed supporting visual if appropriate |
+| Registration | Minimal visual support |
+| QR verification | Clean interface, no distracting imagery |
+| Winners | Elegant restrained visual treatment |
+| Live streaming | Stream thumbnail where available |
+
+Do not force AI images into every component.
+
+The registration and verification experiences must prioritise usability.
+
+---
+
+# 5. COMPLETE PREMIUM HOMEPAGE
+
+Build the entire homepage around Priya & Arjun.
+
+## Hero section
+
+Display:
+
+**PRIYA & ARJUN**
+
+**ARE GETTING MARRIED**
+
+**DECEMBER 1, 2026**
+
+Include:
+
+- AI-generated editorial hero image until real photographs are uploaded.
+- Couple names.
+- Wedding date.
+- Live countdown.
+- Short invitation message.
+- View Our Story.
+- Register Now CTA.
+
+The main registration CTA must be visible without requiring visitors to scroll through the entire homepage.
+
+## Main navigation
+
+Include:
+
+- Home.
+- Our Story.
+- Events.
+- Gallery.
+- Location.
+- Live.
+- Register Now.
+
+## Homepage sections
+
+Build:
+
+1. Hero.
+2. Countdown.
+3. Welcome message.
+4. Couple introduction.
+5. Our Love Story preview.
+6. Wedding Events preview.
+7. Gallery preview.
+8. Wedding venue preview.
+9. Lucky draw registration CTA.
+10. Live streaming preview.
+11. Footer.
+
+All sections must use the official wedding design system.
+
+---
+
+# 6. GUEST REGISTRATION — OPEN BY DEFAULT
+
+This is a critical requirement.
+
+The wedding website registration process must be active and open when the application is launched.
+
+Visitors must be able to register without admin login.
+
+Do not leave the registration page disabled.
+
+Do not create a coming-soon page.
+
+Do not hide the registration CTA.
+
+## 6.1 Public registration
+
+Route:
+
+```text
+/register
+```
+
+Provide a visible registration button throughout the public website.
+
+Use CTA text such as:
+
+**Register Now**
+
+or
+
+**Join the Celebration**
+
+Make the CTA navigate to the actual registration page.
+
+## 6.2 Default registration status
+
+In the central website configuration, initialise:
+
+```text
+registration_open = true
+```
+
+The registration form must be available publicly by default.
+
+The administrator can close or reopen registrations using the dashboard.
+
+Do not require administrator authentication for guest registration.
+
+## 6.3 Registration fields
+
+Include:
+
+1. Full name.
+2. Mobile number.
+3. Email address.
+4. Gender — Male / Female.
+5. Address.
+6. Side selection — Bride Side / Groom Side.
+7. Consent checkbox.
+
+## 6.4 Validation
+
+- Required fields.
+- Indian mobile number validation.
+- Email validation.
+- Normalised mobile numbers.
+- Normalised email addresses.
+- Server-side validation.
+- Database-level uniqueness.
+
+One person can register only once.
+
+Prevent duplicate mobile numbers.
+
+Prevent duplicate emails.
+
+A person cannot register once on Bride Side and again on Groom Side.
+
+Lock side selection after successful registration.
+
+Only an authorised administrator may correct participant details.
+
+## 6.5 Registration confirmation
+
+After registration, show:
+
+**Welcome to the Celebration!**
+
+Your registration for Priya & Arjun's wedding celebration has been successfully completed.
+
+Your selected side must be displayed.
+
+Also explain that the guest needs to scan the common wedding QR code at the venue and enter their registered mobile number to complete verification.
+
+Do not mark registration as verified automatically.
+
+---
+
+# 7. ADMIN PANEL — COMPLETE AUTHENTICATION AND MANAGEMENT SYSTEM
+
+This is another critical requirement.
+
+Build a complete private admin dashboard.
+
+Route:
+
+```text
+/admin/login
+```
+
+Dashboard:
+
+```text
+/admin
+```
+
+The admin must sign in using:
+
+- Email address.
+- Password.
+
+Do not create a public admin registration page.
+
+The administrator login must be separate from public guest registration.
+
+## 7.1 Login page design
+
+Create a premium login page matching the wedding design system.
+
+Include:
+
+- Priya & Arjun branding.
+- Admin login heading.
+- Email input.
+- Password input.
+- Show/hide password button.
+- Sign-in button.
+- Forgot password link.
+- Form validation.
+- Loading state.
+- Incorrect credentials message.
+
+Design:
+
+- Warm ivory background.
+- White card surface.
+- Dark walnut typography.
+- Champagne gold CTA.
+- Cormorant Garamond heading.
+- Inter input labels.
+- Clean, elegant spacing.
+
+Do not show unnecessary registration links.
+
+## 7.2 Authentication implementation
+
+Use Supabase Auth with email and password.
+
+Requirements:
+
+1. Admin enters email.
+2. Admin enters password.
+3. Backend authenticates using Supabase Auth.
+4. Verify the user's authorised admin profile.
+5. Create and maintain a secure authenticated session.
+6. Redirect authorised users to `/admin`.
+7. Reject non-admin authenticated users.
+8. Protect all dashboard routes.
+9. Allow authorised logout.
+10. Handle expired sessions correctly.
+
+Use a secure Next.js-compatible Supabase authentication approach.
+
+Verify authorisation server-side on protected operations.
+
+Do not depend only on hidden frontend navigation to secure admin routes.
+
+## 7.3 First administrator account provisioning
+
+There must be an actual, usable initial administrator account.
+
+Do not invent a publicly exposed default credential.
+
+Do not hardcode a password in source code.
+
+Implement a safe first-admin provisioning procedure:
+
+1. Create the initial admin identity through the Supabase Dashboard or a secure server-side provisioning script.
+2. Associate the authenticated user's UUID with an admin profile.
+3. Assign the owner/admin role.
+4. Document the initial setup procedure.
+5. Allow the administrator to change or reset the password securely.
+6. Disable public admin account creation.
+
+Suggested data model:
+
+```text
+admin_profiles
+
+id
+auth_user_id
+full_name
+email
+role
+is_active
+created_at
+updated_at
+```
+
+Role examples:
+
+```text
+owner
+admin
+```
+
+Ensure the admin role is verified by trusted server-side logic and appropriate database policies. Do not trust user-editable metadata as the sole source of authorisation.
+
+The initial administrator email must be configured during deployment.
+
+No passwords or service-role keys may be committed to Git.
+
+## 7.4 Forgot password
+
+Provide password reset functionality through Supabase Auth.
+
+- Enter administrator email.
+- Send password reset email through the configured provider.
+- Show appropriate feedback.
+- Allow the password to be securely reset.
+- Return to admin login.
+
+Do not create your own insecure password-reset token system.
+
+## 7.5 Dashboard layout
+
+Create a complete responsive admin dashboard.
+
+Sidebar navigation:
+
+```text
+Dashboard
+Website Content
+Homepage
+Our Love Story
+Wedding Events
+Venues & Locations
+Gallery & Media
+Registrations
+Participants
+QR & Verification
+Lucky Draw
+Winners
+Live Streaming
+Settings
+Audit Logs
+Logout
+```
+
+Build actual working screens for all applicable modules.
+
+Do not create blank dashboard pages that merely display headings.
+
+## 7.6 Dashboard overview
+
+Display live database statistics:
+
+- Total registrations.
+- Bride Side registrations.
+- Groom Side registrations.
+- Verified participants.
+- Pending participants.
+- Registration status.
+- Lucky draw eligibility count.
+- Number of winners.
+- Upcoming events.
+- Live-stream status.
+
+Do not use fake or static analytics values.
+
+## 7.7 Website content management
+
+Admin must be able to edit:
+
+- Bride name.
+- Groom name.
+- Website title.
+- Wedding date.
+- Wedding timezone.
+- Wedding ceremony time.
+- Countdown settings.
+- Hero heading.
+- Welcome message.
+- Hero image.
+- Secondary homepage images.
+- CTA labels.
+- Footer information.
+- Contact details.
+- Social links.
+
+Changing website settings should update the public website.
+
+Priya and Arjun should be preconfigured in the application.
+
+## 7.8 AI image and media management
+
+The admin must be able to manage all visual assets.
+
+Features:
+
+- Upload actual wedding photographs.
+- Upload images.
+- Upload event invitation images.
+- Upload approved videos.
+- View existing AI-generated assets.
+- Identify AI-generated placeholder assets.
+- Replace generated images with authentic photographs.
+- Delete assets.
+- Reorder media.
+- Assign gallery categories.
+- Publish/unpublish media.
+- Edit image alt text.
+- Update hero image.
+
+When a real photograph replaces an illustrative image, update the public website without requiring code changes.
+
+Use Supabase Storage with appropriate policies.
+
+## 7.9 Story management
+
+Allow authorised admin users to:
+
+- Create story entries.
+- Edit story entries.
+- Delete entries.
+- Upload media.
+- Change timeline order.
+- Publish/unpublish entries.
+
+Do not fabricate the couple's real relationship history.
+
+## 7.10 Wedding events management
+
+Manage:
+
+- Engagement.
+- Haldi.
+- Mehendi.
+- Wedding.
+- Reception.
+
+Allow the administrator to:
+
+- Create events.
+- Edit events.
+- Delete events.
+- Update date and time.
+- Manage venues.
+- Upload invitation media.
+- Upload photographs.
+- Configure dress code.
+- Set publication status.
+- Change display order.
+
+The public Events page must reflect these changes.
+
+## 7.11 Registration control
+
+Admin must have a prominent, functional registration control.
+
+Display:
+
+```text
+Registration Status
+
+OPEN / CLOSED
+```
+
+Actions:
+
+- Open registrations.
+- Close registrations.
+- View total participants.
+- View registrations by side.
+- Search participants.
+- Export participant information.
+
+The default status must be OPEN.
+
+When admin closes registration:
+
+- New submissions must be rejected by the backend.
+- The public form must display a clear closed state.
+- Existing participant records must be retained.
+
+When admin reopens registration:
+
+- The registration page must become usable again.
+
+Do not merely hide the form in the frontend.
+
+Enforce the registration status in server-side logic.
+
+## 7.12 Participant management
+
+Provide:
+
+- Search by name.
+- Search by mobile.
+- Filter by Bride Side.
+- Filter by Groom Side.
+- Filter by verified status.
+- Filter by pending status.
+- View details.
+- Correct details.
+- Manual status correction where authorised.
+- Export CSV.
+- Export Excel-compatible data.
+
+All edits must validate unique mobile and email constraints.
+
+Admin corrections must create audit records.
+
+## 7.13 QR verification management
+
+Provide:
+
+- Common event QR code.
+- View QR.
+- Download QR as PNG.
+- Print-ready PDF.
+- Activate/deactivate verification.
+- Verified participant count.
+- Pending participant count.
+- Search verified participants.
+- Search pending participants.
+- View timestamps.
+- Manual verification with reason and audit log.
+
+Important approved workflow:
+
+```text
+One common event QR
+        ↓
+Guest scans QR
+        ↓
+Enter registered mobile number
+        ↓
+Backend matches participant
+        ↓
+Automatic verification
+        ↓
+Verified status saved
+```
+
+No OTP.
+
+No individual QR codes.
+
+## 7.14 Lucky draw management
+
+Default configuration:
+
+```text
+Total winners: 11
+Eligibility: Verified participants only
+Winner selection: Secure server-side random selection
+```
+
+Admin must be able to:
+
+- View eligible participants.
+- Configure number of winners.
+- Review Bride Side and Groom Side counts.
+- Confirm the draw.
+- Execute the draw.
+- View winner details.
+- Update gift status.
+
+The 11 winners are selected from the combined eligible pool, not 11 from each side.
+
+Prevent duplicate winners.
+
+Save draw execution history.
+
+Do not allow casual reruns of a completed draw.
+
+## 7.15 Winners management
+
+Show:
+
+- Winner name.
+- Side.
+- Winner position.
+- Draw date.
+- Gift delivery status.
+
+Gift statuses:
+
+- Pending.
+- Contacted.
+- Delivered.
+
+Public winner page must not reveal mobile numbers, email addresses or residential addresses.
+
+## 7.16 Live-streaming management
+
+Admin must be able to:
+
+- Add YouTube stream.
+- Edit stream.
+- Delete stream.
+- Add title.
+- Select ceremony.
+- Set scheduled date and time.
+- Set Upcoming / Live / Ended status.
+- Add replay URL.
+- Publish or unpublish.
+
+Support multiple wedding ceremonies.
+
+The public live page must reflect the admin settings.
+
+Do not build custom video streaming infrastructure.
+
+## 7.17 Audit logs
+
+Record important administrative actions:
+
+- Login-related administrative events where appropriate.
+- Registration open/close.
+- Content edits.
+- Participant corrections.
+- Manual verification.
+- QR activation changes.
+- Lucky draw execution.
+- Winner updates.
+- Gallery asset deletion.
+- Stream changes.
+
+Include actor, action, affected record and timestamp.
+
+Never expose audit logs to public visitors.
+
+---
+
+# 8. CENTRAL WEBSITE SETTINGS
+
+Create a central website configuration system.
+
+Suggested settings:
+
+```text
+site_settings
+
+bride_name = Priya
+groom_name = Arjun
+
+wedding_date = 2026-12-01
+timezone = Asia/Kolkata
+
+registration_open = true
+verification_enabled = true
+
+default_winner_count = 11
+default_draw_eligibility = verified_only
+
+hero_image_url
+hero_image_alt
+
+welcome_message
+website_title
+
+updated_at
+```
+
+The precise structure may use separate relational settings or typed configuration records as appropriate.
+
+All related components must read the same central settings.
+
+Do not maintain separate wedding dates or names in different components.
+
+---
+
+# 9. DATABASE AND SECURITY
+
+Use Supabase PostgreSQL as the single source of truth.
+
+Core entities:
+
+```text
+site_settings
+admin_profiles
+love_story_entries
+wedding_events
+venues
+gallery_categories
+gallery_media
+participants
+checkins
+lucky_draws
+lucky_draw_winners
+live_streams
+audit_logs
+```
+
+Requirements:
+
+- UUID primary keys.
+- Foreign keys.
+- Appropriate unique constraints.
+- Indexes.
+- Created and updated timestamps.
+- Database migrations.
+- RLS policies.
+- Secure server-side operations.
+
+Critical security requirements:
+
+1. Never expose the Supabase service-role key in the browser.
+2. Never allow public users to query all participants.
+3. Never expose private participant fields through public endpoints.
+4. Enforce admin role verification server-side.
+5. Protect database operations through RLS and server authorisation.
+6. Enforce uniqueness at the database level.
+7. Protect lucky draw execution against duplicate submissions.
+8. Protect storage uploads.
+9. Rate-limit public registration and verification endpoints.
+10. Keep production secrets outside the repository.
+
+---
+
+# 10. OFFICIAL DESIGN SYSTEM
+
+Use the supplied wedding design guide without changing its visual identity.
+
+### Colours
+
+```css
+--color-warm-ivory: #F7F0E4;
+--color-soft-cream: #FFF9F0;
+--color-card-surface: #FFFCF7;
+--color-champagne-gold: #C5A36B;
+--color-muted-gold: #A28A62;
+--color-muted-sage: #899078;
+--color-dark-walnut: #493628;
+--color-secondary-text: #7B6A58;
+--color-soft-border: #E5D5BD;
+
+--color-primary: #B8860B;
+--color-secondary: #A34836;
+```
+
+### Fonts
+
+Headings: Cormorant Garamond.
+
+Body: Inter.
+
+Heading weight: 400.
+
+### Visual principles
+
+- Editorial wedding aesthetic.
+- Premium Indian wedding photography.
+- Generous but controlled whitespace.
+- Refined image composition.
+- Warm light background.
+- Restrained golden accents.
+- Subtle warm shadows.
+- Thin borders.
+- Rounded corners.
+- Clean navigation.
+- Elegant motion.
+
+Do not use generic dark SaaS admin templates.
+
+The admin panel must follow the same brand identity while remaining highly usable.
+
+---
+
+# 11. RESPONSIVE DESIGN
+
+Ensure the complete application works on:
+
+- Mobile below 640px.
+- Tablet 640–1024px.
+- Desktop 1024–1440px.
+- Wide desktop above 1440px.
+
+Mobile requirements:
+
+- Minimum 44×44px interactive touch targets.
+- Single-column registration.
+- Easy QR verification.
+- Clean countdown.
+- Responsive navigation.
+- Appropriate image cropping.
+- No horizontal overflow.
+- Readable text.
+- Accessible buttons.
+
+Test at 360px, 390px, 430px, 768px, 1024px, 1366px and 1440px.
+
+---
+
+# 12. DEVELOPMENT EXECUTION — FOLLOW THE EXISTING 8 PHASES
+
+Implement all requirements using the existing eight-phase development structure.
+
+### Phase 01
+Foundation, architecture, database and design system.
+
+### Phase 02
+Priya & Arjun homepage, hero AI imagery and December 1 countdown.
+
+### Phase 03
+Love story, events, invitations and locations.
+
+### Phase 04
+AI-generated imagery integration, photo gallery, media manager foundations and video experience.
+
+### Phase 05
+Open guest registration and participant database.
+
+### Phase 06
+Common QR verification and lucky draw.
+
+### Phase 07
+Complete email/password admin authentication, private admin dashboard, website management, registration controls and live-stream management.
+
+### Phase 08
+Integration, testing, security and deployment.
+
+The additional AI image and admin requirements must be integrated into the original phases, not implemented as disconnected additions.
+
+Do not skip phases.
+
+Do not recreate working architecture.
+
+Do not create duplicate components.
+
+---
+
+# 13. FINAL TESTING REQUIREMENTS
+
+Before declaring the project complete, test these actual journeys.
+
+### Journey A — Visitor
+
+1. Open website.
+2. See Priya & Arjun.
+3. See December 1, 2026.
+4. See dynamically calculated countdown.
+5. Explore story.
+6. Explore events.
+7. Explore gallery.
+8. View locations.
+9. Click Register Now.
+
+### Journey B — Registration
+
+1. Open registration page without login.
+2. Enter guest information.
+3. Select Bride Side or Groom Side.
+4. Accept consent.
+5. Submit.
+6. Save participant in Supabase.
+7. Show confirmation.
+8. Reject duplicate mobile or email.
+
+### Journey C — QR verification
+
+1. Admin displays the common event QR.
+2. Guest scans it.
+3. Verification page opens.
+4. Guest enters registered mobile number.
+5. Backend matches participant.
+6. Participant becomes verified.
+7. Check-in timestamp is saved.
+8. Repeat verification is prevented.
+
+No OTP anywhere in this workflow.
+
+### Journey D — Admin sign-in
+
+1. Visit `/admin/login`.
+2. Enter administrator email.
+3. Enter password.
+4. Sign in.
+5. Verify authorised admin role.
+6. Open dashboard.
+7. Manage the website.
+8. View participant records.
+9. Change registration status.
+10. Manage QR verification.
+11. Run authorised lucky draw.
+12. Manage winners.
+13. Manage live streams.
+14. Sign out.
+
+Ensure non-admin accounts cannot access protected dashboard pages or admin APIs.
+
+### Journey E — Countdown
+
+1. Load homepage.
+2. Confirm target is December 1, 2026.
+3. Verify Asia/Kolkata timezone.
+4. Verify the countdown updates dynamically.
+5. Verify wedding-day and completed-event states.
+
+### Journey F — Image management
+
+1. Load AI-generated assets.
+2. Open admin image manager.
+3. Identify illustrative assets.
+4. Upload a real photograph.
+5. Replace the hero image.
+6. Save changes.
+7. Confirm public homepage reflects the new image.
+
+---
+
+# 14. FINAL DELIVERY EXPECTATION
+
+Deliver a complete website containing:
+
+**PUBLIC EXPERIENCE**
+- Priya & Arjun homepage.
+- Wedding countdown.
+- Love story.
+- Events and invitations.
+- Gallery.
+- Locations.
+- Open registration.
+- QR verification.
+- Winners.
+- YouTube live streaming.
+
+**PRIVATE ADMIN EXPERIENCE**
+- Email/password authentication.
+- Protected dashboard.
+- Complete website content management.
+- AI image and media manager.
+- Event management.
+- Registration open/close control.
+- Participant management.
+- QR management.
+- Lucky draw management.
+- Winner management.
+- Live-stream management.
+- Audit logs.
+
+**BACKEND**
+- Supabase database.
+- Secure authentication.
+- RLS.
+- Storage.
+- Registration API.
+- Verification API.
+- Secure lucky draw engine.
+- Server-side administrator authorisation.
+
+**DESIGN**
+- Premium editorial wedding layout.
+- Cormorant Garamond.
+- Inter.
+- Official wedding palette.
+- AI-generated illustrative couple imagery.
+- Fully responsive desktop and mobile layouts.
+
+## FINAL NON-NEGOTIABLE REQUIREMENTS
+
+1. Couple names must be Priya & Arjun.
+2. Wedding date must be December 1, 2026.
+3. Countdown must be dynamic and timezone-correct.
+4. AI-generated wedding imagery must be integrated where appropriate.
+5. Public registrations must be OPEN by default.
+6. Guest registration must work without admin login.
+7. Admin must sign in using email and password.
+8. Admin must have a real protected dashboard.
+9. Admin must be able to open and close registrations.
+10. Admin must manage website images and content.
+11. Use exactly one common event QR.
+12. Verification uses registered mobile number matching.
+13. OTP must not be implemented.
+14. Lucky draw defaults to 11 total unique verified winners.
+15. Every module must be connected to the same database.
+16. All previously working phases must be preserved.
+17. No fake data or non-functional buttons.
+18. No hardcoded production passwords or exposed secrets.
+
+**FINAL PRODUCT VISION:**
+
+Build a beautiful, premium, AI-enhanced traditional Indian wedding website for Priya & Arjun, supported by a complete registration, verification, lucky draw and private administrator management system.
+
+The experience must be elegant for wedding guests and powerful and straightforward for the wedding administrator.
+
+**Build the complete application, not merely a visual prototype.**

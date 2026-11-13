@@ -1,0 +1,2519 @@
+# COMPLETE WEDDING WEBSITE — 8-PHASE SUPER MASTER DEVELOPMENT PROMPTS
+
+**Project:** Premium Traditional Indian Wedding Website  
+**Development approach:** Sequential, interconnected, production-oriented  
+**Technology:** Next.js, React, TypeScript, Tailwind CSS, Supabase, Vercel  
+**Design direction:** Traditional Indian Wedding × Premium Editorial Magazine  
+**Functional scope:** Essential Wedding Website + Lucky Draw
+
+---
+
+# GLOBAL INSTRUCTIONS — APPLY TO ALL 8 PHASES
+
+These instructions are mandatory throughout the entire project.
+
+## A. Your role
+
+Act as a senior full-stack architect, premium UI/UX designer, frontend engineer, backend engineer, database architect and quality assurance engineer.
+
+You are responsible for building a complete, production-quality wedding website.
+
+Do not approach this project as a simple landing page. It is a complete application with a public website, guest registration system, QR-based verification, lucky draw engine and private administration dashboard.
+
+You must prioritise:
+
+1. Premium visual quality.
+2. Consistent design across all pages.
+3. Correct architecture.
+4. Fully functional features.
+5. Secure database operations.
+6. Mobile-first usability.
+7. Clean, maintainable code.
+8. Proper integration between all modules.
+
+## B. Technology stack
+
+Use the following stack unless the existing project already has an equivalent, correctly implemented solution.
+
+**Frontend**
+- Next.js using App Router.
+- React.
+- TypeScript with strict mode.
+- Tailwind CSS.
+- Framer Motion for interface animations.
+- GSAP only where more advanced animation is genuinely useful.
+- Lucide icons.
+
+**Backend**
+- Next.js server-side Route Handlers and Server Actions where appropriate.
+- Supabase PostgreSQL.
+- Supabase Auth for administrators.
+- Supabase Storage for wedding images, invitation media and gallery assets.
+- PostgreSQL constraints, indexes, transactions and Row Level Security.
+
+**Deployment**
+- Vercel for application hosting.
+- Supabase for database, authentication and storage.
+- Google Maps for wedding venue directions.
+- YouTube embed for wedding live streaming.
+
+Do not introduce unnecessary infrastructure, microservices, Redis, queues or additional paid services unless a genuine requirement emerges.
+
+## C. Official design system — absolute priority
+
+Use the exact design guide supplied by the project owner.
+
+### Official colour tokens
+
+```css
+:root {
+  --color-warm-ivory: #F7F0E4;
+  --color-soft-cream: #FFF9F0;
+  --color-card-surface: #FFFCF7;
+  --color-champagne-gold: #C5A36B;
+  --color-muted-gold: #A28A62;
+  --color-muted-sage: #899078;
+  --color-dark-walnut: #493628;
+  --color-secondary-text: #7B6A58;
+  --color-soft-border: #E5D5BD;
+
+  --color-primary: #B8860B;
+  --color-secondary: #A34836;
+}
+```
+
+Use these colours consistently. The champagne gold and primary gold are distinct tokens; do not randomly interchange their roles.
+
+### Typography
+
+```css
+font-family: "Cormorant Garamond", serif;
+font-family: "Inter", sans-serif;
+```
+
+Rules:
+
+- Cormorant Garamond for all major headings.
+- Inter for body text, labels, buttons, tables and forms.
+- Heading weight: 400.
+- Do not use generic replacements.
+- Avoid excessively bold headings.
+- Maintain elegant editorial typography.
+
+### Typography hierarchy
+
+| Type | Size | Weight |
+|---|---:|---:|
+| Display | 48px | 400 |
+| H1 | 30px | 400 |
+| H2 | 24px | 400 |
+| H3 | 16px | 400 |
+| Body | 16px | 400 |
+| Supporting | 12–14px | 400 |
+| Metadata | 11–12px | 400 |
+
+The 48px Display style is reserved for hero and important editorial moments.
+
+### Spacing
+
+Use a 16px base spacing system.
+
+Preferred spacing: 16px, 24px, 32px, 40px, 48px, 64px and 80px.
+
+Compact component spacing can use 6px and 8px where appropriate.
+
+### Radius
+
+- Buttons: 6px.
+- Cards: 6px.
+- Form fields: 6px.
+- Larger interactive surfaces: up to 12px.
+
+### Surfaces
+
+- Main canvas: #F7F0E4.
+- Cards: #FFFCF7.
+- Borders: #E5D5BD.
+- Primary text: #493628.
+- Supporting text: #7B6A58.
+- Restrained warm-tinted shadows.
+
+Avoid pure black, neon, glassmorphism, excessive gradients, heavy shadows, dark full-page themes and unnecessary decorative ornaments.
+
+## D. Premium design quality requirements
+
+The design must feel like a high-end wedding editorial publication.
+
+It should not resemble:
+- A generic Bootstrap template.
+- A generic SaaS website.
+- A basic wedding invitation template.
+- A repetitive collection of cards.
+- A standard admin dashboard theme.
+
+Use:
+
+- Large, carefully cropped wedding photographs.
+- Editorial image and text compositions.
+- Strong visual hierarchy.
+- Thoughtful whitespace.
+- Consistent content widths.
+- Refined typography.
+- Beautiful section transitions.
+- Subtle motion.
+- Carefully aligned elements.
+- High-quality responsive layouts.
+
+Do not add random icons, badges, ribbons, ornamental flourishes or decorative elements that are not supported by the supplied reference.
+
+Premium does not mean adding more visual effects. It means better composition, typography, imagery, proportions and attention to detail.
+
+## E. Global functionality rules
+
+The website includes:
+
+1. Homepage and wedding welcome.
+2. Countdown.
+3. Love story.
+4. Wedding events.
+5. Invitation images and videos.
+6. Photo and video gallery.
+7. Wedding venue and directions.
+8. Bride Side / Groom Side registration.
+9. Common QR-based guest verification.
+10. Lucky draw.
+11. Public winner announcement.
+12. YouTube live streaming and replay.
+13. Private admin dashboard.
+14. Content and event management.
+15. Participant management.
+16. Audit logs and administrative settings.
+
+### Explicitly excluded
+
+Do not build:
+
+- OTP verification.
+- Individual guest QR codes.
+- General guest RSVP.
+- Digital guestbook.
+- Guest photo uploads.
+- Voice wishes.
+- Couple quizzes.
+- Polls.
+- Song requests.
+- Live memory wall.
+- Wedding newspaper.
+- Payment systems.
+- Multi-wedding SaaS features.
+- Subscription functionality.
+
+## F. Global database rules
+
+Use one shared Supabase database.
+
+Do not create duplicate tables for different phases.
+
+Use:
+- UUID primary keys.
+- Appropriate foreign keys.
+- Created and updated timestamps.
+- Unique constraints.
+- Useful indexes.
+- Explicit status fields.
+- Database migrations.
+- RLS policies.
+- Server-side validation.
+
+Never expose Supabase service-role credentials in frontend code.
+
+Never allow guests to query all participants or private participant information.
+
+## G. How to execute every phase
+
+For every prompt:
+
+1. Inspect the existing project before changing anything.
+2. Read the existing implementation and understand its architecture.
+3. Reuse working components and code.
+4. Create only the files necessary for the phase.
+5. Implement the actual feature, not just its appearance.
+6. Connect all required database operations.
+7. Run type checks, linting and relevant tests.
+8. Fix errors before declaring the phase complete.
+9. Update technical documentation.
+10. Report completed work, modified files, migrations, environment requirements and any remaining dependencies.
+
+Never mark an incomplete feature as completed.
+
+Never overwrite a working phase without a valid reason.
+
+---
+
+# PHASE 01 — FOUNDATION, ARCHITECTURE & DESIGN SYSTEM
+
+## Objective
+
+Establish the complete technical and visual foundation of the wedding application.
+
+This phase is the foundation for all seven remaining phases. Every subsequent phase must use the architecture, database conventions, design tokens and reusable components created here.
+
+## 1.1 Project inspection
+
+First inspect:
+
+- Existing repository structure.
+- Existing package configuration.
+- Existing Next.js version.
+- Existing routes.
+- Existing components.
+- Existing CSS.
+- Existing assets.
+- Existing Supabase setup.
+- Existing environment configuration.
+- Existing design reference files.
+
+If the project already exists, do not unnecessarily recreate it.
+
+Preserve useful working code.
+
+If the repository is empty, initialise the project using the approved stack.
+
+## 1.2 Application architecture
+
+Establish a clean architecture with clear separation between:
+
+- Public website.
+- Admin website.
+- Shared UI components.
+- Database integration.
+- Server-side business logic.
+- API endpoints.
+- Validation schemas.
+- Shared types.
+- Storage utilities.
+- Authentication and authorisation.
+
+Suggested structure:
+
+```text
+src/
+  app/
+    (public)/
+      page.tsx
+      story/
+      events/
+      gallery/
+      locations/
+      register/
+      verify/
+      lucky-draw/
+        winners/
+      live/
+
+    admin/
+      login/
+      layout.tsx
+      page.tsx
+      content/
+      events/
+      gallery/
+      participants/
+      verification/
+      lucky-draw/
+      winners/
+      live/
+      settings/
+
+    api/
+      public/
+      registration/
+      verification/
+      lucky-draw/
+      admin/
+
+  components/
+    layout/
+    navigation/
+    typography/
+    buttons/
+    forms/
+    cards/
+    gallery/
+    events/
+    countdown/
+    media/
+    admin/
+    feedback/
+
+  lib/
+    supabase/
+    auth/
+    database/
+    validation/
+    security/
+    storage/
+    utils/
+
+  services/
+    content/
+    events/
+    participants/
+    verification/
+    lucky-draw/
+    streaming/
+
+  types/
+  config/
+  hooks/
+  styles/
+
+supabase/
+  migrations/
+  seed.sql
+
+public/
+  fonts/
+  images/
+  icons/
+```
+
+This is a suggested structure, not a reason to force unnecessary folders into the project. Adapt it to the existing codebase while maintaining clear separation.
+
+## 1.3 Routing foundation
+
+Establish the complete route structure.
+
+Public:
+
+```text
+/
+ /story
+ /events
+ /gallery
+ /locations
+ /register
+ /verify
+ /lucky-draw/winners
+ /live
+```
+
+Admin:
+
+```text
+/admin/login
+/admin
+/admin/content
+/admin/events
+/admin/gallery
+/admin/participants
+/admin/verification
+/admin/lucky-draw
+/admin/winners
+/admin/live
+/admin/settings
+```
+
+Use clean routes, correct navigation and appropriate loading and error states.
+
+## 1.4 Design token implementation
+
+Create one central design-token system.
+
+Implement:
+
+- CSS custom properties.
+- Tailwind theme configuration.
+- Font loading.
+- Typography utilities.
+- Colour utilities.
+- Spacing conventions.
+- Radius conventions.
+- Shadow tokens.
+- Button variants.
+- Input variants.
+- Card variants.
+
+Do not hardcode slightly different versions of the same brand colour throughout individual components.
+
+## 1.5 Shared component foundation
+
+Create reusable components:
+
+- SiteHeader.
+- SiteFooter.
+- Container.
+- SectionHeading.
+- DisplayHeading.
+- PrimaryButton.
+- FilledButton.
+- GhostButton.
+- TextInput.
+- SelectInput.
+- TextArea.
+- Checkbox.
+- Card.
+- ImageFrame.
+- LoadingState.
+- EmptyState.
+- ErrorState.
+- ConfirmationDialog.
+- Toast / feedback component.
+- ResponsiveNavigation.
+
+Every component must follow the official design system.
+
+## 1.6 Supabase foundation
+
+Set up:
+
+- Supabase client for browser-safe operations.
+- Server-side Supabase client.
+- Secure administrator authentication foundation.
+- Environment variable validation.
+- Database migration conventions.
+- Storage bucket planning.
+- RLS conventions.
+
+Create the initial database migration structure.
+
+Do not create unnecessary sample participants or business records.
+
+## 1.7 Initial database design
+
+Plan the following modules and their relationships:
+
+- Wedding configuration.
+- Couple information.
+- Love story entries.
+- Wedding events.
+- Venues.
+- Gallery categories.
+- Gallery media.
+- Participants.
+- Verification/check-in records.
+- Lucky draw configuration.
+- Lucky draw executions.
+- Lucky draw winners.
+- Live streams.
+- Admin profiles.
+- Audit logs.
+
+The detailed operational schema will be implemented in the relevant phases, but the overall data model must be established now.
+
+## 1.8 Global application states
+
+Define shared handling for:
+
+- Loading.
+- Empty data.
+- Failed requests.
+- Form validation.
+- Success.
+- Unauthorized access.
+- Not found.
+- Network failure.
+
+## 1.9 Documentation
+
+Create:
+
+```text
+docs/
+  PROJECT_ARCHITECTURE.md
+  DESIGN_SYSTEM.md
+  DATABASE_SCHEMA.md
+  ROUTE_STRUCTURE.md
+  DEVELOPMENT_PHASES.md
+  ENVIRONMENT_SETUP.md
+```
+
+## Phase 01 acceptance criteria
+
+- Application starts successfully.
+- Project architecture is established.
+- Fonts load correctly.
+- Design tokens work.
+- Reusable components are available.
+- Routing foundation exists.
+- Supabase connection is established or clearly configured.
+- Environment variables are documented.
+- Database conventions are documented.
+- No existing working functionality has been broken.
+
+**Handoff to Phase 02:** Use the shared architecture, routing, typography, design tokens and reusable components. Do not recreate them.
+
+---
+
+# PHASE 02 — PREMIUM HOMEPAGE & WEDDING EXPERIENCE
+
+## Objective
+
+Build the most visually impressive part of the website: the complete wedding homepage.
+
+This phase establishes the first impression of the entire application.
+
+The homepage must look like a professionally art-directed Indian wedding editorial website.
+
+## 2.1 Overall visual direction
+
+Build an elegant long-scroll homepage with:
+
+- Premium editorial composition.
+- Large wedding imagery.
+- Sophisticated typography.
+- Warm ivory canvas.
+- Muted gold accents.
+- Refined navigation.
+- Subtle animation.
+- Consistent content alignment.
+
+Avoid generic hero layouts.
+
+## 2.2 Header and navigation
+
+Create a premium responsive header.
+
+Desktop:
+
+- Couple names or wedding monogram.
+- Home.
+- Our Story.
+- Events.
+- Gallery.
+- Location.
+- Live.
+- Primary CTA: Join the Celebration.
+
+Mobile:
+
+- Compact brand identity.
+- Accessible menu trigger.
+- Clean slide-out or dropdown navigation.
+- Proper touch targets.
+- Clear active section indication.
+
+Requirements:
+
+- Sticky or fixed behaviour only if it supports the visual composition.
+- Subtle background transition on scroll if needed.
+- Smooth anchor navigation.
+- No oversized navigation.
+- No unnecessary decorative icons.
+
+## 2.3 Hero section
+
+The hero must be the visual centrepiece.
+
+Create a full-bleed or carefully composed large photographic hero.
+
+Include:
+
+- Main couple photograph or video.
+- Couple names.
+- Wedding announcement.
+- Wedding date.
+- Short welcome message.
+- Primary CTA.
+- Secondary CTA for event details.
+
+Design direction:
+
+- Cormorant Garamond for names and headline.
+- Inter for supporting details.
+- Carefully controlled image crop.
+- Natural warm colour presentation.
+- Elegant text placement.
+- Readable text contrast.
+- Restrained overlays only when needed.
+
+Do not use random background images. Use project-owned assets when supplied. If images are unavailable, create a clearly labelled asset placeholder and make it easy for the admin to replace.
+
+Do not invent the couple's names or wedding date.
+
+## 2.4 Wedding countdown
+
+Build a live countdown component.
+
+Display:
+
+- Days.
+- Hours.
+- Minutes.
+- Seconds.
+
+Requirements:
+
+- Use the configured wedding date and timezone.
+- Update correctly.
+- Handle the event-started and event-completed states.
+- Avoid hydration errors.
+- Support mobile layouts.
+- Keep typography consistent with the design system.
+
+## 2.5 Welcome / introduction section
+
+Create a refined introductory section containing:
+
+- Welcome heading.
+- Short wedding introduction.
+- Couple photograph.
+- Wedding date.
+- Invitation message.
+
+Use a balanced editorial image-and-text layout.
+
+## 2.6 Homepage story preview
+
+Show a short introduction to the couple's story.
+
+Include:
+
+- Section title.
+- Short description.
+- One or two photographs.
+- View Our Story link.
+
+The complete story belongs to Phase 03.
+
+## 2.7 Homepage events preview
+
+Show the most important wedding events.
+
+Display:
+
+- Event title.
+- Date.
+- Time.
+- Venue.
+- Event photograph or invitation image.
+- View All Events action.
+
+Use real event records when available.
+
+## 2.8 Homepage gallery preview
+
+Create a photographic preview using selected gallery media.
+
+Use high-quality image crops and a refined grid.
+
+Link to the complete gallery.
+
+## 2.9 Homepage live-stream preview
+
+Display a live-stream teaser.
+
+Support:
+
+- Upcoming.
+- Live Now.
+- Replay Available.
+
+Only display appropriate content based on configured stream status.
+
+## 2.10 Main call-to-action
+
+Include a clear action to register for the wedding lucky draw.
+
+The CTA must navigate to the registration page created in Phase 05.
+
+Do not build a fake registration form in the homepage.
+
+## 2.11 Footer
+
+Create a consistent premium footer containing:
+
+- Couple names.
+- Wedding date.
+- Navigation links.
+- Contact information if supplied.
+- Social links if supplied.
+- Copyright information.
+
+Use the approved Dark Walnut footer treatment selectively.
+
+## 2.12 Animation
+
+Use subtle animations:
+
+- Hero entrance.
+- Text reveal.
+- Image reveal.
+- Scroll-triggered section entrance.
+- Smooth scrolling.
+- Button hover transitions.
+- Countdown transitions.
+
+Avoid excessive movement.
+
+Respect reduced-motion preferences.
+
+## 2.13 Homepage responsiveness
+
+Test:
+
+- 360px mobile width.
+- 390px mobile width.
+- 430px mobile width.
+- Tablet.
+- 1366px desktop.
+- 1440px desktop.
+- Wide desktop.
+
+Ensure no horizontal overflow.
+
+## Phase 02 acceptance criteria
+
+- Complete homepage is functional.
+- Navigation works.
+- Countdown works.
+- All sections use the approved design system.
+- Mobile layout is polished.
+- Images do not stretch or distort.
+- All buttons lead to valid destinations.
+- No invented wedding information.
+- The homepage is connected to the shared application structure.
+
+**Handoff to Phase 03:** Reuse the existing header, footer, section components, typography and content patterns.
+
+---
+
+# PHASE 03 — LOVE STORY, EVENTS, INVITATIONS & LOCATIONS
+
+## Objective
+
+Build the complete wedding information and storytelling experience.
+
+This phase must make the website informative, emotionally engaging and visually consistent.
+
+## 3.1 Our Love Story page
+
+Create a dedicated story page.
+
+Include:
+
+- Page introduction.
+- Couple introduction.
+- How we met.
+- First meeting.
+- Relationship milestones.
+- Proposal.
+- Engagement.
+- Selected photographs.
+- Closing message.
+
+The exact story content must be manageable through the admin dashboard later.
+
+Do not fabricate personal history.
+
+## 3.2 Editorial timeline
+
+Create a premium chronological timeline.
+
+Each entry should support:
+
+- Title.
+- Date or year.
+- Description.
+- Photograph.
+- Optional secondary photograph.
+- Sort order.
+
+Desktop:
+
+- Alternating image-and-text composition where appropriate.
+- Balanced spacing.
+- Clear chronological flow.
+
+Mobile:
+
+- Single-column timeline.
+- No compressed text.
+- No overlapping timeline elements.
+
+## 3.3 Wedding Events page
+
+Support these event types:
+
+1. Engagement.
+2. Haldi.
+3. Mehendi.
+4. Wedding.
+5. Reception.
+
+Do not assume all events are mandatory. Display the events actually configured by the administrator.
+
+Each event must support:
+
+- Event name.
+- Short description.
+- Full description.
+- Date.
+- Start time.
+- End time.
+- Venue name.
+- Venue address.
+- Google Maps link or location.
+- Invitation image.
+- Invitation video where applicable.
+- Dress code.
+- Event photograph.
+- Display order.
+- Published / unpublished state.
+
+## 3.4 Event presentation
+
+Create an elegant event layout.
+
+Use a consistent design system with enough visual variation to avoid repetitive card grids.
+
+Possible layouts:
+
+- Editorial horizontal event rows.
+- Image-and-text event sections.
+- Alternating event compositions.
+- Carefully structured event cards.
+
+Each event should have a clear information hierarchy.
+
+Do not force all content into identical small cards.
+
+## 3.5 Event detail view
+
+Allow visitors to access full details for each event.
+
+Display:
+
+- Event title.
+- Date.
+- Time.
+- Description.
+- Invitation media.
+- Venue.
+- Directions.
+- Dress code.
+- Contact information if supplied.
+
+Ensure all information is easy to read on mobile.
+
+## 3.6 Invitation media
+
+Support:
+
+- JPG.
+- PNG.
+- WebP.
+- MP4 where appropriate.
+
+Use Supabase Storage for uploaded media.
+
+Validate file type and size.
+
+Use safe file handling and controlled storage paths.
+
+## 3.7 Wedding locations
+
+Create a dedicated locations section.
+
+Support multiple event venues.
+
+Each location must contain:
+
+- Venue name.
+- Address.
+- City.
+- State.
+- Country.
+- Latitude and longitude where available.
+- Google Maps URL.
+- Directions CTA.
+- Related event.
+
+Display a map or a map link.
+
+Do not invent venue addresses or map coordinates.
+
+## 3.8 Data relationships
+
+Events should reference venues rather than duplicating the same location information across every record.
+
+Allow an event to use an existing venue or an authorised admin to create a new venue.
+
+## 3.9 Content retrieval
+
+Connect the public pages to the backend content service.
+
+Requirements:
+
+- Published content is visible publicly.
+- Unpublished content is hidden.
+- Sort order is respected.
+- Missing media has a graceful fallback.
+- Invalid records do not break the page.
+- Empty sections are handled appropriately.
+
+## Phase 03 acceptance criteria
+
+- Love Story page works.
+- Timeline is responsive.
+- All configured events display correctly.
+- Event details are complete.
+- Invitation media works.
+- Location links work.
+- Content uses the shared database model.
+- No duplicated content logic.
+- Existing homepage remains functional.
+
+**Handoff to Phase 04:** Reuse event and content services, the existing media handling approach and the same design system.
+
+---
+
+# PHASE 04 — PHOTOGRAPHY, VIDEO GALLERY & MEDIA EXPERIENCE
+
+## Objective
+
+Create a premium wedding media experience that showcases photographs and videos with a professional editorial presentation.
+
+Photography is a major part of a wedding website. The gallery must feel carefully curated, not like a basic file browser.
+
+## 4.1 Gallery architecture
+
+Create a dedicated Gallery page.
+
+Support categories such as:
+
+- Pre-Wedding.
+- Couple Portraits.
+- Engagement.
+- Haldi.
+- Mehendi.
+- Wedding.
+- Reception.
+- Videos.
+
+Categories should be configurable rather than permanently hardcoded.
+
+## 4.2 Gallery layout
+
+Build a premium responsive photography layout.
+
+Use:
+
+- Editorial grids.
+- Masonry-style arrangements where appropriate.
+- Consistent image gutters.
+- Natural image ratios.
+- Carefully selected image sizes.
+- Responsive image rendering.
+
+Avoid forcing every image into the same crop.
+
+Do not create a layout that looks like a basic e-commerce product gallery.
+
+## 4.3 Category navigation
+
+Include clean category filters.
+
+Examples:
+
+- All.
+- Photos.
+- Videos.
+- Pre-Wedding.
+- Engagement.
+- Wedding.
+
+Requirements:
+
+- Active category state.
+- Smooth filtering.
+- Clear empty state.
+- Accessible interaction.
+- Mobile-friendly category navigation.
+
+## 4.4 Lightbox experience
+
+When a visitor selects an image, open a full-screen or large lightbox.
+
+Include:
+
+- Main photograph.
+- Previous / next controls.
+- Close control.
+- Image counter.
+- Keyboard navigation.
+- Mobile swipe support where practical.
+- Accessible focus handling.
+
+The image must remain properly scaled.
+
+Do not distort the original aspect ratio.
+
+## 4.5 Slideshow
+
+Provide an optional slideshow experience.
+
+Include:
+
+- Start slideshow.
+- Pause.
+- Previous.
+- Next.
+- Close.
+- Automatic transitions.
+
+Avoid starting audio or intrusive playback automatically.
+
+## 4.6 Video gallery
+
+Support wedding-related videos.
+
+Each video record should support:
+
+- Title.
+- Description.
+- Thumbnail.
+- Video source type.
+- Video URL or managed asset.
+- Category.
+- Sort order.
+- Published state.
+
+Support safe embedded YouTube videos and uploaded video assets where configured.
+
+Do not create a separate video-hosting infrastructure.
+
+## 4.7 Media storage
+
+Use Supabase Storage.
+
+Create appropriate buckets or storage organisation for:
+
+- Gallery photographs.
+- Gallery videos.
+- Event invitations.
+- Homepage images.
+- Story images.
+
+Use secure upload handling and appropriate public/private access policies.
+
+Only publish media that is intended for public display.
+
+## 4.8 Performance
+
+Implement:
+
+- Next.js image optimisation.
+- Lazy loading.
+- Responsive image sizes.
+- Correct aspect ratios.
+- Thumbnail previews.
+- Loading placeholders.
+- Error fallbacks.
+- Avoid unnecessary full-resolution downloads.
+
+Do not load every gallery image immediately on mobile.
+
+Use pagination or progressive loading when the gallery becomes large.
+
+## 4.9 Accessibility
+
+- Descriptive alt text.
+- Keyboard-accessible lightbox.
+- Visible focus states.
+- Appropriate contrast.
+- Screen-reader labels.
+- Reduced-motion support.
+
+## Phase 04 acceptance criteria
+
+- Gallery loads from actual content records.
+- Categories work.
+- Image grids are responsive.
+- Lightbox works.
+- Slideshow works.
+- Videos play or embed correctly.
+- Image optimisation is implemented.
+- No broken media paths.
+- Public visibility is correctly controlled.
+
+**Handoff to Phase 05:** Gallery media management and storage conventions must be reused by the admin content management system.
+
+---
+
+# PHASE 05 — GUEST REGISTRATION & PARTICIPANT MANAGEMENT
+
+## Objective
+
+Build the complete Bride Side / Groom Side registration system.
+
+This phase introduces the actual participant database that will power the QR verification and lucky draw in Phase 06.
+
+This is a critical business-logic phase. Correctness is more important than visual effects.
+
+## 5.1 Registration page
+
+Create a dedicated registration page.
+
+Design:
+
+- Warm ivory background.
+- Clean card surface.
+- Premium typography.
+- Clear form hierarchy.
+- Responsive form layout.
+- Simple instructions.
+- Clear submission feedback.
+
+The page must feel like part of the wedding website, not an external application.
+
+## 5.2 Side selection
+
+The guest must select one side:
+
+- Bride Side.
+- Groom Side.
+
+Make this selection visually clear.
+
+After successful registration, the side must be locked.
+
+Guests must not be able to switch sides by submitting another form.
+
+Only an authorised admin may correct a participant's side.
+
+All corrections must be recorded in the audit log.
+
+## 5.3 Registration fields
+
+Required fields:
+
+1. Full name.
+2. Mobile number.
+3. Email address.
+4. Gender — Male / Female.
+5. Address.
+6. Side selection — Bride / Groom.
+7. Consent checkbox.
+
+Show clear labels and validation errors.
+
+Do not ask for unnecessary information.
+
+## 5.4 Validation
+
+Implement both frontend and server-side validation.
+
+### Full name
+
+- Required.
+- Trim whitespace.
+- Reject empty values.
+- Apply sensible length limits.
+
+### Mobile number
+
+- Required.
+- Normalise into a consistent format.
+- Validate the expected Indian mobile number format.
+- Store the normalised value.
+- Prevent duplicate registration.
+
+### Email
+
+- Required.
+- Normalise case.
+- Trim whitespace.
+- Validate email format.
+- Prevent duplicate registration.
+
+### Gender
+
+- Only accepted values: Male / Female.
+
+### Address
+
+- Required.
+- Apply sensible maximum length.
+
+### Consent
+
+- Must be explicitly accepted.
+- Store the consent timestamp and policy version where appropriate.
+
+## 5.5 Duplicate prevention
+
+One person can register only once.
+
+The system must prevent:
+
+- Duplicate mobile number.
+- Duplicate email.
+- Registering once on Bride Side and again on Groom Side.
+- Repeated submissions caused by double-clicking.
+- Duplicate requests caused by network retries.
+
+Enforce uniqueness at the database level, not only through frontend validation.
+
+Use normalised mobile and email values.
+
+Return a friendly error without exposing private details of an existing participant.
+
+## 5.6 Database participant model
+
+Create a participant table with fields such as:
+
+```text
+participants
+
+id
+full_name
+mobile_number
+normalized_mobile
+email
+normalized_email
+gender
+address
+side
+consent
+consent_timestamp
+consent_policy_version
+registration_status
+verification_status
+registered_at
+verified_at
+created_at
+updated_at
+```
+
+Suggested statuses:
+
+```text
+registration_status:
+  registered
+  cancelled
+
+verification_status:
+  pending
+  verified
+```
+
+Add appropriate unique constraints, indexes and timestamps.
+
+Use appropriate database constraints for accepted side and gender values.
+
+The exact schema may be refined to suit PostgreSQL conventions, but all required information must be preserved.
+
+## 5.7 Registration API
+
+Create a secure server-side registration operation.
+
+Flow:
+
+1. Receive form data.
+2. Validate input.
+3. Normalise mobile and email.
+4. Validate consent.
+5. Check registration availability.
+6. Insert participant record.
+7. Handle unique constraint violations.
+8. Return a success response.
+
+Use database constraints to handle concurrent duplicate requests.
+
+Do not trust frontend validation alone.
+
+## 5.8 Confirmation screen
+
+After successful registration, display:
+
+**Registration Successful!**
+
+Your participation has been registered successfully.
+
+Show:
+
+- Participant name.
+- Selected side.
+- Registration confirmation.
+- Instructions to scan the common event QR code at the wedding venue for verification.
+
+Do not show private participant details unnecessarily.
+
+Do not claim the guest has already been verified.
+
+## 5.9 Admin readiness
+
+Build the participant service and data model in a way that Phase 07 can use directly.
+
+Provide the following future capabilities through the shared backend:
+
+- List participants.
+- Search by name.
+- Search by mobile number.
+- Filter by side.
+- Filter by registration status.
+- Filter by verification status.
+- View participant details.
+- Export authorised records.
+
+The complete admin interface is implemented in Phase 07.
+
+## 5.10 Privacy and security
+
+- Do not expose the participant table publicly.
+- Do not allow guests to list registrations.
+- Do not expose phone, email or address in public responses.
+- Do not put personal details in URLs.
+- Do not store secrets in frontend code.
+- Use server-side validation.
+- Add basic abuse protection and request rate limits.
+
+## Phase 05 acceptance criteria
+
+- Registration page works.
+- All fields validate.
+- Side selection works.
+- Database insertion works.
+- Mobile duplicates are prevented.
+- Email duplicates are prevented.
+- Concurrent submissions are handled safely.
+- Side cannot be changed by guests after registration.
+- Confirmation screen works.
+- Private participant details are protected.
+
+**Handoff to Phase 06:** Use this exact participant table and registration logic. Do not create a second participant database or a separate guest registration model.
+
+---
+
+# PHASE 06 — COMMON QR VERIFICATION & LUCKY DRAW ENGINE
+
+## Objective
+
+Build the complete wedding venue verification and lucky draw system.
+
+This phase must use the participant records created in Phase 05.
+
+The QR workflow is already approved by the project owner.
+
+**One common event QR code. Registered mobile number matching. Automatic verification. No OTP.**
+
+## 6.1 Common event QR code
+
+Create one common event QR code.
+
+The QR must contain a verification URL such as:
+
+```text
+https://your-domain.com/verify
+```
+
+Do not create individual QR codes for participants.
+
+Do not encode participant personal information into the QR code.
+
+The same QR code must work for all registered guests.
+
+Provide the administrator with the ability to:
+
+- View the QR code.
+- Download as PNG.
+- Generate a print-ready PDF.
+- Activate or deactivate the verification endpoint.
+
+The QR should be suitable for printing and displaying at the wedding venue.
+
+## 6.2 Guest verification page
+
+Build a simple, mobile-first page.
+
+Page title:
+
+**Wedding Guest Verification**
+
+Supporting text:
+
+Scan the event QR code and enter your registered mobile number to confirm your participation.
+
+Input:
+
+- Registered mobile number.
+
+Primary button:
+
+**Verify My Registration**
+
+Do not request:
+
+- OTP.
+- Email verification.
+- Password.
+- Individual QR code.
+- Additional identity documents.
+
+## 6.3 Verification backend
+
+Implement the verification flow securely.
+
+1. Guest scans the common QR.
+2. Website opens the verification page.
+3. Guest enters their registered mobile number.
+4. Frontend submits the number to a server-side endpoint.
+5. Backend normalises the number.
+6. Backend looks up the matching participant.
+7. Backend checks that registration is eligible.
+8. Backend checks whether the participant is already verified.
+9. Backend atomically marks the participant verified.
+10. Backend records the verification timestamp and check-in record.
+11. Frontend displays the result.
+
+Never perform privileged verification updates directly from an untrusted browser client.
+
+## 6.4 Verification states
+
+Handle these situations:
+
+| Condition | Response |
+|---|---|
+| Valid pending participant | Verification successful |
+| Already verified | Already verified |
+| Mobile number not found | Registration not found |
+| Registration closed | Registration is closed |
+| Verification disabled | Verification currently unavailable |
+| Invalid input | Enter a valid mobile number |
+| Server error | Unable to verify right now |
+
+Do not reveal whether an unrelated guest's email or other private information exists.
+
+## 6.5 Prevent duplicate check-in
+
+A participant must have only one successful verification.
+
+Use a database transaction or atomic conditional update.
+
+Use a unique constraint on the participant's check-in record.
+
+Concurrent requests must not create multiple successful check-ins.
+
+Create a check-in record containing:
+
+```text
+id
+participant_id
+verification_method
+verified_at
+created_at
+```
+
+The verification method can be recorded as:
+
+```text
+common_qr_mobile_match
+```
+
+Do not create OTP fields or OTP-related infrastructure.
+
+## 6.6 Verification success screen
+
+Show:
+
+**Successfully Verified!**
+
+Your wedding activity registration has been confirmed.
+
+You are eligible to participate in the wedding lucky draw, subject to the final draw rules.
+
+Show the participant's name and side only where appropriate.
+
+Keep the page elegant, clear and mobile-friendly.
+
+## 6.7 Verification security limitation
+
+This workflow intentionally uses mobile-number matching without OTP.
+
+A person who knows another guest's registered mobile number could potentially verify that participant.
+
+This trade-off is accepted by the project owner.
+
+Implement reasonable abuse controls:
+
+- Rate limit verification attempts.
+- Avoid exposing participant records.
+- Use generic failure responses.
+- Record successful check-ins.
+- Log suspicious repeated attempts.
+- Protect admin-only verification controls.
+
+Do not silently add OTP or change the approved workflow.
+
+## 6.8 Admin verification data
+
+Build the services required for the admin interface.
+
+Provide:
+
+- Total registrations.
+- Total verified.
+- Total pending.
+- Bride Side verified.
+- Groom Side verified.
+- Participant check-in timestamps.
+- Manual verification capability for authorised admins.
+
+Manual verification must record:
+
+- Admin ID.
+- Participant ID.
+- Timestamp.
+- Reason.
+- Previous status.
+- New status.
+
+## 6.9 Lucky draw eligibility
+
+Default eligibility:
+
+**Only successfully verified participants.**
+
+The draw must use the combined Bride Side and Groom Side verified participant pool.
+
+Default winner count:
+
+**11 winners in total.**
+
+Not 11 winners per side.
+
+Provide configuration for:
+
+- Number of winners.
+- Eligible participant pool.
+- Draw status.
+- Registration status.
+- Verification status.
+
+The default eligibility setting must remain verified participants only.
+
+If an admin is allowed to select all registered participants instead, this must be an explicit authorised configuration, not an accidental default.
+
+## 6.10 Lucky draw execution
+
+The draw must execute securely on the server.
+
+Requirements:
+
+- Use a cryptographically secure random generator.
+- Never use browser Math.random() as the winner-selection mechanism.
+- Select unique participant IDs.
+- Prevent duplicate winners.
+- Validate the eligible participant count.
+- Prevent execution when there are insufficient eligible participants.
+- Save the result permanently.
+- Prevent accidental reruns.
+
+Create an immutable draw execution record containing:
+
+```text
+draw_id
+event_id
+draw_status
+winner_count
+eligibility_rule
+eligible_participant_snapshot
+executed_by
+executed_at
+```
+
+Store the selected winners in a separate winner table.
+
+The draw should execute atomically, so a failed or interrupted process cannot produce an incomplete public result.
+
+Use an appropriate transaction or secure server-side execution strategy.
+
+## 6.11 Winner records
+
+Each winner record should contain:
+
+```text
+id
+draw_id
+participant_id
+winner_position
+gift_status
+created_at
+updated_at
+```
+
+Gift statuses:
+
+- Pending.
+- Contacted.
+- Delivered.
+
+Enforce uniqueness so a participant cannot win twice in the same draw.
+
+## 6.12 Public winner announcement
+
+Create:
+
+```text
+/lucky-draw/winners
+```
+
+Display:
+
+- Winner position.
+- Approved public display name.
+- Bride Side / Groom Side.
+- Announcement date.
+
+Do not expose:
+
+- Mobile number.
+- Email address.
+- Full residential address.
+- Private participant records.
+
+Provide a graceful state before the draw:
+
+**The lucky draw winners will be announced soon.**
+
+Do not expose unfinished draw records.
+
+## Phase 06 acceptance criteria
+
+- Common QR code works.
+- Guest mobile matching works.
+- Automatic verification works.
+- No OTP exists.
+- Duplicate verification is prevented.
+- Verification data is persisted.
+- Admin statistics can be queried.
+- Only eligible participants enter the draw.
+- Eleven unique winners can be selected when enough eligible participants exist.
+- Draw results persist.
+- Public winner page works.
+- Sensitive participant information remains private.
+
+**Handoff to Phase 07:** Use the existing participant, check-in, draw and winner records. Do not recreate their schemas or implement a second lucky draw engine.
+
+---
+
+# PHASE 07 — COMPLETE ADMIN DASHBOARD & LIVE STREAMING MANAGEMENT
+
+## Objective
+
+Build the complete private administration system.
+
+The admin dashboard must manage the entire public wedding website and its associated operations.
+
+This must be a real working dashboard, not a static visual prototype.
+
+## 7.1 Admin authentication
+
+Build an administrator login experience.
+
+Use Supabase Auth.
+
+Requirements:
+
+- Secure login.
+- Logout.
+- Protected routes.
+- Server-side session verification.
+- Authorised admin roles.
+- Session handling.
+- Unauthorised access protection.
+
+Do not create public admin registration.
+
+Only authorised administrators should access the dashboard.
+
+## 7.2 Admin design direction
+
+Use the same official design system.
+
+The dashboard must feel like a premium editorial management interface.
+
+Use:
+
+- #F7F0E4 page background.
+- #FFFCF7 card surfaces.
+- #493628 primary text.
+- #B8860B primary accent.
+- #E5D5BD borders.
+- Cormorant Garamond for major headings.
+- Inter for operational text.
+
+Use a refined sidebar or responsive navigation.
+
+Do not use generic dark SaaS dashboard templates.
+
+Do not make the admin dashboard unnecessarily decorative.
+
+## 7.3 Dashboard overview
+
+Create an overview screen.
+
+Display:
+
+- Total registrations.
+- Bride Side registrations.
+- Groom Side registrations.
+- Verified participants.
+- Pending participants.
+- Total lucky draw winners.
+- Upcoming wedding events.
+- Current live-stream status.
+
+Use clean statistic cards and meaningful visual summaries.
+
+Only show actual database data.
+
+Do not use hardcoded sample numbers.
+
+## 7.4 Content management
+
+Create a homepage management module.
+
+Admin must be able to edit:
+
+- Couple names.
+- Wedding date.
+- Hero heading.
+- Welcome message.
+- Hero image.
+- Hero video if supported.
+- Countdown date and timezone.
+- Footer details.
+- Contact details.
+- Social links.
+
+Changes should update the public website.
+
+## 7.5 Love story management
+
+Admin can:
+
+- Create story entries.
+- Edit entries.
+- Delete entries.
+- Upload images.
+- Set dates.
+- Change descriptions.
+- Reorder timeline entries.
+- Publish or unpublish entries.
+
+Use the Phase 03 data model.
+
+## 7.6 Events management
+
+Admin can:
+
+- Create events.
+- Edit events.
+- Delete events.
+- Publish / unpublish events.
+- Change dates and times.
+- Manage venues.
+- Upload invitations.
+- Upload event images.
+- Set dress codes.
+- Change event ordering.
+
+Ensure the public Events page reflects these changes.
+
+## 7.7 Gallery management
+
+Admin can:
+
+- Upload photos.
+- Upload videos or add approved video links.
+- Create categories.
+- Edit media details.
+- Delete media.
+- Change ordering.
+- Publish / unpublish media.
+
+Use Supabase Storage and the Phase 04 media architecture.
+
+Validate file size and type.
+
+## 7.8 Participant management
+
+Create a complete participant management screen.
+
+Table columns:
+
+- Participant name.
+- Mobile number.
+- Email.
+- Side.
+- Registration date.
+- Verification status.
+- Verification timestamp.
+
+Features:
+
+- Search.
+- Filters.
+- Sorting.
+- Pagination.
+- Participant detail view.
+- Export CSV.
+- Export Excel-compatible file.
+
+Only authorised administrators may access private participant information.
+
+## 7.9 Participant editing
+
+Allow authorised admin corrections.
+
+Support editing:
+
+- Full name.
+- Mobile number.
+- Email.
+- Gender.
+- Address.
+- Side, only when authorised.
+
+Validate changes.
+
+Maintain unique constraints.
+
+Record sensitive corrections in audit logs.
+
+Do not allow normal guests to edit registered participant details.
+
+## 7.10 QR and check-in management
+
+Create a dedicated QR & Verification module.
+
+Display:
+
+- Common event QR code.
+- Download PNG.
+- Download print-ready PDF.
+- Verification link.
+- Activate / deactivate controls.
+- Total verified.
+- Pending participants.
+- Bride Side verified.
+- Groom Side verified.
+
+Provide:
+
+- Verified participant list.
+- Pending participant list.
+- Search.
+- Filters.
+- Check-in timestamps.
+- Manual verification.
+
+The dashboard must use the Phase 06 verification engine.
+
+Do not create individual participant QR codes.
+
+Do not add OTP.
+
+## 7.11 Lucky draw management
+
+Create a dedicated lucky draw control screen.
+
+Display:
+
+- Total registered participants.
+- Total verified participants.
+- Eligible participant count.
+- Bride Side count.
+- Groom Side count.
+- Winner count.
+- Current draw status.
+
+Admin actions:
+
+- Close registration.
+- Review eligible participants.
+- Configure winner count.
+- Choose eligibility rule.
+- Confirm the draw.
+- Execute the draw.
+- View completed results.
+
+Default:
+
+- 11 total winners.
+- Verified participants only.
+
+Provide a clear confirmation step before execution.
+
+After a completed draw:
+
+- Prevent accidental reruns.
+- Preserve the original result.
+- Require an explicitly authorised, audited correction process for exceptional changes.
+
+Do not allow a browser-only random draw.
+
+## 7.12 Winners management
+
+Create a winners management table.
+
+Display:
+
+- Winner position.
+- Winner name.
+- Side.
+- Mobile number in the private admin interface.
+- Draw date.
+- Gift status.
+
+Allow admin to update:
+
+- Pending.
+- Contacted.
+- Delivered.
+
+The public winners page must never display private contact details.
+
+## 7.13 YouTube live-stream management
+
+Create a Live Streaming module.
+
+Admin must be able to:
+
+- Add stream.
+- Edit stream.
+- Delete stream.
+- Set stream title.
+- Select related ceremony.
+- Add YouTube URL.
+- Set scheduled date and time.
+- Set status.
+- Add replay URL.
+- Publish / unpublish stream.
+- Enable or disable stream visibility.
+
+Support multiple ceremony streams.
+
+Statuses:
+
+```text
+upcoming
+live
+ended
+```
+
+Use the YouTube embed on the public website.
+
+Do not build custom live-streaming infrastructure.
+
+Do not assume an unlisted YouTube video is private or access-controlled.
+
+Manual stream status control is acceptable. Do not claim automatic YouTube status detection unless a real YouTube API integration is implemented.
+
+## 7.14 Audit logs
+
+Record important administrative actions:
+
+- Participant correction.
+- Side correction.
+- Manual verification.
+- Registration state changes.
+- QR activation changes.
+- Lucky draw execution.
+- Winner status changes.
+- Content deletion.
+- Stream management.
+
+Store:
+
+- Admin ID.
+- Action.
+- Entity type.
+- Entity ID.
+- Timestamp.
+- Relevant before/after information where appropriate.
+
+Protect audit records against unauthorised modification.
+
+## 7.15 Settings
+
+Create settings for:
+
+- Wedding information.
+- Registration availability.
+- Verification availability.
+- Lucky draw configuration.
+- Timezone.
+- Public winner visibility.
+- Live-stream visibility.
+
+Validate configuration changes.
+
+## 7.16 Dashboard usability
+
+Include:
+
+- Loading states.
+- Empty states.
+- Error messages.
+- Confirmation dialogs.
+- Search and filtering.
+- Responsive tables.
+- Mobile-friendly navigation.
+- Form validation.
+- Clear action feedback.
+
+Avoid unnecessarily complicated dashboard navigation.
+
+## Phase 07 acceptance criteria
+
+- Admin login works.
+- Admin routes are protected.
+- Content management works.
+- Event management works.
+- Gallery management works.
+- Participant management works.
+- QR management works.
+- Lucky draw management works.
+- Winners management works.
+- Live streaming management works.
+- Audit logs work.
+- Changes reflect on the public website.
+- Admin permissions are enforced server-side and through RLS where applicable.
+
+**Handoff to Phase 08:** All existing features must now be integrated and tested as one application. Do not replace working functionality with mock implementations.
+
+---
+
+# PHASE 08 — INTEGRATION, TESTING, SECURITY & PRODUCTION DEPLOYMENT
+
+## Objective
+
+Turn the completed application into a stable, polished, production-ready wedding website.
+
+This phase is not a redesign or a rebuild.
+
+It is a complete integration, validation, bug-fixing, security and deployment phase.
+
+## 8.1 Complete application audit
+
+Inspect all eight phases.
+
+Verify:
+
+- Project structure.
+- Routes.
+- Components.
+- Design tokens.
+- Database tables.
+- Relationships.
+- API endpoints.
+- Authentication.
+- RLS.
+- Storage policies.
+- Forms.
+- Admin actions.
+- Public pages.
+
+Identify and fix inconsistencies.
+
+Do not delete functioning features simply because a different implementation seems easier.
+
+## 8.2 End-to-end public website testing
+
+Test the complete visitor journey.
+
+1. Open homepage.
+2. Navigate to Love Story.
+3. Open Wedding Events.
+4. View invitation details.
+5. Open Gallery.
+6. View photographs.
+7. Play videos.
+8. Open Locations.
+9. Navigate to registration.
+10. Complete registration.
+11. Receive confirmation.
+12. Return to the site.
+13. View live-stream information.
+14. View public winner announcements.
+
+Every navigation link must work.
+
+## 8.3 Registration testing
+
+Test:
+
+- Valid registration.
+- Missing name.
+- Invalid mobile.
+- Invalid email.
+- Missing address.
+- Missing consent.
+- Missing side selection.
+- Duplicate mobile.
+- Duplicate email.
+- Repeated submission.
+- Concurrent duplicate requests.
+- Registration closed.
+
+Confirm database constraints are working.
+
+## 8.4 QR verification testing
+
+Test the exact approved workflow.
+
+1. Register a participant.
+2. Generate or use the common event QR.
+3. Open the verification page.
+4. Enter the registered mobile number.
+5. Confirm automatic verification.
+6. Check database status.
+7. Check verification timestamp.
+8. Attempt verification again.
+9. Confirm duplicate verification is prevented.
+10. Test an unregistered number.
+11. Test verification disabled.
+12. Test registration closed.
+
+Confirm that no OTP is requested at any point.
+
+## 8.5 Lucky draw testing
+
+Test:
+
+- Zero eligible participants.
+- One eligible participant.
+- Eleven eligible participants.
+- More than eleven eligible participants.
+- Insufficient eligible participants.
+- Duplicate participant prevention.
+- Correct eligibility filtering.
+- Bride Side and Groom Side combined pool.
+- Winner persistence.
+- Interrupted request handling.
+- Duplicate draw execution prevention.
+- Public winner display.
+- Gift status management.
+
+Use test records only in a separate development or staging environment.
+
+Do not insert fabricated business records into the production database.
+
+## 8.6 Admin testing
+
+Test:
+
+- Login.
+- Logout.
+- Protected routes.
+- Session expiry.
+- Unauthorised access.
+- Content creation.
+- Content editing.
+- Content deletion.
+- Event management.
+- Gallery uploads.
+- Participant filtering.
+- CSV export.
+- QR activation.
+- Manual verification.
+- Lucky draw execution.
+- Winner management.
+- Stream management.
+- Audit logs.
+
+## 8.7 Security testing
+
+Check:
+
+- No service-role key in frontend bundles.
+- Correct server-side authorisation.
+- Supabase RLS policies.
+- Private participant data protection.
+- Secure file uploads.
+- Input validation.
+- SQL injection protection through safe database operations.
+- XSS protection.
+- Rate limiting.
+- CSRF protection where relevant.
+- Safe error responses.
+- Admin route protection.
+- Unique database constraints.
+- Draw transaction integrity.
+- Secrets stored in environment variables.
+
+Never return raw database errors containing private information to public users.
+
+## 8.8 Responsive testing
+
+Test at:
+
+- 360px.
+- 375px.
+- 390px.
+- 430px.
+- 768px.
+- 1024px.
+- 1280px.
+- 1366px.
+- 1440px.
+- 1920px.
+
+Check:
+
+- Navigation.
+- Hero image.
+- Typography.
+- Section spacing.
+- Event layout.
+- Gallery.
+- Forms.
+- QR verification.
+- Winner announcement.
+- Live player.
+- Admin tables.
+
+Fix:
+
+- Horizontal scrolling.
+- Overlapping content.
+- Incorrect image crops.
+- Text overflow.
+- Broken layouts.
+- Inaccessible controls.
+- Unusable mobile forms.
+
+## 8.9 Performance optimisation
+
+Implement:
+
+- Next.js image optimisation.
+- Responsive images.
+- Lazy loading.
+- Appropriate caching.
+- Code splitting.
+- Font optimisation.
+- Efficient data fetching.
+- Pagination for large records.
+- Avoid unnecessary client-side JavaScript.
+- Avoid excessive animation libraries.
+- Avoid repeated database requests.
+
+Check Core Web Vitals and aim for good performance rather than adding unnecessary optimisations that compromise functionality.
+
+## 8.10 Accessibility
+
+Check:
+
+- Semantic HTML.
+- Keyboard navigation.
+- Focus visibility.
+- Form labels.
+- Error messages.
+- Image alt text.
+- Contrast.
+- Screen-reader accessibility.
+- Reduced-motion support.
+- Mobile touch targets.
+
+## 8.11 Production configuration
+
+Prepare:
+
+- Production environment variables.
+- Supabase production project.
+- Database migrations.
+- RLS policies.
+- Storage buckets.
+- Storage permissions.
+- Admin account provisioning.
+- Vercel project configuration.
+- Production domain configuration.
+- HTTPS.
+- Error monitoring strategy.
+- Backup and recovery plan.
+
+Never commit `.env` files or production secrets.
+
+Provide a documented setup process.
+
+## 8.12 Final content readiness
+
+Make sure the owner can update:
+
+- Couple names.
+- Wedding date.
+- Hero images.
+- Love story.
+- Events.
+- Invitations.
+- Locations.
+- Gallery.
+- YouTube links.
+- Lucky draw configuration.
+
+Do not leave important wedding details hardcoded in components.
+
+Use clear placeholders where the owner has not supplied actual content.
+
+## 8.13 Final acceptance checklist
+
+The application is complete only when:
+
+- All public routes work.
+- All admin routes work.
+- Public content is connected to the database.
+- Registration works.
+- Duplicate registration is prevented.
+- Common QR verification works.
+- No OTP exists.
+- Check-in records persist.
+- Lucky draw uses verified participants by default.
+- Eleven unique winners can be selected when eligible.
+- Public winner announcements work.
+- Admin winner management works.
+- Live streaming works.
+- Responsive design is complete.
+- Security policies are implemented.
+- Production build succeeds.
+- No critical errors remain.
+
+## 8.14 Final delivery report
+
+Produce a final technical report:
+
+```text
+FINAL_PROJECT_REPORT.md
+
+1. Completed features
+2. Application architecture
+3. Project folder structure
+4. Database schema
+5. Supabase configuration
+6. RLS policies
+7. Storage configuration
+8. API endpoints
+9. Admin access setup
+10. Environment variables
+11. Testing results
+12. Security checklist
+13. Performance observations
+14. Deployment instructions
+15. Known limitations
+16. Future maintenance instructions
+```
+
+Do not claim that deployment or testing is complete unless it has actually been performed.
+
+**Final objective:** Deliver one complete, integrated, secure and visually premium wedding website.
+
+---
+
+# GLOBAL COMPLETION RULES FOR ALL PHASES
+
+These rules apply throughout the project.
+
+## Rule 1 — Never break existing phases
+
+Before modifying any file, inspect how it is used.
+
+If a component is shared, update it carefully and check every page that uses it.
+
+## Rule 2 — One shared database
+
+All modules must use the same participant, event, gallery, venue, verification, winner and stream records.
+
+No duplicate databases.
+
+No duplicate business logic.
+
+## Rule 3 — One design system
+
+Every page must use the official wedding design tokens.
+
+Do not invent a different design for registration, verification or admin.
+
+## Rule 4 — No fake functionality
+
+Do not create buttons that do nothing.
+
+Do not create fake charts.
+
+Do not create static participant tables pretending to be database-driven.
+
+Do not claim an upload works unless the file is actually uploaded and saved.
+
+Do not simulate a successful lucky draw without a real backend operation.
+
+## Rule 5 — Preserve actual project details
+
+Do not invent:
+
+- Couple names.
+- Wedding dates.
+- Venue addresses.
+- Personal story content.
+- Contact information.
+- Photographs.
+- YouTube links.
+
+Use editable placeholders where information is missing.
+
+## Rule 6 — Database first for critical functionality
+
+Registration, verification, lucky draw and administrative operations must use real backend logic.
+
+The browser must not be trusted with privileged operations.
+
+## Rule 7 — Premium quality on every screen
+
+Do not spend all the design effort on the homepage.
+
+The registration page, QR verification screen, winners page, live page and admin dashboard must all receive the same attention to detail.
+
+## Rule 8 — Phase completion and handoff
+
+At the end of each phase, report:
+
+1. Features completed.
+2. Files created.
+3. Files modified.
+4. Database changes.
+5. API changes.
+6. Design components created.
+7. Tests performed.
+8. Known issues.
+9. Dependencies for the next phase.
+
+Do not start the next phase until the current phase has passed its acceptance criteria.
+
+---
+
+# FINAL PRODUCT VISION
+
+The completed product should consist of three connected experiences:
+
+### 1. Public wedding experience
+
+A beautiful, premium Indian wedding editorial website that guests can explore on desktop and mobile.
+
+### 2. Guest participation experience
+
+A simple registration and verification journey:
+
+**Register → Choose Bride/Groom Side → Scan Common Event QR → Enter Registered Mobile Number → Automatically Verified → Become Eligible for Lucky Draw.**
+
+No OTP. No individual QR. No unnecessary complexity.
+
+### 3. Private administration experience
+
+A secure dashboard through which the wedding organiser can manage website content, events, invitations, gallery, registrations, QR verification, participants, lucky draw winners and YouTube live streaming.
+
+**The final website must look like a premium, professionally art-directed wedding publication while functioning like a reliable, fully integrated web application.**
+
+---
+
+# END OF MASTER DEVELOPMENT SPECIFICATION
