@@ -23,7 +23,7 @@ const eventSchema = z.object({
   contact_info: z.string().max(300).nullable(),
 });
 
-const EVENT_MEDIA = ["image_path", "invitation_image_path", "invitation_video_path"] as const;
+const EVENT_MEDIA = ["image_path", "invitation_pdf_path", "invitation_image_path", "invitation_video_path"] as const;
 
 export async function saveEvent(_: ActionState, fd: FormData): Promise<ActionState> {
   return withAdmin(async ({ supabase }) => {

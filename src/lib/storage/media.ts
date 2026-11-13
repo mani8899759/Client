@@ -8,20 +8,29 @@ export const BUCKETS = { images: "wedding-images", videos: "wedding-videos" } as
 export type MediaPurpose = "hero" | "story" | "events" | "invitations" | "gallery";
 
 export const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
+export const DOCUMENT_TYPES = ["application/pdf"] as const;
 export const VIDEO_TYPES = ["video/mp4"] as const;
 export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
+export const MAX_PDF_BYTES = 25 * 1024 * 1024;
 export const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
 
 const EXT: Record<string, string> = {
   "image/jpeg": "jpg",
   "image/png": "png",
   "image/webp": "webp",
+  "application/pdf": "pdf",
   "video/mp4": "mp4",
 };
 
-export function validateMediaFile(file: { type: string; size: number }, kind: "image" | "video"): string | null {
+export function validateMediaFile(file: { type: string; size: number }, kind: "image" | "video" | "pdf"): string | null {
+  if (kind === "pdf") {
+    if (file.type !== "application/pdf") return "Use a PDF document.";
+    if (file.size > MAX_PDF_BYTES) return `PDF is larger than ${Math.round(MAX_PDF_BYTES / 1024 / 1024)} MB.`;
+    if (file.size === 0) return "File is empty.";
+    return null;
+  }
   const types: readonly string[] = kind === "image" ? IMAGE_TYPES : VIDEO_TYPES;
-  if (!types.includes(file.type)) {
+  if (!types.includes(file.type as (typeof IMAGE_TYPES)[number])) {
     return kind === "image" ? "Use a JPG, PNG or WebP image." : "Use an MP4 video.";
   }
   const max = kind === "image" ? MAX_IMAGE_BYTES : MAX_VIDEO_BYTES;
@@ -35,9 +44,9 @@ export function buildObjectPath(purpose: MediaPurpose, mime: string): string {
   return `${purpose}/${new Date().getUTCFullYear()}/${crypto.randomUUID()}.${ext}`;
 }
 
-const STORAGE_REF = /^(wedding-images|wedding-videos)\/[a-z]+\/\d{4}\/[0-9a-f-]{36}\.(jpg|png|webp|mp4)$/;
+const STORAGE_REF = /^(wedding-images|wedding-videos)\/[a-z]+\/\d{4}\/[0-9a-f-]{36}\.(jpg|png|webp|mp4|pdf)$/;
 /** Repository-bundled AI illustrations, served from /public/images/ai. */
-const STATIC_AI_REF = /^static\/ai\/[a-z0-9]+(-[a-z0-9]+)*\.(webp|avif|jpg|png)$/;
+const STATIC_AI_REF = /^static\/ai\/[a-z0-9]+(-[a-z0-9]+)*\.(webp|avif|jpg|png|pdf)$/;
 
 export function isStorageRef(ref: string | null | undefined): ref is string {
   return !!ref && STORAGE_REF.test(ref);
@@ -52,8 +61,10 @@ export function isValidMediaRef(ref: string | null | undefined): ref is string {
   return isStorageRef(ref) || isAiRef(ref);
 }
 
-/** Public URL for a media reference (Supabase Storage or bundled AI asset), or null. */
+/** Public URL for a media reference (Supabase Storage, bundled AI asset, or absolute/relative URL), or null. */
 export function mediaUrl(ref: string | null | undefined): string | null {
+  if (!ref) return null;
+  if (ref.startsWith("http://") || ref.startsWith("https://") || ref.startsWith("/")) return ref;
   if (isAiRef(ref)) return `/images/ai/${ref.slice("static/ai/".length)}`;
   if (!isStorageRef(ref) || !publicEnv.supabaseUrl) return null;
   return `${publicEnv.supabaseUrl}/storage/v1/object/public/${ref}`;

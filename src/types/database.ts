@@ -56,6 +56,9 @@ export interface WeddingSettings {
   groom_image_alt: string | null;
   secondary_image_path: string | null;
   secondary_image_alt: string | null;
+  invitation_pdf_path?: string | null;
+  invitation_image_path?: string | null;
+  invitation_published?: boolean;
   updated_at?: string;
 }
 
@@ -111,6 +114,7 @@ export interface WeddingEvent {
   image_path: string | null;
   image_alt: string | null;
   invitation_image_path: string | null;
+  invitation_pdf_path?: string | null;
   invitation_video_path: string | null;
   contact_info: string | null;
   sort_order: number;

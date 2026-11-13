@@ -3,10 +3,12 @@ import { ArrowUpRight, Clock, MapPin, Shirt } from "lucide-react";
 import { EVENT_TYPE_LABEL } from "@/config/site";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { ButtonLink } from "@/components/buttons/Button";
+import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { Reveal, ImageReveal } from "@/components/motion/Reveal";
 import { dateOnlyParts, formatDateOnly, formatTimeRange } from "@/lib/utils/datetime";
 import { cn } from "@/lib/utils/cn";
 import { pickAlt, pickImage } from "@/lib/storage/imagery";
+import { mediaUrl } from "@/lib/storage/media";
 import { EVENT_AI_SLOT } from "@/config/ai-assets";
 import type { Venue, WeddingEvent } from "@/types/database";
 
@@ -22,12 +24,17 @@ export function venueLine(v: Venue | null | undefined): string | null {
 
 export function directionsUrl(v: Venue | null | undefined): string | null {
   if (!v) return null;
-  if (v.google_maps_url && /^https:\/\//.test(v.google_maps_url)) return v.google_maps_url;
-  if (v.latitude !== null && v.longitude !== null) {
-    return `https://www.google.com/maps/dir/?api=1&destination=${v.latitude},${v.longitude}`;
+  if (v.latitude !== null && v.longitude !== null && !isNaN(Number(v.latitude)) && !isNaN(Number(v.longitude))) {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${v.latitude},${v.longitude}`)}`;
   }
-  const q = [v.name, v.address, v.city, v.state, v.country].filter(Boolean).join(", ");
-  return q ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}` : null;
+  const dest = [v.name, v.address, v.city, v.state, v.country].filter(Boolean).join(", ");
+  if (dest) {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
+  }
+  if (v.google_maps_url && /^https:\/\//.test(v.google_maps_url)) {
+    return v.google_maps_url;
+  }
+  return null;
 }
 
 /** Large serif date block used across event layouts. */
@@ -37,7 +44,7 @@ export function DateBlock({ date, className }: { date: string | null; className?
     return (
       <div className={cn("flex flex-col", className)}>
         <span className="text-numeral text-[44px] leading-none text-muted-gold">—</span>
-        <span className="mt-2 text-meta text-secondary-text">Date to be announced</span>
+        <span className="mt-2 text-meta text-secondary-text">Event details will be announced soon.</span>
       </div>
     );
   }
@@ -156,12 +163,18 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
           ) : null}
         </dl>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
           <ButtonLink href={`/events/${event.slug}`} variant="primary">
             Event details
           </ButtonLink>
+          <ViewInvitationButton
+            invitationUrl={event.invitation_image_path || event.invitation_pdf_path ? mediaUrl(event.invitation_pdf_path ?? event.invitation_image_path) : null}
+            invitationType={event.invitation_pdf_path ? "pdf" : "image"}
+            variant="primary"
+            size="md"
+          />
           {directions ? (
-            <ButtonLink href={directions} variant="ghost" external>
+            <ButtonLink href={directions} variant="filled" external>
               Get directions
             </ButtonLink>
           ) : null}

@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { PRIMARY_CTA, PUBLIC_NAV } from "@/config/site";
 import { ButtonLink } from "@/components/buttons/Button";
+import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { cn } from "@/lib/utils/cn";
 
 function isActive(pathname: string, href: string) {
@@ -14,7 +15,19 @@ function isActive(pathname: string, href: string) {
 }
 
 /** Mobile/tablet navigation: full-height sheet with large serif links. */
-export function ResponsiveNavigation({ pathname, brand, ctaLabel }: { pathname: string; brand: string; ctaLabel: string }) {
+export function ResponsiveNavigation({
+  pathname,
+  brand,
+  ctaLabel,
+  invitationUrl,
+  invitationType,
+}: {
+  pathname: string;
+  brand: string;
+  ctaLabel: string;
+  invitationUrl?: string | null;
+  invitationType?: "pdf" | "image" | null;
+}) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
@@ -130,11 +143,21 @@ export function ResponsiveNavigation({ pathname, brand, ctaLabel }: { pathname: 
                         );
                       })}
                     </ul>
-                    <div className="mt-10 flex flex-col gap-3">
+                    <div className="mt-8 flex flex-col gap-3">
+                      <ViewInvitationButton
+                        invitationUrl={invitationUrl}
+                        invitationType={invitationType}
+                        size="lg"
+                        variant="primary"
+                        className="w-full"
+                      />
                       <ButtonLink href={PRIMARY_CTA.href} variant="filled" size="lg" className="w-full">
                         {ctaLabel}
                       </ButtonLink>
-                      <ButtonLink href="/lucky-draw/winners" variant="primary" size="lg" className="w-full">
+                      <p className="text-center text-[12px] text-secondary-text">
+                        Join our wedding gift draw for a chance to win a special gift.
+                      </p>
+                      <ButtonLink href="/lucky-draw/winners" variant="ghost" size="md" className="w-full">
                         Lucky Draw Winners
                       </ButtonLink>
                     </div>

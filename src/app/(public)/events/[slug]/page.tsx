@@ -6,6 +6,7 @@ import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/typography/Headings";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { ButtonLink } from "@/components/buttons/Button";
+import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { Reveal, ImageReveal } from "@/components/motion/Reveal";
 import { directionsUrl, eventImage } from "@/components/events/EventParts";
 import { pickAlt } from "@/lib/storage/imagery";
@@ -46,6 +47,9 @@ export default async function EventDetailPage({ params }: Props) {
   const v = event.venue;
   const directions = directionsUrl(v);
   const videoUrl = mediaUrl(event.invitation_video_path);
+  const eventInvitationPath = event.invitation_image_path || event.invitation_pdf_path;
+  const invitationUrl = eventInvitationPath ? mediaUrl(eventInvitationPath) : null;
+  const invitationType = event.invitation_pdf_path ? "pdf" : "image";
 
   return (
     <article className="pb-20 lg:pb-28">
@@ -83,7 +87,13 @@ export default async function EventDetailPage({ params }: Props) {
                   Get directions
                 </ButtonLink>
               ) : null}
-              <ButtonLink href="/locations" variant="primary">
+              <ViewInvitationButton
+                invitationUrl={invitationUrl}
+                invitationType={invitationType}
+                variant="primary"
+                size="md"
+              />
+              <ButtonLink href="/locations" variant="ghost">
                 All locations
               </ButtonLink>
             </div>

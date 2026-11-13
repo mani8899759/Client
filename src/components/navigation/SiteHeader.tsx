@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PRIMARY_CTA, PUBLIC_NAV } from "@/config/site";
 import { ButtonLink } from "@/components/buttons/Button";
+import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { ResponsiveNavigation } from "./ResponsiveNavigation";
 import { cn } from "@/lib/utils/cn";
 
@@ -12,7 +13,19 @@ export function isActivePath(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function SiteHeader({ brand, coupleLabel, ctaLabel }: { brand: string; coupleLabel: string; ctaLabel: string }) {
+export function SiteHeader({
+  brand,
+  coupleLabel,
+  ctaLabel,
+  invitationUrl,
+  invitationType,
+}: {
+  brand: string;
+  coupleLabel: string;
+  ctaLabel: string;
+  invitationUrl?: string | null;
+  invitationType?: "pdf" | "image" | null;
+}) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,8 +49,8 @@ export function SiteHeader({ brand, coupleLabel, ctaLabel }: { brand: string; co
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 px-4 sm:px-6 lg:h-[76px] lg:px-10">
-        <Link href="/" className="group flex items-baseline gap-3" aria-label={`${coupleLabel} — home`}>
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:h-[76px] lg:px-10">
+        <Link href="/" className="group flex items-baseline gap-3 shrink-0" aria-label={`${coupleLabel} — home`}>
           <span className="font-serif text-[22px] leading-none whitespace-nowrap text-dark-walnut transition-colors group-hover:text-primary sm:text-[26px]">
             {brand}
           </span>
@@ -66,11 +79,24 @@ export function SiteHeader({ brand, coupleLabel, ctaLabel }: { brand: string; co
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <ButtonLink href={PRIMARY_CTA.href} size="sm" className="px-3 sm:px-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ViewInvitationButton
+            invitationUrl={invitationUrl}
+            invitationType={invitationType}
+            size="sm"
+            variant="primary"
+            className="hidden sm:inline-flex px-3 sm:px-4"
+          />
+          <ButtonLink href={PRIMARY_CTA.href} size="sm" variant="filled" className="px-3 sm:px-4">
             {ctaLabel}
           </ButtonLink>
-          <ResponsiveNavigation pathname={pathname} brand={brand} ctaLabel={ctaLabel} />
+          <ResponsiveNavigation
+            pathname={pathname}
+            brand={brand}
+            ctaLabel={ctaLabel}
+            invitationUrl={invitationUrl}
+            invitationType={invitationType}
+          />
         </div>
       </div>
     </header>

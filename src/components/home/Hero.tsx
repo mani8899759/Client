@@ -2,6 +2,7 @@ import { ButtonLink } from "@/components/buttons/Button";
 import { Container } from "@/components/layout/Container";
 import { HeroMedia } from "@/components/media/HeroMedia";
 import { Countdown } from "@/components/countdown/Countdown";
+import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { HeroText } from "./HeroText";
 import { coupleNames } from "@/lib/utils/names";
 import { weddingSchedule } from "@/lib/utils/wedding";
@@ -17,7 +18,10 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
   const names = coupleNames(wedding);
   const schedule = weddingSchedule(wedding);
   const heroRef = pickImage(wedding.hero_image_path, "hero");
-  const registerLabel = app.registration_open ? (wedding.cta_primary_label ?? "Register Now") : "Lucky Draw Winners";
+  const registerLabel = app.registration_open ? (wedding.cta_primary_label ?? "Win a Special Gift") : "Lucky Draw Winners";
+  const invitationPath = wedding.invitation_pdf_path || wedding.invitation_image_path || null;
+  const invitationUrl = wedding.invitation_published !== false ? mediaUrl(invitationPath) : null;
+  const invitationType = wedding.invitation_pdf_path ? "pdf" : wedding.invitation_image_path ? "image" : null;
 
   return (
     <section aria-labelledby="hero-title" className="pt-10 pb-16 sm:pt-14 lg:pt-16 lg:pb-24">
@@ -42,10 +46,20 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
             <ButtonLink href={app.registration_open ? "/register" : "/lucky-draw/winners"} variant="filled" size="lg">
               {registerLabel}
             </ButtonLink>
-            <ButtonLink href="/story" variant="primary" size="lg">
+            <ViewInvitationButton
+              invitationUrl={invitationUrl}
+              invitationType={invitationType}
+              variant="primary"
+              size="lg"
+              className="px-6"
+            />
+            <ButtonLink href="/story" variant="ghost" size="lg">
               {wedding.cta_secondary_label ?? "View Our Story"}
             </ButtonLink>
           </div>
+          <p className="mt-4 text-center text-[13px] text-secondary-text">
+            Join our wedding gift draw for a chance to win a special gift.
+          </p>
         </HeroText>
 
         <div className="mt-12 sm:mt-16">

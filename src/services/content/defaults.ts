@@ -12,7 +12,7 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   website_title: WEDDING_IDENTITY.websiteTitle,
   website_subtitle: WEDDING_IDENTITY.websiteSubtitle,
   wedding_time_confirmed: false,
-  cta_primary_label: "Register Now",
+  cta_primary_label: "Win a Special Gift",
   cta_secondary_label: "View Our Story",
   bride_intro: null,
   groom_intro: null,

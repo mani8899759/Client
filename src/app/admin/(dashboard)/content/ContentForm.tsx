@@ -1,7 +1,8 @@
 "use client";
 
 import { ActionForm, SubmitButton } from "@/components/admin/forms";
-import { AArea, ASelect, AText } from "@/components/admin/fields";
+import { AArea, ACheck, ASelect, AText } from "@/components/admin/fields";
+import { MediaField } from "@/components/admin/MediaField";
 import { Panel } from "@/components/admin/ui";
 import { updateWebsiteContent } from "./actions";
 import type { WeddingSettings } from "@/types/database";
@@ -53,6 +54,41 @@ export function ContentForm({
           <AText name="ceremony_time" label="Ceremony time" type="time" defaultValue={ceremonyTime} optionalLabel />
           <ASelect name="timezone" label="Timezone" defaultValue={w.timezone} options={TIMEZONES} />
           <AText name="wedding_end_at" label="Celebration ends" type="datetime-local" defaultValue={weddingEndLocal} optionalLabel hint="Defaults to the end of the day." />
+        </div>
+      </Panel>
+
+      <Panel
+        title="Official wedding invitation"
+        description="Upload a PDF or image invitation for guests to open via the 'View Invitation' button. PDFs open directly in the browser; images open in an elegant preview."
+      >
+        <div className="grid gap-6 sm:grid-cols-2">
+          <MediaField
+            name="invitation_pdf_path"
+            label="Invitation PDF Document"
+            purpose="invitations"
+            kind="pdf"
+            defaultValue={w.invitation_pdf_path}
+            hint="Official wedding PDF invitation. Opens directly in browser without forced download."
+          />
+          <MediaField
+            name="invitation_image_path"
+            label="Invitation Card Image (Alternative/Secondary)"
+            purpose="invitations"
+            kind="image"
+            defaultValue={w.invitation_image_path}
+            ratio="3/4"
+            hint="Digital invitation card image (JPG, PNG or WebP)."
+          />
+        </div>
+        <div className="mt-6 border-t border-soft-border/60 pt-4">
+          <ACheck
+            name="invitation_published"
+            label="Publish invitation to website visitors"
+            defaultChecked={w.invitation_published !== false}
+          />
+          <p className="mt-1 text-[12px] text-secondary-text">
+            When published, the header and hero &quot;View Invitation&quot; buttons open the document. If unselected or empty, visitors see a graceful &quot;Invitation Coming Soon&quot; notice.
+          </p>
         </div>
       </Panel>
 

@@ -47,8 +47,9 @@ export function EventForm({ event, venues }: { event: WeddingEvent | null; venue
             <ACheck name="is_published" label="Published (visible to guests)" defaultChecked={event?.is_published ?? false} />
           </div>
         </div>
-        <div className="mt-8 grid gap-6 border-t border-soft-border pt-6 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 border-t border-soft-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
           <MediaField name="image_path" label="Event photograph" purpose="events" defaultValue={event?.image_path} ratio="5/4" />
+          <MediaField name="invitation_pdf_path" label="Invitation PDF" purpose="invitations" kind="pdf" defaultValue={event?.invitation_pdf_path} />
           <MediaField name="invitation_image_path" label="Invitation image" purpose="invitations" defaultValue={event?.invitation_image_path} ratio="4/5" />
           <MediaField name="invitation_video_path" label="Invitation video" purpose="invitations" kind="video" defaultValue={event?.invitation_video_path} ratio="16/9" />
         </div>

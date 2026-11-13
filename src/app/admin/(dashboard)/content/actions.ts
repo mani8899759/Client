@@ -60,11 +60,33 @@ export async function updateWebsiteContent(_: ActionState, fd: FormData): Promis
       social_links.push({ label, url });
     }
 
+    const invPdfRef = mediaRefField(str(fd, "invitation_pdf_path"));
+    if (!invPdfRef.ok) return fail("Invalid invitation PDF reference.", { invitation_pdf_path: ["Please upload the PDF again."] });
+    const invImgRef = mediaRefField(str(fd, "invitation_image_path"));
+    if (!invImgRef.ok) return fail("Invalid invitation image reference.", { invitation_image_path: ["Please upload the image again."] });
+    const invitation_published = fd.get("invitation_published") === "on";
+
+    const { data: before } = await supabase.from("wedding_settings").select("*").single<WeddingSettings>();
+    const invitationUpdate = {
+      invitation_pdf_path: invPdfRef.value,
+      invitation_image_path: invImgRef.value,
+      invitation_published,
+    };
+
     const { error } = await supabase
       .from("wedding_settings")
-      .update({ ...parsed.data, timezone, wedding_date, wedding_time_confirmed: !!time, wedding_end_at, social_links })
+      .update({
+        ...parsed.data,
+        ...invitationUpdate,
+        timezone,
+        wedding_date,
+        wedding_time_confirmed: !!time,
+        wedding_end_at,
+        social_links,
+      })
       .eq("id", true);
     if (error) return fail(friendlyDbError(error));
+    await removeMedia(supabase, replacedRefs(before, invitationUpdate, ["invitation_pdf_path", "invitation_image_path"]));
     revalidatePublic();
     return ok("Website content saved.");
   });

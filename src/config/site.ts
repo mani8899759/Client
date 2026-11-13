@@ -7,7 +7,7 @@ export const PUBLIC_NAV = [
   { href: "/live", label: "Live" },
 ] as const;
 
-export const PRIMARY_CTA = { href: "/register", label: "Join the Celebration" } as const;
+export const PRIMARY_CTA = { href: "/register", label: "Win a Special Gift" } as const;
 
 export const SIDE_LABEL = { bride: "Bride Side", groom: "Groom Side" } as const;
 export const GENDER_LABEL = { male: "Male", female: "Female" } as const;
@@ -32,3 +32,4 @@ export const PLACEHOLDER = {
 
 export const GALLERY_PAGE_SIZE = 24;
 export const ADMIN_PAGE_SIZE = 25;
+

@@ -347,12 +347,13 @@ export function LiveTeaserSection({ stream, timezone }: { stream: LiveStream | n
 }
 
 const STEPS = [
-  { title: "Register", text: "Add your details and choose Bride Side or Groom Side. It takes a minute." },
-  { title: "Verify at the venue", text: "Scan the event QR code at the wedding and enter your registered mobile number." },
-  { title: "Lucky draw", text: "Verified guests enter the wedding lucky draw. Winners are announced on this site." },
+  { title: "Register for Draw", text: "Add your details and choose Bride Side or Groom Side. It takes a minute." },
+  { title: "Verify at Venue", text: "Scan the common event QR code at the wedding and enter your registered mobile number." },
+  { title: "Win a Special Gift", text: "Verified guests enter our wedding lucky draw. 11 special gifts will be presented to drawn winners!" },
 ];
 
 export function LuckyDrawCtaSection({ app, wedding }: { app: AppSettings; wedding: WeddingSettings }) {
+  const registerLabel = wedding.cta_primary_label ?? "Win a Special Gift";
   return (
     <Section labelledBy="lucky-draw-title">
       <Container width="wide">
@@ -360,23 +361,26 @@ export function LuckyDrawCtaSection({ app, wedding }: { app: AppSettings; weddin
           <Reveal className="lg:col-span-5">
             <SectionHeading
               eyebrow="Wedding Lucky Draw"
-              title={<span id="lucky-draw-title">Be part of the celebration</span>}
+              title={<span id="lucky-draw-title">Join our wedding gift draw</span>}
               intro={
                 app.registration_open
-                  ? "Registration is open for every guest — from the Bride's side and the Groom's side alike."
+                  ? "Join our wedding gift draw for a chance to win a special gift. Open for every guest — from the Bride's side and the Groom's side alike."
                   : "Registration for the lucky draw is now closed. Thank you to everyone who took part."
               }
             />
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
               {app.registration_open ? (
                 <ButtonLink href="/register" variant="filled" size="lg">
-                  {wedding.cta_primary_label ?? "Register Now"}
+                  {registerLabel}
                 </ButtonLink>
               ) : null}
               <ButtonLink href="/lucky-draw/winners" variant="ghost">
                 See the winners
               </ButtonLink>
             </div>
+            <p className="mt-4 text-[13px] text-secondary-text">
+              * Note: Participation offers an opportunity to win a special gift, not a guarantee that every registrant will receive one.
+            </p>
           </Reveal>
           <ol className="grid gap-px overflow-hidden rounded-[var(--radius-control)] border border-soft-border bg-soft-border sm:grid-cols-3 lg:col-span-7">
             {STEPS.map((s, i) => (

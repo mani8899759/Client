@@ -3,12 +3,12 @@ import {
   CoupleSection,
   EventsPreviewSection,
   GalleryPreviewSection,
-  LiveTeaserSection,
   LuckyDrawCtaSection,
   StoryPreviewSection,
   VenuePreviewSection,
   WelcomeSection,
 } from "@/components/home/Sections";
+import { WatchCelebrationLiveSection } from "@/components/home/WatchCelebrationLiveSection";
 import {
   getAppSettings,
   getEvents,
@@ -33,26 +33,38 @@ export default async function HomePage() {
     getLocations(),
   ]);
 
+  const featuredStream = pickFeaturedStream(streams);
+
   return (
     <>
-      {/* 1–2. Hero with live countdown */}
+      {/* 1–3. Header is in layout; Hero with Priya & Arjun, date and live countdown */}
       <Hero wedding={wedding} app={app} />
-      {/* 3. Welcome */}
+
+      {/* 4. Welcome message */}
       <WelcomeSection wedding={wedding} />
-      {/* 4. Couple introduction */}
+
+      {/* 5. Couple introduction */}
       <CoupleSection wedding={wedding} />
-      {/* 5. Love story preview */}
+
+      {/* 6. Our Story */}
       <StoryPreviewSection wedding={wedding} entries={story} />
-      {/* 6. Events preview */}
+
+      {/* 7. Wedding Events */}
       <EventsPreviewSection events={events} />
-      {/* 7. Gallery preview */}
+
+      {/* 8. Photo Gallery */}
       <GalleryPreviewSection media={gallery} />
-      {/* 8. Venue preview */}
+
+      {/* 9. Watch Our Celebration Live — directly after Gallery */}
+      {app.live_section_visible ? (
+        <WatchCelebrationLiveSection stream={featuredStream} timezone={wedding.timezone} />
+      ) : null}
+
+      {/* 10. Wedding Locations and Get Directions */}
       <VenuePreviewSection wedding={wedding} venues={venues} />
-      {/* 9. Lucky draw registration CTA */}
+
+      {/* 11–12. Win a Special Gift CTA section & Lucky Draw verification */}
       <LuckyDrawCtaSection app={app} wedding={wedding} />
-      {/* 10. Live streaming preview */}
-      {app.live_section_visible ? <LiveTeaserSection stream={pickFeaturedStream(streams)} timezone={wedding.timezone} /> : null}
     </>
   );
 }

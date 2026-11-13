@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useId, useRef, useState } from "react";
-import { ImagePlus, Loader2, Trash2, Film } from "lucide-react";
+import { ImagePlus, Loader2, Trash2, Film, FileText, ExternalLink } from "lucide-react";
 import { getBrowserSupabase } from "@/lib/supabase/browser";
 import { BUCKETS, buildObjectPath, mediaUrl, validateMediaFile, type MediaPurpose } from "@/lib/storage/media";
 import { useFieldError } from "./forms";
@@ -27,10 +27,10 @@ function readImageSize(file: File): Promise<{ width: number; height: number } | 
 export type UploadedMedia = { ref: string; width: number | null; height: number | null };
 
 /** Upload a validated file directly to Supabase Storage as the signed-in admin (storage RLS enforces admin). */
-export async function uploadMedia(file: File, purpose: MediaPurpose, kind: "image" | "video"): Promise<UploadedMedia> {
+export async function uploadMedia(file: File, purpose: MediaPurpose, kind: "image" | "video" | "pdf"): Promise<UploadedMedia> {
   const problem = validateMediaFile(file, kind);
   if (problem) throw new Error(problem);
-  const bucket = kind === "image" ? BUCKETS.images : BUCKETS.videos;
+  const bucket = kind === "video" ? BUCKETS.videos : BUCKETS.images;
   const path = buildObjectPath(purpose, file.type);
   const { error } = await getBrowserSupabase().storage.from(bucket).upload(path, file, {
     contentType: file.type,
@@ -58,7 +58,7 @@ export function MediaField({
   name: string;
   label: string;
   purpose: MediaPurpose;
-  kind?: "image" | "video";
+  kind?: "image" | "video" | "pdf";
   defaultValue?: string | null;
   hint?: string;
   ratio?: string;
@@ -98,9 +98,29 @@ export function MediaField({
             <Image src={url} alt="" fill sizes="220px" className="object-cover" />
           ) : url && kind === "video" ? (
             <video src={url} className="absolute inset-0 h-full w-full object-cover" muted preload="metadata" />
+          ) : url && kind === "pdf" ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 p-3 text-center">
+              <FileText className="size-6 text-primary" strokeWidth={1.5} aria-hidden />
+              <span className="text-[12px] font-medium text-dark-walnut">PDF Document</span>
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[11px] text-primary underline"
+              >
+                <span>View</span>
+                <ExternalLink className="size-3" aria-hidden />
+              </a>
+            </div>
           ) : (
             <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-[12px] text-secondary-text">
-              {kind === "image" ? <ImagePlus className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden /> : <Film className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />}
+              {kind === "image" ? (
+                <ImagePlus className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
+              ) : kind === "video" ? (
+                <Film className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
+              ) : (
+                <FileText className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
+              )}
               No {kind} selected
             </span>
           )}
@@ -127,7 +147,7 @@ export function MediaField({
               type="file"
               className="sr-only"
               aria-labelledby={`${id}-label`}
-              accept={kind === "image" ? "image/jpeg,image/png,image/webp" : "video/mp4"}
+              accept={kind === "image" ? "image/jpeg,image/png,image/webp" : kind === "video" ? "video/mp4" : "application/pdf"}
               onChange={(e) => void onFile(e.target.files?.[0])}
             />
           </label>
@@ -148,7 +168,7 @@ export function MediaField({
         </p>
       ) : (
         <p className="text-[12px] text-secondary-text">
-          {hint ?? (kind === "image" ? "JPG, PNG or WebP, up to 15 MB." : "MP4, up to 50 MB.")} Changes apply when you save.
+          {hint ?? (kind === "image" ? "JPG, PNG or WebP, up to 15 MB." : kind === "video" ? "MP4, up to 50 MB." : "PDF document, up to 25 MB.")} Changes apply when you save.
         </p>
       )}
     </div>
