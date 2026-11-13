@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 480, 640, 828, 1080, 1280, 1600, 1920, 2560],
     remotePatterns: [
+      { protocol: "https", hostname: "ueyedhnenxraboszsmju.supabase.co", pathname: "/storage/v1/object/public/**" },
       { protocol: "https", hostname: "ojbatmuspwsmkycegofl.supabase.co", pathname: "/storage/v1/object/public/**" },
       { protocol: "https", hostname: "**.supabase.co", pathname: "/storage/v1/object/public/**" },
       { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
