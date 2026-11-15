@@ -42,6 +42,31 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   contact_phone: null,
   contact_email: null,
   social_links: [],
+  invitation_published: true,
+  invitation_cover_heading: "A Special Invitation",
+  invitation_cover_subheading: "We're Getting Married",
+  invitation_cover_image_path: null,
+  invitation_intro_heading: "Together With Our Families",
+  invitation_intro_message:
+    "We warmly invite you to join us as we celebrate the beginning of our new journey together. Your presence will make our special day even more memorable.",
+  invitation_family_names: null,
+  invitation_closing_heading: "Your Presence Would Mean the World to Us",
+  invitation_closing_message:
+    "We look forward to celebrating this special beginning with our family and friends. We would be delighted to have you with us.",
+  invitation_whatsapp_message:
+    "You're warmly invited to celebrate the wedding of Priya & Arjun on December 1, 2026. We would love to have you with us!",
+  invitation_music_path: null,
+  invitation_music_title: "Traditional Wedding Celebration Music",
+  invitation_music_enabled: true,
+  invitation_music_volume: 0.7,
+  invitation_auto_play_on_open: true,
+  invitation_section_countdown: true,
+  invitation_section_story: true,
+  invitation_section_events: true,
+  invitation_section_document: true,
+  invitation_section_gallery: true,
+  invitation_section_venues: true,
+  invitation_section_gift_draw: true,
 };
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {

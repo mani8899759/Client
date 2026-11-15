@@ -59,6 +59,27 @@ export interface WeddingSettings {
   invitation_pdf_path?: string | null;
   invitation_image_path?: string | null;
   invitation_published?: boolean;
+  invitation_cover_heading?: string | null;
+  invitation_cover_subheading?: string | null;
+  invitation_cover_image_path?: string | null;
+  invitation_intro_heading?: string | null;
+  invitation_intro_message?: string | null;
+  invitation_family_names?: string | null;
+  invitation_closing_heading?: string | null;
+  invitation_closing_message?: string | null;
+  invitation_whatsapp_message?: string | null;
+  invitation_music_path?: string | null;
+  invitation_music_title?: string | null;
+  invitation_music_enabled?: boolean;
+  invitation_music_volume?: number;
+  invitation_auto_play_on_open?: boolean;
+  invitation_section_countdown?: boolean;
+  invitation_section_story?: boolean;
+  invitation_section_events?: boolean;
+  invitation_section_document?: boolean;
+  invitation_section_gallery?: boolean;
+  invitation_section_venues?: boolean;
+  invitation_section_gift_draw?: boolean;
   updated_at?: string;
 }
 

@@ -15,6 +15,7 @@ import {
   Images,
   LayoutDashboard,
   LogOut,
+  Mail,
   Menu,
   QrCode,
   Radio,
@@ -33,6 +34,7 @@ const NAV: Array<{ group: string | null; items: NavItem[] }> = [
   {
     group: "Website",
     items: [
+      { href: "/admin/invitation", label: "Digital Invitation", icon: Mail },
       { href: "/admin/content", label: "Website Content", icon: FileText },
       { href: "/admin/homepage", label: "Homepage", icon: Home },
       { href: "/admin/story", label: "Our Love Story", icon: BookHeart },

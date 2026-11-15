@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useId, useRef, useState } from "react";
-import { ImagePlus, Loader2, Trash2, Film, FileText, ExternalLink } from "lucide-react";
+import { ImagePlus, Loader2, Trash2, Film, FileText, ExternalLink, Music } from "lucide-react";
 import { getBrowserSupabase } from "@/lib/supabase/browser";
 import { BUCKETS, buildObjectPath, mediaUrl, validateMediaFile, type MediaPurpose } from "@/lib/storage/media";
 import { useFieldError } from "./forms";
@@ -27,7 +27,7 @@ function readImageSize(file: File): Promise<{ width: number; height: number } | 
 export type UploadedMedia = { ref: string; width: number | null; height: number | null };
 
 /** Upload a validated file directly to Supabase Storage as the signed-in admin (storage RLS enforces admin). */
-export async function uploadMedia(file: File, purpose: MediaPurpose, kind: "image" | "video" | "pdf"): Promise<UploadedMedia> {
+export async function uploadMedia(file: File, purpose: MediaPurpose, kind: "image" | "video" | "pdf" | "audio"): Promise<UploadedMedia> {
   const problem = validateMediaFile(file, kind);
   if (problem) throw new Error(problem);
   const bucket = kind === "video" ? BUCKETS.videos : BUCKETS.images;
@@ -58,7 +58,7 @@ export function MediaField({
   name: string;
   label: string;
   purpose: MediaPurpose;
-  kind?: "image" | "video" | "pdf";
+  kind?: "image" | "video" | "pdf" | "audio";
   defaultValue?: string | null;
   hint?: string;
   ratio?: string;
@@ -112,14 +112,22 @@ export function MediaField({
                 <ExternalLink className="size-3" aria-hidden />
               </a>
             </div>
+          ) : url && kind === "audio" ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 p-3 text-center">
+              <Music className="size-6 text-primary" strokeWidth={1.5} aria-hidden />
+              <span className="text-[12px] font-medium text-dark-walnut">Audio File</span>
+              <audio controls src={url} className="mt-1 w-full max-w-[190px]" preload="none" />
+            </div>
           ) : (
             <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-[12px] text-secondary-text">
               {kind === "image" ? (
                 <ImagePlus className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
               ) : kind === "video" ? (
                 <Film className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
-              ) : (
+              ) : kind === "pdf" ? (
                 <FileText className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
+              ) : (
+                <Music className="size-5 text-muted-gold" strokeWidth={1.5} aria-hidden />
               )}
               No {kind} selected
             </span>
@@ -147,7 +155,15 @@ export function MediaField({
               type="file"
               className="sr-only"
               aria-labelledby={`${id}-label`}
-              accept={kind === "image" ? "image/jpeg,image/png,image/webp" : kind === "video" ? "video/mp4" : "application/pdf"}
+              accept={
+                kind === "image"
+                  ? "image/jpeg,image/png,image/webp"
+                  : kind === "video"
+                  ? "video/mp4"
+                  : kind === "pdf"
+                  ? "application/pdf"
+                  : "audio/mpeg,audio/mp3,audio/wav,audio/aac,audio/x-m4a,audio/mp4,audio/ogg"
+              }
               onChange={(e) => void onFile(e.target.files?.[0])}
             />
           </label>
@@ -168,7 +184,15 @@ export function MediaField({
         </p>
       ) : (
         <p className="text-[12px] text-secondary-text">
-          {hint ?? (kind === "image" ? "JPG, PNG or WebP, up to 15 MB." : kind === "video" ? "MP4, up to 50 MB." : "PDF document, up to 25 MB.")} Changes apply when you save.
+          {hint ??
+            (kind === "image"
+              ? "JPG, PNG or WebP, up to 15 MB."
+              : kind === "video"
+              ? "MP4, up to 50 MB."
+              : kind === "pdf"
+              ? "PDF document, up to 25 MB."
+              : "MP3, M4A, AAC, WAV or OGG, up to 25 MB.")}{" "}
+          Changes apply when you save.
         </p>
       )}
     </div>

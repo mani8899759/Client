@@ -10,9 +10,11 @@ export type MediaPurpose = "hero" | "story" | "events" | "invitations" | "galler
 export const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 export const DOCUMENT_TYPES = ["application/pdf"] as const;
 export const VIDEO_TYPES = ["video/mp4"] as const;
+export const AUDIO_TYPES = ["audio/mpeg", "audio/mp3", "audio/wav", "audio/aac", "audio/x-m4a", "audio/mp4", "audio/ogg"] as const;
 export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
 export const MAX_PDF_BYTES = 25 * 1024 * 1024;
 export const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
+export const MAX_AUDIO_BYTES = 25 * 1024 * 1024;
 
 const EXT: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -20,12 +22,27 @@ const EXT: Record<string, string> = {
   "image/webp": "webp",
   "application/pdf": "pdf",
   "video/mp4": "mp4",
+  "audio/mpeg": "mp3",
+  "audio/mp3": "mp3",
+  "audio/wav": "wav",
+  "audio/aac": "aac",
+  "audio/x-m4a": "m4a",
+  "audio/mp4": "m4a",
+  "audio/ogg": "ogg",
 };
 
-export function validateMediaFile(file: { type: string; size: number }, kind: "image" | "video" | "pdf"): string | null {
+export function validateMediaFile(file: { type: string; size: number }, kind: "image" | "video" | "pdf" | "audio"): string | null {
   if (kind === "pdf") {
     if (file.type !== "application/pdf") return "Use a PDF document.";
     if (file.size > MAX_PDF_BYTES) return `PDF is larger than ${Math.round(MAX_PDF_BYTES / 1024 / 1024)} MB.`;
+    if (file.size === 0) return "File is empty.";
+    return null;
+  }
+  if (kind === "audio") {
+    if (!AUDIO_TYPES.includes(file.type as (typeof AUDIO_TYPES)[number])) {
+      return "Use an MP3, M4A, AAC, WAV or OGG audio file.";
+    }
+    if (file.size > MAX_AUDIO_BYTES) return `Audio is larger than ${Math.round(MAX_AUDIO_BYTES / 1024 / 1024)} MB.`;
     if (file.size === 0) return "File is empty.";
     return null;
   }
@@ -44,9 +61,9 @@ export function buildObjectPath(purpose: MediaPurpose, mime: string): string {
   return `${purpose}/${new Date().getUTCFullYear()}/${crypto.randomUUID()}.${ext}`;
 }
 
-const STORAGE_REF = /^(wedding-images|wedding-videos)\/[a-z]+\/\d{4}\/[0-9a-f-]{36}\.(jpg|png|webp|mp4|pdf)$/;
+const STORAGE_REF = /^(wedding-images|wedding-videos)\/[a-z]+\/\d{4}\/[0-9a-f-]{36}\.(jpg|png|webp|mp4|pdf|mp3|wav|m4a|aac|ogg)$/;
 /** Repository-bundled AI illustrations, served from /public/images/ai. */
-const STATIC_AI_REF = /^static\/ai\/[a-z0-9]+(-[a-z0-9]+)*\.(webp|avif|jpg|png|pdf)$/;
+const STATIC_AI_REF = /^static\/ai\/[a-z0-9]+(-[a-z0-9]+)*\.(webp|avif|jpg|png|pdf|mp3)$/;
 
 export function isStorageRef(ref: string | null | undefined): ref is string {
   return !!ref && STORAGE_REF.test(ref);

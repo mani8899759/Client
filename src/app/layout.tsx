@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Playfair_Display, Great_Vibes } from "next/font/google";
 import { ToastProvider } from "@/components/feedback/Toast";
 import { MotionProvider } from "@/components/motion/Reveal";
 import { getWeddingSettings } from "@/services/content";
@@ -22,6 +22,21 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-great-vibes",
   display: "swap",
 });
 
@@ -50,7 +65,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" suppressHydrationWarning className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="en-IN" suppressHydrationWarning className={`${cormorant.variable} ${inter.variable} ${playfair.variable} ${greatVibes.variable}`}>
       <body suppressHydrationWarning>
         <MotionProvider>
           <ToastProvider>{children}</ToastProvider>
