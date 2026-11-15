@@ -50,8 +50,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${cormorant.variable} ${inter.variable}`}>
-      <body>
+    <html lang="en-IN" suppressHydrationWarning className={`${cormorant.variable} ${inter.variable}`}>
+      <body suppressHydrationWarning>
         <MotionProvider>
           <ToastProvider>{children}</ToastProvider>
         </MotionProvider>

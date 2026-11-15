@@ -43,6 +43,7 @@ export function ImageFrame({
   const url = src ?? mediaUrl(mediaRef);
   return (
     <div
+      suppressHydrationWarning
       className={cn("relative overflow-hidden bg-soft-cream", rounded && "rounded-[var(--radius-control)]", fill && "h-full w-full", className)}
       style={fill ? undefined : { aspectRatio: ratio }}
     >

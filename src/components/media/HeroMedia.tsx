@@ -28,6 +28,7 @@ export function HeroMedia({
 
   return (
     <motion.div
+      suppressHydrationWarning
       initial={reduce ? false : { opacity: 0, clipPath: "inset(8% 4% 0% 4%)" }}
       animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
       transition={{ duration: 1.4, delay: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
