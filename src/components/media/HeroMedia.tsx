@@ -19,14 +19,9 @@ export function HeroMedia({
   videoUrl: string | null;
   alt: string;
 }) {
-  const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -39,16 +34,6 @@ export function HeroMedia({
   useEffect(() => {
     if (reduce) videoRef.current?.pause();
   }, [reduce]);
-
-  if (!mounted) {
-    return (
-      <div
-        suppressHydrationWarning
-        className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-control)] bg-soft-cream xs:aspect-[5/6] sm:aspect-[16/10] lg:aspect-[21/9]"
-        aria-hidden="true"
-      />
-    );
-  }
 
   return (
     <motion.div
@@ -81,7 +66,6 @@ export function HeroMedia({
             mediaRef={imageRef}
             alt={alt}
             fill
-            priority
             sizes="(min-width: 1440px) 1360px, 100vw"
             imageClassName="object-cover object-[center_30%]"
             placeholderLabel="Hero photograph"
