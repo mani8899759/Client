@@ -54,7 +54,7 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   invitation_closing_message:
     "We look forward to celebrating this special beginning with our family and friends. We would be delighted to have you with us.",
   invitation_whatsapp_message:
-    "You're warmly invited to celebrate the wedding of Priya & Arjun on December 1, 2026. We would love to have you with us!",
+    "You're warmly invited to celebrate the wedding of Priya & Arjun on December 13, 2026. We would love to have you with us!",
   invitation_music_path: "/audio/priya-arjun-wedding-music.m4a",
   invitation_music_title: "Traditional Wedding Celebration Music",
   invitation_music_enabled: true,

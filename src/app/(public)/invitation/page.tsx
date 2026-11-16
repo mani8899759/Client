@@ -11,6 +11,7 @@ import {
   pickFeaturedStream,
 } from "@/services/content";
 import { coupleNames } from "@/lib/utils/names";
+import { weddingSchedule } from "@/lib/utils/wedding";
 import { publicEnv } from "@/lib/env";
 import { InvitationPageClient } from "@/components/invitation/InvitationPageClient";
 
@@ -19,8 +20,10 @@ export const revalidate = 60;
 export async function generateMetadata(): Promise<Metadata> {
   const wedding = await getWeddingSettings();
   const names = coupleNames(wedding);
+  const schedule = weddingSchedule(wedding);
+  const dateLabel = schedule?.dateOnlyLabel ?? "December 13, 2026";
   const title = `${names.bride} & ${names.groom} — Official Wedding Invitation`;
-  const description = `You are warmly invited to celebrate the wedding of ${names.bride} and ${names.groom} on December 1, 2026. Explore our celebrations, venues, story and RSVP.`;
+  const description = `You are warmly invited to celebrate the wedding of ${names.bride} and ${names.groom} on ${dateLabel}. Explore our celebrations, venues, story and RSVP.`;
 
   return {
     title,

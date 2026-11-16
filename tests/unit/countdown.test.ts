@@ -25,37 +25,37 @@ describe("countdown maths", () => {
   });
 });
 
-describe("wedding schedule — Priya & Arjun, 1 December 2026, Asia/Kolkata", () => {
+describe("wedding schedule — Priya & Arjun, 13 December 2026, Asia/Kolkata", () => {
   const dateOnly = weddingSchedule(DEFAULT_WEDDING)!;
 
-  it("targets the start of 1 December in India when no ceremony time is set", () => {
-    expect(dateOnly.targetIso).toBe("2026-11-30T18:30:00.000Z");
-    expect(dateOnly.dayStartIso).toBe("2026-11-30T18:30:00.000Z");
-    expect(dateOnly.dayEndIso).toBe("2026-12-01T18:30:00.000Z");
-    expect(dateOnly.dateLabel).toBe("December 1, 2026");
+  it("targets the start of 13 December in India when no ceremony time is set", () => {
+    expect(dateOnly.targetIso).toBe("2026-12-12T18:30:00.000Z");
+    expect(dateOnly.dayStartIso).toBe("2026-12-12T18:30:00.000Z");
+    expect(dateOnly.dayEndIso).toBe("2026-12-13T18:30:00.000Z");
+    expect(dateOnly.dateLabel).toBe("December 13, 2026");
   });
 
   it("moves through counting → today → completed for a date-only wedding", () => {
     const s = buildSchedule({ ...dateOnly, timeConfirmed: false })!;
-    expect(phaseAt(Date.parse("2026-11-30T18:29:59Z"), s)).toBe("counting");
-    expect(phaseAt(Date.parse("2026-11-30T18:30:00Z"), s)).toBe("today"); // midnight IST
-    expect(phaseAt(Date.parse("2026-12-01T18:29:59Z"), s)).toBe("today"); // 23:59:59 IST
-    expect(phaseAt(Date.parse("2026-12-01T18:30:00Z"), s)).toBe("completed");
+    expect(phaseAt(Date.parse("2026-12-12T18:29:59Z"), s)).toBe("counting");
+    expect(phaseAt(Date.parse("2026-12-12T18:30:00Z"), s)).toBe("today"); // midnight IST
+    expect(phaseAt(Date.parse("2026-12-13T18:29:59Z"), s)).toBe("today"); // 23:59:59 IST
+    expect(phaseAt(Date.parse("2026-12-13T18:30:00Z"), s)).toBe("completed");
   });
 
   it("uses a confirmed ceremony time: today before it, started after it", () => {
-    const withTime = weddingSchedule({ ...DEFAULT_WEDDING, wedding_date: "2026-12-01T13:30:00.000Z", wedding_time_confirmed: true })!;
-    expect(withTime.dateLabel).toBe("December 1, 2026 · 7:00 pm IST");
+    const withTime = weddingSchedule({ ...DEFAULT_WEDDING, wedding_date: "2026-12-13T13:30:00.000Z", wedding_time_confirmed: true })!;
+    expect(withTime.dateLabel).toBe("December 13, 2026 · 7:00 pm IST");
     const s = buildSchedule(withTime)!;
-    expect(phaseAt(Date.parse("2026-11-30T18:00:00Z"), s)).toBe("counting");
-    expect(phaseAt(Date.parse("2026-12-01T10:00:00Z"), s)).toBe("today");
-    expect(phaseAt(Date.parse("2026-12-01T13:30:00Z"), s)).toBe("started");
-    expect(phaseAt(Date.parse("2026-12-01T13:30:00Z") + 12 * H, s)).toBe("completed");
+    expect(phaseAt(Date.parse("2026-12-12T18:00:00Z"), s)).toBe("counting");
+    expect(phaseAt(Date.parse("2026-12-13T10:00:00Z"), s)).toBe("today");
+    expect(phaseAt(Date.parse("2026-12-13T13:30:00Z"), s)).toBe("started");
+    expect(phaseAt(Date.parse("2026-12-13T13:30:00Z") + 12 * H, s)).toBe("completed");
   });
 
   it("is the same instant for visitors in any timezone", () => {
     const s = buildSchedule(dateOnly)!;
     const now = Date.parse("2026-11-13T00:00:00Z");
-    expect(remainingUntil(s.target, now)).toEqual({ days: 17, hours: 18, minutes: 30, seconds: 0 });
+    expect(remainingUntil(s.target, now)).toEqual({ days: 29, hours: 18, minutes: 30, seconds: 0 });
   });
 });

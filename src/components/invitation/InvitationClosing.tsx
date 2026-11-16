@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, Copy, Heart, Send, Share2, ArrowLeft } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
 import { coupleNames } from "@/lib/utils/names";
+import { weddingSchedule } from "@/lib/utils/wedding";
 
 export function InvitationClosing({
   wedding,
@@ -14,6 +15,8 @@ export function InvitationClosing({
   invitationUrl: string;
 }) {
   const names = coupleNames(wedding);
+  const schedule = weddingSchedule(wedding);
+  const dateLabel = schedule?.dateOnlyLabel ?? "December 13, 2026";
   const [copied, setCopied] = useState(false);
   const [canShare, setCanShare] = useState(false);
 
@@ -25,7 +28,7 @@ export function InvitationClosing({
 
   const defaultShareText =
     wedding.invitation_whatsapp_message ||
-    `You're warmly invited to celebrate the wedding of ${names.bride} & ${names.groom} on December 1, 2026. We would love to have you with us!`;
+    `You're warmly invited to celebrate the wedding of ${names.bride} & ${names.groom} on ${dateLabel}. We would love to have you with us!`;
 
   const shareTextWithUrl = `${defaultShareText}\n${invitationUrl}`;
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareTextWithUrl)}`;
@@ -89,7 +92,7 @@ export function InvitationClosing({
             {names.bride} &amp; {names.groom}
           </div>
           <p className="mt-1 text-[13px] tracking-widest text-[#7b6a58] uppercase">
-            December 1, 2026
+            {dateLabel}
           </p>
         </div>
 

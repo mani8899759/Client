@@ -11,7 +11,7 @@ export const WEDDING_IDENTITY = {
   groomName: "Arjun",
   websiteTitle: "Priya & Arjun",
   websiteSubtitle: "Wedding Celebration",
-  /** Midnight, 1 December 2026, Asia/Kolkata (date-only until a ceremony time is confirmed). */
-  weddingDateIso: "2026-11-30T18:30:00.000Z",
+  /** Midnight, 13 December 2026, Asia/Kolkata (date-only until a ceremony time is confirmed). */
+  weddingDateIso: "2026-12-12T18:30:00.000Z",
   timezone: "Asia/Kolkata",
 } as const;

@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { WeddingSettings } from "@/types/database";
 import { coupleNames } from "@/lib/utils/names";
+import { weddingSchedule } from "@/lib/utils/wedding";
 import { InvitationToran } from "../InvitationToran";
 
 export function InvitationHeroAnimation({
@@ -34,6 +35,7 @@ export function InvitationHeroAnimation({
   const namesContainerRef = useRef<HTMLDivElement | null>(null);
 
   const names = coupleNames(wedding);
+  const schedule = weddingSchedule(wedding);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -370,7 +372,7 @@ export function InvitationHeroAnimation({
               className="mt-3 inline-block rounded-full border border-[#d4a843] bg-transparent px-8 py-1.5 backdrop-blur-[2px]"
             >
               <p className="font-[family-name:var(--font-playfair)] text-[15px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[18px]">
-                December 1, 2026
+                {schedule?.dateOnlyLabel ?? "December 13, 2026"}
               </p>
             </div>
             <p

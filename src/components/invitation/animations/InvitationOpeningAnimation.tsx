@@ -6,6 +6,7 @@ import { MailOpen, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import type { WeddingSettings } from "@/types/database";
 import { coupleNames } from "@/lib/utils/names";
+import { weddingSchedule } from "@/lib/utils/wedding";
 import { mediaUrl } from "@/lib/storage/media";
 import { pickImage } from "@/lib/storage/imagery";
 
@@ -27,6 +28,7 @@ export function InvitationOpeningAnimation({
   const sealRef = useRef<HTMLDivElement | null>(null);
 
   const names = coupleNames(wedding);
+  const schedule = weddingSchedule(wedding);
   const coverImageRef =
     wedding.invitation_cover_image_path ||
     wedding.hero_image_path ||
@@ -183,7 +185,7 @@ export function InvitationOpeningAnimation({
           <div className="mt-6">
             <div className="inline-block rounded-full border border-[#d4a843] bg-[#f5ebd5] px-7 py-2 shadow-xs">
               <p className="font-[family-name:var(--font-playfair)] text-[18px] font-bold text-[#3d1c00] sm:text-[20px]">
-                December 1, 2026
+                {schedule?.dateOnlyLabel ?? "December 13, 2026"}
               </p>
             </div>
             <p className="mt-2 text-[12px] font-medium text-[#7b6a58]">

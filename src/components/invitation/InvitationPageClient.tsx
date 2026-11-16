@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Gift } from "lucide-react";
 import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
+import { weddingSchedule } from "@/lib/utils/wedding";
 import { InvitationMotionProvider } from "./animations/InvitationMotionProvider";
 import { InvitationCover } from "./InvitationCover";
 import { InvitationHero } from "./InvitationHero";
@@ -41,6 +42,7 @@ export function InvitationPageClient({
   const [musicTrigger, setMusicTrigger] = useState(false);
   const mainContentRef = useRef<HTMLDivElement | null>(null);
 
+  const schedule = weddingSchedule(wedding);
   const audioUrl = wedding.invitation_music_path
     ? mediaUrl(wedding.invitation_music_path)
     : "/audio/priya-arjun-wedding-music.m4a";
@@ -129,7 +131,11 @@ export function InvitationPageClient({
 
               {/* Screen 8: Wedding Live Video */}
               {wedding.invitation_section_livestream !== false ? (
-                <InvitationLiveStream stream={featuredStream ?? null} timezone={wedding.timezone} />
+                <InvitationLiveStream
+                  stream={featuredStream ?? null}
+                  timezone={wedding.timezone}
+                  weddingDateLabel={schedule?.dateOnlyLabel ?? "December 13, 2026"}
+                />
               ) : null}
 
               {/* Screen 9: Wedding Venues & Google Maps */}

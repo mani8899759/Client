@@ -69,8 +69,8 @@ values
 (
   'Chapter 05',
   'A New Chapter Begins',
-  'December 1, 2026',
-  'December 1, 2026, marks the beginning of a new chapter. We are excited to share this special occasion and create beautiful memories with the people who matter most.',
+  'December 13, 2026',
+  'December 13, 2026, marks the beginning of a new chapter. We are excited to share this special occasion and create beautiful memories with the people who matter most.',
   'static/ai/wedding-ceremony.webp',
   'Sacred wedding ceremony beneath the mandap',
   50,
@@ -124,7 +124,7 @@ values
   'Wedding Ceremony',
   'The most special day as Priya & Arjun begin their journey.',
   'The most special day, as Priya and Arjun begin their new journey together surrounded by family and friends.',
-  '2026-12-01',
+  '2026-12-13',
   '18:00',
   '22:00',
   '11111111-1111-1111-1111-111111111111',
@@ -178,7 +178,7 @@ values (
   'Join us live as Priya and Arjun tie the knot in Jaipur, Rajasthan.',
   (select id from public.events where slug = 'wedding-ceremony'),
   'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-  '2026-12-01 18:00:00+05:30',
+  '2026-12-13 18:00:00+05:30',
   'upcoming',
   10,
   true
@@ -189,5 +189,5 @@ update public.wedding_settings
 set cta_primary_label = 'Win a Special Gift',
     cta_secondary_label = 'View Our Story',
     story_intro = 'Every beautiful journey begins with a simple moment. Here are the cherished memories and milestones leading up to our big day.',
-    story_closing = 'We cannot wait to celebrate our love and begin this new chapter together with you on December 1, 2026.'
+    story_closing = 'We cannot wait to celebrate our love and begin this new chapter together with you on December 13, 2026.'
 where id = true;

@@ -9,6 +9,7 @@ import {
   WelcomeSection,
 } from "@/components/home/Sections";
 import { WatchCelebrationLiveSection } from "@/components/home/WatchCelebrationLiveSection";
+import { weddingSchedule } from "@/lib/utils/wedding";
 import {
   getAppSettings,
   getEvents,
@@ -34,6 +35,7 @@ export default async function HomePage() {
   ]);
 
   const featuredStream = pickFeaturedStream(streams);
+  const schedule = weddingSchedule(wedding);
 
   return (
     <>
@@ -57,7 +59,11 @@ export default async function HomePage() {
 
       {/* 9. Watch Our Celebration Live — directly after Gallery */}
       {app.live_section_visible ? (
-        <WatchCelebrationLiveSection stream={featuredStream} timezone={wedding.timezone} />
+        <WatchCelebrationLiveSection
+          stream={featuredStream}
+          timezone={wedding.timezone}
+          weddingDateLabel={schedule?.dateOnlyLabel ?? "December 13, 2026"}
+        />
       ) : null}
 
       {/* 10. Wedding Locations and Get Directions */}

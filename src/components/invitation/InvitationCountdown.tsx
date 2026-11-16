@@ -8,7 +8,7 @@ import { remainingUntil } from "@/components/countdown/countdown-math";
 
 export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
   const schedule = weddingSchedule(wedding);
-  const targetTime = schedule ? new Date(schedule.targetIso).getTime() : new Date("2026-12-01T00:00:00+05:30").getTime();
+  const targetTime = schedule ? new Date(schedule.targetIso).getTime() : new Date("2026-12-13T00:00:00+05:30").getTime();
   const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
           </p>
 
           <h2 id="countdown-heading" className="mt-1 font-[family-name:var(--font-playfair)] text-[26px] font-bold text-[#3d1c00] sm:text-[34px]">
-            {schedule?.dateOnlyLabel ?? "December 1, 2026"}
+            {schedule?.dateOnlyLabel ?? "December 13, 2026"}
           </h2>
 
           <div className="mx-auto my-6 grid grid-cols-4 gap-2 sm:gap-4">

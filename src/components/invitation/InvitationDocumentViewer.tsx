@@ -5,8 +5,11 @@ import Image from "next/image";
 import { Download, ExternalLink, FileText, Maximize2, Minimize2, Sparkles, ZoomIn, ZoomOut } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
+import { weddingSchedule } from "@/lib/utils/wedding";
 
 export function InvitationDocumentViewer({ wedding }: { wedding: WeddingSettings }) {
+  const schedule = weddingSchedule(wedding);
+  const dateLabel = schedule?.dateOnlyLabel ?? "December 13, 2026";
   const pdfUrl = wedding.invitation_pdf_path ? mediaUrl(wedding.invitation_pdf_path) : null;
   const imgUrl = wedding.invitation_image_path ? mediaUrl(wedding.invitation_image_path) : null;
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -134,7 +137,7 @@ export function InvitationDocumentViewer({ wedding }: { wedding: WeddingSettings
                   The formal ceremonial wedding invitation card will be published here. You can still explore the schedule, venues, and wedding story above.
                 </p>
                 <div className="mt-5 text-[12px] font-medium text-[#8b1a1a]">
-                  December 1, 2026 · Jaipur, Rajasthan
+                  {dateLabel} · Jaipur, Rajasthan
                 </div>
               </div>
             )}

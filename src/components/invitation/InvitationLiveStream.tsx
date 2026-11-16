@@ -11,9 +11,11 @@ import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
 export function InvitationLiveStream({
   stream,
   timezone,
+  weddingDateLabel = "December 13, 2026",
 }: {
   stream: LiveStream | null;
   timezone: string;
+  weddingDateLabel?: string;
 }) {
   const [isMuted, setIsMuted] = useState(true);
   const [manualPlay, setManualPlay] = useState(false);
@@ -170,7 +172,7 @@ export function InvitationLiveStream({
                 Live Stream Schedule
               </h3>
               <p className="mx-auto mt-2 max-w-[50ch] font-[family-name:var(--font-serif)] text-[16px] text-[#5c4033]">
-                The wedding broadcast channel will be linked closer to December 1, 2026. Guests around the world will be able to watch our ceremony live right here.
+                The wedding broadcast channel will be linked closer to {weddingDateLabel}. Guests around the world will be able to watch our ceremony live right here.
               </p>
             </div>
           )}

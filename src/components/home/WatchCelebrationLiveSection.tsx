@@ -13,9 +13,11 @@ import type { LiveStream } from "@/types/database";
 export function WatchCelebrationLiveSection({
   stream,
   timezone,
+  weddingDateLabel = "December 13, 2026",
 }: {
   stream: LiveStream | null;
   timezone: string;
+  weddingDateLabel?: string;
 }) {
   const [isMuted, setIsMuted] = useState(true);
   const [manualPlay, setManualPlay] = useState(false);
@@ -183,7 +185,7 @@ export function WatchCelebrationLiveSection({
               </p>
               <div className="mt-8 flex items-center gap-2 rounded-full border border-soft-border bg-soft-cream px-4 py-2 text-support text-dark-walnut">
                 <Calendar className="size-4 text-muted-gold" />
-                <span>Wedding Date: December 1, 2026</span>
+                <span>Wedding Date: {weddingDateLabel}</span>
               </div>
             </div>
           )}

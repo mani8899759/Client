@@ -95,7 +95,7 @@ insert into public.events (
   'Wedding Ceremony',
   'The most special day of our journey. With the blessings of our families and the presence of our loved ones, Priya and Arjun begin their new life together.',
   'The most special day of our journey. With the blessings of our families and the presence of our loved ones, Priya and Arjun begin their new life together.',
-  '2026-12-30',
+  '2026-12-13',
   null,
   null,
   'morning',

@@ -7,9 +7,9 @@ export type WeddingSchedule = {
   dayEndIso: string;
   timeConfirmed: boolean;
   endIso: string | null;
-  /** "December 1, 2026" or "December 1, 2026 · 7:00 pm IST". */
+  /** "December 13, 2026" or "December 13, 2026 · 7:00 pm IST". */
   dateLabel: string;
-  /** "December 1, 2026". */
+  /** "December 13, 2026". */
   dateOnlyLabel: string;
   timezone: string;
 };
