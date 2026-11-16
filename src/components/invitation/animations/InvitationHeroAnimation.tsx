@@ -22,8 +22,10 @@ export function InvitationHeroAnimation({
   const toranRef = useRef<HTMLDivElement | null>(null);
   const invocationRef = useRef<HTMLParagraphElement | null>(null);
   const dividerTopRef = useRef<HTMLDivElement | null>(null);
+  const groomContainerRef = useRef<HTMLDivElement | null>(null);
   const groomNameRef = useRef<HTMLHeadingElement | null>(null);
   const ampersandRef = useRef<HTMLDivElement | null>(null);
+  const brideContainerRef = useRef<HTMLDivElement | null>(null);
   const brideNameRef = useRef<HTMLHeadingElement | null>(null);
   const dividerBottomRef = useRef<HTMLDivElement | null>(null);
   const marryingTextRef = useRef<HTMLParagraphElement | null>(null);
@@ -67,32 +69,68 @@ export function InvitationHeroAnimation({
           );
         }
 
-        // Staggered couple names typography reveal
-        const textElements = [
-          invocationRef.current,
-          dividerTopRef.current,
-          groomNameRef.current,
-          ampersandRef.current,
-          brideNameRef.current,
+        // 1. Top invocation
+        if (invocationRef.current) {
+          revealTl.fromTo(
+            invocationRef.current,
+            { opacity: 0, y: -16 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+            0.25
+          );
+        }
+        if (dividerTopRef.current) {
+          revealTl.fromTo(
+            dividerTopRef.current,
+            { opacity: 0, scaleX: 0.6 },
+            { opacity: 1, scaleX: 1, duration: 0.7, ease: "power2.out" },
+            0.35
+          );
+        }
+
+        // 2. Groom label & ARJUN move gently in from the left
+        if (groomContainerRef.current) {
+          revealTl.fromTo(
+            groomContainerRef.current,
+            { opacity: 0, x: -35 },
+            { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" },
+            0.4
+          );
+        }
+
+        // 3. Ampersand fades into the center
+        if (ampersandRef.current) {
+          revealTl.fromTo(
+            ampersandRef.current,
+            { opacity: 0, scale: 0.75 },
+            { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" },
+            0.48
+          );
+        }
+
+        // 4. Bride label & PRIYA move gently in from the right
+        if (brideContainerRef.current) {
+          revealTl.fromTo(
+            brideContainerRef.current,
+            { opacity: 0, x: 35 },
+            { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" },
+            0.4
+          );
+        }
+
+        // 5. Wedding date and supporting info below
+        const bottomElements = [
           dividerBottomRef.current,
           marryingTextRef.current,
           dateBadgeRef.current,
           timezoneRef.current,
         ].filter(Boolean);
 
-        if (textElements.length) {
+        if (bottomElements.length) {
           revealTl.fromTo(
-            textElements,
-            { opacity: 0, y: 20, scale: 0.96 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              stagger: 0.1,
-              duration: 0.85,
-              ease: "power2.out",
-            },
-            0.3
+            bottomElements,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, stagger: 0.08, duration: 0.8, ease: "power2.out" },
+            0.6
           );
         }
       }
@@ -246,24 +284,24 @@ export function InvitationHeroAnimation({
         <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#fdf5e6] via-[#fdf5e6]/70 to-transparent" />
       </div>
 
-      {/* 3. Couple Names Flanking the Temple with Traditional Sandalwood-Gold Parchment Backing */}
-      <div className="relative z-10 mx-auto flex min-h-[580px] w-full max-w-[1100px] flex-col items-center justify-center px-4 pt-16 pb-8 text-center sm:min-h-[680px] md:min-h-[760px] lg:min-h-[840px]">
+      {/* 3. Couple Names Spread Outward Flanking the Temple (Transparent Background) */}
+      <div className="relative z-10 mx-auto flex min-h-[580px] w-full max-w-[1450px] flex-col items-center justify-center px-4 pt-16 pb-8 text-center sm:min-h-[680px] sm:px-8 md:min-h-[760px] lg:min-h-[840px] lg:px-12">
         <div
           ref={namesContainerRef}
-          className="relative w-full max-w-[980px] px-2 py-4 text-center will-change-transform"
+          className="relative w-full text-center will-change-transform"
         >
           {/* Top: Auspicious Invocation Header */}
-          <div className="mb-4 sm:mb-6">
+          <div className="mb-4 sm:mb-8">
             <p
               ref={invocationRef}
-              className="font-[family-name:var(--font-script)] text-[30px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[36px]"
+              className="font-[family-name:var(--font-script)] text-[30px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[38px]"
             >
               {wedding.invitation_cover_heading || "A Special Invitation"}
             </p>
 
             <div
               ref={dividerTopRef}
-              className="mx-auto my-2 flex items-center justify-center gap-3"
+              className="mx-auto my-2 flex items-center justify-center gap-3 sm:my-3"
             >
               <span className="h-px w-12 bg-[#d4a843]" />
               <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
@@ -271,73 +309,67 @@ export function InvitationHeroAnimation({
             </div>
           </div>
 
-          {/* Flanking Couple Composition: ARJUN (Left) — & (Middle) — PRIYA (Right) */}
-          <div className="mt-2 flex flex-col items-center justify-center gap-4 sm:gap-6 md:flex-row md:items-center md:justify-center lg:gap-8">
-            {/* LEFT: ARJUN (Groom) */}
-            <div className="relative w-full max-w-[320px] rounded-2xl border border-[#d4a843]/70 bg-gradient-to-b from-[#fffdf7]/95 via-[#faf3e2]/92 to-[#f5ead0]/95 px-6 py-5 shadow-[0_8px_24px_rgba(75,45,20,0.14)] backdrop-blur-sm sm:px-8 sm:py-6 md:w-[300px] lg:w-[350px]">
-              {/* Traditional Auspicious Corner Marks */}
-              <span className="absolute top-2 left-2 size-2.5 border-t-2 border-l-2 border-[#8b1a1a]/70" />
-              <span className="absolute top-2 right-2 size-2.5 border-t-2 border-r-2 border-[#8b1a1a]/70" />
-              <span className="absolute bottom-2 left-2 size-2.5 border-b-2 border-l-2 border-[#8b1a1a]/70" />
-              <span className="absolute bottom-2 right-2 size-2.5 border-b-2 border-r-2 border-[#8b1a1a]/70" />
-
-              <p className="text-[11px] font-semibold tracking-[0.24em] text-[#996515] uppercase">
+          {/* Grand 3-Column Outward Flanking Layout: GROOM (Left) — & (Center) — BRIDE (Right) */}
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-[1400px] mx-auto">
+            {/* LEFT: ARJUN (Groom) — Spread towards the left flank */}
+            <div
+              ref={groomContainerRef}
+              className="justify-self-end text-right pr-4 sm:pr-8 md:pr-[clamp(30px,6vw,120px)] lg:pr-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
+            >
+              <p className="text-[10px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
                 The Groom
               </p>
               <h1
                 ref={groomNameRef}
-                className="mt-1 font-[family-name:var(--font-playfair)] text-[36px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[44px] lg:text-[50px] uppercase"
+                className="mt-1 font-[family-name:var(--font-playfair)] text-[28px] xs:text-[36px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
               >
                 {names.groom}
               </h1>
             </div>
 
-            {/* MIDDLE: Ampersand Medallion */}
+            {/* CENTER: Ampersand floating naturally over Gopuram */}
             <div
               ref={ampersandRef}
-              className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-full border-2 border-[#d4a843] bg-gradient-to-br from-[#fffdf7] via-[#faf3e2] to-[#eeddbb] shadow-[0_4px_16px_rgba(180,130,50,0.24)] sm:size-16"
+              className="justify-self-center text-center px-2 sm:px-4 bg-transparent border-0 shadow-none"
             >
-              <span className="font-[family-name:var(--font-script)] text-[34px] font-bold leading-none text-[#8b1a1a] sm:text-[40px]">
+              <span className="font-[family-name:var(--font-script)] text-[34px] xs:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[76px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_5px_rgba(61,28,0,0.3)]">
                 &amp;
               </span>
             </div>
 
-            {/* RIGHT: PRIYA (Bride) */}
-            <div className="relative w-full max-w-[320px] rounded-2xl border border-[#d4a843]/70 bg-gradient-to-b from-[#fffdf7]/95 via-[#faf3e2]/92 to-[#f5ead0]/95 px-6 py-5 shadow-[0_8px_24px_rgba(75,45,20,0.14)] backdrop-blur-sm sm:px-8 sm:py-6 md:w-[300px] lg:w-[350px]">
-              {/* Traditional Auspicious Corner Marks */}
-              <span className="absolute top-2 left-2 size-2.5 border-t-2 border-l-2 border-[#8b1a1a]/70" />
-              <span className="absolute top-2 right-2 size-2.5 border-t-2 border-r-2 border-[#8b1a1a]/70" />
-              <span className="absolute bottom-2 left-2 size-2.5 border-b-2 border-l-2 border-[#8b1a1a]/70" />
-              <span className="absolute bottom-2 right-2 size-2.5 border-b-2 border-r-2 border-[#8b1a1a]/70" />
-
-              <p className="text-[11px] font-semibold tracking-[0.24em] text-[#996515] uppercase">
+            {/* RIGHT: PRIYA (Bride) — Spread towards the right flank */}
+            <div
+              ref={brideContainerRef}
+              className="justify-self-start text-left pl-4 sm:pl-8 md:pl-[clamp(30px,6vw,120px)] lg:pl-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
+            >
+              <p className="text-[10px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
                 The Bride
               </p>
               <h1
                 ref={brideNameRef}
-                className="mt-1 font-[family-name:var(--font-playfair)] text-[36px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[44px] lg:text-[50px] uppercase"
+                className="mt-1 font-[family-name:var(--font-playfair)] text-[28px] xs:text-[36px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
               >
                 {names.bride}
               </h1>
             </div>
           </div>
 
-          {/* Announcement and Main Date Pill */}
+          {/* Announcement and Main Date */}
           <div
             ref={dividerBottomRef}
-            className="mt-6 border-t border-[#d4a843]/60 pt-5 sm:mt-8"
+            className="mx-auto mt-6 max-w-[540px] border-t border-[#d4a843]/60 pt-5 sm:mt-10"
           >
             <p
               ref={marryingTextRef}
-              className="font-[family-name:var(--font-serif)] text-[14px] font-semibold tracking-[0.24em] text-[#3d1c00] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] uppercase sm:text-[16px]"
+              className="font-[family-name:var(--font-serif)] text-[13px] font-semibold tracking-[0.24em] text-[#3d1c00] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] uppercase sm:text-[16px]"
             >
               Are Getting Married
             </p>
             <div
               ref={dateBadgeRef}
-              className="mt-3 inline-block rounded-full border-2 border-[#d4a843] bg-gradient-to-r from-[#fffdf7]/95 via-[#faf3e2]/95 to-[#f5ead0]/95 px-8 py-2 shadow-[0_4px_14px_rgba(75,45,20,0.1)] backdrop-blur-sm"
+              className="mt-3 inline-block rounded-full border border-[#d4a843] bg-transparent px-8 py-1.5 backdrop-blur-[2px]"
             >
-              <p className="font-[family-name:var(--font-playfair)] text-[16px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_1px_rgba(253,245,230,0.9)] sm:text-[18px]">
+              <p className="font-[family-name:var(--font-playfair)] text-[15px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[18px]">
                 December 1, 2026
               </p>
             </div>
