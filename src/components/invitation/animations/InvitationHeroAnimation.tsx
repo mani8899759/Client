@@ -246,67 +246,98 @@ export function InvitationHeroAnimation({
         <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#fdf5e6] via-[#fdf5e6]/70 to-transparent" />
       </div>
 
-      {/* 3. Center Couple Names directly over Temple (NO white card sheet) */}
-      <div className="relative z-10 mx-auto flex min-h-[580px] max-w-[820px] flex-col items-center justify-center px-4 pt-16 text-center sm:min-h-[680px] md:min-h-[760px] lg:min-h-[840px]">
+      {/* 3. Couple Names Flanking the Temple with Traditional Sandalwood-Gold Parchment Backing */}
+      <div className="relative z-10 mx-auto flex min-h-[580px] w-full max-w-[1100px] flex-col items-center justify-center px-4 pt-16 pb-8 text-center sm:min-h-[680px] md:min-h-[760px] lg:min-h-[840px]">
         <div
           ref={namesContainerRef}
-          className="relative max-w-[620px] px-4 py-6 text-center will-change-transform"
+          className="relative w-full max-w-[980px] px-2 py-4 text-center will-change-transform"
         >
-          {/* Auspicious Invocation */}
-          <p
-            ref={invocationRef}
-            className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[34px]"
-          >
-            {wedding.invitation_cover_heading || "A Special Invitation"}
-          </p>
+          {/* Top: Auspicious Invocation Header */}
+          <div className="mb-4 sm:mb-6">
+            <p
+              ref={invocationRef}
+              className="font-[family-name:var(--font-script)] text-[30px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[36px]"
+            >
+              {wedding.invitation_cover_heading || "A Special Invitation"}
+            </p>
 
-          <div
-            ref={dividerTopRef}
-            className="mx-auto my-3 flex items-center justify-center gap-3"
-          >
-            <span className="h-px w-12 bg-[#d4a843]" />
-            <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
-            <span className="h-px w-12 bg-[#d4a843]" />
+            <div
+              ref={dividerTopRef}
+              className="mx-auto my-2 flex items-center justify-center gap-3"
+            >
+              <span className="h-px w-12 bg-[#d4a843]" />
+              <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
+              <span className="h-px w-12 bg-[#d4a843]" />
+            </div>
           </div>
 
-          {/* Prominent Couple Names */}
-          <div className="mt-2 space-y-1">
-            <h1
-              ref={groomNameRef}
-              className="font-[family-name:var(--font-playfair)] text-[44px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_10px_rgba(253,245,230,0.95)] sm:text-[60px] md:text-[68px] uppercase"
-            >
-              {names.groom}
-            </h1>
+          {/* Flanking Couple Composition: ARJUN (Left) — & (Middle) — PRIYA (Right) */}
+          <div className="mt-2 flex flex-col items-center justify-center gap-4 sm:gap-6 md:flex-row md:items-center md:justify-center lg:gap-8">
+            {/* LEFT: ARJUN (Groom) */}
+            <div className="relative w-full max-w-[320px] rounded-2xl border border-[#d4a843]/70 bg-gradient-to-b from-[#fffdf7]/95 via-[#faf3e2]/92 to-[#f5ead0]/95 px-6 py-5 shadow-[0_8px_24px_rgba(75,45,20,0.14)] backdrop-blur-sm sm:px-8 sm:py-6 md:w-[300px] lg:w-[350px]">
+              {/* Traditional Auspicious Corner Marks */}
+              <span className="absolute top-2 left-2 size-2.5 border-t-2 border-l-2 border-[#8b1a1a]/70" />
+              <span className="absolute top-2 right-2 size-2.5 border-t-2 border-r-2 border-[#8b1a1a]/70" />
+              <span className="absolute bottom-2 left-2 size-2.5 border-b-2 border-l-2 border-[#8b1a1a]/70" />
+              <span className="absolute bottom-2 right-2 size-2.5 border-b-2 border-r-2 border-[#8b1a1a]/70" />
+
+              <p className="text-[11px] font-semibold tracking-[0.24em] text-[#996515] uppercase">
+                The Groom
+              </p>
+              <h1
+                ref={groomNameRef}
+                className="mt-1 font-[family-name:var(--font-playfair)] text-[36px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[44px] lg:text-[50px] uppercase"
+              >
+                {names.groom}
+              </h1>
+            </div>
+
+            {/* MIDDLE: Ampersand Medallion */}
             <div
               ref={ampersandRef}
-              className="font-[family-name:var(--font-script)] text-[38px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_4px_rgba(61,28,0,0.25)] sm:text-[48px]"
+              className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-full border-2 border-[#d4a843] bg-gradient-to-br from-[#fffdf7] via-[#faf3e2] to-[#eeddbb] shadow-[0_4px_16px_rgba(180,130,50,0.24)] sm:size-16"
             >
-              &amp;
+              <span className="font-[family-name:var(--font-script)] text-[34px] font-bold leading-none text-[#8b1a1a] sm:text-[40px]">
+                &amp;
+              </span>
             </div>
-            <h1
-              ref={brideNameRef}
-              className="font-[family-name:var(--font-playfair)] text-[44px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_10px_rgba(253,245,230,0.95)] sm:text-[60px] md:text-[68px] uppercase"
-            >
-              {names.bride}
-            </h1>
+
+            {/* RIGHT: PRIYA (Bride) */}
+            <div className="relative w-full max-w-[320px] rounded-2xl border border-[#d4a843]/70 bg-gradient-to-b from-[#fffdf7]/95 via-[#faf3e2]/92 to-[#f5ead0]/95 px-6 py-5 shadow-[0_8px_24px_rgba(75,45,20,0.14)] backdrop-blur-sm sm:px-8 sm:py-6 md:w-[300px] lg:w-[350px]">
+              {/* Traditional Auspicious Corner Marks */}
+              <span className="absolute top-2 left-2 size-2.5 border-t-2 border-l-2 border-[#8b1a1a]/70" />
+              <span className="absolute top-2 right-2 size-2.5 border-t-2 border-r-2 border-[#8b1a1a]/70" />
+              <span className="absolute bottom-2 left-2 size-2.5 border-b-2 border-l-2 border-[#8b1a1a]/70" />
+              <span className="absolute bottom-2 right-2 size-2.5 border-b-2 border-r-2 border-[#8b1a1a]/70" />
+
+              <p className="text-[11px] font-semibold tracking-[0.24em] text-[#996515] uppercase">
+                The Bride
+              </p>
+              <h1
+                ref={brideNameRef}
+                className="mt-1 font-[family-name:var(--font-playfair)] text-[36px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[44px] lg:text-[50px] uppercase"
+              >
+                {names.bride}
+              </h1>
+            </div>
           </div>
 
-          {/* Announcement and Main Date */}
+          {/* Announcement and Main Date Pill */}
           <div
             ref={dividerBottomRef}
-            className="mt-6 border-t border-[#d4a843]/60 pt-5"
+            className="mt-6 border-t border-[#d4a843]/60 pt-5 sm:mt-8"
           >
             <p
               ref={marryingTextRef}
-              className="font-[family-name:var(--font-serif)] text-[15px] font-semibold tracking-[0.22em] text-[#3d1c00] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] uppercase sm:text-[17px]"
+              className="font-[family-name:var(--font-serif)] text-[14px] font-semibold tracking-[0.24em] text-[#3d1c00] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] uppercase sm:text-[16px]"
             >
               Are Getting Married
             </p>
             <div
               ref={dateBadgeRef}
-              className="mt-3 inline-block rounded-full border border-[#d4a843] px-7 py-1.5 backdrop-blur-[2px]"
+              className="mt-3 inline-block rounded-full border-2 border-[#d4a843] bg-gradient-to-r from-[#fffdf7]/95 via-[#faf3e2]/95 to-[#f5ead0]/95 px-8 py-2 shadow-[0_4px_14px_rgba(75,45,20,0.1)] backdrop-blur-sm"
             >
-              <p className="font-[family-name:var(--font-playfair)] text-[16px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[18px]">
+              <p className="font-[family-name:var(--font-playfair)] text-[16px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_1px_rgba(253,245,230,0.9)] sm:text-[18px]">
                 December 1, 2026
               </p>
             </div>
