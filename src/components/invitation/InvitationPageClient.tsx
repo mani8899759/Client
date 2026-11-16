@@ -19,7 +19,6 @@ import { InvitationLiveStream } from "./InvitationLiveStream";
 import { InvitationLocations } from "./InvitationLocations";
 import { InvitationGiftSection } from "./InvitationGiftSection";
 import { InvitationClosing } from "./InvitationClosing";
-import { InvitationGopuramSection } from "./InvitationGopuramSection";
 
 export function InvitationPageClient({
   wedding,
@@ -145,11 +144,6 @@ export function InvitationPageClient({
 
               {/* Screen 11: Invitation Closing Message & WhatsApp Sharing */}
               <InvitationClosing wedding={wedding} invitationUrl={invitationUrl} />
-
-              {/* Screen 12: South Indian Gopuram Illustration — Final Section */}
-              {wedding.invitation_gopuram_enabled !== false ? (
-                <InvitationGopuramSection wedding={wedding} />
-              ) : null}
             </main>
           </div>
 

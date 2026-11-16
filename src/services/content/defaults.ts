@@ -68,8 +68,8 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   invitation_section_livestream: true,
   invitation_section_venues: true,
   invitation_section_gift_draw: true,
-  invitation_gopuram_enabled: true,
-  invitation_gopuram_image_path: "static/images/priyaa-arjun-invitation-gopuram.png",
+  invitation_gopuram_enabled: false,
+  invitation_gopuram_image_path: null,
 };
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
