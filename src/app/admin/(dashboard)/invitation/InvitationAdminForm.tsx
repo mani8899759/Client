@@ -299,6 +299,15 @@ export function InvitationAdminForm({
 
           <div className="rounded-[var(--radius-control)] border border-soft-border bg-card-surface p-3">
             <ACheck
+              name="invitation_section_livestream"
+              label="YouTube Live Stream"
+              defaultChecked={w.invitation_section_livestream !== false}
+            />
+            <p className="mt-1 text-[12px] text-secondary-text">Broadcast ceremony and video replay.</p>
+          </div>
+
+          <div className="rounded-[var(--radius-control)] border border-soft-border bg-card-surface p-3">
+            <ACheck
               name="invitation_section_venues"
               label="Venues & Google Maps"
               defaultChecked={w.invitation_section_venues !== false}
@@ -313,6 +322,15 @@ export function InvitationAdminForm({
               defaultChecked={w.invitation_section_gift_draw !== false}
             />
             <p className="mt-1 text-[12px] text-secondary-text">Links guests directly to the registration page.</p>
+          </div>
+
+          <div className="rounded-[var(--radius-control)] border border-soft-border bg-card-surface p-3 sm:col-span-2 lg:col-span-3">
+            <ACheck
+              name="invitation_gopuram_enabled"
+              label="South Indian Gopuram Temple Finale"
+              defaultChecked={w.invitation_gopuram_enabled !== false}
+            />
+            <p className="mt-1 text-[12px] text-secondary-text">Scroll-triggered South Indian Gopuram artwork ending.</p>
           </div>
         </div>
       </Panel>
@@ -336,6 +354,67 @@ export function InvitationAdminForm({
             maxLength={2000}
             rows={3}
           />
+        </div>
+      </Panel>
+
+      {/* 8. South Indian Gopuram Finale (Screen 12) */}
+      <Panel
+        title="South Indian Gopuram Temple Finale (Final Section)"
+        description="The ceremonial ending artwork that smoothly reveals as guests reach the bottom of the digital invitation."
+      >
+        <div className="flex flex-col gap-5">
+          <div className="rounded-[var(--radius-control)] border border-soft-border bg-soft-cream/60 p-4">
+            <ACheck
+              name="invitation_gopuram_enabled"
+              label="Enable South Indian Gopuram finale section"
+              defaultChecked={w.invitation_gopuram_enabled !== false}
+            />
+            <p className="mt-1 text-[12px] text-secondary-text">
+              Displays the authentic South Indian Gopuram temple illustration with scroll-triggered upward reveal.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div>
+              <MediaField
+                name="invitation_gopuram_image_path"
+                label="Custom Gopuram artwork file"
+                purpose="invitations"
+                kind="image"
+                defaultValue={w.invitation_gopuram_image_path}
+                ratio="1240/721"
+                hint="Upload a replacement transparent PNG or high-res artwork if desired. Default is priyaa-arjun-invitation-gopuram.png."
+              />
+            </div>
+
+            <div className="flex flex-col justify-center rounded-[var(--radius-control)] border border-[#d4a843]/40 bg-[#fdf5e6] p-5 text-center">
+              <span className="font-serif text-[16px] font-semibold text-[#3d1c00]">
+                Current Final Section Artwork Preview
+              </span>
+              <p className="mt-1 text-[12px] text-[#5c4033]">
+                Defringed transparent PNG blending seamlessly into #FDF5E6 cream background.
+              </p>
+              <div className="relative mx-auto mt-4 aspect-[1240/721] w-full max-w-[360px] overflow-hidden rounded-[8px] border border-[#d4a843]/60 bg-[#fdf5e6]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/priyaa-arjun-invitation-gopuram.png"
+                  alt="Gopuram preview"
+                  className="h-full w-full object-contain object-bottom"
+                />
+              </div>
+              <div className="mt-3">
+                <a
+                  href="/invitation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#8b1a1a] hover:underline"
+                >
+                  <span>Preview Scroll-Triggered Reveal in Invitation</span>
+                  <ExternalLink className="size-3" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </Panel>
 

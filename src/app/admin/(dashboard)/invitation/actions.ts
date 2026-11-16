@@ -27,6 +27,7 @@ const INVITATION_MEDIA = [
   "invitation_pdf_path",
   "invitation_image_path",
   "invitation_music_path",
+  "invitation_gopuram_image_path",
 ] as const;
 
 export async function updateDigitalInvitation(_: ActionState, fd: FormData): Promise<ActionState> {
@@ -57,8 +58,10 @@ export async function updateDigitalInvitation(_: ActionState, fd: FormData): Pro
       invitation_section_events: fd.get("invitation_section_events") === "on",
       invitation_section_document: fd.get("invitation_section_document") === "on",
       invitation_section_gallery: fd.get("invitation_section_gallery") === "on",
+      invitation_section_livestream: fd.get("invitation_section_livestream") === "on",
       invitation_section_venues: fd.get("invitation_section_venues") === "on",
       invitation_section_gift_draw: fd.get("invitation_section_gift_draw") === "on",
+      invitation_gopuram_enabled: fd.get("invitation_gopuram_enabled") === "on",
     };
 
     const update = {

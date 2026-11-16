@@ -78,8 +78,11 @@ export interface WeddingSettings {
   invitation_section_events?: boolean;
   invitation_section_document?: boolean;
   invitation_section_gallery?: boolean;
+  invitation_section_livestream?: boolean;
   invitation_section_venues?: boolean;
   invitation_section_gift_draw?: boolean;
+  invitation_gopuram_enabled?: boolean;
+  invitation_gopuram_image_path?: string | null;
   updated_at?: string;
 }
 

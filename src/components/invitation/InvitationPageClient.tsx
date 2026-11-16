@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Gift, Heart, Volume2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { GalleryMedia, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
+import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { InvitationCover } from "./InvitationCover";
 import { InvitationAudioPlayer } from "./InvitationAudioPlayer";
@@ -14,8 +14,11 @@ import { InvitationStory } from "./InvitationStory";
 import { InvitationEvents } from "./InvitationEvents";
 import { InvitationDocumentViewer } from "./InvitationDocumentViewer";
 import { InvitationGallery } from "./InvitationGallery";
+import { InvitationLiveStream } from "./InvitationLiveStream";
 import { InvitationLocations } from "./InvitationLocations";
+import { InvitationGiftSection } from "./InvitationGiftSection";
 import { InvitationClosing } from "./InvitationClosing";
+import { InvitationGopuramSection } from "./InvitationGopuramSection";
 
 export function InvitationPageClient({
   wedding,
@@ -23,6 +26,7 @@ export function InvitationPageClient({
   events,
   venues,
   gallery,
+  featuredStream,
   siteUrl,
 }: {
   wedding: WeddingSettings;
@@ -30,6 +34,7 @@ export function InvitationPageClient({
   events: WeddingEvent[];
   venues: Venue[];
   gallery: GalleryMedia[];
+  featuredStream?: LiveStream | null;
   siteUrl: string;
 }) {
   const [isOpened, setIsOpened] = useState(false);
@@ -115,13 +120,28 @@ export function InvitationPageClient({
                 <InvitationGallery media={gallery} />
               ) : null}
 
+              {/* Screen 8: Wedding Live Video */}
+              {wedding.invitation_section_livestream !== false ? (
+                <InvitationLiveStream stream={featuredStream ?? null} timezone={wedding.timezone} />
+              ) : null}
+
               {/* Screen 9: Wedding Venues & Google Maps */}
               {wedding.invitation_section_venues !== false ? (
                 <InvitationLocations venues={venues} />
               ) : null}
 
-              {/* Screens 10 & 11: Call to Action & Sharing */}
+              {/* Screen 10: Win a Special Gift */}
+              {wedding.invitation_section_gift_draw !== false ? (
+                <InvitationGiftSection wedding={wedding} />
+              ) : null}
+
+              {/* Screen 11: Invitation Closing Message & WhatsApp Sharing */}
               <InvitationClosing wedding={wedding} invitationUrl={invitationUrl} />
+
+              {/* Screen 12: South Indian Gopuram Illustration — Final Section */}
+              {wedding.invitation_gopuram_enabled !== false ? (
+                <InvitationGopuramSection wedding={wedding} />
+              ) : null}
             </motion.main>
           ) : null}
         </AnimatePresence>

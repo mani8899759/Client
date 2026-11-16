@@ -9,7 +9,6 @@ import {
   WelcomeSection,
 } from "@/components/home/Sections";
 import { WatchCelebrationLiveSection } from "@/components/home/WatchCelebrationLiveSection";
-import { GopuramClosingSection } from "@/components/home/GopuramClosingSection";
 import {
   getAppSettings,
   getEvents,
@@ -66,9 +65,6 @@ export default async function HomePage() {
 
       {/* 11–12. Win a Special Gift CTA section & Lucky Draw verification */}
       <LuckyDrawCtaSection app={app} wedding={wedding} />
-
-      {/* 13. South Indian Gopuram Footer Scroll Reveal */}
-      <GopuramClosingSection wedding={wedding} />
     </>
   );
 }

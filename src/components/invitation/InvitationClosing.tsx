@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Copy, Gift, Heart, Send, Share2, Sparkles } from "lucide-react";
+import { Check, Copy, Heart, Send, Share2, ArrowLeft } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
 import { coupleNames } from "@/lib/utils/names";
 
@@ -29,7 +29,6 @@ export function InvitationClosing({
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Fallback
       setCopied(false);
     }
   }
@@ -51,68 +50,53 @@ export function InvitationClosing({
   }
 
   return (
-    <section aria-labelledby="closing-heading" className="py-16 sm:py-24 bg-[#fdf5e6]">
-      <div className="mx-auto max-w-[800px] px-4 text-center sm:px-6">
-        {/* Decorative heart icon */}
+    <section aria-labelledby="closing-heading" className="pt-16 pb-12 sm:pt-24 sm:pb-16 bg-[#fdf5e6]">
+      <div className="mx-auto max-w-[760px] px-4 text-center sm:px-6">
+        {/* Heart motif */}
         <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-[#f5ebd5] text-[#8b1a1a]">
           <Heart className="size-7 fill-[#8b1a1a]" strokeWidth={1.5} />
         </div>
 
-        <p className="font-[family-name:var(--font-script)] text-[30px] text-[#8b1a1a] sm:text-[36px]">
-          With Gratitude &amp; Love
+        <p className="font-[family-name:var(--font-script)] text-[30px] text-[#8b1a1a] sm:text-[38px]">
+          With Gratitude &amp; Joy
         </p>
 
-        <h2 id="closing-heading" className="mt-1 font-[family-name:var(--font-playfair)] text-[32px] font-bold text-[#3d1c00] sm:text-[44px]">
+        <h2
+          id="closing-heading"
+          className="mt-1 font-[family-name:var(--font-playfair)] text-[32px] font-bold text-[#3d1c00] sm:text-[44px]"
+        >
           {wedding.invitation_closing_heading || "Your Presence Would Mean the World to Us"}
         </h2>
 
-        <p className="mx-auto mt-4 max-w-[58ch] font-[family-name:var(--font-serif)] text-[19px] leading-relaxed text-[#5c4033] sm:text-[21px]">
+        <p className="mx-auto mt-4 max-w-[56ch] font-[family-name:var(--font-serif)] text-[19px] leading-relaxed text-[#5c4033] sm:text-[22px]">
           {wedding.invitation_closing_message ||
-            "We look forward to celebrating this special beginning with our family and friends. We would be delighted to have you with us."}
+            "We look forward to celebrating this beautiful beginning with our family and friends. Your presence and blessings would make our celebration even more special."}
         </p>
 
-        <div className="mt-4 font-[family-name:var(--font-playfair)] text-[22px] font-semibold text-[#8b1a1a]">
-          {names.bride} &amp; {names.groom}
-        </div>
-        <p className="text-[13px] tracking-widest text-[#7b6a58] uppercase">December 1, 2026</p>
-
-        {/* Gift Draw CTA */}
-        {wedding.invitation_section_gift_draw !== false ? (
-          <div className="mx-auto mt-10 max-w-[540px] rounded-[16px] border-2 border-[#d4a843]/60 bg-[#fffcf7] p-6 shadow-sm sm:p-8">
-            <div className="flex items-center justify-center gap-2 text-[#8b1a1a]">
-              <Gift className="size-5" />
-              <span className="font-[family-name:var(--font-playfair)] text-[18px] font-semibold">
-                Wedding Celebration Gift Draw
-              </span>
-            </div>
-            <p className="mt-2 text-[14px] leading-relaxed text-[#7b6a58]">
-              Register your attendance and participate in our special wedding gift draw for a chance to receive a commemorative keepsake.
-            </p>
-            <div className="mt-5">
-              <Link
-                href="/register"
-                className="inline-flex items-center justify-center gap-2 rounded-[8px] bg-[#8b1a1a] px-8 py-3.5 text-[15px] font-medium tracking-[0.04em] text-[#fdf5e6] shadow-sm transition-all hover:bg-[#721515] hover:shadow-md active:scale-98"
-              >
-                <span>Win a Special Gift</span>
-              </Link>
-            </div>
-            <p className="mt-2 text-[11px] text-[#7b6a58]">
-              Open to both Bride Side &amp; Groom Side guests.
-            </p>
+        {/* Couple Signature */}
+        <div className="mt-8 border-t border-b border-[#d4a843]/40 py-5">
+          <p className="font-[family-name:var(--font-script)] text-[24px] text-[#5c4033]">
+            With Love,
+          </p>
+          <div className="mt-1 font-[family-name:var(--font-playfair)] text-[26px] font-bold tracking-wide text-[#8b1a1a] sm:text-[32px]">
+            {names.bride} &amp; {names.groom}
           </div>
-        ) : null}
+          <p className="mt-1 text-[13px] tracking-widest text-[#7b6a58] uppercase">
+            December 1, 2026
+          </p>
+        </div>
 
-        {/* WhatsApp & Sharing Actions */}
-        <div className="mt-12 rounded-[14px] border border-[#e5d5bd] bg-[#f5ebd5]/40 p-6 sm:p-8">
+        {/* WhatsApp & Invitation Sharing Card */}
+        <div className="mt-10 rounded-[14px] border border-[#d4a843]/50 bg-[#fffcf7] p-6 shadow-xs sm:p-8">
           <h3 className="font-[family-name:var(--font-playfair)] text-[20px] font-semibold text-[#3d1c00]">
-            Share Invitation with Family &amp; Friends
+            Share Our Wedding Invitation
           </h3>
           <p className="mt-1 text-[13px] text-[#7b6a58]">
-            Forward our wedding details directly over WhatsApp or copy the digital link.
+            Forward this digital invitation to your loved ones via WhatsApp or copy the link.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            {/* WhatsApp button - styled green accent as specified in reference */}
+            {/* WhatsApp button - distinct green accent as specified */}
             <a
               href={whatsappUrl}
               target="_blank"
@@ -147,13 +131,14 @@ export function InvitationClosing({
           </div>
         </div>
 
-        {/* Back to main wedding website */}
-        <div className="mt-12">
+        {/* Back to main wedding website link */}
+        <div className="mt-8">
           <Link
             href="/"
-            className="text-[14px] font-medium text-[#8b1a1a] underline decoration-[#d4a843] underline-offset-4 hover:text-[#721515]"
+            className="inline-flex items-center gap-2 text-[14px] font-medium text-[#8b1a1a] underline decoration-[#d4a843] underline-offset-4 hover:text-[#721515]"
           >
-            ← Return to Main Wedding Website
+            <ArrowLeft className="size-4" />
+            <span>Return to Main Wedding Website</span>
           </Link>
         </div>
       </div>

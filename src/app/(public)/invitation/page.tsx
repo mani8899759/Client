@@ -4,9 +4,11 @@ import { Mail, ArrowLeft } from "lucide-react";
 import {
   getEvents,
   getFeaturedGallery,
+  getLiveStreams,
   getLocations,
   getStoryEntries,
   getWeddingSettings,
+  pickFeaturedStream,
 } from "@/services/content";
 import { coupleNames } from "@/lib/utils/names";
 import { publicEnv } from "@/lib/env";
@@ -38,13 +40,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function InvitationPage() {
-  const [wedding, story, events, venues, gallery] = await Promise.all([
+  const [wedding, story, events, venues, gallery, streams] = await Promise.all([
     getWeddingSettings(),
     getStoryEntries(),
     getEvents(),
     getLocations(),
     getFeaturedGallery(12),
+    getLiveStreams(),
   ]);
+
+  const featuredStream = pickFeaturedStream(streams);
 
   // Graceful state if invitation is marked unpublished by admin
   if (wedding.invitation_published === false) {
@@ -81,6 +86,7 @@ export default async function InvitationPage() {
       events={events}
       venues={venues}
       gallery={gallery}
+      featuredStream={featuredStream}
       siteUrl={publicEnv.siteUrl}
     />
   );
