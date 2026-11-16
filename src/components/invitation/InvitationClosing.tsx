@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Check, Copy, Heart, Send, Share2, ArrowLeft } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
@@ -15,6 +15,13 @@ export function InvitationClosing({
 }) {
   const names = coupleNames(wedding);
   const [copied, setCopied] = useState(false);
+  const [canShare, setCanShare] = useState(false);
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+      setCanShare(true);
+    }
+  }, []);
 
   const defaultShareText =
     wedding.invitation_whatsapp_message ||
@@ -108,7 +115,7 @@ export function InvitationClosing({
             </a>
 
             {/* Native device share */}
-            {typeof navigator !== "undefined" && typeof navigator.share === "function" ? (
+            {canShare ? (
               <button
                 type="button"
                 onClick={() => void handleNativeShare()}

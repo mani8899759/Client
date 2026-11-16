@@ -119,7 +119,7 @@ export function InvitationToran({
         {/* Repeating Mango Leaves Array (24 Leaves spaced across 1200px) */}
         {Array.from({ length: 25 }).map((_, i) => {
           const x = i * 50;
-          const yOffset = Math.sin((i / 3) * Math.PI) * 3 + 4;
+          const yOffset = Math.round((Math.sin((i / 3) * Math.PI) * 3 + 4) * 100) / 100;
           const rotation = ((i % 3) - 1) * 7;
           const swayClass =
             i % 3 === 0
@@ -141,7 +141,7 @@ export function InvitationToran({
         {/* Marigold Flower Accents placed at intervals */}
         {Array.from({ length: 13 }).map((_, i) => {
           const x = i * 100;
-          const yOffset = Math.sin((i / 1.5) * Math.PI) * 2 + 5;
+          const yOffset = Math.round((Math.sin((i / 1.5) * Math.PI) * 2 + 5) * 100) / 100;
           return (
             <g key={i} transform={`translate(${x}, ${yOffset})`}>
               <use href={`#${id}-marigold-cluster`} />
