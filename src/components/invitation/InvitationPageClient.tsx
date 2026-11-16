@@ -42,7 +42,9 @@ export function InvitationPageClient({
   const [musicTrigger, setMusicTrigger] = useState(false);
   const mainContentRef = useRef<HTMLDivElement | null>(null);
 
-  const audioUrl = wedding.invitation_music_path ? mediaUrl(wedding.invitation_music_path) : null;
+  const audioUrl = wedding.invitation_music_path
+    ? mediaUrl(wedding.invitation_music_path)
+    : "/audio/priya-arjun-wedding-music.m4a";
   const invitationUrl = `${siteUrl}/invitation`;
 
   function handleStartOpen() {

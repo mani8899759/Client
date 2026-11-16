@@ -33,7 +33,12 @@ export const getWeddingSettings = cache(async (): Promise<WeddingSettings> => {
   const { data, error } = await db.from("wedding_settings").select("*").maybeSingle<WeddingSettings>();
   logError("wedding", error);
   if (!data) return DEFAULT_WEDDING;
-  return { ...DEFAULT_WEDDING, ...data, social_links: Array.isArray(data.social_links) ? data.social_links : [] };
+  return {
+    ...DEFAULT_WEDDING,
+    ...data,
+    invitation_music_path: data.invitation_music_path || DEFAULT_WEDDING.invitation_music_path,
+    social_links: Array.isArray(data.social_links) ? data.social_links : [],
+  };
 });
 
 export const getAppSettings = cache(async (): Promise<AppSettings> => {
