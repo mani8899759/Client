@@ -38,7 +38,7 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
     <Section labelledBy="welcome-title" className="pt-24! sm:pt-28! lg:pt-32!">
       <Container width="wide">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <ImageReveal className="lg:col-span-5">
+          <Reveal preset="slide-left" className="lg:col-span-5">
             <ImageFrame
               mediaRef={ref}
               alt={pickAlt(ref, wedding.welcome_image_alt, "The couple")}
@@ -47,8 +47,8 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
               placeholderLabel="Couple photograph"
               placeholderHint="Upload in Admin › Homepage"
             />
-          </ImageReveal>
-          <Reveal className="lg:col-span-6 lg:col-start-7">
+          </Reveal>
+          <Reveal preset="slide-right" delay={0.12} className="lg:col-span-6 lg:col-start-7">
             <Eyebrow>Welcome</Eyebrow>
             <h2 id="welcome-title" className="mt-4 text-h1 text-balance text-dark-walnut sm:text-[36px] sm:leading-[1.12]">
               {wedding.welcome_title ?? "Welcome to our wedding celebration"}
@@ -70,9 +70,25 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
   );
 }
 
-function Person({ role, name, intro, imageRef, imageAlt, delay }: { role: string; name: string; intro: string | null; imageRef: string | null; imageAlt: string; delay: number }) {
+function Person({
+  role,
+  name,
+  intro,
+  imageRef,
+  imageAlt,
+  delay,
+  preset = "fade-up",
+}: {
+  role: string;
+  name: string;
+  intro: string | null;
+  imageRef: string | null;
+  imageAlt: string;
+  delay: number;
+  preset?: "slide-left" | "slide-right" | "fade-up";
+}) {
   return (
-    <Reveal delay={delay} className="flex flex-col items-center text-center">
+    <Reveal preset={preset} delay={delay} className="flex flex-col items-center text-center">
       <ImageFrame
         mediaRef={imageRef}
         alt={imageAlt}
@@ -95,13 +111,15 @@ export function CoupleSection({ wedding }: { wedding: WeddingSettings }) {
   return (
     <Section tone="cream" labelledBy="couple-title">
       <Container width="default">
-        <SectionHeading align="center" eyebrow="The Couple" title={<span id="couple-title">Two families, one celebration</span>} />
+        <Reveal preset="fade-up">
+          <SectionHeading align="center" eyebrow="The Couple" title={<span id="couple-title">Two families, one celebration</span>} />
+        </Reveal>
         <div className="mt-14 grid items-start gap-14 md:grid-cols-[1fr_auto_1fr] md:gap-8 lg:mt-20">
-          <Person role="The Bride" name={names.bride} intro={wedding.bride_intro} imageRef={brideRef} imageAlt={pickAlt(brideRef, wedding.bride_image_alt, names.bride)} delay={0} />
-          <span aria-hidden className="hidden self-center font-serif text-[64px] text-champagne-gold italic md:block">
-            &amp;
-          </span>
-          <Person role="The Groom" name={names.groom} intro={wedding.groom_intro} imageRef={groomRef} imageAlt={pickAlt(groomRef, wedding.groom_image_alt, names.groom)} delay={0.1} />
+          <Person role="The Bride" name={names.bride} intro={wedding.bride_intro} imageRef={brideRef} imageAlt={pickAlt(brideRef, wedding.bride_image_alt, names.bride)} delay={0} preset="slide-left" />
+          <Reveal preset="scale-rotate" delay={0.15} className="hidden self-center font-serif text-[64px] text-champagne-gold italic md:block">
+            <span aria-hidden>&amp;</span>
+          </Reveal>
+          <Person role="The Groom" name={names.groom} intro={wedding.groom_intro} imageRef={groomRef} imageAlt={pickAlt(groomRef, wedding.groom_image_alt, names.groom)} delay={0.1} preset="slide-right" />
         </div>
       </Container>
     </Section>
@@ -120,7 +138,7 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
     <Section labelledBy="story-preview-title">
       <Container width="wide">
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="order-2 lg:order-1 lg:col-span-5">
+          <Reveal preset="slide-left" className="order-2 lg:order-1 lg:col-span-5">
             <SectionHeading
               eyebrow="Our Love Story"
               title={<span id="story-preview-title">{primary?.title ?? "How our story began"}</span>}
@@ -133,7 +151,7 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
             </div>
           </Reveal>
           <div className="relative order-1 pb-10 lg:order-2 lg:col-span-6 lg:col-start-7">
-            <ImageReveal className="w-[82%]">
+            <Reveal preset="slide-right" className="w-[82%]">
               <ImageFrame
                 mediaRef={primaryRef}
                 alt={pickAlt(primaryRef, primary?.image_alt, primary?.title ?? "Our story")}
@@ -143,8 +161,8 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
                 placeholderHint="Add story chapters in Admin › Our Love Story"
                 imageClassName="object-[60%_center]"
               />
-            </ImageReveal>
-            <ImageReveal delay={0.2} className="absolute right-0 bottom-0 w-[42%] border-[6px] border-warm-ivory sm:border-8">
+            </Reveal>
+            <Reveal preset="zoom-reveal" delay={0.25} className="absolute right-0 bottom-0 w-[42%] border-[6px] border-warm-ivory shadow-md sm:border-8">
               <ImageFrame
                 mediaRef={secondaryRef}
                 alt={pickAlt(secondaryRef, secondary?.image_alt, "Wedding details")}
@@ -154,7 +172,7 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
                 rounded={false}
                 aiTag={false}
               />
-            </ImageReveal>
+            </Reveal>
           </div>
         </div>
       </Container>
@@ -167,7 +185,7 @@ export function EventsPreviewSection({ events }: { events: WeddingEvent[] }) {
   return (
     <Section tone="cream" labelledBy="events-preview-title">
       <Container width="wide">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal preset="fade-up" className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow="Wedding Events"
             title={<span id="events-preview-title">The celebrations</span>}
@@ -178,7 +196,7 @@ export function EventsPreviewSection({ events }: { events: WeddingEvent[] }) {
               View all events
             </ButtonLink>
           ) : null}
-        </div>
+        </Reveal>
         {shown.length ? (
           <ol className="mt-12 lg:mt-16">
             {shown.map((e, i) => (
@@ -219,17 +237,17 @@ export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
   return (
     <Section labelledBy="gallery-preview-title">
       <Container width="wide">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal preset="fade-up" className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading eyebrow="Gallery" title={<span id="gallery-preview-title">Moments, kept</span>} />
           <ButtonLink href="/gallery" variant="ghost" className="shrink-0">
             View the gallery
           </ButtonLink>
-        </div>
+        </Reveal>
         <div className="mt-12 grid grid-cols-12 gap-3 sm:gap-4 lg:mt-16 lg:gap-5">
           {slots.map((cls, i) => {
             const m = items[i];
             return (
-              <ImageReveal key={m?.id ?? `slot-${i}`} delay={i * 0.05} className={cn("relative", cls)}>
+              <Reveal key={m?.id ?? `slot-${i}`} preset="zoom-reveal" delay={i * 0.06} className={cn("relative", cls)}>
                 <Link href="/gallery" className="group block h-full w-full" aria-label={m?.alt ?? "Open the gallery"} tabIndex={m ? 0 : -1}>
                   <ImageFrame
                     mediaRef={m?.ref}
@@ -240,7 +258,7 @@ export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
                     imageClassName="transition-transform duration-[1.4s] ease-[var(--ease-editorial)] group-hover:scale-[1.03]"
                   />
                 </Link>
-              </ImageReveal>
+              </Reveal>
             );
           })}
         </div>
@@ -257,7 +275,7 @@ export function VenuePreviewSection({ wedding, venues }: { wedding: WeddingSetti
     <Section tone="cream" labelledBy="venue-title">
       <Container width="wide">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <ImageReveal className="lg:col-span-7">
+          <Reveal preset="slide-left" className="lg:col-span-7">
             <ImageFrame
               mediaRef={ref}
               alt={pickAlt(ref, wedding.secondary_image_alt, "The wedding venue")}
@@ -266,8 +284,8 @@ export function VenuePreviewSection({ wedding, venues }: { wedding: WeddingSetti
               placeholderLabel="Venue photograph"
               placeholderHint="Upload in Admin › Homepage"
             />
-          </ImageReveal>
-          <Reveal className="lg:col-span-4 lg:col-start-9">
+          </Reveal>
+          <Reveal preset="slide-right" delay={0.15} className="lg:col-span-4 lg:col-start-9">
             <Eyebrow>The Venue</Eyebrow>
             <h2 id="venue-title" className="mt-4 text-h1 text-dark-walnut sm:text-[36px] sm:leading-[1.12]">
               {v?.name ?? "Where we celebrate"}
@@ -309,8 +327,8 @@ export function LiveTeaserSection({ stream, timezone }: { stream: LiveStream | n
   return (
     <Section labelledBy="live-title" className="border-t border-soft-border">
       <Container width="wide">
-        <div className="grid items-center gap-10 rounded-[var(--radius-surface)] border border-soft-border bg-card-surface p-5 sm:p-8 lg:grid-cols-12 lg:gap-14 lg:p-12">
-          <Reveal className="lg:col-span-5">
+        <Reveal preset="zoom-reveal" className="grid items-center gap-10 rounded-[var(--radius-surface)] border border-soft-border bg-card-surface p-5 sm:p-8 lg:grid-cols-12 lg:gap-14 lg:p-12 shadow-[var(--shadow-surface)]">
+          <div className="lg:col-span-5">
             <StreamStatusBadge status={stream.status} />
             <h2 id="live-title" className="mt-5 text-h1 text-dark-walnut sm:text-[36px] sm:leading-[1.12]">
               {stream.title}
@@ -327,7 +345,7 @@ export function LiveTeaserSection({ stream, timezone }: { stream: LiveStream | n
                 {cta}
               </ButtonLink>
             </div>
-          </Reveal>
+          </div>
           <Link href="/live" className="group relative block overflow-hidden rounded-[var(--radius-control)] lg:col-span-7" aria-label={cta}>
             <div className="relative aspect-video bg-dark-walnut">
               {id ? (
@@ -340,7 +358,7 @@ export function LiveTeaserSection({ stream, timezone }: { stream: LiveStream | n
               </span>
             </div>
           </Link>
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );
@@ -358,7 +376,7 @@ export function LuckyDrawCtaSection({ app, wedding }: { app: AppSettings; weddin
     <Section labelledBy="lucky-draw-title">
       <Container width="wide">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="lg:col-span-5">
+          <Reveal preset="slide-left" className="lg:col-span-5">
             <SectionHeading
               eyebrow="Wedding Lucky Draw"
               title={<span id="lucky-draw-title">Join our wedding gift draw</span>}
@@ -384,7 +402,7 @@ export function LuckyDrawCtaSection({ app, wedding }: { app: AppSettings; weddin
           </Reveal>
           <ol className="grid gap-px overflow-hidden rounded-[var(--radius-control)] border border-soft-border bg-soft-border sm:grid-cols-3 lg:col-span-7">
             {STEPS.map((s, i) => (
-              <Reveal as="li" key={s.title} delay={i * 0.08} className="flex flex-col bg-card-surface p-6 sm:p-7">
+              <Reveal as="li" key={s.title} preset="fade-up" delay={0.08 + i * 0.1} className="flex flex-col bg-card-surface p-6 sm:p-7">
                 <span className="text-numeral text-[40px] leading-none text-champagne-gold">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-8 font-serif text-[24px] leading-tight text-dark-walnut">{s.title}</h3>
                 <p className="mt-3 text-support text-secondary-text">{s.text}</p>

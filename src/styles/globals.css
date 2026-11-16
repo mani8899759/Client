@@ -78,6 +78,10 @@ html.lenis body {
   pointer-events: none;
 }
 
+body:has(.invitation-theme) footer {
+  display: none;
+}
+
 /* ── Typography hierarchy ───────────────────────────────────────────────── */
 @utility text-display {
   font-family: var(--font-serif);

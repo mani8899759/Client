@@ -63,7 +63,7 @@ export function EventRow({ event, index }: { event: WeddingEvent; index: number 
   const time = event.time_label || formatTimeRange(event.start_time, event.end_time);
   const venue = venueLine(event.venue);
   return (
-    <Reveal as="li" delay={index * 0.06} className="border-t border-soft-border last:border-b">
+    <Reveal as="li" preset="fade-up" delay={index * 0.06} className="border-t border-soft-border last:border-b">
       <Link
         href={`/events/${event.slug}`}
         className="group grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4 py-8 sm:grid-cols-[120px_1fr_auto] lg:grid-cols-[160px_1fr_240px_40px] lg:gap-x-10"
@@ -99,8 +99,8 @@ export function EventRow({ event, index }: { event: WeddingEvent; index: number 
         </div>
         <ArrowUpRight
           aria-hidden
-          className="hidden size-5 text-muted-gold transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary lg:block"
-          strokeWidth={1.25}
+          className="col-span-2 size-5 justify-self-end text-muted-gold transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:col-span-1"
+          strokeWidth={1.5}
         />
       </Link>
     </Reveal>
@@ -127,7 +127,7 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
       )}
       aria-labelledby={`event-${event.slug}`}
     >
-      <ImageReveal className={cn("lg:col-span-6", flip && "lg:order-2 lg:col-start-7")}>
+      <ImageReveal preset={flip ? "slide-right" : "slide-left"} className={cn("lg:col-span-6", flip && "lg:order-2 lg:col-start-7")}>
         <ImageFrame
           mediaRef={eventImage(event)}
           alt={pickAlt(eventImage(event), event.image_alt, event.name)}
@@ -138,7 +138,7 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
         />
       </ImageReveal>
 
-      <Reveal className={cn("lg:col-span-5", flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-8")}>
+      <Reveal preset={flip ? "slide-left" : "slide-right"} delay={0.12} className={cn("lg:col-span-5", flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-8")}>
         <div className="flex items-baseline gap-4">
           <span className="text-numeral text-[20px] text-champagne-gold">{String(index + 1).padStart(2, "0")}</span>
           <span className="h-px flex-1 bg-soft-border" aria-hidden />

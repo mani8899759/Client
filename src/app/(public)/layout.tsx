@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SmoothScrollProvider } from "@/components/animations/SmoothScrollProvider";
 import { getWeddingSettings } from "@/services/content";
 import { coupleNames } from "@/lib/utils/names";
 import { mediaUrl } from "@/lib/storage/media";
@@ -11,7 +12,7 @@ export default async function PublicLayout({ children }: { children: React.React
   const invitationType = wedding.invitation_pdf_path ? "pdf" : wedding.invitation_image_path ? "image" : null;
 
   return (
-    <>
+    <SmoothScrollProvider>
       <SiteHeader
         brand={wedding.website_title ?? coupleNames(wedding).joined}
         coupleLabel={coupleNames(wedding).joined}
@@ -23,6 +24,6 @@ export default async function PublicLayout({ children }: { children: React.React
         {children}
       </main>
       <SiteFooter wedding={wedding} />
-    </>
+    </SmoothScrollProvider>
   );
 }

@@ -39,7 +39,7 @@ export default async function LivePage() {
       <section aria-label="Live streams" className="pb-20 lg:pb-28">
         <Container width="wide">
           {featured ? (
-            <Reveal className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <Reveal preset="zoom-reveal" className="grid gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-8">
                 {featuredUrl && getYouTubeId(featuredUrl) ? (
                   <YouTubeEmbed url={featuredUrl} title={featured.title} />
@@ -79,10 +79,10 @@ export default async function LivePage() {
             <div className="mt-20 lg:mt-28">
               <h2 className="text-meta text-muted-gold">All streams</h2>
               <ul className="mt-6">
-                {others.map((s) => {
+                {others.map((s, i) => {
                   const url = playableUrl(s) ?? s.youtube_url;
                   return (
-                    <li key={s.id} className="grid gap-3 border-t border-soft-border py-6 last:border-b sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
+                    <Reveal as="li" key={s.id} preset="fade-up" delay={i * 0.08} className="grid gap-3 border-t border-soft-border py-6 last:border-b sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
                       <div>
                         <div className="flex flex-wrap items-center gap-3">
                           <StreamStatusBadge status={s.status} />
@@ -95,7 +95,7 @@ export default async function LivePage() {
                           {s.status === "ended" ? "Watch replay" : s.status === "live" ? "Watch live" : "Open on YouTube"}
                         </ButtonLink>
                       ) : null}
-                    </li>
+                    </Reveal>
                   );
                 })}
               </ul>

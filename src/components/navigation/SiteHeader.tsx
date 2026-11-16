@@ -36,6 +36,8 @@ export function SiteHeader({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  if (pathname?.startsWith("/invitation")) return null;
+
   return (
     <header
       className={cn(

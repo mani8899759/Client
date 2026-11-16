@@ -45,7 +45,9 @@ export default async function LocationsPage() {
       />
       {locationVisual ? (
         <Container width="wide" className="-mt-4 mb-16 lg:mb-20">
-          <ImageFrame mediaRef={locationVisual} alt={pickAlt(locationVisual, null, "The wedding venue")} ratio="21/9" sizes="(min-width: 1440px) 1360px, 100vw" />
+          <Reveal preset="zoom-reveal">
+            <ImageFrame mediaRef={locationVisual} alt={pickAlt(locationVisual, null, "The wedding venue")} ratio="21/9" sizes="(min-width: 1440px) 1360px, 100vw" />
+          </Reveal>
         </Container>
       ) : null}
       <section aria-label="Venues" className="pb-20 lg:pb-28">
@@ -57,8 +59,8 @@ export default async function LocationsPage() {
                 const address = [v.address, v.city, v.state, v.country].filter(Boolean);
                 const hasMap = v.latitude !== null && v.longitude !== null;
                 return (
-                  <Reveal as="li" key={v.id} className="grid gap-8 border-t border-soft-border pt-10 lg:grid-cols-12 lg:gap-16">
-                    <div className={hasMap ? "lg:col-span-5" : "lg:col-span-8"}>
+                  <li key={v.id} className="grid gap-8 border-t border-soft-border pt-10 lg:grid-cols-12 lg:gap-16">
+                    <Reveal preset="slide-left" className={hasMap ? "lg:col-span-5" : "lg:col-span-8"}>
                       <span className="text-numeral text-[20px] text-champagne-gold">{String(i + 1).padStart(2, "0")}</span>
                       <h2 className="mt-4 text-h1 text-dark-walnut sm:text-[36px] sm:leading-[1.12]">{v.name}</h2>
                       {address.length ? (
@@ -95,13 +97,13 @@ export default async function LocationsPage() {
                           </ButtonLink>
                         </div>
                       ) : null}
-                    </div>
+                    </Reveal>
                     {hasMap ? (
-                      <div className="lg:col-span-7">
+                      <Reveal preset="slide-right" delay={0.15} className="lg:col-span-7">
                         <MapEmbed venue={v} />
-                      </div>
+                      </Reveal>
                     ) : null}
-                  </Reveal>
+                  </li>
                 );
               })}
             </ol>

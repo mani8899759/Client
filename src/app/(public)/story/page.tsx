@@ -32,7 +32,7 @@ function TimelineEntry({ entry, index }: { entry: StoryEntry; index: number }) {
       <span aria-hidden className="absolute top-2 left-0 size-[9px] -translate-x-1/2 rounded-full border border-primary bg-warm-ivory lg:left-1/2" />
 
       <div className={cn("pl-8 lg:col-span-5 lg:pl-0", flip ? "lg:order-2 lg:col-start-8" : "lg:col-start-1")}>
-        <ImageReveal className="relative">
+        <ImageReveal preset={flip ? "slide-right" : "slide-left"} className="relative">
           <ImageFrame
             mediaRef={ref}
             alt={pickAlt(ref, entry.image_alt, entry.title)}
@@ -41,7 +41,11 @@ function TimelineEntry({ entry, index }: { entry: StoryEntry; index: number }) {
             placeholderLabel="Chapter photograph"
           />
           {hasSecondary ? (
-            <div className={cn("absolute -bottom-8 w-[44%] border-[6px] border-warm-ivory", flip ? "-left-6" : "-right-6")}>
+            <Reveal
+              preset="zoom-reveal"
+              delay={0.2}
+              className={cn("absolute -bottom-8 w-[44%] border-[6px] border-warm-ivory shadow-md", flip ? "-left-6" : "-right-6")}
+            >
               <ImageFrame
                 mediaRef={entry.secondary_image_path}
                 alt={entry.secondary_image_alt ?? entry.title}
@@ -49,12 +53,16 @@ function TimelineEntry({ entry, index }: { entry: StoryEntry; index: number }) {
                 sizes="20vw"
                 rounded={false}
               />
-            </div>
+            </Reveal>
           ) : null}
         </ImageReveal>
       </div>
 
-      <Reveal className={cn("pl-8 lg:col-span-5 lg:pl-0", flip ? "lg:order-1 lg:col-start-1 lg:text-right" : "lg:col-start-8", hasSecondary && "mt-6 lg:mt-0")}>
+      <Reveal
+        preset={flip ? "slide-left" : "slide-right"}
+        delay={0.12}
+        className={cn("pl-8 lg:col-span-5 lg:pl-0", flip ? "lg:order-1 lg:col-start-1 lg:text-right" : "lg:col-start-8", hasSecondary && "mt-6 lg:mt-0")}
+      >
         <div className={cn("flex flex-wrap items-baseline gap-x-4 gap-y-1", flip && "lg:justify-end")}>
           {entry.chapter ? <span className="text-meta text-muted-gold">{entry.chapter}</span> : null}
           {dateLabel(entry) ? <span className="text-meta text-secondary-text">{dateLabel(entry)}</span> : null}
