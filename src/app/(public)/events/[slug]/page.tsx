@@ -43,7 +43,7 @@ export default async function EventDetailPage({ params }: Props) {
   const idx = all.findIndex((e) => e.id === event.id);
   const next = idx >= 0 ? all[idx + 1] : undefined;
   const date = formatDateOnly(event.event_date);
-  const time = formatTimeRange(event.start_time, event.end_time);
+  const time = event.time_label || formatTimeRange(event.start_time, event.end_time);
   const v = event.venue;
   const directions = directionsUrl(v);
   const videoUrl = mediaUrl(event.invitation_video_path);

@@ -4,7 +4,7 @@ export type Side = "bride" | "groom";
 export type Gender = "male" | "female";
 export type RegistrationStatus = "registered" | "cancelled";
 export type VerificationStatus = "pending" | "verified";
-export type EventType = "engagement" | "haldi" | "mehendi" | "wedding" | "reception" | "other";
+export type EventType = "engagement" | "haldi" | "mehendi" | "sangeet" | "wedding" | "reception" | "other";
 export type MediaType = "photo" | "video";
 export type VideoSource = "upload" | "youtube";
 export type StreamStatus = "upcoming" | "live" | "ended";
@@ -133,6 +133,8 @@ export interface WeddingEvent {
   event_date: string | null;
   start_time: string | null;
   end_time: string | null;
+  time_period?: "morning" | "afternoon" | "evening" | "all_day" | null;
+  time_label?: string | null;
   venue_id: string | null;
   dress_code: string | null;
   image_path: string | null;

@@ -53,7 +53,8 @@ export function InvitationEvents({
           {events.map((event) => {
             const imgRef = event.image_path || pickImage(null, `event-${event.event_type}`);
             const imgUrl = mediaUrl(imgRef) ?? "/images/ai/wedding-ceremony.webp";
-            const timeStr = formatTimeRange(event.start_time, event.end_time);
+            const rawTime = formatTimeRange(event.start_time, event.end_time);
+            const timeStr = event.time_label || (rawTime ? `${rawTime} (IST)` : null);
             const venue = event.venue;
             const dest = venue
               ? venue.latitude && venue.longitude
@@ -100,7 +101,8 @@ export function InvitationEvents({
                       <Calendar className="size-4 shrink-0 text-[#8b1a1a]" />
                       <span className="font-semibold text-[#3d1c00]">
                         {event.event_date
-                          ? new Date(event.event_date + "T00:00:00").toLocaleDateString("en-IN", {
+                          ? new Date(event.event_date + "T00:00:00Z").toLocaleDateString("en-IN", {
+                              timeZone: "UTC",
                               weekday: "long",
                               year: "numeric",
                               month: "long",
@@ -114,7 +116,7 @@ export function InvitationEvents({
                     {timeStr ? (
                       <div className="flex items-center gap-2.5">
                         <Clock className="size-4 shrink-0 text-[#8b1a1a]" />
-                        <span>{timeStr} (IST)</span>
+                        <span>{timeStr}</span>
                       </div>
                     ) : null}
 

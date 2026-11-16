@@ -18,6 +18,7 @@ export const EVENT_TYPE_LABEL = {
   engagement: "Engagement",
   haldi: "Haldi",
   mehendi: "Mehendi",
+  sangeet: "Sangeet",
   wedding: "Wedding",
   reception: "Reception",
   other: "Celebration",

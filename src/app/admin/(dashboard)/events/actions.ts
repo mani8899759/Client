@@ -12,12 +12,14 @@ const time = z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/, "Invalid time.").nullabl
 
 const eventSchema = z.object({
   name: z.string({ error: "Enter the event name." }).min(1, "Enter the event name.").max(120),
-  event_type: z.enum(["engagement", "haldi", "mehendi", "wedding", "reception", "other"]),
+  event_type: z.enum(["engagement", "haldi", "mehendi", "sangeet", "wedding", "reception", "other"]),
   short_description: z.string().max(300).nullable(),
   description: z.string().max(5000).nullable(),
   event_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date.").nullable(),
   start_time: time,
   end_time: time,
+  time_period: z.enum(["morning", "afternoon", "evening", "all_day"]).nullable().optional(),
+  time_label: z.string().max(100).nullable().optional(),
   dress_code: z.string().max(200).nullable(),
   image_alt: z.string().max(200).nullable(),
   contact_info: z.string().max(300).nullable(),

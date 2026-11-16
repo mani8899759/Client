@@ -60,7 +60,7 @@ export function DateBlock({ date, className }: { date: string | null; className?
 
 /** Compact editorial row for the homepage events preview. */
 export function EventRow({ event, index }: { event: WeddingEvent; index: number }) {
-  const time = formatTimeRange(event.start_time, event.end_time);
+  const time = event.time_label || formatTimeRange(event.start_time, event.end_time);
   const venue = venueLine(event.venue);
   return (
     <Reveal as="li" delay={index * 0.06} className="border-t border-soft-border last:border-b">
@@ -70,7 +70,14 @@ export function EventRow({ event, index }: { event: WeddingEvent; index: number 
       >
         <DateBlock date={event.event_date} />
         <div className="min-w-0">
-          <p className="text-meta text-muted-gold">{EVENT_TYPE_LABEL[event.event_type]}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-meta text-muted-gold">{EVENT_TYPE_LABEL[event.event_type] ?? "Ceremony"}</p>
+            {event.time_period ? (
+              <span className="text-[11px] font-medium uppercase tracking-wider text-muted-gold/80">
+                · {event.time_period}
+              </span>
+            ) : null}
+          </div>
           <h3 className="mt-2 font-serif text-[28px] leading-tight text-dark-walnut transition-colors group-hover:text-primary sm:text-[30px]">
             {event.name}
           </h3>
@@ -103,13 +110,23 @@ export function EventRow({ event, index }: { event: WeddingEvent; index: number 
 /** Alternating image-and-text composition for the full Events page. */
 export function EventFeature({ event, index }: { event: WeddingEvent; index: number }) {
   const flip = index % 2 === 1;
-  const time = formatTimeRange(event.start_time, event.end_time);
+  const time = event.time_label || formatTimeRange(event.start_time, event.end_time);
   const date = formatDateOnly(event.event_date);
   const venue = venueLine(event.venue);
   const directions = directionsUrl(event.venue);
+  const isMainCeremony = event.event_type === "wedding" || event.slug === "wedding-ceremony";
 
   return (
-    <article id={event.slug} className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16" aria-labelledby={`event-${event.slug}`}>
+    <article
+      id={event.slug}
+      className={cn(
+        "grid items-center gap-10 rounded-[var(--radius-card)] p-4 sm:p-6 lg:grid-cols-12 lg:gap-16 lg:p-10 transition-colors",
+        isMainCeremony
+          ? "border border-champagne-gold/40 bg-gradient-to-br from-cream/40 via-card-surface to-soft-cream/30 shadow-[0_8px_32px_rgba(201,160,80,0.08)]"
+          : "border border-transparent"
+      )}
+      aria-labelledby={`event-${event.slug}`}
+    >
       <ImageReveal className={cn("lg:col-span-6", flip && "lg:order-2 lg:col-start-7")}>
         <ImageFrame
           mediaRef={eventImage(event)}
@@ -125,7 +142,12 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
         <div className="flex items-baseline gap-4">
           <span className="text-numeral text-[20px] text-champagne-gold">{String(index + 1).padStart(2, "0")}</span>
           <span className="h-px flex-1 bg-soft-border" aria-hidden />
-          <span className="text-meta text-muted-gold">{EVENT_TYPE_LABEL[event.event_type]}</span>
+          <span className="text-meta text-muted-gold">{EVENT_TYPE_LABEL[event.event_type] ?? "Ceremony"}</span>
+          {event.time_period ? (
+            <span className="rounded-full border border-champagne-gold/30 bg-champagne-gold/10 px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-dark-walnut capitalize">
+              {event.time_period}
+            </span>
+          ) : null}
         </div>
         <h2 id={`event-${event.slug}`} className="mt-6 text-h1 text-dark-walnut sm:text-[36px]">
           {event.name}

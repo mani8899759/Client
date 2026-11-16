@@ -28,8 +28,21 @@ export function EventForm({ event, venues }: { event: WeddingEvent | null; venue
           />
           <AText name="slug" label="Web address" defaultValue={v(event?.slug)} maxLength={80} optionalLabel hint="Generated from the name if empty." />
           <AText name="event_date" label="Date" type="date" defaultValue={v(event?.event_date)} />
-          <AText name="start_time" label="Start time" type="time" defaultValue={v(event?.start_time).slice(0, 5)} />
+          <AText name="start_time" label="Start time" type="time" defaultValue={v(event?.start_time).slice(0, 5)} optionalLabel />
           <AText name="end_time" label="End time" type="time" defaultValue={v(event?.end_time).slice(0, 5)} optionalLabel />
+          <ASelect
+            name="time_period"
+            label="Time period"
+            defaultValue={event?.time_period ?? ""}
+            options={[
+              { value: "", label: "Not specified" },
+              { value: "morning", label: "Morning" },
+              { value: "afternoon", label: "Afternoon" },
+              { value: "evening", label: "Evening" },
+              { value: "all_day", label: "All day" },
+            ]}
+          />
+          <AText name="time_label" label="Custom time label" defaultValue={v(event?.time_label)} optionalLabel hint='e.g. "7:00 PM onwards" or "Morning — Exact timing to be announced"' />
           <ASelect
             name="venue_id"
             label="Venue"

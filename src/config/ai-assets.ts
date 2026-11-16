@@ -60,6 +60,7 @@ export const EVENT_AI_SLOT: Record<string, string> = {
   engagement: "event-engagement",
   haldi: "event-haldi",
   mehendi: "event-mehendi",
+  sangeet: "event-reception",
   wedding: "event-wedding",
   reception: "event-reception",
 };
