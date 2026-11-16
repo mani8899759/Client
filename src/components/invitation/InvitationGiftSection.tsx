@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Gift, Sparkles } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
+import { FloralDivider } from "./TraditionalMotifs";
 
 export function InvitationGiftSection({ wedding }: { wedding: WeddingSettings }) {
   if (wedding.invitation_section_gift_draw === false) return null;
@@ -15,23 +16,25 @@ export function InvitationGiftSection({ wedding }: { wedding: WeddingSettings })
           <div className="pointer-events-none absolute bottom-3 left-3 size-6 border-b-2 border-l-2 border-[#d4a843]" />
           <div className="pointer-events-none absolute bottom-3 right-3 size-6 border-b-2 border-r-2 border-[#d4a843]" />
 
-          <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-[#f5ebd5] text-[#8b1a1a]">
+          <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-full bg-[#f5ebd5] text-[#8b1a1a]">
             <Gift className="size-7" />
           </div>
 
-          <p className="font-[family-name:var(--font-script)] text-[26px] text-[#8b1a1a] sm:text-[30px]">
-            Guest Appreciation
+          <p className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a] sm:text-[34px]">
+            Guest Participation
           </p>
 
           <h2
             id="invitation-gift-heading"
-            className="mt-1 font-[family-name:var(--font-playfair)] text-[28px] font-bold text-[#3d1c00] sm:text-[36px]"
+            className="mt-1 font-[family-name:var(--font-playfair)] text-[30px] font-bold text-[#3d1c00] sm:text-[38px]"
           >
-            A Special Surprise Awaits!
+            Join Our Celebration
           </h2>
 
-          <p className="mx-auto mt-3 max-w-[50ch] font-[family-name:var(--font-serif)] text-[18px] leading-relaxed text-[#5c4033] sm:text-[20px]">
-            Celebrate this special occasion with us and take a chance to win a special gift. Register your details to participate in our commemorative wedding celebration draw.
+          <FloralDivider className="my-2" />
+
+          <p className="mx-auto mt-2 max-w-[50ch] font-[family-name:var(--font-serif)] text-[18px] leading-relaxed text-[#5c4033] sm:text-[20px]">
+            Be part of our special day and take a chance to win a special gift. Register your details to participate in our commemorative wedding celebration draw.
           </p>
 
           <div className="mt-8">

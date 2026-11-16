@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Maximize2, Sparkles, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import type { GalleryMedia } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { AI_SLOTS } from "@/config/ai-assets";
+import { FloralDivider } from "./TraditionalMotifs";
+import { MandalaDecoration } from "./MandalaDecoration";
 
 export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
-  // Combine database gallery media with static AI assets if database has fewer items
   const galleryItems =
     media && media.length > 0
       ? media.map((m) => ({
@@ -37,47 +38,59 @@ export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
   }
 
   return (
-    <section aria-labelledby="gallery-heading" className="py-14 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-[1020px] px-4 sm:px-6">
+    <section aria-labelledby="gallery-heading" className="relative overflow-hidden py-16 sm:py-24 bg-[#fdf5e6]">
+      {/* Background Mandala Accents */}
+      <MandalaDecoration size={260} className="absolute -top-12 -right-12" opacity={0.14} />
+
+      <div className="relative z-10 mx-auto max-w-[1040px] px-4 sm:px-6">
         <div className="text-center">
-          <p className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a]">
+          <p className="font-[family-name:var(--font-script)] text-[30px] text-[#8b1a1a] sm:text-[36px]">
             Moments in Time
           </p>
-          <h2 id="gallery-heading" className="mt-1 font-[family-name:var(--font-playfair)] text-[34px] font-bold text-[#3d1c00] sm:text-[44px]">
-            Wedding Visual Gallery
+          <h2
+            id="gallery-heading"
+            className="mt-1 font-[family-name:var(--font-playfair)] text-[34px] font-bold text-[#3d1c00] sm:text-[44px]"
+          >
+            Photo Gallery
           </h2>
-          <div className="mx-auto my-4 flex items-center justify-center gap-3">
-            <span className="h-px w-12 bg-[#d4a843]" />
-            <Sparkles className="size-4 text-[#d4a843]" />
-            <span className="h-px w-12 bg-[#d4a843]" />
-          </div>
-          <p className="mx-auto max-w-[56ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033]">
-            A glimpse into the cherished celebrations, pre-wedding rituals and joyful memories.
+          <FloralDivider className="my-3" />
+          <p className="mx-auto max-w-[56ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033] sm:text-[20px]">
+            A glimpse into the cherished celebrations, pre-wedding rituals and joyful memories of Priya &amp; Arjun.
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3">
-          {galleryItems.slice(0, 9).map((item, idx) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setActiveIdx(idx)}
-              className="group relative aspect-[4/5] w-full overflow-hidden rounded-[12px] border border-[#d4a843]/40 bg-[#fffcf7] shadow-sm transition-all duration-300 hover:border-[#8b1a1a] hover:shadow-md cursor-pointer"
-            >
-              <Image
-                src={item.url}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 640px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="absolute right-2 bottom-2 left-2 truncate text-left text-[12px] font-medium text-[#fffcf7] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                {item.caption}
-              </div>
-            </button>
-          ))}
+        {/* Mixed Editorial Collage Layout — matching reference blueprint */}
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5">
+          {galleryItems.slice(0, 6).map((item, idx) => {
+            // Give item 0 a featured 2-column or prominent presence
+            const isFeatured = idx === 0;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveIdx(idx)}
+                className={`group relative overflow-hidden rounded-[14px] border-2 border-[#d4a843]/50 bg-[#fffcf7] shadow-xs transition-all duration-300 hover:border-[#8b1a1a] hover:shadow-md cursor-pointer ${
+                  isFeatured ? "col-span-2 aspect-[16/10] md:col-span-2 md:aspect-[16/10]" : "aspect-[1/1]"
+                }`}
+              >
+                <Image
+                  src={item.url}
+                  alt={item.alt}
+                  fill
+                  sizes={isFeatured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 640px) 50vw, 33vw"}
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-4">
+                  <div className="flex w-full items-center justify-between text-[#fffcf7]">
+                    <span className="truncate text-[13px] font-medium font-[family-name:var(--font-serif)]">
+                      {item.caption}
+                    </span>
+                    <Maximize2 className="size-4 shrink-0 text-[#d4a843]" />
+                  </div>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -90,21 +103,19 @@ export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
           onClick={() => setActiveIdx(null)}
         >
           <div
-            className="relative flex max-h-[90vh] max-w-[90vw] flex-col items-center"
+            className="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-[16px] border-2 border-[#d4a843] bg-[#2b1604] p-2"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close button */}
             <button
               type="button"
               onClick={() => setActiveIdx(null)}
-              className="absolute -top-11 right-0 rounded-full bg-[#fffcf7]/20 p-2 text-white hover:bg-[#fffcf7]/40"
-              aria-label="Close photo preview"
+              className="absolute top-4 right-4 z-10 flex size-9 items-center justify-center rounded-full bg-[#3d1c00]/80 text-[#fdf5e6] hover:bg-[#8b1a1a]"
+              aria-label="Close image preview"
             >
               <X className="size-5" />
             </button>
 
-            {/* Main Image */}
-            <div className="relative h-[65vh] w-[85vw] max-w-[900px] overflow-hidden rounded-[12px] shadow-2xl">
+            <div className="relative aspect-[4/3] max-h-[75vh] w-[80vw] max-w-[800px]">
               <Image
                 src={galleryItems[activeIdx].url}
                 alt={galleryItems[activeIdx].alt}
@@ -114,28 +125,33 @@ export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
               />
             </div>
 
-            {/* Caption */}
-            <p className="mt-3 text-center text-[14px] text-[#fdf5e6]">
-              {galleryItems[activeIdx].caption} ({activeIdx + 1} of {galleryItems.length})
-            </p>
+            <div className="flex items-center justify-between p-3 text-[#fdf5e6]">
+              <p className="font-[family-name:var(--font-serif)] text-[16px]">
+                {galleryItems[activeIdx].caption}
+              </p>
 
-            {/* Prev / Next */}
-            <button
-              type="button"
-              onClick={handlePrev}
-              className="absolute top-1/2 -left-12 -translate-y-1/2 rounded-full bg-[#fffcf7]/20 p-2 text-white hover:bg-[#fffcf7]/40 sm:-left-16"
-              aria-label="Previous photo"
-            >
-              <ChevronLeft className="size-6" />
-            </button>
-            <button
-              type="button"
-              onClick={handleNext}
-              className="absolute top-1/2 -right-12 -translate-y-1/2 rounded-full bg-[#fffcf7]/20 p-2 text-white hover:bg-[#fffcf7]/40 sm:-right-16"
-              aria-label="Next photo"
-            >
-              <ChevronRight className="size-6" />
-            </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="flex size-8 items-center justify-center rounded-full border border-[#d4a843] text-[#d4a843] hover:bg-[#d4a843]/20"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+                <span className="text-[12px] text-[#f5ebd5]">
+                  {activeIdx + 1} / {galleryItems.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="flex size-8 items-center justify-center rounded-full border border-[#d4a843] text-[#d4a843] hover:bg-[#d4a843]/20"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       ) : null}

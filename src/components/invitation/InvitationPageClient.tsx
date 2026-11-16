@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { InvitationCover } from "./InvitationCover";
+import { InvitationHero } from "./InvitationHero";
 import { InvitationAudioPlayer } from "./InvitationAudioPlayer";
 import { InvitationWelcome } from "./InvitationWelcome";
 import { InvitationCountdown } from "./InvitationCountdown";
@@ -92,6 +93,9 @@ export function InvitationPageClient({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 0.61, 0.36, 1] }}
             >
+              {/* Screen 1: Top Hero with Watercolor South Indian Gopuram & Traditional Toran */}
+              <InvitationHero wedding={wedding} />
+
               {/* Screen 2: Welcome and Couple introduction */}
               <InvitationWelcome wedding={wedding} />
 

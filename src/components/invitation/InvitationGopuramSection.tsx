@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import type { WeddingSettings } from "@/types/database";
-import { mediaUrl } from "@/lib/storage/media";
+import { InvitationToran } from "./InvitationToran";
 
 export function InvitationGopuramSection({ wedding }: { wedding: WeddingSettings }) {
   const containerRef = useRef<HTMLElement | null>(null);
@@ -15,40 +15,32 @@ export function InvitationGopuramSection({ wedding }: { wedding: WeddingSettings
     return null;
   }
 
-  // Determine artwork path (admin configurable with default fallbacks)
-  const gopuramImageRef = wedding.invitation_gopuram_image_path || "priyaa-arjun-invitation-gopuram.png";
-  const gopuramSrc = gopuramImageRef.startsWith("http") || gopuramImageRef.startsWith("/")
-    ? gopuramImageRef
-    : gopuramImageRef.startsWith("static/")
-    ? `/${gopuramImageRef.replace("static/", "")}`
-    : `/images/${gopuramImageRef}`;
-
-  // Scroll-linked smooth reveal
+  // Scroll-linked smooth upward reveal
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end end"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.9, 1], [0.15, 0.6, 0.95, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.35, 0.85, 1], [0.2, 0.65, 0.95, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [90, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
 
   return (
     <section
       ref={containerRef}
       aria-label="Traditional South Indian Gopuram Temple Finale"
-      className="relative overflow-hidden bg-[#fdf5e6] pt-12 sm:pt-16 pb-0"
+      className="relative overflow-hidden bg-[#fdf5e6] pt-10 pb-0"
     >
-      {/* Decorative Traditional Auspicious Header */}
+      {/* Decorative Auspicious Inscription */}
       <div className="relative z-10 mx-auto max-w-[800px] px-4 text-center">
         <div className="flex items-center justify-center gap-3">
           <span className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4a843]" />
-          <span className="font-[family-name:var(--font-script)] text-[24px] text-[#8b1a1a] sm:text-[28px]">
+          <span className="font-[family-name:var(--font-script)] text-[26px] text-[#8b1a1a] sm:text-[30px]">
             Deva Devalayam
           </span>
           <span className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4a843]" />
         </div>
-        <p className="mt-1 font-[family-name:var(--font-serif)] text-[16px] tracking-[0.08em] text-[#5c4033] uppercase sm:text-[17px]">
+        <p className="mt-1 font-[family-name:var(--font-serif)] text-[15px] tracking-[0.1em] text-[#5c4033] uppercase sm:text-[17px]">
           Seeking the Eternal Blessings of the Divine
         </p>
       </div>
@@ -67,7 +59,7 @@ export function InvitationGopuramSection({ wedding }: { wedding: WeddingSettings
         className="relative mx-auto mt-6 flex w-full max-w-[1360px] items-end justify-center px-2 sm:px-6"
       >
         {/* Soft top gradient to blend clouds flawlessly into cream background */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-[#fdf5e6] to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-[#fdf5e6] to-transparent" />
 
         {/* 
           Responsive artwork wrapper:
@@ -92,8 +84,13 @@ export function InvitationGopuramSection({ wedding }: { wedding: WeddingSettings
         </div>
       </motion.div>
 
+      {/* Bottom Marigold and Mango Leaf Toran — exactly matching the reference blueprint bottom */}
+      <div className="relative z-10 w-full overflow-hidden bg-[#fdf5e6] -mt-1">
+        <InvitationToran position="bottom" />
+      </div>
+
       {/* Ultra subtle baseline trim seamlessly matching #fdf5e6 with zero artifact */}
-      <div className="h-2 w-full bg-[#fdf5e6]" />
+      <div className="h-3 w-full bg-[#fdf5e6]" />
     </section>
   );
 }
