@@ -5,10 +5,11 @@ import { Sparkles, Calendar } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { remainingUntil } from "@/components/countdown/countdown-math";
+import { AUTHORITATIVE_WEDDING_CONFIG } from "@/lib/wedding-config";
 
 export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
   const schedule = weddingSchedule(wedding);
-  const targetTime = schedule ? new Date(schedule.targetIso).getTime() : new Date("2026-12-13T00:00:00+05:30").getTime();
+  const targetTime = schedule ? new Date(schedule.targetIso).getTime() : AUTHORITATIVE_WEDDING_CONFIG.targetTimestamp;
   const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
           </p>
 
           <h2 id="countdown-heading" className="mt-1 font-[family-name:var(--font-playfair)] text-[26px] font-bold text-[#3d1c00] sm:text-[34px]">
-            {schedule?.dateOnlyLabel ?? "December 13, 2026"}
+            {schedule?.dateOnlyLabel ?? AUTHORITATIVE_WEDDING_CONFIG.weddingDateDisplay}
           </h2>
 
           <div className="mx-auto my-6 grid grid-cols-4 gap-2 sm:gap-4">

@@ -1,17 +1,17 @@
+import { AUTHORITATIVE_WEDDING_CONFIG } from "@/lib/wedding-config";
+
 /**
  * Owner-supplied wedding identity.
  *
- * The database (`wedding_settings`, seeded by migration 0007) is the source
- * of truth and admins edit it in Admin › Website Content. These values mirror
- * that seed and are used only as a fallback when the database cannot be
- * reached, so the site never shows generic placeholder names.
+ * Sourced from the central AUTHORITATIVE_WEDDING_CONFIG and database (`wedding_settings`).
  */
 export const WEDDING_IDENTITY = {
-  brideName: "Priya",
-  groomName: "Arjun",
-  websiteTitle: "Priya & Arjun",
+  brideName: AUTHORITATIVE_WEDDING_CONFIG.bride,
+  groomName: AUTHORITATIVE_WEDDING_CONFIG.groom,
+  websiteTitle: `${AUTHORITATIVE_WEDDING_CONFIG.bride} & ${AUTHORITATIVE_WEDDING_CONFIG.groom}`,
   websiteSubtitle: "Wedding Celebration",
-  /** Midnight, 13 December 2026, Asia/Kolkata (date-only until a ceremony time is confirmed). */
-  weddingDateIso: "2026-12-12T18:30:00.000Z",
-  timezone: "Asia/Kolkata",
+  weddingDateIso: AUTHORITATIVE_WEDDING_CONFIG.weddingDateIso,
+  weddingDateDisplay: AUTHORITATIVE_WEDDING_CONFIG.weddingDateDisplay,
+  weddingDay: AUTHORITATIVE_WEDDING_CONFIG.weddingDay,
+  timezone: AUTHORITATIVE_WEDDING_CONFIG.timezone,
 } as const;
