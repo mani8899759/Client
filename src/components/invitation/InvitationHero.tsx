@@ -24,12 +24,17 @@ export function InvitationHero({ wedding }: { wedding: WeddingSettings }) {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <picture>
           <source
+            media="(max-width: 640px)"
+            srcSet="/images/south-indian-gopuram-hero-mobile.webp"
+            type="image/webp"
+          />
+          <source
             srcSet="/images/south-indian-gopuram-hero-desktop.webp"
             type="image/webp"
           />
           <Image
             src="/images/south-indian-gopuram-hero-desktop.png"
-            alt="Traditional South Indian Temple Gopuram Watercolor Scene with lush greenery and sacred spires"
+            alt="Traditional South Indian Temple Gopuram Watercolor Scene with sacred spires, lotus pond, and lush palm landscape"
             fill
             priority
             sizes="100vw"
