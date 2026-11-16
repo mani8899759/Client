@@ -205,3 +205,4 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
     </article>
   );
 }
+
