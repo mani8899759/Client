@@ -47,55 +47,49 @@ export function InvitationHero({ wedding }: { wedding: WeddingSettings }) {
         <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#fdf5e6] via-[#fdf5e6]/70 to-transparent" />
       </div>
 
-      {/* 3. Center Couple Name Plaque over Temple */}
+      {/* 3. Center Couple Names directly over Temple (without white card sheet) */}
       <div className="relative z-10 mx-auto flex min-h-[580px] max-w-[820px] flex-col items-center justify-center px-4 pt-16 text-center sm:min-h-[680px] md:min-h-[760px] lg:min-h-[820px]">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 25, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.22, 0.61, 0.36, 1] }}
-          className="relative max-w-[560px] overflow-hidden rounded-[20px] border border-[#d4a843]/70 bg-[#fffcf7]/85 p-6 shadow-[0_12px_40px_rgba(61,28,0,0.12)] backdrop-blur-[3px] sm:p-10 md:p-12"
+          className="relative max-w-[620px] px-4 py-6 text-center"
         >
-          {/* Ornate corner flourishes */}
-          <div className="pointer-events-none absolute top-2.5 left-2.5 size-6 border-t-2 border-l-2 border-[#8b1a1a]" />
-          <div className="pointer-events-none absolute top-2.5 right-2.5 size-6 border-t-2 border-r-2 border-[#8b1a1a]" />
-          <div className="pointer-events-none absolute bottom-2.5 left-2.5 size-6 border-b-2 border-l-2 border-[#8b1a1a]" />
-          <div className="pointer-events-none absolute bottom-2.5 right-2.5 size-6 border-b-2 border-r-2 border-[#8b1a1a]" />
-
           {/* Auspicious Invocation */}
-          <p className="font-[family-name:var(--font-script)] text-[24px] text-[#8b1a1a] sm:text-[30px]">
+          <p className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[34px]">
             {wedding.invitation_cover_heading || "A Special Invitation"}
           </p>
 
-          <div className="mx-auto my-2 flex items-center justify-center gap-3">
-            <span className="h-px w-10 bg-[#d4a843]" />
+          <div className="mx-auto my-3 flex items-center justify-center gap-3">
+            <span className="h-px w-12 bg-[#d4a843]" />
             <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
-            <span className="h-px w-10 bg-[#d4a843]" />
+            <span className="h-px w-12 bg-[#d4a843]" />
           </div>
 
           {/* Prominent Couple Names */}
           <div className="mt-2 space-y-1">
-            <h1 className="font-[family-name:var(--font-playfair)] text-[42px] font-bold tracking-[0.06em] text-[#8b1a1a] sm:text-[58px] md:text-[66px] uppercase drop-shadow-2xs">
+            <h1 className="font-[family-name:var(--font-playfair)] text-[44px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_10px_rgba(253,245,230,0.95)] sm:text-[60px] md:text-[68px] uppercase">
               {names.groom}
             </h1>
-            <div className="font-[family-name:var(--font-script)] text-[36px] font-normal leading-none text-[#d4a843] sm:text-[46px]">
+            <div className="font-[family-name:var(--font-script)] text-[38px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_4px_rgba(61,28,0,0.25)] sm:text-[48px]">
               &amp;
             </div>
-            <h1 className="font-[family-name:var(--font-playfair)] text-[42px] font-bold tracking-[0.06em] text-[#8b1a1a] sm:text-[58px] md:text-[66px] uppercase drop-shadow-2xs">
+            <h1 className="font-[family-name:var(--font-playfair)] text-[44px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_10px_rgba(253,245,230,0.95)] sm:text-[60px] md:text-[68px] uppercase">
               {names.bride}
             </h1>
           </div>
 
           {/* Announcement and Main Date */}
-          <div className="mt-6 border-t border-[#d4a843]/50 pt-5">
-            <p className="font-[family-name:var(--font-serif)] text-[15px] font-medium tracking-[0.2em] text-[#5c4033] uppercase sm:text-[17px]">
+          <div className="mt-6 border-t border-[#d4a843]/60 pt-5">
+            <p className="font-[family-name:var(--font-serif)] text-[15px] font-semibold tracking-[0.22em] text-[#3d1c00] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] uppercase sm:text-[17px]">
               Are Getting Married
             </p>
-            <div className="mt-3 inline-block rounded-full border border-[#d4a843] bg-[#f5ebd5] px-6 py-1.5 shadow-2xs">
-              <p className="font-[family-name:var(--font-playfair)] text-[16px] font-semibold text-[#3d1c00] sm:text-[18px]">
+            <div className="mt-3 inline-block rounded-full border border-[#d4a843] px-7 py-1.5 backdrop-blur-[2px]">
+              <p className="font-[family-name:var(--font-playfair)] text-[16px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[18px]">
                 December 1, 2026
               </p>
             </div>
-            <p className="mt-2 text-[12px] tracking-wide text-[#7b6a58]">
+            <p className="mt-2 text-[12px] font-medium tracking-wide text-[#3d1c00] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)]">
               Asia / Kolkata (IST)
             </p>
           </div>
