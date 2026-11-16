@@ -58,6 +58,26 @@
   --shadow-invite-card: 0 10px 30px -5px rgb(61 28 0 / 0.08), 0 2px 8px -2px rgb(139 26 26 / 0.06);
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Lenis Smooth Scrolling (Scoped to Invitation)
+   ───────────────────────────────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 /* ── Typography hierarchy ───────────────────────────────────────────────── */
 @utility text-display {
   font-family: var(--font-serif);

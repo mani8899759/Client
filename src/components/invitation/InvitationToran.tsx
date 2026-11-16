@@ -21,6 +21,26 @@ export function InvitationToran({
         flip ? "rotate-180" : ""
       }`}
     >
+      <style>{`
+        @keyframes toranLeafSway {
+          0%, 100% { transform-origin: top center; transform: rotate(0deg); }
+          50% { transform-origin: top center; transform: rotate(1.2deg); }
+        }
+        .toran-leaf-sway-1 {
+          animation: toranLeafSway 5s ease-in-out infinite;
+        }
+        .toran-leaf-sway-2 {
+          animation: toranLeafSway 6.5s ease-in-out infinite 1.5s;
+        }
+        .toran-leaf-sway-3 {
+          animation: toranLeafSway 5.8s ease-in-out infinite 2.8s;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .toran-leaf-sway-1, .toran-leaf-sway-2, .toran-leaf-sway-3 {
+            animation: none !important;
+          }
+        }
+      `}</style>
       <svg
         viewBox="0 0 1200 70"
         fill="none"
@@ -101,8 +121,18 @@ export function InvitationToran({
           const x = i * 50;
           const yOffset = Math.sin((i / 3) * Math.PI) * 3 + 4;
           const rotation = ((i % 3) - 1) * 7;
+          const swayClass =
+            i % 3 === 0
+              ? "toran-leaf-sway-1"
+              : i % 3 === 1
+              ? "toran-leaf-sway-2"
+              : "toran-leaf-sway-3";
           return (
-            <g key={i} transform={`translate(${x}, ${yOffset}) rotate(${rotation})`}>
+            <g
+              key={i}
+              transform={`translate(${x}, ${yOffset}) rotate(${rotation})`}
+              className={swayClass}
+            >
               <use href={`#${id}-mango-leaf`} />
             </g>
           );

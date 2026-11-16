@@ -6,6 +6,7 @@ import { ArrowLeft, Gift, Heart, Volume2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
+import { InvitationMotionProvider } from "./animations/InvitationMotionProvider";
 import { InvitationCover } from "./InvitationCover";
 import { InvitationHero } from "./InvitationHero";
 import { InvitationAudioPlayer } from "./InvitationAudioPlayer";
@@ -55,8 +56,9 @@ export function InvitationPageClient({
   }
 
   return (
-    <div className="invitation-theme min-h-screen bg-[#fdf5e6] text-[#3d1c00]">
-      {/* Top minimal bar to return to wedding site */}
+    <InvitationMotionProvider active={isOpened}>
+      <div className="invitation-theme min-h-screen bg-[#fdf5e6] text-[#3d1c00]">
+        {/* Top minimal bar to return to wedding site */}
       <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-[#d4a843]/40 bg-[#fffcf7]/95 px-4 backdrop-blur-md sm:px-8">
         <Link
           href="/"
@@ -151,14 +153,15 @@ export function InvitationPageClient({
         </AnimatePresence>
       </div>
 
-      {/* Persistent Floating Music Controller */}
-      <InvitationAudioPlayer
-        audioUrl={audioUrl}
-        title={wedding.invitation_music_title}
-        autoPlayTrigger={musicTrigger}
-        enabled={wedding.invitation_music_enabled !== false}
-        defaultVolume={Number(wedding.invitation_music_volume ?? 0.7)}
-      />
-    </div>
+        {/* Persistent Floating Music Controller */}
+        <InvitationAudioPlayer
+          audioUrl={audioUrl}
+          title={wedding.invitation_music_title}
+          autoPlayTrigger={musicTrigger}
+          enabled={wedding.invitation_music_enabled !== false}
+          defaultVolume={Number(wedding.invitation_music_volume ?? 0.7)}
+        />
+      </div>
+    </InvitationMotionProvider>
   );
 }
