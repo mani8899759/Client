@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ImageFrame } from "./ImageFrame";
 
@@ -19,9 +19,14 @@ export function HeroMedia({
   videoUrl: string | null;
   alt: string;
 }) {
+  const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -35,13 +40,23 @@ export function HeroMedia({
     if (reduce) videoRef.current?.pause();
   }, [reduce]);
 
+  if (!mounted) {
+    return (
+      <div
+        suppressHydrationWarning
+        className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-control)] bg-soft-cream xs:aspect-[5/6] sm:aspect-[16/10] lg:aspect-[21/9]"
+        aria-hidden="true"
+      />
+    );
+  }
+
   return (
     <motion.div
       ref={containerRef}
       suppressHydrationWarning
       initial={reduce ? false : { opacity: 0, clipPath: "inset(8% 4% 0% 4%)" }}
       animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
-      transition={{ duration: 1.4, delay: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
+      transition={{ duration: 1.4, delay: 0.15, ease: [0.22, 0.61, 0.36, 1] }}
       className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-control)] xs:aspect-[5/6] sm:aspect-[16/10] lg:aspect-[21/9]"
     >
       <motion.div
