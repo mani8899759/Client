@@ -93,25 +93,25 @@ export function InvitationPageClient({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 0.61, 0.36, 1] }}
             >
-              {/* Screen 1: Top Hero with Watercolor South Indian Gopuram & Traditional Toran */}
+              {/* Screen 1: Top Hero South Indian Gopuram Background + Toran + Names */}
               <InvitationHero wedding={wedding} />
 
               {/* Screen 2: Welcome and Couple introduction */}
               <InvitationWelcome wedding={wedding} />
 
-              {/* Screen 3: Wedding Countdown */}
+              {/* Screen 3: Events and Schedule */}
+              {wedding.invitation_section_events !== false ? (
+                <InvitationEvents events={events} timezone={wedding.timezone} />
+              ) : null}
+
+              {/* Screen 4: Wedding Countdown */}
               {wedding.invitation_section_countdown !== false ? (
                 <InvitationCountdown wedding={wedding} />
               ) : null}
 
-              {/* Screen 4: Our Story */}
+              {/* Screen 5: Our Story */}
               {wedding.invitation_section_story !== false ? (
                 <InvitationStory story={story} wedding={wedding} />
-              ) : null}
-
-              {/* Screen 5: Events and Schedule */}
-              {wedding.invitation_section_events !== false ? (
-                <InvitationEvents events={events} timezone={wedding.timezone} />
               ) : null}
 
               {/* Screen 6: Official Invitation File (PDF / Card viewer) */}

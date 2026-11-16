@@ -7,7 +7,8 @@ import type { WeddingEvent } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { pickImage } from "@/lib/storage/imagery";
 import { formatTimeRange } from "@/lib/utils/datetime";
-import { TempleArchMotif, FloralDivider } from "./TraditionalMotifs";
+import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
+import { MandalaDecoration } from "./MandalaDecoration";
 
 export function InvitationEvents({
   events,
@@ -19,12 +20,19 @@ export function InvitationEvents({
   if (!events || events.length === 0) return null;
 
   return (
-    <section aria-labelledby="events-heading" className="py-16 sm:py-24 bg-[#fdf5e6]">
-      <div className="mx-auto max-w-[1000px] px-4 sm:px-6">
+    <section aria-labelledby="events-heading" className="relative overflow-hidden py-14 sm:py-20 lg:py-24 bg-[#fdf5e6]">
+      {/* Background Mandala Accents */}
+      <div className="absolute top-1/2 -left-20 -translate-y-1/2">
+        <MandalaDecoration size={240} opacity={0.10} />
+      </div>
+      <div className="absolute top-1/2 -right-20 -translate-y-1/2">
+        <MandalaDecoration size={240} opacity={0.10} />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1040px] px-4 sm:px-6">
         <div className="text-center">
-          <TempleArchMotif className="mb-3" />
-          <p className="font-[family-name:var(--font-script)] text-[30px] text-[#8b1a1a] sm:text-[36px]">
-            Auspicious Ceremonies
+          <p className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a] sm:text-[32px]">
+            Sacred Ceremonies
           </p>
           <h2
             id="events-heading"
@@ -32,14 +40,16 @@ export function InvitationEvents({
           >
             Wedding Celebrations
           </h2>
-          <FloralDivider className="my-3" />
-          <p className="mx-auto max-w-[56ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033] sm:text-[20px]">
+          <div className="mx-auto my-4 max-w-[320px]">
+            <TraditionalMotifDivider size="sm" />
+          </div>
+          <p className="mx-auto max-w-[56ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033]">
             Join us in commemorating every ritual and celebratory occasion as two families become one.
           </p>
         </div>
 
-        {/* 2-Column Responsive Events Grid — matching reference blueprint */}
-        <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2">
+        {/* 2-Column Responsive Grid matching Blueprint */}
+        <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 lg:gap-8">
           {events.map((event) => {
             const imgRef = event.image_path || pickImage(null, `event-${event.event_type}`);
             const imgUrl = mediaUrl(imgRef) ?? "/images/ai/wedding-ceremony.webp";
@@ -55,86 +65,100 @@ export function InvitationEvents({
             return (
               <div
                 key={event.id}
-                className="group relative flex flex-col overflow-hidden rounded-[14px] border-2 border-[#d4a843]/50 bg-[#fffcf7] p-6 shadow-xs transition-all duration-300 hover:border-[#8b1a1a] hover:shadow-md"
+                className="group flex flex-col overflow-hidden rounded-[16px] border border-[#d4a843]/60 bg-[#fffcf7] shadow-[0_4px_20px_rgba(61,28,0,0.05)] transition-all duration-300 hover:border-[#8b1a1a] hover:shadow-[0_8px_30px_rgba(139,26,26,0.12)]"
               >
-                {/* Decorative corner accent */}
-                <div className="pointer-events-none absolute top-2 right-2 size-4 border-t border-r border-[#d4a843]" />
-                <div className="pointer-events-none absolute bottom-2 left-2 size-4 border-b border-l border-[#d4a843]" />
-
-                <div className="flex items-center justify-between gap-2 border-b border-[#d4a843]/30 pb-3">
-                  <span className="font-[family-name:var(--font-playfair)] text-[22px] font-bold text-[#8b1a1a]">
-                    {event.name}
-                  </span>
-                  <span className="rounded-full bg-[#f5ebd5] px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-[#5c4033] uppercase">
+                {/* Event Photo */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={imgUrl}
+                    alt={event.image_alt || event.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 480px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/65 via-transparent to-transparent" />
+                  <span className="absolute top-3 left-3 rounded-full border border-[#d4a843]/50 bg-[#8b1a1a]/95 px-3.5 py-1 text-[11px] font-semibold tracking-wider text-[#fdf5e6] uppercase shadow-xs">
                     {event.event_type}
                   </span>
                 </div>
 
-                {event.short_description ? (
-                  <p className="mt-3 text-[14px] leading-relaxed text-[#7b6a58]">
-                    {event.short_description}
-                  </p>
-                ) : null}
+                {/* Event Details */}
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-[24px] font-bold text-[#8b1a1a]">
+                    {event.name}
+                  </h3>
 
-                <div className="mt-4 space-y-2 text-[13px] text-[#5c4033]">
-                  {/* Date */}
-                  <div className="flex items-center gap-2">
-                    <Calendar className="size-4 shrink-0 text-[#8b1a1a]" />
-                    <span className="font-semibold text-[#3d1c00]">
-                      {event.event_date
-                        ? new Date(event.event_date + "T00:00:00").toLocaleDateString("en-IN", {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })
-                        : "Details will be announced soon"}
-                    </span>
-                  </div>
-
-                  {/* Time */}
-                  {timeStr ? (
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4 shrink-0 text-[#8b1a1a]" />
-                      <span>{timeStr}</span>
-                    </div>
+                  {event.short_description ? (
+                    <p className="mt-2 text-[14px] leading-relaxed text-[#7b6a58]">
+                      {event.short_description}
+                    </p>
                   ) : null}
 
-                  {/* Venue */}
-                  {venue ? (
-                    <div className="flex items-start gap-2">
-                      <MapPin className="size-4 shrink-0 text-[#8b1a1a] mt-0.5" />
-                      <div>
-                        <span className="font-medium text-[#3d1c00]">{venue.name}</span>
-                        {venue.address ? (
-                          <p className="text-[12px] text-[#7b6a58]">{venue.address}</p>
-                        ) : null}
+                  <div className="mt-5 space-y-2.5 text-[13px] text-[#5c4033] border-t border-[#e5d5bd]/60 pt-4">
+                    {/* Date */}
+                    <div className="flex items-center gap-2.5">
+                      <Calendar className="size-4 shrink-0 text-[#8b1a1a]" />
+                      <span className="font-semibold text-[#3d1c00]">
+                        {event.event_date
+                          ? new Date(event.event_date + "T00:00:00").toLocaleDateString("en-IN", {
+                              weekday: "long",
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })
+                          : "Details will be announced soon"}
+                      </span>
+                    </div>
+
+                    {/* Time */}
+                    {timeStr ? (
+                      <div className="flex items-center gap-2.5">
+                        <Clock className="size-4 shrink-0 text-[#8b1a1a]" />
+                        <span>{timeStr} (IST)</span>
                       </div>
-                    </div>
-                  ) : null}
+                    ) : null}
 
-                  {/* Dress Code */}
-                  {event.dress_code ? (
-                    <div className="mt-2 text-[12px] text-[#7b6a58]">
-                      <span className="font-medium text-[#8b1a1a]">Dress Code:</span> {event.dress_code}
-                    </div>
-                  ) : null}
-                </div>
+                    {/* Venue */}
+                    {venue ? (
+                      <div className="flex items-start gap-2.5">
+                        <MapPin className="size-4 shrink-0 text-[#8b1a1a] mt-0.5" />
+                        <div>
+                          <p className="font-semibold text-[#3d1c00]">{venue.name}</p>
+                          <p className="text-[12px] text-[#7b6a58]">{venue.address || venue.city}</p>
+                        </div>
+                      </div>
+                    ) : null}
 
-                {/* Get Directions Link */}
-                {directionsUrl ? (
-                  <div className="mt-5 border-t border-[#d4a843]/30 pt-3">
-                    <a
-                      href={directionsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#8b1a1a] hover:underline"
-                    >
-                      <Navigation className="size-3.5" />
-                      <span>Get Directions</span>
-                    </a>
+                    {/* Dress Code */}
+                    {event.dress_code ? (
+                      <div className="mt-3 rounded-[6px] border border-[#d4a843]/40 bg-[#f5ebd5]/40 px-3 py-1.5 text-[12px] text-[#5c4033]">
+                        <span className="font-semibold text-[#8b1a1a]">Dress Code:</span> {event.dress_code}
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
+
+                  {/* Actions */}
+                  <div className="mt-6 flex items-center justify-between gap-3 pt-3 border-t border-[#e5d5bd]/60">
+                    <Link
+                      href={`/events/${event.slug}`}
+                      className="rounded-[6px] border border-[#d4a843] bg-transparent px-4 py-2 text-[12px] font-medium text-[#3d1c00] transition-colors hover:bg-[#d4a843]/15"
+                    >
+                      View Details
+                    </Link>
+
+                    {directionsUrl ? (
+                      <a
+                        href={directionsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#8b1a1a] px-4 py-2 text-[12px] font-medium text-[#fdf5e6] shadow-xs transition-colors hover:bg-[#721515]"
+                      >
+                        <Navigation className="size-3.5" />
+                        <span>Get Directions</span>
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
               </div>
             );
           })}

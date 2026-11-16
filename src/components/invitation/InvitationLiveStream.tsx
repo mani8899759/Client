@@ -6,6 +6,7 @@ import { Play, Volume2, VolumeX, Maximize2, ExternalLink, Calendar, Video, Radio
 import type { LiveStream } from "@/types/database";
 import { getYouTubeId, youTubeThumbnail } from "@/lib/utils/youtube";
 import { formatDateTimeInZone } from "@/lib/utils/datetime";
+import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
 
 export function InvitationLiveStream({
   stream,
@@ -36,16 +37,19 @@ export function InvitationLiveStream({
       <div className="mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center">
-          <p className="font-[family-name:var(--font-script)] text-[30px] text-[#8b1a1a] sm:text-[36px]">
-            Visual Memories
+          <p className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a] sm:text-[34px]">
+            Celebration in Motion
           </p>
           <h2
             id="invitation-live-heading"
-            className="mt-1 font-[family-name:var(--font-playfair)] text-[34px] font-bold text-[#3d1c00] sm:text-[44px]"
+            className="mt-1 font-[family-name:var(--font-playfair)] text-[32px] font-bold text-[#3d1c00] sm:text-[42px]"
           >
             Our Wedding Moments
           </h2>
-          <p className="mx-auto mt-3 max-w-[54ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033] sm:text-[20px]">
+          <div className="mx-auto my-3 max-w-[300px]">
+            <TraditionalMotifDivider size="sm" />
+          </div>
+          <p className="mx-auto mt-2 max-w-[54ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033] sm:text-[20px]">
             Be part of our special moments, wherever you are. Join us virtually as we exchange our sacred vows.
           </p>
         </div>

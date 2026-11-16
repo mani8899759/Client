@@ -1,60 +1,67 @@
-import React from "react";
-
 export function MandalaDecoration({
-  size = 240,
   className = "",
-  opacity = 0.22,
+  size = 200,
+  opacity = 0.14,
 }: {
-  size?: number;
   className?: string;
+  size?: number;
   opacity?: number;
 }) {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none select-none ${className}`}
       style={{ width: size, height: size, opacity }}
+      className={`pointer-events-none select-none text-[#d4a843] ${className}`}
     >
       <svg
         viewBox="0 0 200 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full text-[#d4a843]"
+        className="h-full w-full"
       >
-        <g stroke="currentColor" strokeWidth="1.2">
-          {/* Outer circle rings */}
-          <circle cx="100" cy="100" r="92" strokeDasharray="3 3" />
-          <circle cx="100" cy="100" r="85" />
-          <circle cx="100" cy="100" r="72" strokeWidth="0.8" />
-          <circle cx="100" cy="100" r="54" />
-          <circle cx="100" cy="100" r="32" strokeWidth="0.8" />
-          <circle cx="100" cy="100" r="16" />
-          <circle cx="100" cy="100" r="4" fill="currentColor" />
+        {/* Concentric rings */}
+        <circle cx="100" cy="100" r="95" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
+        <circle cx="100" cy="100" r="82" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="100" cy="100" r="68" stroke="currentColor" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="48" stroke="currentColor" strokeWidth="1" />
+        <circle cx="100" cy="100" r="28" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="100" cy="100" r="10" stroke="currentColor" strokeWidth="1" />
 
-          {/* 16 Petals / Rays */}
-          {Array.from({ length: 16 }).map((_, i) => {
-            const angle = (i * 360) / 16;
-            return (
-              <g key={i} transform={`rotate(${angle} 100 100)`}>
-                <path d="M 100 28 C 94 45, 94 65, 100 84 C 106 65, 106 45, 100 28 Z" fill="currentColor" fillOpacity="0.08" />
-                <path d="M 100 15 C 96 22, 96 25, 100 32 C 104 25, 104 22, 100 15 Z" fill="currentColor" fillOpacity="0.2" />
-                <circle cx="100" cy="10" r="2" fill="currentColor" />
-                <line x1="100" y1="32" x2="100" y2="54" strokeWidth="0.8" />
-              </g>
-            );
-          })}
+        {/* 16 Radial Petals Outer */}
+        {Array.from({ length: 16 }).map((_, i) => {
+          const deg = i * 22.5;
+          return (
+            <g key={`outer-${i}`} transform={`rotate(${deg} 100 100)`}>
+              <path
+                d="M100,18 C108,35 106,60 100,75 C94,60 92,35 100,18 Z"
+                stroke="currentColor"
+                strokeWidth="0.8"
+                fill="currentColor"
+                fillOpacity="0.08"
+              />
+              <circle cx="100" cy="10" r="2" fill="currentColor" />
+            </g>
+          );
+        })}
 
-          {/* 8 Inner decorative diamond florets */}
-          {Array.from({ length: 8 }).map((_, i) => {
-            const angle = (i * 360) / 8 + 22.5;
-            return (
-              <g key={i} transform={`rotate(${angle} 100 100)`}>
-                <path d="M 100 68 L 96 74 L 100 80 L 104 74 Z" fill="currentColor" fillOpacity="0.25" />
-                <circle cx="100" cy="62" r="1.5" fill="currentColor" />
-              </g>
-            );
-          })}
-        </g>
+        {/* 8 Radial Petals Inner */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const deg = i * 45;
+          return (
+            <g key={`inner-${i}`} transform={`rotate(${deg} 100 100)`}>
+              <path
+                d="M100,52 C106,64 104,78 100,88 C96,78 94,64 100,52 Z"
+                stroke="currentColor"
+                strokeWidth="1"
+                fill="currentColor"
+                fillOpacity="0.15"
+              />
+            </g>
+          );
+        })}
+
+        {/* Center Floral Core */}
+        <circle cx="100" cy="100" r="5" fill="currentColor" fillOpacity="0.3" />
       </svg>
     </div>
   );

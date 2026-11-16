@@ -1,100 +1,120 @@
-import React from "react";
+import { useId } from "react";
 
-export function InvitationToran({ position = "top", className = "" }: { position?: "top" | "bottom"; className?: string }) {
-  // A traditional Indian wedding toran featuring mango leaves and marigold blossoms
+/**
+ * Traditional South Indian Mango Leaf & Marigold Flower Toran
+ * Rendered as an authentic, responsive vector garland with glossy green
+ * mango leaves (maavilai) and radiant saffron-orange marigold blossoms (genda phool).
+ */
+export function InvitationToran({
+  className = "",
+  flip = false,
+}: {
+  className?: string;
+  flip?: boolean;
+}) {
+  const id = useId();
+
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none select-none w-full overflow-hidden ${
-        position === "top" ? "top-0 left-0" : "bottom-0 left-0 rotate-180"
-      } ${className}`}
+      className={`pointer-events-none w-full overflow-hidden select-none ${className} ${
+        flip ? "rotate-180" : ""
+      }`}
     >
       <svg
-        viewBox="0 0 1200 68"
+        viewBox="0 0 1200 70"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto min-w-[700px] object-cover"
         preserveAspectRatio="none"
+        className="h-12 w-full sm:h-16 md:h-18"
       >
         <defs>
-          {/* Leaf gradient */}
-          <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#2e7d32" />
-            <stop offset="60%" stopColor="#1b5e20" />
-            <stop offset="100%" stopColor="#0d3c13" />
+          {/* Leaf Gradients */}
+          <linearGradient id={`${id}-leaf-dark`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1e5c22" />
+            <stop offset="60%" stopColor="#2e7d32" />
+            <stop offset="100%" stopColor="#1b4d1c" />
           </linearGradient>
-          {/* Marigold orange gradient */}
-          <radialGradient id="marigoldOrange" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#ffb703" />
-            <stop offset="65%" stopColor="#fb8500" />
-            <stop offset="100%" stopColor="#c85000" />
+          <linearGradient id={`${id}-leaf-light`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#388e3c" />
+            <stop offset="70%" stopColor="#4caf50" />
+            <stop offset="100%" stopColor="#2e7d32" />
+          </linearGradient>
+          {/* Marigold Orange & Gold Gradients */}
+          <radialGradient id={`${id}-marigold-orange`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#ffe082" />
+            <stop offset="35%" stopColor="#ffa000" />
+            <stop offset="75%" stopColor="#f57c00" />
+            <stop offset="100%" stopColor="#e65100" />
           </radialGradient>
-          {/* Marigold yellow gradient */}
-          <radialGradient id="marigoldYellow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#fff3b0" />
-            <stop offset="65%" stopColor="#ffd166" />
+          <radialGradient id={`${id}-marigold-yellow`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fff9c4" />
+            <stop offset="40%" stopColor="#ffeb3b" />
+            <stop offset="80%" stopColor="#fbc02d" />
+            <stop offset="100%" stopColor="#f57f17" />
+          </radialGradient>
+          {/* Gold string */}
+          <linearGradient id={`${id}-gold-thread`} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#d4a843" />
+            <stop offset="50%" stopColor="#ffd54f" />
             <stop offset="100%" stopColor="#d4a843" />
-          </radialGradient>
+          </linearGradient>
+
+          {/* Reusable Mango Leaf Shape */}
+          <g id={`${id}-mango-leaf`}>
+            {/* Outer Leaf Body */}
+            <path
+              d="M0,0 C12,15 18,35 0,56 C-18,35 -12,15 0,0 Z"
+              fill={`url(#${id}-leaf-dark)`}
+            />
+            {/* Center spine */}
+            <path d="M0,0 L0,53" stroke="#81c784" strokeWidth="1" opacity="0.75" />
+            {/* Side veins */}
+            <path
+              d="M0,12 Q5,16 9,20 M0,22 Q6,27 10,31 M0,32 Q5,37 8,41 M0,12 Q-5,16 -9,20 M0,22 Q-6,27 -10,31 M0,32 Q-5,37 -8,41"
+              stroke="#81c784"
+              strokeWidth="0.75"
+              opacity="0.55"
+            />
+          </g>
+
+          {/* Reusable Marigold Flower */}
+          <g id={`${id}-marigold-cluster`}>
+            <circle cx="0" cy="0" r="10.5" fill={`url(#${id}-marigold-orange)`} />
+            <circle cx="-3" cy="-2" r="4.5" fill={`url(#${id}-marigold-yellow)`} opacity="0.8" />
+            <circle cx="3" cy="-2" r="4.5" fill={`url(#${id}-marigold-yellow)`} opacity="0.8" />
+            <circle cx="0" cy="3" r="4" fill={`url(#${id}-marigold-yellow)`} opacity="0.85" />
+            <circle cx="0" cy="0" r="2.5" fill="#e65100" />
+          </g>
         </defs>
 
-        {/* Supporting garland twine rope across the top */}
-        <path d="M0 6 Q 300 14, 600 6 Q 900 14, 1200 6" stroke="#b8860b" strokeWidth="3" strokeDasharray="6 3" />
-        <path d="M0 6 Q 300 14, 600 6 Q 900 14, 1200 6" stroke="#8b1a1a" strokeWidth="1.5" />
+        {/* Hanging Golden Thread Arc */}
+        <path
+          d="M0,4 Q150,14 300,4 Q450,14 600,4 Q750,14 900,4 Q1050,14 1200,4"
+          stroke={`url(#${id}-gold-thread)`}
+          strokeWidth="3.5"
+          fill="none"
+        />
 
-        {/* Repeating Mango Leaves and Marigolds */}
-        {Array.from({ length: 24 }).map((_, i) => {
-          const x = i * 50 + 12;
-          const isAlt = i % 2 === 0;
+        {/* Repeating Mango Leaves Array (24 Leaves spaced across 1200px) */}
+        {Array.from({ length: 25 }).map((_, i) => {
+          const x = i * 50;
+          const yOffset = Math.sin((i / 3) * Math.PI) * 3 + 4;
+          const rotation = ((i % 3) - 1) * 7;
           return (
-            <g key={i} transform={`translate(${x}, 6)`}>
-              {/* Mango Leaf */}
-              <path
-                d="M 0 0 C -8 18, -12 36, 0 54 C 12 36, 8 18, 0 0 Z"
-                fill="url(#leafGrad)"
-                stroke="#145214"
-                strokeWidth="0.8"
-                filter="drop-shadow(0 2px 3px rgba(0,0,0,0.15))"
-              />
-              {/* Leaf central vein */}
-              <line x1="0" y1="2" x2="0" y2="48" stroke="#4caf50" strokeWidth="0.7" opacity="0.7" />
+            <g key={i} transform={`translate(${x}, ${yOffset}) rotate(${rotation})`}>
+              <use href={`#${id}-mango-leaf`} />
+            </g>
+          );
+        })}
 
-              {/* Marigold Blossom hanging at the joint */}
-              <circle
-                cx="0"
-                cy="10"
-                r="7"
-                fill={isAlt ? "url(#marigoldOrange)" : "url(#marigoldYellow)"}
-                stroke="#9a3412"
-                strokeWidth="0.6"
-              />
-              <circle
-                cx="0"
-                cy="10"
-                r="4.5"
-                fill={isAlt ? "#ffa200" : "#ffe66d"}
-                stroke="#e85d04"
-                strokeWidth="0.5"
-                strokeDasharray="1.5 1"
-              />
-              <circle
-                cx="0"
-                cy="10"
-                r="2"
-                fill="#ffffff"
-                opacity="0.8"
-              />
-
-              {/* Secondary floral bead dropping slightly lower */}
-              {isAlt && (
-                <circle
-                  cx="0"
-                  cy="20"
-                  r="3.5"
-                  fill="url(#marigoldYellow)"
-                  stroke="#b8860b"
-                  strokeWidth="0.5"
-                />
-              )}
+        {/* Marigold Flower Accents placed at intervals */}
+        {Array.from({ length: 13 }).map((_, i) => {
+          const x = i * 100;
+          const yOffset = Math.sin((i / 1.5) * Math.PI) * 2 + 5;
+          return (
+            <g key={i} transform={`translate(${x}, ${yOffset})`}>
+              <use href={`#${id}-marigold-cluster`} />
             </g>
           );
         })}
