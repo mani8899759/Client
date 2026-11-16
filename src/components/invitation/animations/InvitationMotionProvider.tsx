@@ -91,7 +91,6 @@ export function InvitationMotionProvider({
       // Destroy Lenis
       lenis.destroy();
       lenisRef.current = null;
-      setLenisInstance(null);
 
       // Kill all invitation-scoped ScrollTriggers
       ScrollTrigger.getAll().forEach((trigger) => {

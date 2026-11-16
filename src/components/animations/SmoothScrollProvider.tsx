@@ -99,7 +99,6 @@ export function SmoothScrollProvider({
       gsap.ticker.remove(onTick);
       lenis.destroy();
       lenisRef.current = null;
-      setLenisInstance(null);
     };
   }, [pathname, isExcluded]);
 

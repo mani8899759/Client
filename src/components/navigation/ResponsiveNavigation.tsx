@@ -37,11 +37,10 @@ export function ResponsiveNavigation({
   // eslint-disable-next-line react-hooks/set-state-in-effect -- portal target only exists after mount
   useEffect(() => setMounted(true), []);
 
-  const [lastPath, setLastPath] = useState(pathname);
-  if (lastPath !== pathname) {
-    setLastPath(pathname);
+  // Close mobile navigation drawer on route change
+  useEffect(() => {
     setOpen(false);
-  }
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
