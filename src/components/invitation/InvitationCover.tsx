@@ -5,13 +5,21 @@ import { InvitationOpeningAnimation } from "./animations/InvitationOpeningAnimat
 
 export function InvitationCover({
   wedding,
-  onOpen,
+  onStartOpen,
+  onComplete,
   isOpened,
 }: {
   wedding: WeddingSettings;
-  onOpen: () => void;
+  onStartOpen: () => void;
+  onComplete: () => void;
   isOpened: boolean;
 }) {
   if (isOpened) return null;
-  return <InvitationOpeningAnimation wedding={wedding} onOpen={onOpen} />;
+  return (
+    <InvitationOpeningAnimation
+      wedding={wedding}
+      onStartOpen={onStartOpen}
+      onComplete={onComplete}
+    />
+  );
 }

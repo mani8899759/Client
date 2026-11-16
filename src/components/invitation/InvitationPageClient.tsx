@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Gift, Heart, Volume2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, Gift } from "lucide-react";
 import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { InvitationMotionProvider } from "./animations/InvitationMotionProvider";
@@ -46,13 +45,15 @@ export function InvitationPageClient({
   const audioUrl = wedding.invitation_music_path ? mediaUrl(wedding.invitation_music_path) : null;
   const invitationUrl = `${siteUrl}/invitation`;
 
-  function handleOpen() {
-    setIsOpened(true);
+  function handleStartOpen() {
     setMusicTrigger(true);
-    // Smooth scroll down to main content if needed
+  }
+
+  function handleOpenComplete() {
+    setIsOpened(true);
     setTimeout(() => {
       mainContentRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 150);
+    }, 100);
   }
 
   return (
@@ -83,23 +84,22 @@ export function InvitationPageClient({
 
       {/* Screen 1: Cover Experience */}
       {!isOpened ? (
-        <InvitationCover wedding={wedding} onOpen={handleOpen} isOpened={isOpened} />
+        <InvitationCover
+          wedding={wedding}
+          onStartOpen={handleStartOpen}
+          onComplete={handleOpenComplete}
+          isOpened={isOpened}
+        />
       ) : null}
 
       {/* Screen 2–11: Invitation Content Revealed */}
       <div ref={mainContentRef}>
-        <AnimatePresence>
-          {isOpened ? (
-            <motion.main
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 0.61, 0.36, 1] }}
-            >
-              {/* Screen 1: Top Hero South Indian Gopuram Background + Toran + Names */}
-              <InvitationHero wedding={wedding} />
+        <main>
+          {/* Screen 1: Top Hero South Indian Gopuram Background + Toran + Names */}
+          <InvitationHero wedding={wedding} isOpened={isOpened} />
 
-              {/* Screen 2: Welcome and Couple introduction */}
-              <InvitationWelcome wedding={wedding} />
+          {/* Screen 2: Welcome and Couple introduction */}
+          <InvitationWelcome wedding={wedding} />
 
               {/* Screen 3: Events and Schedule */}
               {wedding.invitation_section_events !== false ? (
@@ -148,10 +148,8 @@ export function InvitationPageClient({
               {wedding.invitation_gopuram_enabled !== false ? (
                 <InvitationGopuramSection wedding={wedding} />
               ) : null}
-            </motion.main>
-          ) : null}
-        </AnimatePresence>
-      </div>
+            </main>
+          </div>
 
         {/* Persistent Floating Music Controller */}
         <InvitationAudioPlayer
