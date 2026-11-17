@@ -221,16 +221,24 @@ const GALLERY_LAYOUT = [
 ];
 
 export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
-  // Published gallery items first; AI illustrations fill the preview until real photographs exist.
+  // Published gallery items first; authentic shoot photos fill the preview if needed.
   const items: Array<{ id: string; ref: string | null; alt: string }> = media.map((m) => ({
     id: m.id,
     ref: m.storage_path,
     alt: m.alt_text ?? m.title ?? "Wedding photograph",
   }));
+  const fallbackPhotos = [
+    { id: "shoot-13", ref: "/images/wedding-shoot/optimised/photo-13.webp", alt: "Manikanta & Sravika — Together in Love" },
+    { id: "shoot-05", ref: "/images/wedding-shoot/optimised/photo-05.webp", alt: "Manikanta & Sravika — Couple Portrait" },
+    { id: "shoot-06", ref: "/images/wedding-shoot/optimised/photo-06.webp", alt: "Manikanta & Sravika — Ceremonial Elegance" },
+    { id: "shoot-01", ref: "/images/wedding-shoot/optimised/photo-01.webp", alt: "Manikanta & Sravika — Golden Memories" },
+    { id: "shoot-03", ref: "/images/wedding-shoot/optimised/photo-03.webp", alt: "Manikanta & Sravika — Pre-Wedding Walk" },
+    { id: "shoot-08", ref: "/images/wedding-shoot/optimised/photo-08.webp", alt: "Manikanta & Sravika — Cherished Moments" },
+  ];
   if (items.length < 6) {
-    for (const a of presentAiAssets().filter((x) => x.group === "gallery" || x.group === "events")) {
+    for (const p of fallbackPhotos) {
       if (items.length >= 6) break;
-      if (!items.some((i) => i.ref === a.ref)) items.push({ id: a.slot, ref: a.ref, alt: a.alt });
+      if (!items.some((i) => i.ref === p.ref)) items.push(p);
     }
   }
   const slots = GALLERY_LAYOUT.slice(0, Math.max(3, Math.min(items.length, 6)));

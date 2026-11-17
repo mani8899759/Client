@@ -52,7 +52,7 @@ export function InvitationEvents({
         <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 lg:gap-8">
           {events.map((event) => {
             const imgRef = event.image_path || pickImage(null, `event-${event.event_type}`);
-            const imgUrl = mediaUrl(imgRef) ?? "/images/ai/wedding-ceremony.webp";
+            const imgUrl = mediaUrl(imgRef) ?? "/images/wedding-shoot/optimised/photo-10.webp";
             const rawTime = formatTimeRange(event.start_time, event.end_time);
             const timeStr = event.time_label || (rawTime ? `${rawTime} (IST)` : null);
             const venue = event.venue;

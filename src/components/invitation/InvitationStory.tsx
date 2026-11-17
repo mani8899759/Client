@@ -41,7 +41,7 @@ export function InvitationStory({
         <div className="mt-12 space-y-12 sm:mt-16 sm:space-y-16">
           {story.map((entry, index) => {
             const isEven = index % 2 === 1;
-            const imgUrl = mediaUrl(entry.image_path) ?? "/images/ai/couple-prewedding.webp";
+            const imgUrl = mediaUrl(entry.image_path) ?? "/images/wedding-shoot/optimised/photo-03.webp";
 
             return (
               <div

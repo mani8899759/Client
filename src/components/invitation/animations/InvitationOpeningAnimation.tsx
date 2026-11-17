@@ -34,7 +34,7 @@ export function InvitationOpeningAnimation({
     wedding.hero_image_path ||
     pickImage(null, "hero");
   const coverImageUrl =
-    mediaUrl(coverImageRef) ?? "/images/ai/priya-arjun-hero.webp";
+    mediaUrl(coverImageRef) ?? "/images/wedding-shoot/optimised/photo-06.webp";
 
   function handleTriggerOpen() {
     if (opening) return;

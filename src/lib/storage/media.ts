@@ -82,6 +82,9 @@ export function isValidMediaRef(ref: string | null | undefined): ref is string {
 export function mediaUrl(ref: string | null | undefined): string | null {
   if (!ref) return null;
   if (ref.startsWith("http://") || ref.startsWith("https://") || ref.startsWith("/")) return ref;
+  if (ref.startsWith("static/wedding-shoot/")) return `/images/wedding-shoot/${ref.slice("static/wedding-shoot/".length)}`;
+  if (ref.startsWith("static/shoot/")) return `/images/wedding-shoot/optimised/${ref.slice("static/shoot/".length)}`;
+  if (ref.startsWith("wedding-shoot/")) return `/images/wedding-shoot/${ref.slice("wedding-shoot/".length)}`;
   if (isAiRef(ref)) return `/images/ai/${ref.slice("static/ai/".length)}`;
   if (!isStorageRef(ref) || !publicEnv.supabaseUrl) return null;
   return `${publicEnv.supabaseUrl}/storage/v1/object/public/${ref}`;

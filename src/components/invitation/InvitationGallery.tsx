@@ -12,21 +12,23 @@ import { MandalaDecoration } from "./MandalaDecoration";
 export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
-  // Combine database gallery media with static AI assets if database has fewer items
+  // Combine database gallery media with authentic wedding shoot photos if database has fewer items
   const galleryItems =
     media && media.length > 0
       ? media.map((m) => ({
           id: m.id,
-          url: mediaUrl(m.storage_path) ?? "/images/ai/gallery-01.webp",
+          url: mediaUrl(m.storage_path) ?? "/images/wedding-shoot/optimised/photo-01.webp",
           caption: m.caption ?? m.title ?? "Wedding Celebration",
           alt: m.alt_text ?? "Manikanta & Sravika Wedding Celebration",
         }))
-      : AI_SLOTS.filter((s) => s.group === "gallery").map((s) => ({
-          id: s.slot,
-          url: `/images/ai/${s.file}`,
-          caption: s.usedFor,
-          alt: s.alt,
-        }));
+      : [
+          { id: "shoot-13", url: "/images/wedding-shoot/optimised/photo-13.webp", caption: "Manikanta & Sravika — Together in Love", alt: "Manikanta & Sravika wedding portrait" },
+          { id: "shoot-05", url: "/images/wedding-shoot/optimised/photo-05.webp", caption: "Ceremonial Couple Portrait", alt: "Manikanta & Sravika ceremonial portrait" },
+          { id: "shoot-06", url: "/images/wedding-shoot/optimised/photo-06.webp", caption: "Joyful Beginnings", alt: "Manikanta & Sravika portrait" },
+          { id: "shoot-01", url: "/images/wedding-shoot/optimised/photo-01.webp", caption: "A Golden Afternoon", alt: "Manikanta & Sravika candid" },
+          { id: "shoot-03", url: "/images/wedding-shoot/optimised/photo-03.webp", caption: "Walking into Forever", alt: "Manikanta & Sravika pre-wedding walk" },
+          { id: "shoot-08", url: "/images/wedding-shoot/optimised/photo-08.webp", caption: "Moments of Happiness", alt: "Manikanta & Sravika outdoor" },
+        ];
 
   function handlePrev() {
     if (activeIdx === null) return;
