@@ -22,8 +22,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const names = coupleNames(wedding);
   const schedule = weddingSchedule(wedding);
   const dateLabel = schedule?.dateOnlyLabel ?? "December 13, 2026";
-  const title = `${names.bride} & ${names.groom} — Official Wedding Invitation`;
-  const description = `You are warmly invited to celebrate the wedding of ${names.bride} and ${names.groom} on ${dateLabel}. Explore our celebrations, venues, story and RSVP.`;
+  const title = `${names.joined} — Gudla's Wedding Invitation`;
+  const description = `You are warmly invited to celebrate the wedding of ${names.joined} on ${dateLabel}. Explore our celebrations, venues, story and RSVP.`;
 
   return {
     title,
@@ -66,7 +66,7 @@ export default async function InvitationPage() {
             Invitation Coming Soon
           </h1>
           <p className="mt-3 font-[family-name:var(--font-serif)] text-[17px] text-[#5c4033]">
-            The official digital wedding invitation for Priya &amp; Arjun is being prepared and will be available shortly.
+            The official digital wedding invitation for Manikanta &amp; Sravika is being prepared and will be available shortly.
           </p>
           <div className="mt-6">
             <Link

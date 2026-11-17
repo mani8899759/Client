@@ -92,7 +92,7 @@ export default async function StoryPage() {
         eyebrow="Our Love Story"
         title={
           <>
-            {names.bride} <span className="text-primary italic">&amp;</span> {names.groom}
+            {names.groom} <span className="text-primary italic">&amp;</span> {names.bride}
           </>
         }
         intro={wedding.story_intro ?? undefined}

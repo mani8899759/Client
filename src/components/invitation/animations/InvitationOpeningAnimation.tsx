@@ -169,7 +169,7 @@ export function InvitationOpeningAnimation({
           <div className="relative mx-auto mt-6 aspect-[16/10] w-full max-w-[460px] overflow-hidden rounded-[10px] border-2 border-[#d4a843] shadow-md">
             <Image
               src={coverImageUrl}
-              alt={`${names.bride} and ${names.groom} wedding portrait`}
+              alt={`${names.joined} wedding portrait`}
               fill
               sizes="(max-width: 640px) 100vw, 460px"
               priority
@@ -177,7 +177,7 @@ export function InvitationOpeningAnimation({
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/50 via-transparent to-transparent" />
             <div className="absolute right-3.5 bottom-2.5 text-[11px] font-medium tracking-[0.14em] text-[#fffdf9] drop-shadow-sm uppercase">
-              Jaipur, Rajasthan
+              December 13, 2026
             </div>
           </div>
 

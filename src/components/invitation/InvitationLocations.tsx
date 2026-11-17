@@ -29,7 +29,7 @@ export function InvitationLocations({ venues }: { venues: Venue[] }) {
             <TraditionalMotifDivider size="sm" />
           </div>
           <p className="mx-auto max-w-[56ch] font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033]">
-            We look forward to welcoming you at our heritage celebration venue in the historic royal city of Jaipur.
+            We look forward to welcoming you to celebrate with us in Kandukuru (Hyderabad) and Visakhapatnam.
           </p>
         </div>
 

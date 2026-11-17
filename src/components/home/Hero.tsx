@@ -35,7 +35,7 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
           ) : null}
           <HeroTextItem>
             <h1 id="hero-title" className="text-display text-dark-walnut">
-              {names.bride} <span className="text-primary italic">&amp;</span> {names.groom}
+              {names.groom} <span className="text-primary italic">&amp;</span> {names.bride}
             </h1>
           </HeroTextItem>
           <HeroTextItem>

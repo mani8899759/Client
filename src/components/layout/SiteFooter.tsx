@@ -18,9 +18,9 @@ export function SiteFooter({ wedding }: { wedding: WeddingSettings }) {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="font-serif text-[36px] leading-[1.1] text-soft-cream sm:text-[48px]">
-              {names.bride}
-              <span className="mx-3 text-champagne-gold italic">&amp;</span>
               {names.groom}
+              <span className="mx-3 text-champagne-gold italic">&amp;</span>
+              {names.bride}
             </p>
             <p className="mt-4 text-meta text-champagne-gold">{date ?? "Date to be announced"}</p>
             {wedding.footer_note ? <p className="mt-6 max-w-[42ch] text-support text-soft-border/80">{wedding.footer_note}</p> : null}

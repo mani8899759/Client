@@ -7,32 +7,39 @@ import { dateOnlyParts, formatDateOnly, formatDateTimeInZone } from "@/lib/utils
 
 describe("Authoritative Wedding Date Configuration & Countdown", () => {
   it("has the authoritative configuration values", () => {
-    expect(AUTHORITATIVE_WEDDING_CONFIG.bride).toBe("Priya");
-    expect(AUTHORITATIVE_WEDDING_CONFIG.groom).toBe("Arjun");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.bride).toBe("Sravika");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.groom).toBe("Manikanta");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.brideFormal).toBe("Chy. La. Sow. Lakshmi Sravika");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.groomFormal).toBe("Chy. Neela Manikanta");
     expect(AUTHORITATIVE_WEDDING_CONFIG.weddingDate).toBe("2026-12-13");
     expect(AUTHORITATIVE_WEDDING_CONFIG.weddingDateDisplay).toBe("December 13, 2026");
     expect(AUTHORITATIVE_WEDDING_CONFIG.weddingDay).toBe("Sunday");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.weddingTime).toBe("08:08 AM");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.weddingTimeConfirmed).toBe(true);
     expect(AUTHORITATIVE_WEDDING_CONFIG.timezone).toBe("Asia/Kolkata");
     expect(AUTHORITATIVE_WEDDING_CONFIG.timezoneOffset).toBe("UTC+05:30");
     expect(AUTHORITATIVE_WEDDING_CONFIG.ceremonyPeriod).toBe("Morning");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.exactCeremonyTime).toBe("08:08 AM");
   });
 
-  it("calculates midnight December 13, 2026 in Asia/Kolkata without time drift", () => {
-    // 2026-12-13T00:00:00+05:30 is 2026-12-12T18:30:00.000Z in UTC
+  it("calculates 08:08 AM December 13, 2026 in Asia/Kolkata without time drift", () => {
+    // 2026-12-13T08:08:00+05:30 is 2026-12-13T02:38:00.000Z in UTC
     const targetIso = AUTHORITATIVE_WEDDING_CONFIG.weddingDateIso;
-    expect(targetIso).toBe("2026-12-12T18:30:00.000Z");
+    expect(targetIso).toBe("2026-12-13T02:38:00.000Z");
 
     const targetTs = AUTHORITATIVE_WEDDING_CONFIG.targetTimestamp;
-    expect(targetTs).toBe(new Date("2026-12-13T00:00:00+05:30").getTime());
-    expect(targetTs).toBe(new Date("2026-12-12T18:30:00.000Z").getTime());
+    expect(targetTs).toBe(new Date("2026-12-13T08:08:00+05:30").getTime());
+    expect(targetTs).toBe(new Date("2026-12-13T02:38:00.000Z").getTime());
   });
 
   it("produces correct schedule and date labels from DEFAULT_WEDDING", () => {
     const schedule = weddingSchedule(DEFAULT_WEDDING);
     expect(schedule).not.toBeNull();
     expect(schedule?.dateOnlyLabel).toBe("December 13, 2026");
-    expect(schedule?.targetIso).toBe("2026-12-12T18:30:00.000Z");
+    expect(schedule?.dateLabel).toBe("December 13, 2026 · 8:08 am IST");
+    expect(schedule?.targetIso).toBe("2026-12-13T02:38:00.000Z");
     expect(schedule?.timezone).toBe("Asia/Kolkata");
+    expect(schedule?.timeConfirmed).toBe(true);
   });
 
   it("calculates countdown units accurately for a mocked current timestamp", () => {

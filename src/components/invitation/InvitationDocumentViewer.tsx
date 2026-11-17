@@ -89,7 +89,7 @@ export function InvitationDocumentViewer({ wedding }: { wedding: WeddingSettings
                 {/* Download */}
                 <a
                   href={pdfUrl ?? imgUrl ?? "#"}
-                  download={pdfUrl ? "Priya-Arjun-Wedding-Invitation.pdf" : "Priya-Arjun-Wedding-Invitation.jpg"}
+                  download={pdfUrl ? "Gudlas-Wedding-Invitation-Manikanta-Sravika.pdf" : "Gudlas-Wedding-Invitation-Manikanta-Sravika.jpg"}
                   className="inline-flex items-center gap-1 rounded-[6px] bg-[#8b1a1a] px-3.5 py-1.5 text-[12px] font-medium text-[#fdf5e6] shadow-xs hover:bg-[#721515]"
                 >
                   <Download className="size-3" />
@@ -137,7 +137,7 @@ export function InvitationDocumentViewer({ wedding }: { wedding: WeddingSettings
                   The formal ceremonial wedding invitation card will be published here. You can still explore the schedule, venues, and wedding story above.
                 </p>
                 <div className="mt-5 text-[12px] font-medium text-[#8b1a1a]">
-                  {dateLabel} · Jaipur, Rajasthan
+                  {dateLabel} · Hyderabad &amp; Visakhapatnam
                 </div>
               </div>
             )}
