@@ -19,7 +19,7 @@ export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
           id: m.id,
           url: mediaUrl(m.storage_path) ?? "/images/ai/gallery-01.webp",
           caption: m.caption ?? m.title ?? "Wedding Celebration",
-          alt: m.alt_text ?? "Manikanta & Sravika Wedding Celebration",
+          alt: m.alt_text ?? "Priya & Arjun Wedding Celebration",
         }))
       : AI_SLOTS.filter((s) => s.group === "gallery").map((s) => ({
           id: s.slot,

@@ -40,7 +40,7 @@ export function ContentForm({
           <AText name="bride_name" label="Bride's name" defaultValue={v(w.bride_name)} maxLength={80} required />
           <AText name="groom_name" label="Groom's name" defaultValue={v(w.groom_name)} maxLength={80} required />
           <AText name="monogram" label="Monogram" defaultValue={v(w.monogram)} maxLength={12} optionalLabel hint="e.g. P & A" />
-          <AText name="website_title" label="Website title" defaultValue={v(w.website_title)} maxLength={120} hint="e.g. Manikanta & Sravika" />
+          <AText name="website_title" label="Website title" defaultValue={v(w.website_title)} maxLength={120} hint="e.g. Priya & Arjun" />
           <AText name="website_subtitle" label="Website subtitle" defaultValue={v(w.website_subtitle)} maxLength={120} hint="e.g. Wedding Celebration" />
         </div>
       </Panel>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronUp, Music, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
-const MUTED_KEY = "wedding_invitation_music_muted";
+const MUTED_KEY = "priya_arjun_invitation_music_muted";
 
 export function InvitationAudioPlayer({
   audioUrl,

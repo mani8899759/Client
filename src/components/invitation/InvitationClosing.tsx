@@ -28,7 +28,7 @@ export function InvitationClosing({
 
   const defaultShareText =
     wedding.invitation_whatsapp_message ||
-    `You're warmly invited to celebrate the wedding of ${names.joined} on ${dateLabel}. We would love to have you with us!`;
+    `You're warmly invited to celebrate the wedding of ${names.bride} & ${names.groom} on ${dateLabel}. We would love to have you with us!`;
 
   const shareTextWithUrl = `${defaultShareText}\n${invitationUrl}`;
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareTextWithUrl)}`;
@@ -47,7 +47,7 @@ export function InvitationClosing({
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({
-          title: `${names.joined} — Gudla's Wedding Invitation`,
+          title: `${names.bride} & ${names.groom} — Wedding Invitation`,
           text: defaultShareText,
           url: invitationUrl,
         });
@@ -89,7 +89,7 @@ export function InvitationClosing({
             With Love,
           </p>
           <div className="mt-1 font-[family-name:var(--font-playfair)] text-[26px] font-bold tracking-wide text-[#8b1a1a] sm:text-[32px]">
-            {names.joined}
+            {names.bride} &amp; {names.groom}
           </div>
           <p className="mt-1 text-[13px] tracking-widest text-[#7b6a58] uppercase">
             {dateLabel}

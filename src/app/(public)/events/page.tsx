@@ -18,7 +18,7 @@ export default async function EventsPage() {
       <PageHeader
         eyebrow="Schedule"
         title="Wedding Celebrations"
-        intro="Join us as we celebrate every special moment for the wedding of Manikanta & Sravika."
+        intro="Join us as we celebrate every special moment leading up to the wedding of Priya & Arjun."
       >
         {events.length > 1 ? (
           <nav aria-label="Jump to event" className="mt-10 -mx-4 overflow-x-auto px-4 scrollbar-none">

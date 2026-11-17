@@ -115,11 +115,11 @@ export function CoupleSection({ wedding }: { wedding: WeddingSettings }) {
           <SectionHeading align="center" eyebrow="The Couple" title={<span id="couple-title">Two families, one celebration</span>} />
         </Reveal>
         <div className="mt-14 grid items-start gap-14 md:grid-cols-[1fr_auto_1fr] md:gap-8 lg:mt-20">
-          <Person role="The Groom" name={names.groom} intro={wedding.groom_intro} imageRef={groomRef} imageAlt={pickAlt(groomRef, wedding.groom_image_alt, names.groom)} delay={0} preset="slide-left" />
+          <Person role="The Bride" name={names.bride} intro={wedding.bride_intro} imageRef={brideRef} imageAlt={pickAlt(brideRef, wedding.bride_image_alt, names.bride)} delay={0} preset="slide-left" />
           <Reveal preset="scale-rotate" delay={0.15} className="hidden self-center font-serif text-[64px] text-champagne-gold italic md:block">
             <span aria-hidden>&amp;</span>
           </Reveal>
-          <Person role="The Bride" name={names.bride} intro={wedding.bride_intro} imageRef={brideRef} imageAlt={pickAlt(brideRef, wedding.bride_image_alt, names.bride)} delay={0.1} preset="slide-right" />
+          <Person role="The Groom" name={names.groom} intro={wedding.groom_intro} imageRef={groomRef} imageAlt={pickAlt(groomRef, wedding.groom_image_alt, names.groom)} delay={0.1} preset="slide-right" />
         </div>
       </Container>
     </Section>
