@@ -39,7 +39,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1–3. Header is in layout; Hero with Priya & Arjun, date and live countdown */}
+      {/* 1–3. Header is in layout; Hero with Manikanta & Sravika, date and live countdown */}
       <Hero wedding={wedding} app={app} />
 
       {/* 4. Welcome message */}

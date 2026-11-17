@@ -7,8 +7,8 @@ import { dateOnlyParts, formatDateOnly, formatDateTimeInZone } from "@/lib/utils
 
 describe("Authoritative Wedding Date Configuration & Countdown", () => {
   it("has the authoritative configuration values", () => {
-    expect(AUTHORITATIVE_WEDDING_CONFIG.bride).toBe("Priya");
-    expect(AUTHORITATIVE_WEDDING_CONFIG.groom).toBe("Arjun");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.bride).toBe("Sravika");
+    expect(AUTHORITATIVE_WEDDING_CONFIG.groom).toBe("Manikanta");
     expect(AUTHORITATIVE_WEDDING_CONFIG.weddingDate).toBe("2026-12-13");
     expect(AUTHORITATIVE_WEDDING_CONFIG.weddingDateDisplay).toBe("December 13, 2026");
     expect(AUTHORITATIVE_WEDDING_CONFIG.weddingDay).toBe("Sunday");

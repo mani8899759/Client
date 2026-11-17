@@ -4,21 +4,23 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { EventFeature } from "@/components/events/EventParts";
 import { EmptyState } from "@/components/feedback/States";
-import { getEvents } from "@/services/content";
+import { getEvents, getWeddingSettings } from "@/services/content";
 import { formatDateOnly } from "@/lib/utils/datetime";
+import { coupleNames } from "@/lib/utils/names";
 
 export const revalidate = 60;
 export const metadata: Metadata = { title: "Wedding Events" };
 
 export default async function EventsPage() {
-  const events = await getEvents();
+  const [events, wedding] = await Promise.all([getEvents(), getWeddingSettings()]);
+  const names = coupleNames(wedding);
 
   return (
     <>
       <PageHeader
         eyebrow="Schedule"
         title="Wedding Celebrations"
-        intro="Join us as we celebrate every special moment leading up to the wedding of Priya & Arjun."
+        intro={`Join us as we celebrate every special moment leading up to the wedding of ${names.joined}.`}
       >
         {events.length > 1 ? (
           <nav aria-label="Jump to event" className="mt-10 -mx-4 overflow-x-auto px-4 scrollbar-none">

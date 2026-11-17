@@ -25,7 +25,7 @@ describe("countdown maths", () => {
   });
 });
 
-describe("wedding schedule — Priya & Arjun, 13 December 2026, Asia/Kolkata", () => {
+describe("wedding schedule — Manikanta & Sravika, 13 December 2026, Asia/Kolkata", () => {
   const dateOnly = weddingSchedule(DEFAULT_WEDDING)!;
 
   it("targets the start of 13 December in India when no ceremony time is set", () => {

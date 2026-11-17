@@ -23,7 +23,7 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
 
   const names = coupleNames(wedding);
   const brideImg =
-    mediaUrl(pickImage(wedding.bride_image_path, "bride")) ?? "/images/ai/bride-detail.webp";
+    mediaUrl(pickImage(wedding.bride_image_path, "bride")) ?? "/images/sravika-bride.webp";
   const groomImg =
     mediaUrl(pickImage(wedding.groom_image_path, "groom")) ?? "/images/ai/groom-detail.webp";
 
@@ -170,6 +170,9 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             <p className="text-[12px] font-semibold tracking-[0.16em] text-[#8b1a1a] uppercase">
               The Groom
             </p>
+            <p className="mt-1 font-serif text-[14px] text-[#996515] italic">
+              Chy. Neela Manikanta
+            </p>
             {wedding.groom_intro ? (
               <p className="mt-2 max-w-[28ch] text-[13px] leading-relaxed text-[#7b6a58]">
                 {wedding.groom_intro}
@@ -201,6 +204,9 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             </h3>
             <p className="text-[12px] font-semibold tracking-[0.16em] text-[#8b1a1a] uppercase">
               The Bride
+            </p>
+            <p className="mt-1 font-serif text-[14px] text-[#996515] italic">
+              Chy. La. Sow. Lakshmi Sravika
             </p>
             {wedding.bride_intro ? (
               <p className="mt-2 max-w-[28ch] text-[13px] leading-relaxed text-[#7b6a58]">

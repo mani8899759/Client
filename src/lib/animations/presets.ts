@@ -1,6 +1,6 @@
 /**
  * Animation Presets and Motion Configurations
- * Designed for the Priya & Arjun wedding website and digital invitation.
+ * Designed for the Manikanta & Sravika wedding website and digital invitation.
  */
 
 export type AnimationPreset =

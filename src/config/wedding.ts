@@ -8,7 +8,9 @@ import { AUTHORITATIVE_WEDDING_CONFIG } from "@/lib/wedding-config";
 export const WEDDING_IDENTITY = {
   brideName: AUTHORITATIVE_WEDDING_CONFIG.bride,
   groomName: AUTHORITATIVE_WEDDING_CONFIG.groom,
-  websiteTitle: `${AUTHORITATIVE_WEDDING_CONFIG.bride} & ${AUTHORITATIVE_WEDDING_CONFIG.groom}`,
+  formalBrideName: AUTHORITATIVE_WEDDING_CONFIG.formalBride,
+  formalGroomName: AUTHORITATIVE_WEDDING_CONFIG.formalGroom,
+  websiteTitle: `${AUTHORITATIVE_WEDDING_CONFIG.groom} & ${AUTHORITATIVE_WEDDING_CONFIG.bride}`,
   websiteSubtitle: "Wedding Celebration",
   weddingDateIso: AUTHORITATIVE_WEDDING_CONFIG.weddingDateIso,
   weddingDateDisplay: AUTHORITATIVE_WEDDING_CONFIG.weddingDateDisplay,

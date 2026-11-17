@@ -16,8 +16,8 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   cta_secondary_label: "View Our Story",
   bride_intro: null,
   groom_intro: null,
-  bride_image_path: null,
-  bride_image_alt: null,
+  bride_image_path: "/images/sravika-bride.webp",
+  bride_image_alt: "Sravika — The Bride",
   groom_image_path: null,
   groom_image_alt: null,
   secondary_image_path: null,
@@ -51,12 +51,12 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   invitation_intro_heading: "Together With Our Families",
   invitation_intro_message:
     "We warmly invite you to join us as we celebrate the beginning of our new journey together. Your presence will make our special day even more memorable.",
-  invitation_family_names: null,
+  invitation_family_names: "Gudla & Padakanti Families",
   invitation_closing_heading: "Your Presence Would Mean the World to Us",
   invitation_closing_message:
     "We look forward to celebrating this special beginning with our family and friends. We would be delighted to have you with us.",
   invitation_whatsapp_message:
-    "You're warmly invited to celebrate the wedding of Priya & Arjun on December 13, 2026. We would love to have you with us!",
+    "You're warmly invited to celebrate the wedding of Manikanta & Sravika on December 13, 2026. We would love to have you with us!",
   invitation_music_path: "/audio/priya-arjun-wedding-music.m4a",
   invitation_music_title: "Traditional Wedding Celebration Music",
   invitation_music_enabled: true,

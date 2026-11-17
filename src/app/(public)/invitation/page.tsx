@@ -66,7 +66,7 @@ export default async function InvitationPage() {
             Invitation Coming Soon
           </h1>
           <p className="mt-3 font-[family-name:var(--font-serif)] text-[17px] text-[#5c4033]">
-            The official digital wedding invitation for Priya &amp; Arjun is being prepared and will be available shortly.
+            The official digital wedding invitation for {coupleNames(wedding).joined} is being prepared and will be available shortly.
           </p>
           <div className="mt-6">
             <Link

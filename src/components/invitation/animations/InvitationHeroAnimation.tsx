@@ -89,7 +89,7 @@ export function InvitationHeroAnimation({
           );
         }
 
-        // 2. Groom label & ARJUN move gently in from the left
+        // 2. Groom label & MANIKANTA move gently in from the left
         if (groomContainerRef.current) {
           revealTl.fromTo(
             groomContainerRef.current,
@@ -313,7 +313,7 @@ export function InvitationHeroAnimation({
 
           {/* Grand 3-Column Outward Flanking Layout: GROOM (Left) — & (Center) — BRIDE (Right) */}
           <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-[1400px] mx-auto">
-            {/* LEFT: ARJUN (Groom) — Spread towards the left flank */}
+            {/* LEFT: MANIKANTA (Groom) — Spread towards the left flank */}
             <div
               ref={groomContainerRef}
               className="justify-self-end text-right pr-4 sm:pr-8 md:pr-[clamp(30px,6vw,120px)] lg:pr-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
@@ -339,7 +339,7 @@ export function InvitationHeroAnimation({
               </span>
             </div>
 
-            {/* RIGHT: PRIYA (Bride) — Spread towards the right flank */}
+            {/* RIGHT: SRAVIKA (Bride) — Spread towards the right flank */}
             <div
               ref={brideContainerRef}
               className="justify-self-start text-left pl-4 sm:pl-8 md:pl-[clamp(30px,6vw,120px)] lg:pl-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"

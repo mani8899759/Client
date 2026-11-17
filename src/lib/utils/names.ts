@@ -4,11 +4,14 @@ import type { WeddingSettings } from "@/types/database";
 export function coupleNames(s: Pick<WeddingSettings, "bride_name" | "groom_name"> | null) {
   const bride = s?.bride_name?.trim() || null;
   const groom = s?.groom_name?.trim() || null;
+  const b = bride ?? PLACEHOLDER.bride;
+  const g = groom ?? PLACEHOLDER.groom;
   return {
-    bride: bride ?? PLACEHOLDER.bride,
-    groom: groom ?? PLACEHOLDER.groom,
+    bride: b,
+    groom: g,
     isPlaceholder: !bride || !groom,
-    joined: `${bride ?? PLACEHOLDER.bride} & ${groom ?? PLACEHOLDER.groom}`,
+    // The couple branding must read: MANIKANTA & SRAVIKA
+    joined: `${g} & ${b}`,
   };
 }
 
@@ -16,5 +19,5 @@ export function monogramOf(s: Pick<WeddingSettings, "bride_name" | "groom_name" 
   if (s?.monogram?.trim()) return s.monogram.trim();
   const b = s?.bride_name?.trim()?.[0];
   const g = s?.groom_name?.trim()?.[0];
-  return b && g ? `${b.toUpperCase()} & ${g.toUpperCase()}` : "B & G";
+  return g && b ? `${g.toUpperCase()} & ${b.toUpperCase()}` : "M & S";
 }

@@ -1,20 +1,22 @@
 /**
  * Single Authoritative Wedding Configuration
  *
- * Central source of truth for Priya & Arjun's Wedding Date & Countdown.
+ * Central source of truth for Manikanta & Sravika's Wedding Date & Identity.
  * All public pages, digital invitation, admin forms, and countdowns derive from this.
  */
 
 export const AUTHORITATIVE_WEDDING_CONFIG = {
-  bride: "Priya",
-  groom: "Arjun",
+  bride: "Sravika",
+  groom: "Manikanta",
+  formalBride: "Chy. La. Sow. Lakshmi Sravika",
+  formalGroom: "Chy. Neela Manikanta",
   weddingDate: "2026-12-13",
   weddingDateDisplay: "December 13, 2026",
   weddingDay: "Sunday",
   timezone: "Asia/Kolkata",
   timezoneOffset: "UTC+05:30",
   ceremonyPeriod: "Morning",
-  exactCeremonyTime: null as string | null, // Not yet confirmed
+  exactCeremonyTime: "08:08 AM",
   /**
    * Deterministic UTC ISO string representing midnight December 13, 2026 in Asia/Kolkata (UTC+05:30):
    * 2026-12-13T00:00:00+05:30 == 2026-12-12T18:30:00.000Z
