@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Gift } from "lucide-react";
+import { ArrowLeft, FileText, Gift } from "lucide-react";
 import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { weddingSchedule } from "@/lib/utils/wedding";
@@ -48,6 +48,20 @@ export function InvitationPageClient({
     : "/audio/priya-arjun-wedding-music.m4a";
   const invitationUrl = `${siteUrl}/invitation`;
 
+  // If visitor arrives with #invitation-card or #official-invitation, auto-open and scroll
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash;
+    if (hash === "#invitation-card" || hash === "#official-invitation") {
+      setIsOpened(true);
+      setMusicTrigger(true);
+      setTimeout(() => {
+        const el = document.getElementById("invitation-card");
+        el?.scrollIntoView({ behavior: "smooth" });
+      }, 400);
+    }
+  }, []);
+
   function handleStartOpen() {
     setMusicTrigger(true);
   }
@@ -76,13 +90,29 @@ export function InvitationPageClient({
           {wedding.bride_name} <span className="font-[family-name:var(--font-script)] text-[#8b1a1a]">&amp;</span> {wedding.groom_name}
         </div>
 
-        <Link
-          href="/register"
-          className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#8b1a1a] px-3.5 py-1.5 text-[12px] font-medium text-[#fdf5e6] shadow-2xs hover:bg-[#721515]"
-        >
-          <Gift className="size-3.5" />
-          <span className="hidden sm:inline">Win a Gift</span>
-        </Link>
+        <div className="flex items-center gap-2.5">
+          <a
+            href="#invitation-card"
+            onClick={() => {
+              if (!isOpened) {
+                setIsOpened(true);
+                setMusicTrigger(true);
+              }
+            }}
+            className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#d4a843] bg-[#fffcf7] px-3 py-1.5 text-[12px] font-medium text-[#8b1a1a] shadow-2xs hover:bg-[#d4a843]/15"
+          >
+            <FileText className="size-3.5" />
+            <span className="hidden xs:inline">Ceremonial Card</span>
+          </a>
+
+          <Link
+            href="/register"
+            className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#8b1a1a] px-3.5 py-1.5 text-[12px] font-medium text-[#fdf5e6] shadow-2xs hover:bg-[#721515]"
+          >
+            <Gift className="size-3.5" />
+            <span className="hidden sm:inline">Win a Gift</span>
+          </Link>
+        </div>
       </header>
 
       {/* Screen 1: Cover Experience */}

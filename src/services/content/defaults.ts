@@ -22,6 +22,8 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   groom_image_alt: null,
   secondary_image_path: null,
   secondary_image_alt: null,
+  invitation_pdf_path: "/documents/gudlas-wedding-invitation.pdf",
+  invitation_image_path: null,
   announcement: null,
   hero_heading: "Are getting married",
   hero_subheading: "With joyful hearts, we invite you to celebrate the beginning of our forever.",

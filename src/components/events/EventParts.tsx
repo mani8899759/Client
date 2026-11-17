@@ -194,6 +194,7 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
             invitationType={event.invitation_pdf_path ? "pdf" : "image"}
             variant="primary"
             size="md"
+            eventSpecific={true}
           />
           {directions ? (
             <ButtonLink href={directions} variant="filled" external>

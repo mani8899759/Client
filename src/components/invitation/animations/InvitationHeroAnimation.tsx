@@ -381,6 +381,15 @@ export function InvitationHeroAnimation({
             >
               Asia / Kolkata (IST)
             </p>
+
+            <div className="mt-4 flex items-center justify-center">
+              <a
+                href="#invitation-card"
+                className="inline-flex items-center gap-2 rounded-full border border-[#d4a843] bg-[#fffcf7]/85 px-6 py-2 text-[13px] font-semibold text-[#8b1a1a] shadow-xs backdrop-blur-xs transition hover:bg-[#8b1a1a] hover:text-[#fdf5e6]"
+              >
+                <span>📜 View Official Invitation Card</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

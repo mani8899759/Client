@@ -14,6 +14,7 @@ export function ViewInvitationButton({
   variant = "ghost",
   size = "md",
   className,
+  eventSpecific = false,
 }: {
   invitationUrl?: string | null;
   invitationType?: "pdf" | "image" | null;
@@ -21,13 +22,14 @@ export function ViewInvitationButton({
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
+  eventSpecific?: boolean;
 }) {
   const [imagePreviewOpen, setImagePreviewOpen] = useState(false);
 
   // If this is an event-specific invitation image/pdf on an individual event card
-  const isEventSpecific = Boolean(invitationUrl && (invitationUrl.includes("/events/") || invitationType));
+  const isEvent = Boolean(eventSpecific || (invitationUrl && invitationUrl.includes("/events/")));
 
-  if (isEventSpecific && invitationUrl) {
+  if (isEvent && invitationUrl) {
     const isPdf = invitationType === "pdf" || invitationUrl.toLowerCase().endsWith(".pdf") || invitationUrl.includes(".pdf?");
 
     return (
