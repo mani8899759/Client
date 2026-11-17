@@ -383,7 +383,7 @@ export function InvitationAdminForm({
                 kind="image"
                 defaultValue={w.invitation_gopuram_image_path}
                 ratio="1240/721"
-                hint="Upload a replacement transparent PNG or high-res artwork if desired. Default is priyaa-arjun-invitation-gopuram.png."
+                hint="Upload a replacement transparent PNG or high-res artwork if desired. Default is gopuram-illustration.png."
               />
             </div>
 
@@ -397,7 +397,7 @@ export function InvitationAdminForm({
               <div className="relative mx-auto mt-4 aspect-[1240/721] w-full max-w-[360px] overflow-hidden rounded-[8px] border border-[#d4a843]/60 bg-[#fdf5e6]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/priyaa-arjun-invitation-gopuram.png"
+                  src="/images/gopuram-illustration.png"
                   alt="Gopuram preview"
                   className="h-full w-full object-contain object-bottom"
                 />

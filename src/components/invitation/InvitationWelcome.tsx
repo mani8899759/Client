@@ -25,7 +25,7 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
   const brideImg =
     mediaUrl(pickImage(wedding.bride_image_path, "bride")) ?? "/images/sravika-bride.webp";
   const groomImg =
-    mediaUrl(pickImage(wedding.groom_image_path, "groom")) ?? "/images/ai/groom-detail.webp";
+    mediaUrl(pickImage(wedding.groom_image_path, "groom")) ?? "/images/manikanta-groom.webp";
 
   useEffect(() => {
     if (typeof window === "undefined") return;

@@ -18,8 +18,8 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   groom_intro: null,
   bride_image_path: "/images/sravika-bride.webp",
   bride_image_alt: "Sravika — The Bride",
-  groom_image_path: null,
-  groom_image_alt: null,
+  groom_image_path: "/images/manikanta-groom.webp",
+  groom_image_alt: "Manikanta — The Groom",
   secondary_image_path: null,
   secondary_image_alt: null,
   invitation_pdf_path: "/documents/gudlas-wedding-invitation.pdf",
@@ -50,8 +50,8 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   invitation_cover_image_path: null,
   invitation_intro_heading: "Together With Our Families",
   invitation_intro_message:
-    "We warmly invite you to join us as we celebrate the beginning of our new journey together. Your presence will make our special day even more memorable.",
-  invitation_family_names: "Gudla & Padakanti Families",
+    "With the blessings of Sri Gudla Venu Venkata Parameswara Reddy and Smt. Nagendra Lakshmi, we solicit your gracious presence with family and friends on the auspicious occasion of the marriage of their son, Chy. Neela Manikanta, with Chy. La. Sow. Lakshmi Sravika.",
+  invitation_family_names: "Sri Gudla Venu Venkata Parameswara Reddy & Smt. Nagendra Lakshmi",
   invitation_closing_heading: "Your Presence Would Mean the World to Us",
   invitation_closing_message:
     "We look forward to celebrating this special beginning with our family and friends. We would be delighted to have you with us.",
