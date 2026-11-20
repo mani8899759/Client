@@ -65,7 +65,7 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   invitation_section_countdown: true,
   invitation_section_story: true,
   invitation_section_events: true,
-  invitation_section_document: true,
+  invitation_section_document: false,
   invitation_section_gallery: true,
   invitation_section_livestream: true,
   invitation_section_venues: true,
