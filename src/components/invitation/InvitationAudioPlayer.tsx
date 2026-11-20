@@ -222,10 +222,10 @@ export function InvitationAudioPlayer({
         {m4aUrl ? <source src={m4aUrl} type="audio/mp4" /> : null}
       </audio>
 
-      {/* Floating Audio Controller */}
+      {/* Floating Audio Controller positioned right above bottom interest bar */}
       <aside
         aria-label="Wedding Invitation Background Music"
-        className="fixed right-4 bottom-5 z-40 flex flex-col items-end gap-2 sm:right-6 sm:bottom-6"
+        className="fixed right-4 bottom-18 z-40 flex flex-col items-end gap-2 sm:right-6 sm:bottom-20"
       >
         {/* Subtle Tap-to-Play prompt when browser blocks initial autoplay */}
         {mounted && autoplayBlocked && !isPlaying ? (
