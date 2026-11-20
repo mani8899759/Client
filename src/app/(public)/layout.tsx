@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SmoothScrollProvider } from "@/components/animations/SmoothScrollProvider";
+import { InvitationBottomInterestBar } from "@/components/invitation/InvitationBottomInterestBar";
 import { getWeddingSettings } from "@/services/content";
 import { coupleNames } from "@/lib/utils/names";
 import { mediaUrl } from "@/lib/storage/media";
@@ -24,6 +25,7 @@ export default async function PublicLayout({ children }: { children: React.React
         {children}
       </main>
       <SiteFooter wedding={wedding} />
+      <InvitationBottomInterestBar />
     </SmoothScrollProvider>
   );
 }

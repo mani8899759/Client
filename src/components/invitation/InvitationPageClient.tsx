@@ -19,7 +19,6 @@ import { InvitationLiveStream } from "./InvitationLiveStream";
 import { InvitationLocations } from "./InvitationLocations";
 import { InvitationGiftSection } from "./InvitationGiftSection";
 import { InvitationClosing } from "./InvitationClosing";
-import { InvitationBottomInterestBar } from "./InvitationBottomInterestBar";
 
 export function InvitationPageClient({
   wedding,
@@ -165,9 +164,6 @@ export function InvitationPageClient({
             <InvitationClosing wedding={wedding} invitationUrl={invitationUrl} />
           </main>
         </div>
-
-        {/* Fixed Bottom RSVP "I Am Interested" Bar with Tick Mark & Counter */}
-        {isOpened ? <InvitationBottomInterestBar /> : null}
 
         {/* Persistent Floating Music Controller */}
         <InvitationAudioPlayer
