@@ -58,7 +58,7 @@ export function InvitationStory({
                     alt={entry.image_alt || entry.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 400px"
-                    className="object-cover"
+                    className="object-cover object-[center_20%]"
                   />
                   <div className="absolute top-3 left-3 rounded-full bg-[#8b1a1a]/90 px-3 py-1 text-[11px] font-medium tracking-wider text-[#fdf5e6] uppercase">
                     Chapter 0{index + 1}

@@ -6,6 +6,7 @@ import type { WeddingSettings } from "@/types/database";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { remainingUntil } from "@/components/countdown/countdown-math";
 import { AUTHORITATIVE_WEDDING_CONFIG } from "@/lib/wedding-config";
+import { WeddingInterestButton } from "./WeddingInterestButton";
 
 export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
   const schedule = weddingSchedule(wedding);
@@ -77,8 +78,11 @@ export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
 
           <div className="flex items-center justify-center gap-2 text-[13px] text-[#7b6a58]">
             <Calendar className="size-4 text-[#8b1a1a]" />
-            <span>Ceremony in Jaipur, Rajasthan (IST)</span>
+            <span>Eco Villagio Resorts, Hyderabad · &apos;P&apos; Conventions, Visakhapatnam</span>
           </div>
+
+          {/* Interactive "I Am Interested" Button with Live Guest Counter */}
+          <WeddingInterestButton />
         </div>
       </div>
     </section>

@@ -94,7 +94,7 @@ export function InvitationGallery({ media }: { media: GalleryMedia[] }) {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, 500px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="absolute right-3 bottom-3 left-3 truncate text-left text-[12px] font-medium text-[#fffcf7] opacity-0 transition-opacity duration-300 group-hover:opacity-100">

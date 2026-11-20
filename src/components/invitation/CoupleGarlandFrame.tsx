@@ -15,7 +15,7 @@ export function CoupleGarlandFrame({
   const id = useId();
 
   return (
-    <div className={`relative flex items-center justify-center p-5 sm:p-7 ${className}`}>
+    <div className={`relative flex items-center justify-center p-3 xs:p-5 sm:p-7 ${className}`}>
       {/* Radiating Mango Leaf & Marigold SVG Wreath */}
       <svg
         viewBox="0 0 240 240"
@@ -68,7 +68,7 @@ export function CoupleGarlandFrame({
       </svg>
 
       {/* Portrait Content Slot */}
-      <div className="relative size-32 overflow-hidden rounded-full border-2 border-[#d4a843] shadow-[0_4px_20px_rgba(61,28,0,0.12)] sm:size-40 md:size-44">
+      <div className="relative size-26 xs:size-32 overflow-hidden rounded-full border-2 border-[#d4a843] shadow-[0_4px_20px_rgba(61,28,0,0.12)] sm:size-40 md:size-44">
         {children}
       </div>
     </div>

@@ -75,7 +75,7 @@ export function InvitationEvents({
                     alt={event.image_alt || event.name}
                     fill
                     sizes="(max-width: 640px) 100vw, 480px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/65 via-transparent to-transparent" />
                   <span className="absolute top-3 left-3 rounded-full border border-[#d4a843]/50 bg-[#8b1a1a]/95 px-3.5 py-1 text-[11px] font-semibold tracking-wider text-[#fdf5e6] uppercase shadow-xs">

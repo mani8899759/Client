@@ -165,17 +165,29 @@ export function InvitationOpeningAnimation({
             </p>
           </div>
 
-          {/* Couple Imagery Portrait Frame */}
-          <div className="relative mx-auto mt-6 aspect-[16/10] w-full max-w-[460px] overflow-hidden rounded-[10px] border-2 border-[#d4a843] shadow-md">
-            <Image
-              src={coverImageUrl}
-              alt={`${names.groom} and ${names.bride} wedding portrait`}
-              fill
-              sizes="(max-width: 640px) 100vw, 460px"
-              priority
-              className="object-cover object-[center_35%]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/50 via-transparent to-transparent" />
+          {/* Couple Imagery Portrait Frame - Responsive Mobile Portrait vs Desktop Landscape */}
+          <div className="relative mx-auto mt-6 aspect-[4/3] xs:aspect-[5/4] sm:aspect-[16/10] w-full max-w-[460px] overflow-hidden rounded-[10px] border-2 border-[#d4a843] shadow-md">
+            <picture className="absolute inset-0 h-full w-full">
+              {/* Mobile (<640px): Full vertical couple portrait with zero cropping */}
+              <source
+                media="(max-width: 639px)"
+                srcSet="/images/wedding-shoot/optimised/photo-05.webp"
+                type="image/webp"
+              />
+              {/* Desktop (>=640px): Standard cover image */}
+              <source
+                media="(min-width: 640px)"
+                srcSet={coverImageUrl}
+                type="image/webp"
+              />
+              <img
+                src={coverImageUrl}
+                alt={`${names.groom} and ${names.bride} wedding portrait`}
+                className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%]"
+                loading="eager"
+              />
+            </picture>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#3d1c00]/50 via-transparent to-transparent pointer-events-none" />
             <div className="absolute right-3.5 bottom-2.5 text-[11px] font-medium tracking-[0.14em] text-[#fffdf9] drop-shadow-sm uppercase">
               Hyderabad · Visakhapatnam
             </div>

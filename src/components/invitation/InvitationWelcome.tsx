@@ -151,8 +151,8 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
           </p>
         </div>
 
-        {/* Couple Profile Circles with South Indian Garland Frames */}
-        <div className="mt-12 flex flex-col items-center justify-center gap-8 sm:flex-row sm:gap-14 md:gap-20">
+        {/* Couple Profile Circles with South Indian Garland Frames - Side by side on mobile & desktop */}
+        <div className="mt-10 grid grid-cols-2 items-start justify-center gap-3 sm:flex sm:flex-row sm:items-center sm:gap-14 md:gap-20">
           {/* Groom Profile */}
           <div ref={groomCardRef} className="flex flex-col items-center">
             <CoupleGarlandFrame>
@@ -160,27 +160,27 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
                 src={groomImg}
                 alt={`${names.groom} - The Groom`}
                 fill
-                sizes="(max-width: 640px) 140px, 180px"
-                className="object-cover"
+                sizes="(max-width: 640px) 130px, 180px"
+                className="object-cover object-[center_15%]"
               />
             </CoupleGarlandFrame>
-            <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-[24px] font-bold text-[#3d1c00] sm:text-[28px]">
+            <h3 className="mt-2.5 font-[family-name:var(--font-playfair)] text-[18px] font-bold text-[#3d1c00] sm:mt-3 sm:text-[28px]">
               {names.groom}
             </h3>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[#8b1a1a] uppercase">
+            <p className="text-[10px] font-semibold tracking-[0.14em] text-[#8b1a1a] uppercase sm:text-[12px] sm:tracking-[0.16em]">
               The Groom
             </p>
-            <p className="mt-1 font-serif text-[14px] text-[#996515] italic">
+            <p className="mt-0.5 font-serif text-[11px] text-[#996515] italic sm:text-[14px]">
               Chy. Neela Manikanta
             </p>
             {wedding.groom_intro ? (
-              <p className="mt-2 max-w-[28ch] text-[13px] leading-relaxed text-[#7b6a58]">
+              <p className="mt-1.5 max-w-[28ch] text-[11px] leading-relaxed text-[#7b6a58] sm:mt-2 sm:text-[13px]">
                 {wedding.groom_intro}
               </p>
             ) : null}
           </div>
 
-          {/* Center Auspicious Ampersand */}
+          {/* Center Auspicious Ampersand for Desktop */}
           <div
             ref={ampersandRef}
             className="hidden sm:block font-[family-name:var(--font-script)] text-[44px] text-[#d4a843]"
@@ -195,21 +195,21 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
                 src={brideImg}
                 alt={`${names.bride} - The Bride`}
                 fill
-                sizes="(max-width: 640px) 140px, 180px"
-                className="object-cover"
+                sizes="(max-width: 640px) 130px, 180px"
+                className="object-cover object-[center_15%]"
               />
             </CoupleGarlandFrame>
-            <h3 className="mt-3 font-[family-name:var(--font-playfair)] text-[24px] font-bold text-[#3d1c00] sm:text-[28px]">
+            <h3 className="mt-2.5 font-[family-name:var(--font-playfair)] text-[18px] font-bold text-[#3d1c00] sm:mt-3 sm:text-[28px]">
               {names.bride}
             </h3>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[#8b1a1a] uppercase">
+            <p className="text-[10px] font-semibold tracking-[0.14em] text-[#8b1a1a] uppercase sm:text-[12px] sm:tracking-[0.16em]">
               The Bride
             </p>
-            <p className="mt-1 font-serif text-[14px] text-[#996515] italic">
+            <p className="mt-0.5 font-serif text-[11px] text-[#996515] italic sm:text-[14px]">
               Chy. La. Sow. Lakshmi Sravika
             </p>
             {wedding.bride_intro ? (
-              <p className="mt-2 max-w-[28ch] text-[13px] leading-relaxed text-[#7b6a58]">
+              <p className="mt-1.5 max-w-[28ch] text-[11px] leading-relaxed text-[#7b6a58] sm:mt-2 sm:text-[13px]">
                 {wedding.bride_intro}
               </p>
             ) : null}

@@ -62,15 +62,28 @@ export function HeroMedia({
             aria-label={alt}
           />
         ) : (
-          <ImageFrame
-            mediaRef={imageRef}
-            alt={alt}
-            fill
-            sizes="(min-width: 1440px) 1360px, 100vw"
-            imageClassName="object-cover object-[center_30%]"
-            placeholderLabel="Hero photograph"
-            placeholderHint="Upload the couple's main photograph in Admin › Content"
-          />
+          <div className="relative h-full w-full">
+            <picture className="absolute inset-0 h-full w-full">
+              {/* Mobile (<640px): Gorgeous full vertical portrait of Manikanta & Sravika */}
+              <source
+                media="(max-width: 639px)"
+                srcSet="/images/wedding-shoot/optimised/photo-05.webp"
+                type="image/webp"
+              />
+              {/* Desktop / Laptop (>=640px): Wide landscape portrait */}
+              <source
+                media="(min-width: 640px)"
+                srcSet={imageUrl || "/images/wedding-shoot/optimised/photo-13.webp"}
+                type="image/webp"
+              />
+              <img
+                src={imageUrl || "/images/wedding-shoot/optimised/photo-13.webp"}
+                alt={alt}
+                className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%]"
+                loading="eager"
+              />
+            </picture>
+          </div>
         )}
       </motion.div>
     </motion.div>

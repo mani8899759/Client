@@ -44,6 +44,7 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
               alt={pickAlt(ref, wedding.welcome_image_alt, "The couple")}
               ratio="4/5"
               sizes="(min-width: 1024px) 40vw, 100vw"
+              imageClassName="object-cover object-[center_20%]"
               placeholderLabel="Couple photograph"
               placeholderHint="Upload in Admin › Homepage"
             />
@@ -94,6 +95,7 @@ function Person({
         alt={imageAlt}
         ratio="4/5"
         sizes="(min-width: 768px) 30vw, 80vw"
+        imageClassName="object-cover object-[center_20%]"
         placeholderLabel={`${role} photograph`}
         className="w-full max-w-[360px]"
       />
