@@ -28,6 +28,16 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
     <section aria-labelledby="hero-title" className="pt-10 pb-16 sm:pt-14 lg:pt-16 lg:pb-24">
       <Container width="wide">
         <HeroText>
+          <HeroTextItem>
+            <div className="mb-2 sm:mb-3">
+              <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-muted-gold">
+                {wedding.family_heading || "Gudla & Padakanti Families"}
+              </p>
+              <p className="mt-0.5 font-serif text-[13px] xs:text-[14px] sm:text-[15px] italic text-secondary-text">
+                cordially invite you to celebrate
+              </p>
+            </div>
+          </HeroTextItem>
           {wedding.announcement ? (
             <HeroTextItem>
               <p className="mb-4 text-meta text-muted-gold sm:mb-6">{wedding.announcement}</p>

@@ -9,6 +9,7 @@ import {
   WelcomeSection,
 } from "@/components/home/Sections";
 import { WatchCelebrationLiveSection } from "@/components/home/WatchCelebrationLiveSection";
+import { PhotoAccessSection } from "@/components/home/PhotoAccessSection";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import {
   getAppSettings,
@@ -39,25 +40,26 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1–3. Header is in layout; Hero with Manikanta & Sravika, date and live countdown */}
+      {/* 1. Homepage Hero with Manikanta & Sravika, Family Branding, date and live countdown */}
       <Hero wedding={wedding} app={app} />
 
-      {/* 4. Welcome message */}
+      {/* 2. Welcome message & Couple introduction */}
       <WelcomeSection wedding={wedding} />
-
-      {/* 5. Couple introduction */}
       <CoupleSection wedding={wedding} />
 
-      {/* 6. Our Story */}
+      {/* 3. Our Story */}
       <StoryPreviewSection wedding={wedding} entries={story} />
 
-      {/* 7. Wedding Events */}
+      {/* 4. Wedding Events */}
       <EventsPreviewSection events={events} />
 
-      {/* 8. Photo Gallery */}
+      {/* 5. Photo Gallery */}
       <GalleryPreviewSection media={gallery} />
 
-      {/* 9. Watch Our Celebration Live — directly after Gallery */}
+      {/* 6. Wedding Venue / Locations and Get Directions */}
+      <VenuePreviewSection wedding={wedding} venues={venues} />
+
+      {/* 7. YouTube Live Wedding Video */}
       {app.live_section_visible ? (
         <WatchCelebrationLiveSection
           stream={featuredStream}
@@ -66,10 +68,10 @@ export default async function HomePage() {
         />
       ) : null}
 
-      {/* 10. Wedding Locations and Get Directions */}
-      <VenuePreviewSection wedding={wedding} venues={venues} />
+      {/* 8. Access Your Wedding Photos — NEW SECTION */}
+      <PhotoAccessSection wedding={wedding} />
 
-      {/* 11–12. Win a Special Gift CTA section & Lucky Draw verification */}
+      {/* 9. Win a Special Gift CTA section & Lucky Draw verification */}
       <LuckyDrawCtaSection app={app} wedding={wedding} />
     </>
   );

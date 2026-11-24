@@ -72,6 +72,21 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   invitation_section_gift_draw: true,
   invitation_gopuram_enabled: false,
   invitation_gopuram_image_path: null,
+  groom_family_name: "Gudla",
+  bride_family_name: "Padakanti",
+  family_heading: "Gudla & Padakanti Families",
+  family_invitation_message:
+    "Together with the blessings of our families, we cordially invite you to celebrate the wedding of Manikanta & Sravika.",
+  photo_access_enabled: true,
+  photo_access_heading: "Your Wedding Memories",
+  photo_access_subheading: "Relive the Beautiful Moments",
+  photo_access_description:
+    "Be part of our celebration all over again. Explore the beautiful photographs captured during our wedding celebrations and find the memories you shared with us.",
+  photo_access_url: "https://snapdiaries.ve.ai/gallery/manikanta-sravika",
+  photo_access_cta_label: "View Wedding Photos",
+  photo_access_supporting_text:
+    "Access the complete wedding photo collection through our official photo gallery.",
+  photo_access_qr_visible: true,
 };
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {

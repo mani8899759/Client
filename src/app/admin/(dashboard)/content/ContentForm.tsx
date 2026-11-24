@@ -31,7 +31,7 @@ export function ContentForm({
   weddingEndLocal: string;
 }) {
   const socials = [...w.social_links, ...Array.from({ length: 6 }, () => ({ label: "", url: "" }))].slice(0, 6);
-  const v = (x: string | null) => x ?? "";
+  const v = (x: string | null | undefined) => x ?? "";
 
   return (
     <ActionForm action={updateWebsiteContent} className="flex flex-col gap-6">
@@ -42,6 +42,47 @@ export function ContentForm({
           <AText name="monogram" label="Monogram" defaultValue={v(w.monogram)} maxLength={12} optionalLabel hint="e.g. M & S" />
           <AText name="website_title" label="Website title" defaultValue={v(w.website_title)} maxLength={120} hint="e.g. Manikanta & Sravika" />
           <AText name="website_subtitle" label="Website subtitle" defaultValue={v(w.website_subtitle)} maxLength={120} hint="e.g. Wedding Celebration" />
+        </div>
+      </Panel>
+
+      <Panel
+        title="Family branding & invitation"
+        description="Display both groom's and bride's family identities on the wedding website, hero, and invitation headers."
+      >
+        <div className="grid gap-5 sm:grid-cols-2">
+          <AText
+            name="groom_family_name"
+            label="Groom's family name"
+            defaultValue={v(w.groom_family_name) || "Gudla"}
+            maxLength={80}
+            hint="e.g. Gudla"
+          />
+          <AText
+            name="bride_family_name"
+            label="Bride's family name"
+            defaultValue={v(w.bride_family_name) || "Padakanti"}
+            maxLength={80}
+            hint="e.g. Padakanti"
+          />
+          <AText
+            name="family_heading"
+            label="Family invitation branding heading"
+            defaultValue={v(w.family_heading) || "Gudla & Padakanti Families"}
+            maxLength={160}
+            className="sm:col-span-2"
+            hint='e.g. "Gudla & Padakanti Families"'
+          />
+          <AArea
+            name="family_invitation_message"
+            label="Family invitation message"
+            defaultValue={
+              v(w.family_invitation_message) ||
+              "Together with the blessings of our families, we cordially invite you to celebrate the wedding of Manikanta & Sravika."
+            }
+            maxLength={1000}
+            rows={3}
+            className="sm:col-span-2"
+          />
         </div>
       </Panel>
 

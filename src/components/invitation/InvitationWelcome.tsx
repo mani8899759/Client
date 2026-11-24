@@ -139,15 +139,16 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             Meet The Couple
           </h2>
 
-          {wedding.invitation_family_names ? (
-            <p className="mt-2 text-[14px] tracking-wide text-[#7b6a58]">
-              {wedding.invitation_family_names}
+          <div className="mt-2.5">
+            <p className="font-sans text-[12px] sm:text-[14px] font-semibold tracking-[0.2em] uppercase text-[#8b1a1a]">
+              {wedding.family_heading || "Gudla & Padakanti Families"}
             </p>
-          ) : null}
+          </div>
 
-          <p className="mx-auto mt-4 max-w-[56ch] font-[family-name:var(--font-serif)] text-[18px] leading-relaxed text-[#5c4033] sm:text-[21px]">
-            {wedding.invitation_intro_message ||
-              "With the blessings of our families, we warmly invite you to celebrate the beginning of our new journey together. Your presence will make this special occasion even more memorable."}
+          <p className="mx-auto mt-4 max-w-[58ch] font-[family-name:var(--font-serif)] text-[18px] leading-relaxed text-[#5c4033] sm:text-[21px]">
+            {wedding.family_invitation_message ||
+              wedding.invitation_intro_message ||
+              "Together with the blessings of our families, we cordially invite you to celebrate the wedding of Manikanta & Sravika."}
           </p>
         </div>
 
@@ -170,9 +171,14 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             <p className="text-[10px] font-semibold tracking-[0.14em] text-[#8b1a1a] uppercase sm:text-[12px] sm:tracking-[0.16em]">
               The Groom
             </p>
-            <p className="mt-0.5 font-serif text-[11px] text-[#996515] italic sm:text-[14px]">
+            <p className="mt-0.5 font-serif text-[12px] text-[#996515] italic sm:text-[15px]">
               Chy. Neela Manikanta
             </p>
+            <div className="mt-2.5 rounded-[8px] border border-[#d4a843]/40 bg-[#fffcf7]/90 px-3 py-2 text-[11px] leading-snug text-[#5c4033] sm:text-[13px] text-center max-w-[220px]">
+              <p className="text-[10px] font-semibold tracking-wider uppercase text-[#8b1a1a]">Son of</p>
+              <p className="mt-0.5 font-medium text-[#3d1c00]">Sri Gudla Venu Venkata Parameswara Reddy</p>
+              <p className="text-[#5c4033]">&amp; Smt. Nagendra Lakshmi</p>
+            </div>
             {wedding.groom_intro ? (
               <p className="mt-1.5 max-w-[28ch] text-[11px] leading-relaxed text-[#7b6a58] sm:mt-2 sm:text-[13px]">
                 {wedding.groom_intro}
@@ -205,9 +211,14 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             <p className="text-[10px] font-semibold tracking-[0.14em] text-[#8b1a1a] uppercase sm:text-[12px] sm:tracking-[0.16em]">
               The Bride
             </p>
-            <p className="mt-0.5 font-serif text-[11px] text-[#996515] italic sm:text-[14px]">
+            <p className="mt-0.5 font-serif text-[12px] text-[#996515] italic sm:text-[15px]">
               Chy. La. Sow. Lakshmi Sravika
             </p>
+            <div className="mt-2.5 rounded-[8px] border border-[#d4a843]/40 bg-[#fffcf7]/90 px-3 py-2 text-[11px] leading-snug text-[#5c4033] sm:text-[13px] text-center max-w-[220px]">
+              <p className="text-[10px] font-semibold tracking-wider uppercase text-[#8b1a1a]">Daughter of</p>
+              <p className="mt-0.5 font-medium text-[#3d1c00]">Smt. Padakanti Saroja</p>
+              <p className="text-[#5c4033]">Wife of late Bhrahma Chari</p>
+            </div>
             {wedding.bride_intro ? (
               <p className="mt-1.5 max-w-[28ch] text-[11px] leading-relaxed text-[#7b6a58] sm:mt-2 sm:text-[13px]">
                 {wedding.bride_intro}

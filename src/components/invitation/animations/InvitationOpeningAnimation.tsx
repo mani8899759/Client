@@ -151,8 +151,18 @@ export function InvitationOpeningAnimation({
               <span className="h-px w-14 bg-gradient-to-l from-transparent via-[#d4a843] to-[#d4a843]" />
             </div>
 
+            {/* Family Invitation Branding */}
+            <div className="mb-2">
+              <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] font-semibold tracking-[0.22em] text-[#996515] uppercase">
+                {wedding.family_heading || "Gudla & Padakanti Families"}
+              </p>
+              <p className="mt-0.5 font-serif text-[12px] sm:text-[14px] italic text-[#5c4033]">
+                cordially invite you to celebrate the wedding of
+              </p>
+            </div>
+
             {/* Prominent Couple Names */}
-            <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-[32px] xs:text-[40px] font-bold tracking-tight text-[#8b1a1a] sm:text-[52px] lg:text-[58px]">
+            <h1 className="mt-1 font-[family-name:var(--font-playfair)] text-[32px] xs:text-[40px] font-bold tracking-tight text-[#8b1a1a] sm:text-[52px] lg:text-[58px]">
               {names.groom}{" "}
               <span className="font-[family-name:var(--font-script)] font-normal text-[#d4a843]">
                 &amp;

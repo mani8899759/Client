@@ -15,6 +15,10 @@ const fields = <T extends z.ZodRawShape>(schema: z.ZodObject<T>, fd: FormData) =
 const contentSchema = z.object({
   bride_name: z.string({ error: "Enter the bride's name." }).min(1, "Enter the bride's name.").max(80),
   groom_name: z.string({ error: "Enter the groom's name." }).min(1, "Enter the groom's name.").max(80),
+  groom_family_name: opt(80),
+  bride_family_name: opt(80),
+  family_heading: opt(160),
+  family_invitation_message: opt(1000),
   website_title: opt(120),
   website_subtitle: opt(120),
   monogram: opt(12),
@@ -107,6 +111,16 @@ const homepageSchema = z.object({
   bride_image_alt: opt(200),
   groom_image_alt: opt(200),
   secondary_image_alt: opt(200),
+  photo_access_heading: opt(160),
+  photo_access_subheading: opt(160),
+  photo_access_description: opt(1000),
+  photo_access_url: z
+    .string({ error: "Enter the external photo gallery URL." })
+    .url("Enter a valid URL.")
+    .regex(/^https:\/\//, "URL must start with https://")
+    .nullable(),
+  photo_access_cta_label: opt(80),
+  photo_access_supporting_text: opt(300),
 });
 
 const HOMEPAGE_MEDIA = [
@@ -128,8 +142,12 @@ export async function updateHomepage(_: ActionState, fd: FormData): Promise<Acti
       if (!r.ok) return fail("Invalid media reference.", { [key]: ["Please upload the file again."] });
       media[key] = r.value;
     }
+    const boolFields = {
+      photo_access_enabled: fd.get("photo_access_enabled") === "on",
+      photo_access_qr_visible: fd.get("photo_access_qr_visible") === "on",
+    };
     const { data: before } = await supabase.from("wedding_settings").select("*").single<WeddingSettings>();
-    const update = { ...parsed.data, ...media };
+    const update = { ...parsed.data, ...media, ...boolFields };
     const { error } = await supabase.from("wedding_settings").update(update).eq("id", true);
     if (error) return fail(friendlyDbError(error));
     await removeMedia(supabase, replacedRefs(before, update, [...HOMEPAGE_MEDIA]));

@@ -11,6 +11,8 @@ const fields = <T extends z.ZodRawShape>(schema: z.ZodObject<T>, fd: FormData) =
   schema.safeParse(Object.fromEntries(Object.keys(schema.shape).map((k) => [k, str(fd, k)])));
 
 const invitationSchema = z.object({
+  family_heading: opt(160),
+  family_invitation_message: opt(1000),
   invitation_cover_heading: opt(120),
   invitation_cover_subheading: opt(160),
   invitation_intro_heading: opt(120),

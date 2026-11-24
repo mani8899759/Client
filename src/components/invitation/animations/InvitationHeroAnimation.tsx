@@ -293,7 +293,7 @@ export function InvitationHeroAnimation({
           className="relative w-full text-center will-change-transform"
         >
           {/* Top: Auspicious Invocation Header */}
-          <div className="mb-4 sm:mb-8">
+          <div className="mb-3 sm:mb-6">
             <p
               ref={invocationRef}
               className="font-[family-name:var(--font-script)] text-[30px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[38px]"
@@ -308,6 +308,16 @@ export function InvitationHeroAnimation({
               <span className="h-px w-12 bg-[#d4a843]" />
               <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
               <span className="h-px w-12 bg-[#d4a843]" />
+            </div>
+
+            {/* Family Invitation Branding */}
+            <div className="mt-2">
+              <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
+                {wedding.family_heading || "Gudla & Padakanti Families"}
+              </p>
+              <p className="mt-0.5 font-serif text-[12px] sm:text-[14px] italic text-[#5c4033] drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
+                cordially invite you to celebrate
+              </p>
             </div>
           </div>
 

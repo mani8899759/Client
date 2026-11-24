@@ -130,6 +130,13 @@ export function InvitationAdminForm({
         <div className="flex flex-col gap-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <AText
+              name="family_heading"
+              label="Family branding heading"
+              defaultValue={v(w.family_heading) || "Gudla & Padakanti Families"}
+              maxLength={160}
+              hint='e.g. "Gudla & Padakanti Families"'
+            />
+            <AText
               name="invitation_intro_heading"
               label="Introductory heading"
               defaultValue={v(w.invitation_intro_heading) || "Together With Our Families"}
@@ -137,13 +144,25 @@ export function InvitationAdminForm({
             />
             <AText
               name="invitation_family_names"
-              label="Family names or parents (optional)"
+              label="Formal family / parents note (optional)"
               defaultValue={v(w.invitation_family_names)}
               maxLength={400}
               optionalLabel
-              hint="e.g. Daughter of Mr. & Mrs. Sharma & Son of Mr. & Mrs. Verma"
+              className="sm:col-span-2"
+              hint="e.g. Sri Gudla Venu Venkata Parameswara Reddy & Smt. Nagendra Lakshmi"
             />
           </div>
+
+          <AArea
+            name="family_invitation_message"
+            label="Family invitation message"
+            defaultValue={
+              v(w.family_invitation_message) ||
+              "Together with the blessings of our families, we cordially invite you to celebrate the wedding of Manikanta & Sravika."
+            }
+            maxLength={1000}
+            rows={2}
+          />
 
           <AArea
             name="invitation_intro_message"

@@ -17,6 +17,7 @@ export default async function PublicLayout({ children }: { children: React.React
       <SiteHeader
         brand={wedding.website_title ?? coupleNames(wedding).joined}
         coupleLabel={coupleNames(wedding).joined}
+        familyHeading={wedding.family_heading ?? "Gudla & Padakanti Families"}
         ctaLabel={wedding.cta_primary_label ?? "Win a Special Gift"}
         invitationUrl={invitationUrl}
         invitationType={invitationType}

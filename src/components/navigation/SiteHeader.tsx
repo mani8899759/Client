@@ -16,12 +16,14 @@ export function isActivePath(pathname: string, href: string) {
 export function SiteHeader({
   brand,
   coupleLabel,
+  familyHeading,
   ctaLabel,
   invitationUrl,
   invitationType,
 }: {
   brand: string;
   coupleLabel: string;
+  familyHeading?: string | null;
   ctaLabel: string;
   invitationUrl?: string | null;
   invitationType?: "pdf" | "image" | null;
@@ -57,9 +59,16 @@ export function SiteHeader({
           className="group flex flex-1 min-w-0 items-center overflow-hidden"
           aria-label={`${coupleLabel} — home`}
         >
-          <span className="truncate font-serif text-[20px] xs:text-[22px] sm:text-[26px] leading-none text-dark-walnut transition-colors group-hover:text-primary">
-            {brand}
-          </span>
+          <div className="flex flex-col min-w-0">
+            {familyHeading ? (
+              <span className="hidden xl:inline-block font-sans text-[10px] tracking-[0.16em] uppercase text-muted-gold leading-tight">
+                {familyHeading}
+              </span>
+            ) : null}
+            <span className="truncate font-serif text-[20px] xs:text-[22px] sm:text-[26px] leading-none text-dark-walnut transition-colors group-hover:text-primary">
+              {brand}
+            </span>
+          </div>
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">
@@ -99,6 +108,7 @@ export function SiteHeader({
           <ResponsiveNavigation
             pathname={pathname}
             brand={brand}
+            familyHeading={familyHeading}
             ctaLabel={ctaLabel}
             invitationUrl={invitationUrl}
             invitationType={invitationType}

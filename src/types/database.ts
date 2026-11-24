@@ -83,6 +83,18 @@ export interface WeddingSettings {
   invitation_section_gift_draw?: boolean;
   invitation_gopuram_enabled?: boolean;
   invitation_gopuram_image_path?: string | null;
+  groom_family_name?: string | null;
+  bride_family_name?: string | null;
+  family_heading?: string | null;
+  family_invitation_message?: string | null;
+  photo_access_enabled?: boolean;
+  photo_access_heading?: string | null;
+  photo_access_subheading?: string | null;
+  photo_access_description?: string | null;
+  photo_access_url?: string | null;
+  photo_access_cta_label?: string | null;
+  photo_access_supporting_text?: string | null;
+  photo_access_qr_visible?: boolean;
   updated_at?: string;
 }
 
