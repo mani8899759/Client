@@ -25,7 +25,7 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
   const invitationType = wedding.invitation_pdf_path ? "pdf" : wedding.invitation_image_path ? "image" : null;
 
   return (
-    <section aria-labelledby="hero-title" className="pt-10 pb-16 sm:pt-14 lg:pt-16 lg:pb-24">
+    <section aria-labelledby="hero-title" className="pt-10 pb-4 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-24">
       <Container width="wide">
         <HeroText>
           <HeroTextItem>

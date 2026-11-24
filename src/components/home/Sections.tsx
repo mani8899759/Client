@@ -16,6 +16,8 @@ import { weddingSchedule } from "@/lib/utils/wedding";
 import { pickAlt, pickImage } from "@/lib/storage/imagery";
 import { presentAiAssets } from "@/config/ai-assets";
 import { cn } from "@/lib/utils/cn";
+import { shuffleArray } from "@/lib/utils/shuffle";
+import { WEDDING_SHOOT_PHOTOS } from "@/config/wedding-shoot";
 import type { VenueWithEvents } from "@/services/content";
 import type { AppSettings, GalleryMedia, LiveStream, StoryEntry, WeddingEvent, WeddingSettings } from "@/types/database";
 
@@ -35,7 +37,7 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
   const ref = pickImage(wedding.welcome_image_path, "couple-editorial-portrait");
   const schedule = weddingSchedule(wedding);
   return (
-    <Section labelledBy="welcome-title" className="pt-24! sm:pt-28! lg:pt-32!">
+    <Section labelledBy="welcome-title" className="pt-4 sm:pt-24 lg:pt-32">
       <Container width="wide">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal preset="slide-left" className="lg:col-span-5">
@@ -51,8 +53,12 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
           </Reveal>
           <Reveal preset="slide-right" delay={0.12} className="lg:col-span-6 lg:col-start-7">
             <Eyebrow>Welcome</Eyebrow>
-            <h2 id="welcome-title" className="mt-4 text-h1 text-balance text-dark-walnut sm:text-[36px] sm:leading-[1.12]">
-              {wedding.welcome_title ?? "Welcome to our wedding celebration"}
+            <h2
+              id="welcome-title"
+              className="mt-4 font-serif text-[28px] xs:text-[32px] sm:text-[36px] font-normal leading-[1.18] sm:leading-[1.12] text-dark-walnut text-balance"
+            >
+              <span className="block sm:inline">Gudla &amp; Padakanti</span>{" "}
+              <span className="block sm:inline">Families</span>
             </h2>
             {wedding.welcome_message ? <Paragraphs text={wedding.welcome_message} className="mt-6 text-body text-secondary-text" /> : null}
             {wedding.invitation_message ? (
@@ -223,27 +229,31 @@ const GALLERY_LAYOUT = [
 ];
 
 export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
-  // Published gallery items first; authentic shoot photos fill the preview if needed.
-  const items: Array<{ id: string; ref: string | null; alt: string }> = media.map((m) => ({
-    id: m.id,
-    ref: m.storage_path,
-    alt: m.alt_text ?? m.title ?? "Wedding photograph",
+  // Published gallery items and authentic shoot photos shuffled fresh on each page load
+  const shootFallbacks: Array<{ id: string; ref: string | null; alt: string }> = WEDDING_SHOOT_PHOTOS.map((p) => ({
+    id: p.id,
+    ref: p.webp,
+    alt: p.alt || p.caption || "Wedding photograph",
   }));
-  const fallbackPhotos = [
-    { id: "shoot-13", ref: "/images/wedding-shoot/optimised/photo-13.webp", alt: "Manikanta & Sravika — Together in Love" },
-    { id: "shoot-05", ref: "/images/wedding-shoot/optimised/photo-05.webp", alt: "Manikanta & Sravika — Couple Portrait" },
-    { id: "shoot-06", ref: "/images/wedding-shoot/optimised/photo-06.webp", alt: "Manikanta & Sravika — Ceremonial Elegance" },
-    { id: "shoot-01", ref: "/images/wedding-shoot/optimised/photo-01.webp", alt: "Manikanta & Sravika — Golden Memories" },
-    { id: "shoot-03", ref: "/images/wedding-shoot/optimised/photo-03.webp", alt: "Manikanta & Sravika — Pre-Wedding Walk" },
-    { id: "shoot-08", ref: "/images/wedding-shoot/optimised/photo-08.webp", alt: "Manikanta & Sravika — Cherished Moments" },
-  ];
-  if (items.length < 6) {
-    for (const p of fallbackPhotos) {
-      if (items.length >= 6) break;
-      if (!items.some((i) => i.ref === p.ref)) items.push(p);
+
+  const initialList: Array<{ id: string; ref: string | null; alt: string }> = media.length
+    ? media.map((m) => ({
+        id: m.id,
+        ref: m.storage_path,
+        alt: m.alt_text ?? m.title ?? "Wedding photograph",
+      }))
+    : shootFallbacks;
+
+  // Add remaining shoot photos if list is short
+  for (const p of shootFallbacks) {
+    if (!initialList.some((i) => i.ref === p.ref)) {
+      initialList.push(p);
     }
   }
-  const slots = GALLERY_LAYOUT.slice(0, Math.max(3, Math.min(items.length, 6)));
+
+  // Shuffle photos on each fresh load
+  const shuffledItems = shuffleArray(initialList);
+  const slots = GALLERY_LAYOUT.slice(0, Math.max(3, Math.min(shuffledItems.length, 6)));
   return (
     <Section labelledBy="gallery-preview-title">
       <Container width="wide">
@@ -255,7 +265,7 @@ export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
         </Reveal>
         <div className="mt-12 grid grid-cols-12 gap-3 sm:gap-4 lg:mt-16 lg:gap-5">
           {slots.map((cls, i) => {
-            const m = items[i];
+            const m = shuffledItems[i];
             return (
               <Reveal key={m?.id ?? `slot-${i}`} preset="zoom-reveal" delay={i * 0.06} className={cn("relative", cls)}>
                 <Link href="/gallery" className="group block h-full w-full" aria-label={m?.alt ?? "Open the gallery"} tabIndex={m ? 0 : -1}>

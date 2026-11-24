@@ -4,15 +4,16 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { GalleryExperience } from "@/components/gallery/GalleryExperience";
 import { getGalleryCategories, getGalleryPage } from "@/services/content";
 import { WEDDING_SHOOT_PHOTOS } from "@/config/wedding-shoot";
+import { shuffleArray } from "@/lib/utils/shuffle";
 import type { GalleryMedia } from "@/types/database";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Gallery" };
 
 export default async function GalleryPage() {
   const [categories, first] = await Promise.all([getGalleryCategories(), getGalleryPage({})]);
   // Use published real gallery media from Supabase, or authentic shoot photos as static fallback
-  const items: GalleryMedia[] = first.items.length
+  const rawItems: GalleryMedia[] = first.items.length
     ? first.items
     : WEDDING_SHOOT_PHOTOS.map((p, i) => ({
         id: p.id,
@@ -34,6 +35,10 @@ export default async function GalleryPage() {
         is_placeholder: false,
         created_at: "",
       }));
+
+  // Shuffle photos freshly on each new page visit/load using Fisher-Yates
+  const items = shuffleArray(rawItems);
+
   return (
     <>
       <PageHeader eyebrow="Photo & Video Gallery" title="Moments, kept" intro="Photographs and films from every celebration. Select any image to view it in full." />

@@ -1,6 +1,5 @@
 import { Hero } from "@/components/home/Hero";
 import {
-  CoupleSection,
   EventsPreviewSection,
   GalleryPreviewSection,
   LuckyDrawCtaSection,
@@ -43,9 +42,8 @@ export default async function HomePage() {
       {/* 1. Homepage Hero with Manikanta & Sravika, Family Branding, date and live countdown */}
       <Hero wedding={wedding} app={app} />
 
-      {/* 2. Welcome message & Couple introduction */}
+      {/* 2. Welcome message & Family Branding */}
       <WelcomeSection wedding={wedding} />
-      <CoupleSection wedding={wedding} />
 
       {/* 3. Our Story */}
       <StoryPreviewSection wedding={wedding} entries={story} />

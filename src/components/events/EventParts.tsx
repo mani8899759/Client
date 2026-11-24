@@ -83,7 +83,7 @@ export function EventRow({ event, index }: { event: WeddingEvent; index: number 
           </h3>
           <div className="mt-3 flex flex-col gap-1 text-support text-secondary-text sm:flex-row sm:flex-wrap sm:gap-x-6">
             {time ? <span>{time}</span> : null}
-            {venue ? <span>{venue}</span> : null}
+            {venue ? <span>{venue}</span> : <span>Venue details coming soon</span>}
           </div>
         </div>
         <div className="col-span-2 hidden sm:col-span-1 sm:block">
@@ -163,16 +163,20 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
               {time ? <span className="block text-secondary-text">{time}</span> : null}
             </dd>
           </div>
-          {venue ? (
-            <div className="grid grid-cols-[24px_1fr] gap-3">
-              <dt className="sr-only">Venue</dt>
-              <MapPin aria-hidden className="mt-0.5 size-4 text-muted-gold" strokeWidth={1.5} />
-              <dd className="text-dark-walnut">
-                {event.venue?.name}
-                {event.venue?.address ? <span className="block text-secondary-text">{event.venue.address}</span> : null}
-              </dd>
-            </div>
-          ) : null}
+          <div className="grid grid-cols-[24px_1fr] gap-3">
+            <dt className="sr-only">Venue</dt>
+            <MapPin aria-hidden className="mt-0.5 size-4 text-muted-gold" strokeWidth={1.5} />
+            <dd className="text-dark-walnut">
+              {venue ? (
+                <>
+                  {event.venue?.name}
+                  {event.venue?.address ? <span className="block text-secondary-text">{event.venue.address}</span> : null}
+                </>
+              ) : (
+                <span className="text-secondary-text">Venue details coming soon</span>
+              )}
+            </dd>
+          </div>
           {event.dress_code ? (
             <div className="grid grid-cols-[24px_1fr] gap-3">
               <dt className="sr-only">Dress code</dt>

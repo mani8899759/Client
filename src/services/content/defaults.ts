@@ -27,10 +27,10 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   announcement: null,
   hero_heading: "Are getting married",
   hero_subheading: "With joyful hearts, we invite you to celebrate the beginning of our forever.",
-  hero_image_path: "/images/wedding-shoot/optimised/photo-13.webp",
+  hero_image_path: "/images/wedding-shoot/optimised/photo-08.webp",
   hero_image_alt: "Manikanta & Sravika — Together in Love",
   hero_video_path: null,
-  welcome_title: "Welcome to our wedding celebration",
+  welcome_title: "Gudla & Padakanti Families",
   welcome_message:
     "With the blessings of our families, we invite you to share in the joy of our wedding.\n\n" +
     "Here you will find the ceremonies, venues and everything you need for the celebrations. Your presence and blessings will make our day complete.",

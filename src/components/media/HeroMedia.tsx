@@ -64,22 +64,22 @@ export function HeroMedia({
         ) : (
           <div className="relative h-full w-full">
             <picture className="absolute inset-0 h-full w-full">
-              {/* Mobile (<640px): Gorgeous full vertical portrait of Manikanta & Sravika */}
+              {/* Mobile (<640px): Authentic couple portrait */}
               <source
                 media="(max-width: 639px)"
-                srcSet="/images/wedding-shoot/optimised/photo-05.webp"
+                srcSet={imageUrl || "/images/wedding-shoot/optimised/photo-08.webp"}
                 type="image/webp"
               />
-              {/* Desktop / Laptop (>=640px): Wide landscape portrait */}
+              {/* Desktop / Laptop (>=640px): Authentic couple photo */}
               <source
                 media="(min-width: 640px)"
-                srcSet={imageUrl || "/images/wedding-shoot/optimised/photo-13.webp"}
+                srcSet={imageUrl || "/images/wedding-shoot/optimised/photo-08.webp"}
                 type="image/webp"
               />
               <img
-                src={imageUrl || "/images/wedding-shoot/optimised/photo-13.webp"}
+                src={imageUrl || "/images/wedding-shoot/optimised/photo-08.webp"}
                 alt={alt}
-                className="h-full w-full object-cover object-[center_20%] sm:object-[center_30%]"
+                className="h-full w-full object-cover object-[center_20%] sm:object-[center_25%]"
                 loading="eager"
               />
             </picture>

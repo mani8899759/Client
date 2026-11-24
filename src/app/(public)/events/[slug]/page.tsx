@@ -67,16 +67,20 @@ export default async function EventDetailPage({ params }: Props) {
             <dl className="mt-10 border-b border-soft-border">
               <Detail label="Date">{date ?? "To be announced"}</Detail>
               {time ? <Detail label="Time">{time}</Detail> : null}
-              {v ? (
-                <Detail label="Venue">
-                  {v.name}
-                  {v.address || v.city ? (
-                    <span className="block text-support text-secondary-text">
-                      {[v.address, v.city, v.state, v.country].filter(Boolean).join(", ")}
-                    </span>
-                  ) : null}
-                </Detail>
-              ) : null}
+              <Detail label="Venue">
+                {v ? (
+                  <>
+                    {v.name}
+                    {v.address || v.city ? (
+                      <span className="block text-support text-secondary-text">
+                        {[v.address, v.city, v.state, v.country].filter(Boolean).join(", ")}
+                      </span>
+                    ) : null}
+                  </>
+                ) : (
+                  <span className="text-secondary-text">Venue details coming soon</span>
+                )}
+              </Detail>
               {event.dress_code ? <Detail label="Dress code">{event.dress_code}</Detail> : null}
               {event.contact_info ? <Detail label="Contact">{event.contact_info}</Detail> : null}
             </dl>
