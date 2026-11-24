@@ -29,13 +29,13 @@ export function getPresetVariants(preset: AnimationPreset, distance = 35) {
       };
     case "slide-left":
       return {
-        hidden: { opacity: 0, x: -distance * 1.3 },
-        visible: { opacity: 1, x: 0 },
+        hidden: { opacity: 0, y: Math.min(distance, 20) },
+        visible: { opacity: 1, y: 0 },
       };
     case "slide-right":
       return {
-        hidden: { opacity: 0, x: distance * 1.3 },
-        visible: { opacity: 1, x: 0 },
+        hidden: { opacity: 0, y: Math.min(distance, 20) },
+        visible: { opacity: 1, y: 0 },
       };
     case "zoom-reveal":
       return {

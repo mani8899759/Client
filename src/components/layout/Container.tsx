@@ -20,7 +20,7 @@ export function Container({
   children: React.ReactNode;
   as?: "div" | "section" | "header" | "footer" | "nav" | "main";
 }) {
-  return <Tag className={cn("mx-auto w-full px-4 sm:px-6 lg:px-10", WIDTHS[width], className)}>{children}</Tag>;
+  return <Tag className={cn("mx-auto w-full max-w-full px-4 box-border sm:px-6 lg:px-10", WIDTHS[width], className)}>{children}</Tag>;
 }
 
 /** Vertical rhythm for page sections (64px mobile → 80/112px desktop). */

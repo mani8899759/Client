@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { PRIMARY_CTA, PUBLIC_NAV } from "@/config/site";
+import { PRIMARY_CTA } from "@/config/site";
 import { ButtonLink } from "@/components/buttons/Button";
 import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { cn } from "@/lib/utils/cn";
@@ -14,7 +14,19 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-/** Mobile/tablet navigation: full-height sheet with large serif links. */
+/** Complete mobile navigation items as requested */
+const MOBILE_NAV_ITEMS = [
+  { href: "/", label: "Home" },
+  { href: "/story", label: "Our Story" },
+  { href: "/events", label: "Events" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/live", label: "Live" },
+  { href: "/locations", label: "Location" },
+  { href: "/invitation", label: "View Invitation" },
+  { href: "/register", label: "Win a Special Gift" },
+] as const;
+
+/** Mobile/tablet navigation: full-screen vertical overlay with zero horizontal scrolling. */
 export function ResponsiveNavigation({
   pathname,
   brand,
@@ -42,10 +54,14 @@ export function ResponsiveNavigation({
     setOpen(false);
   }, [pathname]);
 
+  // Clean body scroll locking and keyboard accessibility
   useEffect(() => {
     if (!open) return;
-    const previous = document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
+    const previousTouchAction = document.body.style.touchAction;
     document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
       if (e.key === "Tab" && panelRef.current) {
@@ -65,7 +81,8 @@ export function ResponsiveNavigation({
     const t = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>("a")?.focus(), 50);
     const trigger = triggerRef.current;
     return () => {
-      document.body.style.overflow = previous;
+      document.body.style.overflow = previousOverflow;
+      document.body.style.touchAction = previousTouchAction;
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(t);
       trigger?.focus();
@@ -80,6 +97,7 @@ export function ResponsiveNavigation({
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="mobile-navigation"
+        aria-label="Open navigation menu"
         className="flex size-11 items-center justify-center rounded-[var(--radius-control)] text-dark-walnut hover:bg-soft-cream lg:hidden cursor-pointer active:scale-95 transition-transform"
       >
         <Menu className="size-6 text-dark-walnut" strokeWidth={2} aria-hidden />
@@ -96,46 +114,51 @@ export function ResponsiveNavigation({
                   role="dialog"
                   aria-modal="true"
                   aria-label="Site navigation"
-                  initial={reduce ? false : { opacity: 0, x: "100%" }}
-                  animate={{ opacity: 1, x: "0%" }}
-                  exit={reduce ? undefined : { opacity: 0, x: "100%" }}
-                  transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
-                  className="fixed inset-0 z-[70] flex flex-col bg-warm-ivory lg:hidden"
+                  initial={reduce ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={reduce ? undefined : { opacity: 0 }}
+                  transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
+                  className="fixed inset-0 z-[100] flex h-full h-[100dvh] w-full max-w-full flex-col bg-warm-ivory box-border overflow-x-hidden overflow-y-auto lg:hidden"
                 >
-                  <div className="flex h-16 items-center justify-between px-4 sm:px-6 border-b border-soft-border/80">
-                    <span className="font-serif text-[22px] sm:text-[24px] leading-none text-dark-walnut">{brand}</span>
+                  {/* Top Bar: Brand on left, Close button on right */}
+                  <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6 border-b border-soft-border/80 bg-warm-ivory/95 backdrop-blur-sm sticky top-0 z-10 box-border">
+                    <span className="font-serif text-[20px] xs:text-[22px] sm:text-[24px] leading-none text-dark-walnut tracking-wide font-medium truncate pr-2">
+                      {brand}
+                    </span>
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="-mr-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] hover:bg-soft-cream text-dark-walnut cursor-pointer active:scale-95 transition-transform"
+                      aria-label="Close menu"
+                      className="-mr-2 flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-control)] hover:bg-soft-cream text-dark-walnut cursor-pointer active:scale-95 transition-transform"
                     >
-                      <X className="size-6" strokeWidth={1.75} aria-hidden />
+                      <X className="size-6" strokeWidth={2} aria-hidden />
                       <span className="sr-only">Close menu</span>
                     </button>
                   </div>
-                  <nav aria-label="Mobile" className="flex flex-1 flex-col justify-between overflow-y-auto px-4 pt-6 pb-8 sm:px-6">
-                    <ul className="flex flex-col">
-                      {PUBLIC_NAV.map((item, i) => {
+
+                  {/* Navigation content in single vertical column */}
+                  <nav aria-label="Mobile Navigation" className="flex flex-1 flex-col justify-between overflow-y-auto px-4 pt-4 pb-8 sm:px-6 box-border">
+                    <ul className="flex flex-col divide-y divide-soft-border/70">
+                      {MOBILE_NAV_ITEMS.map((item, i) => {
                         const active = isActive(pathname, item.href);
                         return (
                           <motion.li
                             key={item.href}
-                            initial={reduce ? false : { opacity: 0, y: 12 }}
+                            initial={reduce ? false : { opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.05 + i * 0.04, duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
-                            className="border-b border-soft-border"
+                            transition={{ delay: 0.03 + i * 0.03, duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
                           >
                             <Link
                               href={item.href}
                               onClick={() => setOpen(false)}
                               aria-current={active ? "page" : undefined}
                               className={cn(
-                                "flex items-center justify-between py-3.5 sm:py-4 font-serif text-[26px] sm:text-[30px] leading-tight transition-colors",
+                                "flex min-h-[52px] items-center justify-between py-3.5 font-serif text-[24px] xs:text-[26px] sm:text-[28px] leading-tight transition-colors",
                                 active ? "text-primary font-medium" : "text-dark-walnut hover:text-primary",
                               )}
                             >
-                              {item.label}
-                              <span aria-hidden className="text-meta text-muted-gold">
+                              <span>{item.label}</span>
+                              <span aria-hidden className="font-sans text-[12px] tracking-[0.16em] text-muted-gold font-normal">
                                 {String(i + 1).padStart(2, "0")}
                               </span>
                             </Link>
@@ -143,24 +166,38 @@ export function ResponsiveNavigation({
                         );
                       })}
                     </ul>
-                    <div className="mt-8 flex flex-col gap-3">
+
+                    {/* Prominent Action Buttons */}
+                    <div className="mt-8 flex flex-col gap-3 pt-4 border-t border-soft-border/60">
                       <ViewInvitationButton
                         invitationUrl={invitationUrl}
                         invitationType={invitationType}
                         size="lg"
                         variant="primary"
-                        className="w-full text-center"
+                        className="w-full min-h-[48px] text-center justify-center"
                         onClick={() => setOpen(false)}
                       />
-                      <ButtonLink href={PRIMARY_CTA.href} variant="filled" size="lg" className="w-full text-center" onClick={() => setOpen(false)}>
+                      <ButtonLink
+                        href={PRIMARY_CTA.href}
+                        variant="filled"
+                        size="lg"
+                        className="w-full min-h-[48px] text-center justify-center font-medium"
+                        onClick={() => setOpen(false)}
+                      >
                         {ctaLabel}
                       </ButtonLink>
-                      <p className="text-center text-[12px] text-secondary-text">
+                      <ButtonLink
+                        href="/lucky-draw/winners"
+                        variant="ghost"
+                        size="md"
+                        className="w-full text-center justify-center text-dark-walnut hover:text-primary"
+                        onClick={() => setOpen(false)}
+                      >
+                        View Lucky Draw Winners
+                      </ButtonLink>
+                      <p className="text-center text-[12px] text-secondary-text mt-1">
                         Join our wedding gift draw for a chance to win a special gift.
                       </p>
-                      <ButtonLink href="/lucky-draw/winners" variant="ghost" size="md" className="w-full text-center" onClick={() => setOpen(false)}>
-                        Lucky Draw Winners
-                      </ButtonLink>
                     </div>
                   </nav>
                 </motion.div>

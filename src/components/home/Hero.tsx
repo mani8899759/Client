@@ -104,7 +104,7 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
           <Reveal
             preset="zoom-reveal"
             delay={0.15}
-            className="relative z-10 mx-auto -mt-10 xs:-mt-14 w-[calc(100%-16px)] max-w-[920px] rounded-[var(--radius-surface)] border border-soft-border bg-card-surface px-2.5 xs:px-4 py-7 shadow-[var(--shadow-lift)] sm:-mt-24 sm:w-[calc(100%-64px)] sm:px-8 sm:py-12"
+            className="relative z-10 mx-auto -mt-10 xs:-mt-14 w-full max-w-[920px] rounded-[var(--radius-surface)] border border-soft-border bg-card-surface px-2.5 xs:px-4 py-7 shadow-[var(--shadow-lift)] sm:-mt-24 sm:px-8 sm:py-12"
           >
             <div id="countdown">
               <Countdown

@@ -51,9 +51,13 @@ export function SiteHeader({
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:h-[76px] lg:px-10">
-        <Link href="/" className="group flex min-w-0 items-baseline gap-2 shrink-0" aria-label={`${coupleLabel} — home`}>
-          <span className="truncate font-serif text-[21px] leading-none text-dark-walnut transition-colors group-hover:text-primary xs:text-[23px] sm:text-[26px]">
+      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-3 px-4 box-border sm:px-6 lg:h-[76px] lg:px-10">
+        <Link
+          href="/"
+          className="group flex flex-1 min-w-0 items-center overflow-hidden"
+          aria-label={`${coupleLabel} — home`}
+        >
+          <span className="truncate font-serif text-[20px] xs:text-[22px] sm:text-[26px] leading-none text-dark-walnut transition-colors group-hover:text-primary">
             {brand}
           </span>
         </Link>
@@ -81,7 +85,7 @@ export function SiteHeader({
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <ViewInvitationButton
             invitationUrl={invitationUrl}
             invitationType={invitationType}
