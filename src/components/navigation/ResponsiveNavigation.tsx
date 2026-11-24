@@ -80,9 +80,9 @@ export function ResponsiveNavigation({
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="mobile-navigation"
-        className="-mr-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] text-dark-walnut hover:bg-soft-cream lg:hidden"
+        className="-mr-1.5 xs:-mr-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] text-dark-walnut hover:bg-soft-cream lg:hidden cursor-pointer active:scale-95 transition-transform"
       >
-        <Menu className="size-5" strokeWidth={1.5} aria-hidden />
+        <Menu className="size-6 text-dark-walnut" strokeWidth={1.75} aria-hidden />
         <span className="sr-only">Open menu</span>
       </button>
 
@@ -96,20 +96,20 @@ export function ResponsiveNavigation({
                   role="dialog"
                   aria-modal="true"
                   aria-label="Site navigation"
-                  initial={reduce ? false : { opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={reduce ? undefined : { opacity: 0 }}
-                  transition={{ duration: 0.35 }}
+                  initial={reduce ? false : { opacity: 0, x: "100%" }}
+                  animate={{ opacity: 1, x: "0%" }}
+                  exit={reduce ? undefined : { opacity: 0, x: "100%" }}
+                  transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
                   className="fixed inset-0 z-[70] flex flex-col bg-warm-ivory lg:hidden"
                 >
-                  <div className="flex h-16 items-center justify-between px-4 sm:px-6">
-                    <span className="font-serif text-[24px] leading-none">{brand}</span>
+                  <div className="flex h-16 items-center justify-between px-4 sm:px-6 border-b border-soft-border/80">
+                    <span className="font-serif text-[22px] sm:text-[24px] leading-none text-dark-walnut">{brand}</span>
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="-mr-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] hover:bg-soft-cream"
+                      className="-mr-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] hover:bg-soft-cream text-dark-walnut cursor-pointer active:scale-95 transition-transform"
                     >
-                      <X className="size-5" strokeWidth={1.5} aria-hidden />
+                      <X className="size-6" strokeWidth={1.75} aria-hidden />
                       <span className="sr-only">Close menu</span>
                     </button>
                   </div>
@@ -127,10 +127,11 @@ export function ResponsiveNavigation({
                           >
                             <Link
                               href={item.href}
+                              onClick={() => setOpen(false)}
                               aria-current={active ? "page" : undefined}
                               className={cn(
-                                "flex items-center justify-between py-4 font-serif text-[30px] leading-tight",
-                                active ? "text-primary" : "text-dark-walnut",
+                                "flex items-center justify-between py-3.5 sm:py-4 font-serif text-[26px] sm:text-[30px] leading-tight transition-colors",
+                                active ? "text-primary font-medium" : "text-dark-walnut hover:text-primary",
                               )}
                             >
                               {item.label}
@@ -148,15 +149,16 @@ export function ResponsiveNavigation({
                         invitationType={invitationType}
                         size="lg"
                         variant="primary"
-                        className="w-full"
+                        className="w-full text-center"
+                        onClick={() => setOpen(false)}
                       />
-                      <ButtonLink href={PRIMARY_CTA.href} variant="filled" size="lg" className="w-full">
+                      <ButtonLink href={PRIMARY_CTA.href} variant="filled" size="lg" className="w-full text-center" onClick={() => setOpen(false)}>
                         {ctaLabel}
                       </ButtonLink>
                       <p className="text-center text-[12px] text-secondary-text">
                         Join our wedding gift draw for a chance to win a special gift.
                       </p>
-                      <ButtonLink href="/lucky-draw/winners" variant="ghost" size="md" className="w-full">
+                      <ButtonLink href="/lucky-draw/winners" variant="ghost" size="md" className="w-full text-center" onClick={() => setOpen(false)}>
                         Lucky Draw Winners
                       </ButtonLink>
                     </div>

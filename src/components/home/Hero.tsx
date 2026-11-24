@@ -57,7 +57,7 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
           ) : null}
           <HeroTextItem>
             <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-              <ButtonLink href={app.registration_open ? "/register" : "/lucky-draw/winners"} variant="filled" size="lg">
+              <ButtonLink href={app.registration_open ? "/register" : "/lucky-draw/winners"} variant="filled" size="lg" className="w-full sm:w-auto text-center">
                 {registerLabel}
               </ButtonLink>
               <ViewInvitationButton
@@ -65,9 +65,9 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
                 invitationType={invitationType}
                 variant="primary"
                 size="lg"
-                className="px-6"
+                className="w-full sm:w-auto px-6 text-center"
               />
-              <ButtonLink href="/story" variant="ghost" size="lg">
+              <ButtonLink href="/story" variant="ghost" size="lg" className="w-full sm:w-auto text-center">
                 {wedding.cta_secondary_label ?? "View Our Story"}
               </ButtonLink>
             </div>
@@ -92,7 +92,7 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
           <Reveal
             preset="zoom-reveal"
             delay={0.15}
-            className="relative z-10 mx-auto -mt-12 w-[calc(100%-24px)] max-w-[920px] rounded-[var(--radius-surface)] border border-soft-border bg-card-surface px-3 py-9 shadow-[var(--shadow-lift)] sm:-mt-24 sm:w-[calc(100%-64px)] sm:px-8 sm:py-12"
+            className="relative z-10 mx-auto -mt-10 xs:-mt-14 w-[calc(100%-16px)] max-w-[920px] rounded-[var(--radius-surface)] border border-soft-border bg-card-surface px-2.5 xs:px-4 py-7 shadow-[var(--shadow-lift)] sm:-mt-24 sm:w-[calc(100%-64px)] sm:px-8 sm:py-12"
           >
             <div id="countdown">
               <Countdown

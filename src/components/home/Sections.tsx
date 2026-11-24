@@ -312,11 +312,11 @@ export function VenuePreviewSection({ wedding, venues }: { wedding: WeddingSetti
             )}
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
               {directions ? (
-                <ButtonLink href={directions} external variant="filled">
+                <ButtonLink href={directions} external variant="filled" className="w-full sm:w-auto text-center">
                   Get directions
                 </ButtonLink>
               ) : null}
-              <ButtonLink href="/locations" variant="ghost">
+              <ButtonLink href="/locations" variant="ghost" className="w-full sm:w-auto text-center">
                 {venues.length > 1 ? `All ${venues.length} locations` : "Location details"}
               </ButtonLink>
             </div>
@@ -351,7 +351,7 @@ export function LiveTeaserSection({ stream, timezone }: { stream: LiveStream | n
                   : "Missed the moment? The full ceremony is available to watch again."}
             </p>
             <div className="mt-8">
-              <ButtonLink href="/live" variant={stream.status === "live" ? "filled" : "primary"}>
+              <ButtonLink href="/live" variant={stream.status === "live" ? "filled" : "primary"} className="w-full sm:w-auto text-center">
                 {cta}
               </ButtonLink>
             </div>
@@ -398,11 +398,11 @@ export function LuckyDrawCtaSection({ app, wedding }: { app: AppSettings; weddin
             />
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
               {app.registration_open ? (
-                <ButtonLink href="/register" variant="filled" size="lg">
+                <ButtonLink href="/register" variant="filled" size="lg" className="w-full sm:w-auto text-center">
                   {registerLabel}
                 </ButtonLink>
               ) : null}
-              <ButtonLink href="/lucky-draw/winners" variant="ghost">
+              <ButtonLink href="/lucky-draw/winners" variant="ghost" className="w-full sm:w-auto text-center">
                 See the winners
               </ButtonLink>
             </div>

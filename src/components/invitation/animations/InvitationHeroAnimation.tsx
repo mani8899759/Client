@@ -316,14 +316,14 @@ export function InvitationHeroAnimation({
             {/* LEFT: MANIKANTA (Groom) — Spread towards the left flank */}
             <div
               ref={groomContainerRef}
-              className="justify-self-end text-right pr-4 sm:pr-8 md:pr-[clamp(30px,6vw,120px)] lg:pr-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
+              className="justify-self-end text-right pr-2 xs:pr-4 sm:pr-8 md:pr-[clamp(30px,6vw,120px)] lg:pr-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
             >
-              <p className="text-[10px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
+              <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.18em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
                 The Groom
               </p>
               <h1
                 ref={groomNameRef}
-                className="mt-1 font-[family-name:var(--font-playfair)] text-[28px] xs:text-[36px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
+                className="mt-0.5 sm:mt-1 font-[family-name:var(--font-playfair)] text-[20px] xs:text-[26px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.04em] sm:tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
               >
                 {names.groom}
               </h1>
@@ -332,9 +332,9 @@ export function InvitationHeroAnimation({
             {/* CENTER: Ampersand floating naturally over Gopuram */}
             <div
               ref={ampersandRef}
-              className="justify-self-center text-center px-2 sm:px-4 bg-transparent border-0 shadow-none"
+              className="justify-self-center text-center px-1.5 xs:px-2 sm:px-4 bg-transparent border-0 shadow-none"
             >
-              <span className="font-[family-name:var(--font-script)] text-[34px] xs:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[76px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_5px_rgba(61,28,0,0.3)]">
+              <span className="font-[family-name:var(--font-script)] text-[26px] xs:text-[34px] sm:text-[52px] md:text-[62px] lg:text-[76px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_5px_rgba(61,28,0,0.3)]">
                 &amp;
               </span>
             </div>
@@ -342,14 +342,14 @@ export function InvitationHeroAnimation({
             {/* RIGHT: SRAVIKA (Bride) — Spread towards the right flank */}
             <div
               ref={brideContainerRef}
-              className="justify-self-start text-left pl-4 sm:pl-8 md:pl-[clamp(30px,6vw,120px)] lg:pl-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
+              className="justify-self-start text-left pl-2 xs:pl-4 sm:pl-8 md:pl-[clamp(30px,6vw,120px)] lg:pl-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
             >
-              <p className="text-[10px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
+              <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.18em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
                 The Bride
               </p>
               <h1
                 ref={brideNameRef}
-                className="mt-1 font-[family-name:var(--font-playfair)] text-[28px] xs:text-[36px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
+                className="mt-0.5 sm:mt-1 font-[family-name:var(--font-playfair)] text-[20px] xs:text-[26px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.04em] sm:tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
               >
                 {names.bride}
               </h1>

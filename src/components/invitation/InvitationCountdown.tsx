@@ -34,43 +34,43 @@ export function InvitationCountdown({ wedding }: { wedding: WeddingSettings }) {
             {schedule?.dateOnlyLabel ?? AUTHORITATIVE_WEDDING_CONFIG.weddingDateDisplay}
           </h2>
 
-          <div className="mx-auto my-6 grid grid-cols-4 gap-2 sm:gap-4">
+          <div className="mx-auto my-6 grid grid-cols-4 gap-1.5 xs:gap-2 sm:gap-4">
             {/* Days */}
-            <div className="flex flex-col items-center rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-3 sm:p-4">
-              <span className="font-[family-name:var(--font-playfair)] text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
+            <div className="flex flex-col items-center rounded-[8px] sm:rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-2 xs:p-3 sm:p-4">
+              <span className="font-[family-name:var(--font-playfair)] text-[22px] xs:text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
                 {r ? pad(r.days) : "--"}
               </span>
-              <span className="mt-1 text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
+              <span className="mt-1 text-[9px] xs:text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
                 Days
               </span>
             </div>
 
             {/* Hours */}
-            <div className="flex flex-col items-center rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-3 sm:p-4">
-              <span className="font-[family-name:var(--font-playfair)] text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
+            <div className="flex flex-col items-center rounded-[8px] sm:rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-2 xs:p-3 sm:p-4">
+              <span className="font-[family-name:var(--font-playfair)] text-[22px] xs:text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
                 {r ? pad(r.hours) : "--"}
               </span>
-              <span className="mt-1 text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
+              <span className="mt-1 text-[9px] xs:text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
                 Hours
               </span>
             </div>
 
             {/* Minutes */}
-            <div className="flex flex-col items-center rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-3 sm:p-4">
-              <span className="font-[family-name:var(--font-playfair)] text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
+            <div className="flex flex-col items-center rounded-[8px] sm:rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-2 xs:p-3 sm:p-4">
+              <span className="font-[family-name:var(--font-playfair)] text-[22px] xs:text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
                 {r ? pad(r.minutes) : "--"}
               </span>
-              <span className="mt-1 text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
+              <span className="mt-1 text-[9px] xs:text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
                 Minutes
               </span>
             </div>
 
             {/* Seconds */}
-            <div className="flex flex-col items-center rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-3 sm:p-4">
-              <span className="font-[family-name:var(--font-playfair)] text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
+            <div className="flex flex-col items-center rounded-[8px] sm:rounded-[10px] border border-[#e5d5bd] bg-[#f5ebd5]/60 p-2 xs:p-3 sm:p-4">
+              <span className="font-[family-name:var(--font-playfair)] text-[22px] xs:text-[28px] font-bold text-[#8b1a1a] sm:text-[42px]">
                 {r ? pad(r.seconds) : "--"}
               </span>
-              <span className="mt-1 text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
+              <span className="mt-1 text-[9px] xs:text-[11px] tracking-wider text-[#5c4033] uppercase font-medium sm:text-[13px]">
                 Seconds
               </span>
             </div>

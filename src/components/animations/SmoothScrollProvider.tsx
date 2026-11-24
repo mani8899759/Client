@@ -72,7 +72,8 @@ export function SmoothScrollProvider({
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.0,
+      syncTouch: true,
       autoRaf: false, // Driven by GSAP ticker for frame-perfect sync
     });
 

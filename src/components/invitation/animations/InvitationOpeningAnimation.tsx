@@ -152,7 +152,7 @@ export function InvitationOpeningAnimation({
             </div>
 
             {/* Prominent Couple Names */}
-            <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-[40px] font-bold tracking-tight text-[#8b1a1a] sm:text-[52px] lg:text-[58px]">
+            <h1 className="mt-2 font-[family-name:var(--font-playfair)] text-[32px] xs:text-[40px] font-bold tracking-tight text-[#8b1a1a] sm:text-[52px] lg:text-[58px]">
               {names.groom}{" "}
               <span className="font-[family-name:var(--font-script)] font-normal text-[#d4a843]">
                 &amp;
@@ -208,12 +208,12 @@ export function InvitationOpeningAnimation({
           </div>
 
           {/* "Open Invitation" CTA */}
-          <div ref={sealRef} className="mt-8">
+          <div ref={sealRef} className="mt-6 sm:mt-8">
             <button
               type="button"
               onClick={handleTriggerOpen}
               disabled={opening}
-              className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-[8px] border-2 border-[#d4a843] bg-gradient-to-r from-[#8b1a1a] via-[#a32222] to-[#8b1a1a] px-9 py-3.5 text-[16px] font-medium tracking-[0.06em] text-[#fdf5e6] shadow-[0_6px_22px_rgba(139,26,26,0.35)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_28px_rgba(139,26,26,0.45)] active:scale-98 cursor-pointer"
+              className="group relative inline-flex w-full sm:w-auto items-center justify-center gap-3 overflow-hidden rounded-[8px] border-2 border-[#d4a843] bg-gradient-to-r from-[#8b1a1a] via-[#a32222] to-[#8b1a1a] px-6 sm:px-9 py-3.5 text-[15px] sm:text-[16px] font-medium tracking-[0.06em] text-[#fdf5e6] shadow-[0_6px_22px_rgba(139,26,26,0.35)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_28px_rgba(139,26,26,0.45)] active:scale-98 cursor-pointer"
             >
               <MailOpen className="size-5 text-[#fdf5e6] transition-transform duration-300 group-hover:scale-110" />
               <span className="font-semibold tracking-wide">

@@ -15,6 +15,7 @@ export function ViewInvitationButton({
   size = "md",
   className,
   eventSpecific = false,
+  onClick,
 }: {
   invitationUrl?: string | null;
   invitationType?: "pdf" | "image" | null;
@@ -23,6 +24,7 @@ export function ViewInvitationButton({
   size?: ButtonSize;
   className?: string;
   eventSpecific?: boolean;
+  onClick?: () => void;
 }) {
   const [imagePreviewOpen, setImagePreviewOpen] = useState(false);
 
@@ -39,6 +41,7 @@ export function ViewInvitationButton({
           variant={variant}
           size={size}
           onClick={() => {
+            onClick?.();
             if (isPdf) {
               window.open(invitationUrl, "_blank", "noopener,noreferrer");
             } else {
@@ -90,6 +93,7 @@ export function ViewInvitationButton({
   return (
     <Link
       href="/invitation"
+      onClick={onClick}
       className={buttonClasses(variant, size, cn("inline-flex items-center justify-center gap-2", className))}
     >
       <Mail className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />

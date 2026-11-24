@@ -105,13 +105,13 @@ export function InvitationClosing({
             Forward this digital invitation to your loved ones via WhatsApp or copy the link.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
             {/* WhatsApp button - distinct green accent as specified */}
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-[8px] bg-[#25d366] px-5 py-2.5 text-[14px] font-medium text-white shadow-xs transition-colors hover:bg-[#20ba59]"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-[8px] bg-[#25d366] px-5 py-3 sm:py-2.5 text-[14px] font-medium text-white shadow-xs transition-colors hover:bg-[#20ba59]"
             >
               <Send className="size-4" />
               <span>Share on WhatsApp</span>
@@ -122,7 +122,7 @@ export function InvitationClosing({
               <button
                 type="button"
                 onClick={() => void handleNativeShare()}
-                className="inline-flex items-center gap-2 rounded-[8px] border border-[#d4a843] bg-transparent px-5 py-2.5 text-[14px] font-medium text-[#3d1c00] hover:bg-[#d4a843]/15"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-[8px] border border-[#d4a843] bg-transparent px-5 py-3 sm:py-2.5 text-[14px] font-medium text-[#3d1c00] hover:bg-[#d4a843]/15 cursor-pointer"
               >
                 <Share2 className="size-4" />
                 <span>Share</span>
@@ -133,7 +133,7 @@ export function InvitationClosing({
             <button
               type="button"
               onClick={() => void handleCopy()}
-              className="inline-flex items-center gap-2 rounded-[8px] border border-[#d4a843] bg-[#fffcf7] px-5 py-2.5 text-[14px] font-medium text-[#3d1c00] shadow-2xs hover:bg-[#f5ebd5]"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-[8px] border border-[#d4a843] bg-[#fffcf7] px-5 py-3 sm:py-2.5 text-[14px] font-medium text-[#3d1c00] shadow-2xs hover:bg-[#f5ebd5] cursor-pointer"
             >
               {copied ? <Check className="size-4 text-emerald-600" /> : <Copy className="size-4" />}
               <span>{copied ? "Link Copied!" : "Copy Link"}</span>

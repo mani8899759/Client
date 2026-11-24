@@ -115,10 +115,11 @@ export function InvitationBottomInterestBar() {
                 </span>
 
                 <div className="truncate text-left">
-                  <p className="flex items-center gap-1.5 text-[12px] font-semibold text-[#3d1c00] sm:text-[14px]">
+                  <p className="flex items-center gap-1.5 text-[11px] xs:text-[12px] font-semibold text-[#3d1c00] sm:text-[14px]">
                     <Users className="size-3.5 shrink-0 text-[#8b1a1a]" />
                     <span className="font-bold text-[#8b1a1a]">{count}</span>
-                    <span className="truncate">People Interested in Attending</span>
+                    <span className="truncate hidden xs:inline">People Interested in Attending</span>
+                    <span className="truncate xs:hidden">Interested</span>
                   </p>
                   <p className="hidden truncate text-[11px] text-[#7b6a58] sm:block">
                     {action === "interested"
@@ -144,10 +145,11 @@ export function InvitationBottomInterestBar() {
                         type="button"
                         onClick={() => void handleInterested()}
                         disabled={loading}
-                        className="inline-flex h-9.5 items-center gap-1.5 rounded-full border border-[#d4a843] bg-gradient-to-r from-[#8b1a1a] via-[#9e1c1c] to-[#8b1a1a] px-3.5 py-1.5 text-[12px] font-semibold text-[#fdf5e6] shadow-[0_3px_12px_rgba(139,26,26,0.25)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] sm:h-10 sm:px-5 sm:text-[13px]"
+                        className="inline-flex h-9.5 items-center gap-1.5 rounded-full border border-[#d4a843] bg-gradient-to-r from-[#8b1a1a] via-[#9e1c1c] to-[#8b1a1a] px-3 xs:px-3.5 py-1.5 text-[11px] xs:text-[12px] font-semibold text-[#fdf5e6] shadow-[0_3px_12px_rgba(139,26,26,0.25)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] sm:h-10 sm:px-5 sm:text-[13px] cursor-pointer"
                       >
                         <Heart className="size-3.5 fill-[#fdf5e6] text-[#fdf5e6]" />
-                        <span>I Am Interested</span>
+                        <span className="hidden xs:inline">I Am Interested</span>
+                        <span className="xs:hidden">Interested</span>
                       </button>
 
                       {/* Cross Mark (❌ / ✕) - Dismisses immediately without incrementing counter */}

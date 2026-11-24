@@ -30,11 +30,11 @@ function RollingNumber({ value, fast }: { value: string; fast?: boolean }) {
 
 function Unit({ value, label, fast }: { value: string; label: string; fast?: boolean }) {
   return (
-    <div className="flex min-w-0 flex-1 flex-col items-center px-1.5 xs:px-3 sm:px-7 lg:px-10">
-      <span className="font-serif text-[38px] leading-none font-normal text-dark-walnut [font-variant-numeric:lining-nums_tabular-nums] xs:text-[44px] sm:text-[60px] lg:text-[68px]">
+    <div className="flex min-w-0 flex-1 flex-col items-center px-1 xs:px-2.5 sm:px-7 lg:px-10">
+      <span className="font-serif text-[30px] leading-none font-normal text-dark-walnut [font-variant-numeric:lining-nums_tabular-nums] xs:text-[42px] sm:text-[60px] lg:text-[68px]">
         <RollingNumber value={value} fast={fast} />
       </span>
-      <span className="mt-3 font-serif text-[16px] leading-none text-secondary-text italic xs:text-[17px] sm:mt-4 sm:text-[20px]">{label}</span>
+      <span className="mt-2 font-serif text-[13px] leading-none text-secondary-text italic xs:text-[16px] sm:mt-4 sm:text-[20px]">{label}</span>
     </div>
   );
 }
