@@ -37,6 +37,14 @@
   --font-script: var(--font-great-vibes), "Great Vibes", cursive;
 }
 
+:root {
+  --mobile-page-x: 16px;
+  --mobile-section-gap: 48px;
+  --mobile-card-padding: 16px;
+  --mobile-element-gap: 12px;
+  --mobile-heading-gap: 16px;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────
    Invitation Design System (My Shaadi Link inspired)
    Scoped to .invitation-theme

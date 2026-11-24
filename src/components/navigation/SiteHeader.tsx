@@ -51,9 +51,9 @@ export function SiteHeader({
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-2.5 px-3.5 sm:px-6 lg:h-[76px] lg:px-10">
-        <Link href="/" className="group flex items-baseline gap-2 shrink-0" aria-label={`${coupleLabel} — home`}>
-          <span className="font-serif text-[19px] xs:text-[22px] leading-none whitespace-nowrap text-dark-walnut transition-colors group-hover:text-primary sm:text-[26px]">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:h-[76px] lg:px-10">
+        <Link href="/" className="group flex min-w-0 items-baseline gap-2 shrink-0" aria-label={`${coupleLabel} — home`}>
+          <span className="truncate font-serif text-[21px] leading-none text-dark-walnut transition-colors group-hover:text-primary xs:text-[23px] sm:text-[26px]">
             {brand}
           </span>
         </Link>
@@ -81,17 +81,16 @@ export function SiteHeader({
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3">
+        <div className="flex items-center gap-3">
           <ViewInvitationButton
             invitationUrl={invitationUrl}
             invitationType={invitationType}
             size="sm"
             variant="primary"
-            className="hidden sm:inline-flex px-3 sm:px-4"
+            className="hidden md:inline-flex px-3 sm:px-4"
           />
-          <ButtonLink href={PRIMARY_CTA.href} size="sm" variant="filled" className="px-2.5 xs:px-3 sm:px-4 text-[12px] sm:text-[14px] whitespace-nowrap">
-            <span className="hidden xs:inline">{ctaLabel}</span>
-            <span className="xs:hidden">Win Gift</span>
+          <ButtonLink href={PRIMARY_CTA.href} size="sm" variant="filled" className="hidden md:inline-flex px-3 sm:px-4">
+            {ctaLabel}
           </ButtonLink>
           <ResponsiveNavigation
             pathname={pathname}

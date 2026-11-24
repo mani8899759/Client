@@ -30,34 +30,41 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
         <HeroText>
           {wedding.announcement ? (
             <HeroTextItem>
-              <p className="mb-6 text-meta text-muted-gold">{wedding.announcement}</p>
+              <p className="mb-4 text-meta text-muted-gold sm:mb-6">{wedding.announcement}</p>
             </HeroTextItem>
           ) : null}
           <HeroTextItem>
-            <h1 id="hero-title" className="text-display text-dark-walnut">
-              {names.groom} <span className="text-primary italic">&amp;</span> {names.bride}
+            <h1 id="hero-title" className="font-serif text-[32px] xs:text-[38px] leading-[1.15] text-dark-walnut sm:text-display">
+              {names.groom} <span className="text-primary italic font-serif">&amp;</span> {names.bride}
             </h1>
           </HeroTextItem>
           <HeroTextItem>
-            <p className="mt-4 font-serif text-[22px] leading-snug text-secondary-text italic sm:text-[26px]">
+            <p className="mt-3 font-serif text-[18px] xs:text-[20px] leading-snug text-secondary-text italic sm:mt-4 sm:text-[26px]">
               {wedding.hero_heading ?? "Are getting married"}
             </p>
           </HeroTextItem>
           <HeroTextItem>
-            <div className="mx-auto mt-7 flex max-w-[520px] items-center gap-4">
+            <div className="mx-auto mt-6 flex max-w-[360px] xs:max-w-[420px] items-center gap-3 sm:mt-7 sm:max-w-[520px] sm:gap-4">
               <span aria-hidden className="h-px flex-1 bg-champagne-gold/70" />
-              <p className="text-meta text-dark-walnut">{schedule?.dateOnlyLabel ?? "Date to be announced"}</p>
+              <p className="text-meta text-dark-walnut tracking-[0.16em] xs:tracking-[0.18em] text-[11px] xs:text-[12px] whitespace-nowrap">{schedule?.dateOnlyLabel ?? "December 13, 2026"}</p>
               <span aria-hidden className="h-px flex-1 bg-champagne-gold/70" />
             </div>
           </HeroTextItem>
           {wedding.hero_subheading ? (
             <HeroTextItem>
-              <p className="mx-auto mt-6 max-w-[56ch] text-body text-secondary-text text-pretty">{wedding.hero_subheading}</p>
+              <p className="mx-auto mt-5 max-w-[340px] text-[15px] xs:text-[16px] leading-[1.65] text-secondary-text text-pretty sm:mt-6 sm:max-w-[56ch] sm:text-body">
+                {wedding.hero_subheading}
+              </p>
             </HeroTextItem>
           ) : null}
           <HeroTextItem>
-            <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-              <ButtonLink href={app.registration_open ? "/register" : "/lucky-draw/winners"} variant="filled" size="lg" className="w-full sm:w-auto text-center">
+            <div className="mx-auto mt-8 flex w-full max-w-[360px] flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
+              <ButtonLink
+                href={app.registration_open ? "/register" : "/lucky-draw/winners"}
+                variant="filled"
+                size="lg"
+                className="w-full min-h-[48px] sm:w-auto text-center justify-center font-medium"
+              >
                 {registerLabel}
               </ButtonLink>
               <ViewInvitationButton
@@ -65,9 +72,14 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
                 invitationType={invitationType}
                 variant="primary"
                 size="lg"
-                className="w-full sm:w-auto px-6 text-center"
+                className="w-full min-h-[48px] sm:w-auto px-6 text-center justify-center font-medium"
               />
-              <ButtonLink href="/story" variant="ghost" size="lg" className="w-full sm:w-auto text-center">
+              <ButtonLink
+                href="/story"
+                variant="ghost"
+                size="lg"
+                className="hidden sm:inline-flex w-full sm:w-auto text-center justify-center"
+              >
                 {wedding.cta_secondary_label ?? "View Our Story"}
               </ButtonLink>
             </div>

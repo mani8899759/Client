@@ -80,9 +80,9 @@ export function ResponsiveNavigation({
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="mobile-navigation"
-        className="-mr-1.5 xs:-mr-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] text-dark-walnut hover:bg-soft-cream lg:hidden cursor-pointer active:scale-95 transition-transform"
+        className="flex size-11 items-center justify-center rounded-[var(--radius-control)] text-dark-walnut hover:bg-soft-cream lg:hidden cursor-pointer active:scale-95 transition-transform"
       >
-        <Menu className="size-6 text-dark-walnut" strokeWidth={1.75} aria-hidden />
+        <Menu className="size-6 text-dark-walnut" strokeWidth={2} aria-hidden />
         <span className="sr-only">Open menu</span>
       </button>
 
