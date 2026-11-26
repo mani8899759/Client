@@ -48,7 +48,9 @@ export function ResponsiveNavigation({
   logoUrl?: string | null;
   logoEnabled?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
+  const [openPath, setOpenPath] = useState<string | null>(null);
+  const open = openPath === pathname;
+  const setOpen = (next: boolean) => setOpenPath(next ? pathname : null);
   const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -56,11 +58,6 @@ export function ResponsiveNavigation({
 
   // eslint-disable-next-line react-hooks/set-state-in-effect -- portal target only exists after mount
   useEffect(() => setMounted(true), []);
-
-  // Close mobile navigation drawer on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   // Clean body scroll locking and keyboard accessibility
   useEffect(() => {

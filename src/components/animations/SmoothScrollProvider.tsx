@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
@@ -25,6 +25,18 @@ export function useSmoothScroll() {
 // Routes where Lenis must NOT hijack scroll (forms, admin inputs, verification, or dedicated invitation motion provider)
 const EXCLUDED_PREFIXES = ["/admin", "/register", "/verify", "/invitation"];
 
+function subscribeReducedMotion(cb: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener?.("change", cb);
+  return () => mq.removeEventListener?.("change", cb);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function SmoothScrollProvider({
   children,
 }: {
@@ -32,7 +44,7 @@ export function SmoothScrollProvider({
 }) {
   const pathname = usePathname();
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
-  const [isReduced, setIsReduced] = useState(false);
+  const isReduced = useSyncExternalStore(subscribeReducedMotion, getReducedMotionSnapshot, () => false);
   const lenisRef = useRef<Lenis | null>(null);
 
   const isExcluded = EXCLUDED_PREFIXES.some((prefix) =>
@@ -42,24 +54,13 @@ export function SmoothScrollProvider({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setIsReduced(mediaQuery.matches);
-
-    const onMotionChange = (e: MediaQueryListEvent) => {
-      setIsReduced(e.matches);
-    };
-    mediaQuery.addEventListener?.("change", onMotionChange);
-
     // If user prefers reduced motion or is on an excluded route, use native scrolling
-    if (mediaQuery.matches || isExcluded) {
+    if (isReduced || isExcluded) {
       if (lenisRef.current) {
         lenisRef.current.destroy();
         lenisRef.current = null;
-        setLenisInstance(null);
       }
-      return () => {
-        mediaQuery.removeEventListener?.("change", onMotionChange);
-      };
+      return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
@@ -78,7 +79,7 @@ export function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
-    setLenisInstance(lenis);
+    const initTimer = setTimeout(() => setLenisInstance(lenis), 0);
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -95,13 +96,13 @@ export function SmoothScrollProvider({
     }, 450);
 
     return () => {
-      mediaQuery.removeEventListener?.("change", onMotionChange);
+      clearTimeout(initTimer);
       clearTimeout(timer);
       gsap.ticker.remove(onTick);
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [pathname, isExcluded]);
+  }, [pathname, isExcluded, isReduced]);
 
   const scrollTo = (target: string | HTMLElement, offset: number = 0) => {
     if (lenisRef.current) {

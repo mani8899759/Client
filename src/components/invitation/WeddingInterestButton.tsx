@@ -12,12 +12,15 @@ export function WeddingInterestButton({ className = "" }: { className?: string }
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY) as GuestStatus | null;
-      if (stored === "interested") {
-        setStatus("interested");
-      }
-    } catch {}
+    const raf = requestAnimationFrame(() => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY) as GuestStatus | null;
+        if (stored === "interested") {
+          setStatus("interested");
+        }
+      } catch {}
+    });
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   async function handleInterestedClick() {

@@ -15,17 +15,17 @@ export function InvitationBottomInterestBar() {
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
   useEffect(() => {
-    setMounted(true);
-
-    try {
-      const isResolved = localStorage.getItem(RESOLVED_KEY);
-      if (isResolved === "true") {
-        setIsVisible(false);
-        return;
+    const raf = requestAnimationFrame(() => {
+      setMounted(true);
+      try {
+        if (localStorage.getItem(RESOLVED_KEY) === "true") {
+          setIsVisible(false);
+        }
+      } catch {
+        // LocalStorage access may fail in private browsing
       }
-    } catch {
-      // LocalStorage access may fail in private browsing
-    }
+    });
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   async function handleInterested() {

@@ -5,7 +5,6 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { YouTubeEmbed } from "@/components/media/YouTubeEmbed";
 import { StreamStatusBadge } from "@/components/media/StreamStatusBadge";
-import { EmptyState } from "@/components/feedback/States";
 import { ButtonLink } from "@/components/buttons/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { OFFICIAL_LOGO } from "@/config/logo";

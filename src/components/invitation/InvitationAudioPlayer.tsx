@@ -37,16 +37,19 @@ export function InvitationAudioPlayer({
 
   // Initialize client state & read saved mute preference
   useEffect(() => {
-    setMounted(true);
-    try {
-      const savedMuted = sessionStorage.getItem(MUTED_KEY) === "true";
-      if (savedMuted) {
-        setIsMuted(true);
-        if (audioRef.current) audioRef.current.muted = true;
+    const raf = requestAnimationFrame(() => {
+      setMounted(true);
+      try {
+        const savedMuted = sessionStorage.getItem(MUTED_KEY) === "true";
+        if (savedMuted) {
+          setIsMuted(true);
+          if (audioRef.current) audioRef.current.muted = true;
+        }
+      } catch {
+        // Storage access may be restricted in private browsing
       }
-    } catch {
-      // Storage access may be restricted in private browsing
-    }
+    });
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   // Update volume

@@ -1,15 +1,7 @@
 -- 20261116000002_confirmed_events_schedule.sql
 -- Confirmed 5-event schedule for Priya & Arjun (December 2026)
 
--- 1. Add 'sangeet' to event_type enum if not present
-do $$
-begin
-  alter type public.event_type add value if not exists 'sangeet' after 'mehendi';
-exception
-  when duplicate_object then null;
-end $$;
-
--- 2. Add time_period and time_label columns to events table if not exists
+-- 1. Add time_period and time_label columns to events table if not exists
 alter table public.events add column if not exists time_period text;
 alter table public.events add column if not exists time_label text;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,6 +21,18 @@ export function useInvitationMotion() {
   return useContext(MotionContext);
 }
 
+function subscribeReducedMotion(cb: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener?.("change", cb);
+  return () => mq.removeEventListener?.("change", cb);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function InvitationMotionProvider({
   children,
   active = true,
@@ -29,25 +41,11 @@ export function InvitationMotionProvider({
   active?: boolean;
 }) {
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
-  const [isReduced, setIsReduced] = useState(false);
+  const isReduced = useSyncExternalStore(subscribeReducedMotion, getReducedMotionSnapshot, () => false);
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setIsReduced(mediaQuery.matches);
-
-    const onMotionChange = (e: MediaQueryListEvent) => {
-      setIsReduced(e.matches);
-    };
-    mediaQuery.addEventListener?.("change", onMotionChange);
-
-    if (mediaQuery.matches || !active) {
-      return () => {
-        mediaQuery.removeEventListener?.("change", onMotionChange);
-      };
-    }
+    if (typeof window === "undefined" || isReduced || !active) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -66,7 +64,7 @@ export function InvitationMotionProvider({
     });
 
     lenisRef.current = lenis;
-    setLenisInstance(lenis);
+    const initTimer = setTimeout(() => setLenisInstance(lenis), 0);
 
     // Sync Lenis scroll events to GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
@@ -84,7 +82,7 @@ export function InvitationMotionProvider({
     }, 400);
 
     return () => {
-      mediaQuery.removeEventListener?.("change", onMotionChange);
+      clearTimeout(initTimer);
       clearTimeout(refreshTimer);
 
       // Clean up GSAP ticker callback
@@ -103,7 +101,7 @@ export function InvitationMotionProvider({
       });
       ScrollTrigger.clearMatchMedia?.();
     };
-  }, [active]);
+  }, [active, isReduced]);
 
   const scrollTo = (target: string | HTMLElement, offset: number = 0) => {
     if (lenisRef.current) {

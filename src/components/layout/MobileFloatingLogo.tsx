@@ -31,16 +31,21 @@ export function MobileFloatingLogo({
   const [interestBarOpen, setInterestBarOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    try {
-      setInterestBarOpen(localStorage.getItem(RESOLVED_KEY) !== "true");
-    } catch {
-      setInterestBarOpen(false);
-    }
+    const raf = requestAnimationFrame(() => {
+      setMounted(true);
+      try {
+        setInterestBarOpen(localStorage.getItem(RESOLVED_KEY) !== "true");
+      } catch {
+        setInterestBarOpen(false);
+      }
+    });
 
     const onResolved = () => setInterestBarOpen(false);
     window.addEventListener("wedding:interest-bar-resolved", onResolved);
-    return () => window.removeEventListener("wedding:interest-bar-resolved", onResolved);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("wedding:interest-bar-resolved", onResolved);
+    };
   }, []);
 
   if (!enabled || !logoUrl || !mounted) return null;

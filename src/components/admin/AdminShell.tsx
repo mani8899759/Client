@@ -120,15 +120,13 @@ export function AdminShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  const [openPath, setOpenPath] = useState<string | null>(null);
+  const open = openPath === pathname;
+  const setOpen = (next: boolean) => setOpenPath(next ? pathname : null);
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenPath(null);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);

@@ -22,7 +22,8 @@ export function InvitationClosing({
 
   useEffect(() => {
     if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
-      setCanShare(true);
+      const raf = requestAnimationFrame(() => setCanShare(true));
+      return () => cancelAnimationFrame(raf);
     }
   }, []);
 

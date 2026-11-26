@@ -20,9 +20,12 @@ export function WeddingCountdown({
   const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
-    setNow(Date.now());
+    const raf = requestAnimationFrame(() => setNow(Date.now()));
     const interval = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(interval);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearInterval(interval);
+    };
   }, []);
 
   const r = now === null ? null : remainingUntil(targetTimestamp, now);

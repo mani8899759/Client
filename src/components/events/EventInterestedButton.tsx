@@ -54,10 +54,13 @@ export function EventInterestedButton({
 
   useEffect(() => {
     let active = true;
-    const localIds = readLocalInterests();
-    if (localIds.includes(eventId)) {
-      setInterested(true);
-    }
+    const raf = requestAnimationFrame(() => {
+      if (!active) return;
+      const localIds = readLocalInterests();
+      if (localIds.includes(eventId)) {
+        setInterested(true);
+      }
+    });
 
     void fetchSavedEventInterests().then((serverIds) => {
       if (!active) return;
@@ -69,6 +72,7 @@ export function EventInterestedButton({
 
     return () => {
       active = false;
+      cancelAnimationFrame(raf);
     };
   }, [eventId]);
 
