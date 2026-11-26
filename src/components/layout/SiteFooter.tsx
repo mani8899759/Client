@@ -3,6 +3,7 @@ import { PUBLIC_NAV } from "@/config/site";
 import { Container } from "./Container";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { coupleNames } from "@/lib/utils/names";
+import { HashtagBadge } from "@/components/common/HashtagBadge";
 import type { WeddingSettings } from "@/types/database";
 
 /** Dark Walnut footer — the one place the deep tone is used as a full surface. */
@@ -24,6 +25,12 @@ export function SiteFooter({ wedding }: { wedding: WeddingSettings }) {
             </p>
             <p className="mt-4 text-meta text-champagne-gold">{date ?? "Date to be announced"}</p>
             {wedding.footer_note ? <p className="mt-6 max-w-[42ch] text-support text-soft-border/80">{wedding.footer_note}</p> : null}
+            {wedding.hashtag_homepage_visible !== false ? (
+              <div className="mt-5 flex items-center gap-2.5">
+                <span className="text-[12px] uppercase tracking-widest text-champagne-gold/75">Hashtag:</span>
+                <HashtagBadge hashtag={wedding.hashtag || "#Kanmani"} variant="footer" />
+              </div>
+            ) : null}
           </div>
 
           <nav aria-label="Footer" className="lg:col-span-3 lg:col-start-7">

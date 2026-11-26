@@ -35,7 +35,6 @@ export function InvitationHeroAnimation({
   const dividerBottomRef = useRef<HTMLDivElement | null>(null);
   const marryingTextRef = useRef<HTMLParagraphElement | null>(null);
   const dateBadgeRef = useRef<HTMLDivElement | null>(null);
-  const timezoneRef = useRef<HTMLParagraphElement | null>(null);
   const namesContainerRef = useRef<HTMLDivElement | null>(null);
 
   const names = coupleNames(wedding);
@@ -137,7 +136,6 @@ export function InvitationHeroAnimation({
           dividerBottomRef.current,
           marryingTextRef.current,
           dateBadgeRef.current,
-          timezoneRef.current,
         ].filter(Boolean);
 
         if (bottomElements.length) {
@@ -334,28 +332,22 @@ export function InvitationHeroAnimation({
           {/* Announcement and Main Date */}
           <div
             ref={dividerBottomRef}
-            className="mx-auto mt-5 max-w-[540px] border-t border-[#d4a843]/60 pt-4 sm:mt-8 sm:pt-5"
+            className="mx-auto mt-7 max-w-[540px] border-t border-[#d4a843]/60 pt-5 sm:mt-11 sm:pt-6"
           >
             <p
               ref={marryingTextRef}
-              className="font-[family-name:var(--font-serif)] text-[13px] font-semibold tracking-[0.24em] text-[#3d1c00] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] uppercase sm:text-[16px]"
+              className="font-[family-name:var(--font-serif)] text-[14px] xs:text-[15px] sm:text-[17px] md:text-[18px] font-bold tracking-[0.24em] sm:tracking-[0.28em] text-[#8b1a1a] uppercase drop-shadow-[0_1px_4px_rgba(253,245,230,1)]"
             >
               Are Getting Married
             </p>
             <div
               ref={dateBadgeRef}
-              className="mt-3 inline-block rounded-full border border-[#d4a843] bg-transparent px-8 py-1.5 backdrop-blur-[2px]"
+              className="mt-3.5 inline-block rounded-full border border-[#d4a843] bg-[#fdf5e6]/75 px-7 sm:px-9 py-1.5 backdrop-blur-[4px] shadow-[0_2px_8px_rgba(212,168,67,0.15)]"
             >
               <p className="font-[family-name:var(--font-playfair)] text-[15px] font-bold text-[#8b1a1a] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:text-[18px]">
                 {schedule?.dateOnlyLabel ?? "December 13, 2026"}
               </p>
             </div>
-            <p
-              ref={timezoneRef}
-              className="mt-6 text-[12px] font-medium tracking-wide text-[#3d1c00] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:mt-2"
-            >
-              Asia / Kolkata (IST)
-            </p>
           </div>
         </div>
       </div>

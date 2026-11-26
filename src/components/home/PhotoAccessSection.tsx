@@ -7,6 +7,7 @@ import { Camera, ExternalLink, QrCode, Sparkles } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading, Eyebrow } from "@/components/typography/Headings";
+import { HashtagBadge } from "@/components/common/HashtagBadge";
 import type { WeddingSettings } from "@/types/database";
 
 const DEFAULT_GALLERY_URL = "https://snapdiaries.ve.ai/gallery/manikanta-sravika";
@@ -145,6 +146,21 @@ export function PhotoAccessSection({ wedding }: { wedding: WeddingSettings }) {
               <p className="mt-4 text-[12px] text-secondary-text">
                 Opens our official guest gallery on SnapDiaries in a new tab.
               </p>
+
+              {/* Official Wedding Hashtag */}
+              {wedding.hashtag_homepage_visible !== false ? (
+                <div className="mt-8 border-t border-soft-border/70 pt-6">
+                  <p className="text-meta text-muted-gold uppercase tracking-wider">
+                    {wedding.hashtag_title || "Celebrate With Us"}
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <HashtagBadge hashtag={wedding.hashtag || "#Kanmani"} />
+                    <p className="text-[13px] text-secondary-text italic max-w-[48ch]">
+                      {wedding.hashtag_message || "Share your favourite moments from our celebrations with our wedding hashtag."}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
             </Reveal>
           </div>
         </div>

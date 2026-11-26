@@ -6,6 +6,7 @@ import { Check, Copy, Heart, Send, Share2, ArrowLeft } from "lucide-react";
 import type { WeddingSettings } from "@/types/database";
 import { coupleNames } from "@/lib/utils/names";
 import { weddingSchedule } from "@/lib/utils/wedding";
+import { HashtagBadge } from "@/components/common/HashtagBadge";
 
 export function InvitationClosing({
   wedding,
@@ -96,6 +97,24 @@ export function InvitationClosing({
             {dateLabel}
           </p>
         </div>
+
+        {/* Official Wedding Hashtag */}
+        {wedding.hashtag_invitation_visible !== false ? (
+          <div className="mt-7 flex flex-col items-center">
+            <p className="font-sans text-[11px] font-semibold tracking-[0.2em] text-[#996515] uppercase">
+              {wedding.hashtag_title || "Celebrate With Us"}
+            </p>
+            <div className="mt-2.5">
+              <HashtagBadge
+                hashtag={wedding.hashtag || "#Kanmani"}
+                variant="invitation"
+              />
+            </div>
+            <p className="mt-2 max-w-[44ch] font-[family-name:var(--font-serif)] text-[15px] italic text-[#7b6a58]">
+              {wedding.hashtag_message || "Share your favourite moments from our celebrations with our wedding hashtag."}
+            </p>
+          </div>
+        ) : null}
 
         {/* WhatsApp & Invitation Sharing Card */}
         <div className="mt-10 rounded-[14px] border border-[#d4a843]/50 bg-[#fffcf7] p-6 shadow-xs sm:p-8">

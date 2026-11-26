@@ -20,6 +20,9 @@ const contentSchema = z.object({
   bride_family_name: opt(80),
   family_heading: opt(160),
   family_invitation_message: opt(1000),
+  hashtag: opt(60),
+  hashtag_title: opt(120),
+  hashtag_message: opt(500),
   website_title: opt(120),
   website_subtitle: opt(120),
   monogram: opt(12),
@@ -70,6 +73,8 @@ export async function updateWebsiteContent(_: ActionState, fd: FormData): Promis
     const invImgRef = mediaRefField(str(fd, "invitation_image_path"));
     if (!invImgRef.ok) return fail("Invalid invitation image reference.", { invitation_image_path: ["Please upload the image again."] });
     const invitation_published = fd.get("invitation_published") === "on";
+    const hashtag_homepage_visible = fd.get("hashtag_homepage_visible") === "on";
+    const hashtag_invitation_visible = fd.get("hashtag_invitation_visible") === "on";
 
     const { data: before } = await supabase.from("wedding_settings").select("*").single<WeddingSettings>();
     const invitationUpdate = {
@@ -83,6 +88,8 @@ export async function updateWebsiteContent(_: ActionState, fd: FormData): Promis
       .update({
         ...parsed.data,
         ...invitationUpdate,
+        hashtag_homepage_visible,
+        hashtag_invitation_visible,
         timezone,
         wedding_date,
         wedding_time_confirmed: !!time,

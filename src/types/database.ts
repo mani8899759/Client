@@ -103,6 +103,11 @@ export interface WeddingSettings {
   logo_mobile_size?: number;
   logo_mobile_bottom?: number;
   logo_mobile_right?: number;
+  hashtag?: string | null;
+  hashtag_title?: string | null;
+  hashtag_message?: string | null;
+  hashtag_homepage_visible?: boolean;
+  hashtag_invitation_visible?: boolean;
   updated_at?: string;
 }
 

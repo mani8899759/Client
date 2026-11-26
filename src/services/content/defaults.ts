@@ -95,6 +95,11 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   logo_mobile_size: 108,
   logo_mobile_bottom: 16,
   logo_mobile_right: 16,
+  hashtag: "#Kanmani",
+  hashtag_title: "Celebrate With Us",
+  hashtag_message: "Share your favourite moments from our celebrations with our wedding hashtag.",
+  hashtag_homepage_visible: true,
+  hashtag_invitation_visible: true,
 };
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {

@@ -192,7 +192,12 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
 }
 
 export function EventsPreviewSection({ events }: { events: WeddingEvent[] }) {
-  const shown = events.slice(0, 5);
+  // Homepage-specific filtering: Exclude Engagement and Reception ceremonies
+  // (Main /events page and /invitation retain their respective event lists)
+  const homepageEvents = events.filter(
+    (e) => e.slug !== "engagement" && e.slug !== "reception" && e.event_type !== "reception"
+  );
+  const shown = homepageEvents.slice(0, 5);
   return (
     <Section tone="cream" labelledBy="events-preview-title">
       <Container width="wide">

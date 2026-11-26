@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { DEFAULT_WEDDING } from "@/services/content/defaults";
 import {
   FALLBACK_EVENTS,
   FALLBACK_STORY_ENTRIES,
@@ -139,5 +140,29 @@ describe("Authoritative Invitation Content & Fallback System", () => {
       "wedding-ceremony",
       "reception",
     ]);
+  });
+
+  it("filters out engagement and reception ceremonies for homepage preview while keeping 4 events", () => {
+    const homepageEvents = FALLBACK_EVENTS
+      .filter((e) => e.slug !== "engagement" && e.slug !== "reception" && e.event_type !== "reception")
+      .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+
+    expect(homepageEvents).toHaveLength(4);
+    expect(homepageEvents.map((e) => e.slug)).toEqual([
+      "mehndi",
+      "haldi",
+      "sangeet",
+      "wedding-ceremony",
+    ]);
+  });
+
+  it("configures official wedding hashtag #Kanmani with copy defaults", () => {
+    expect(DEFAULT_WEDDING.hashtag).toBe("#Kanmani");
+    expect(DEFAULT_WEDDING.hashtag_title).toBe("Celebrate With Us");
+    expect(DEFAULT_WEDDING.hashtag_message).toBe(
+      "Share your favourite moments from our celebrations with our wedding hashtag."
+    );
+    expect(DEFAULT_WEDDING.hashtag_homepage_visible).toBe(true);
+    expect(DEFAULT_WEDDING.hashtag_invitation_visible).toBe(true);
   });
 });

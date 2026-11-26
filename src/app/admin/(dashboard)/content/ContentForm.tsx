@@ -87,6 +87,49 @@ export function ContentForm({
       </Panel>
 
       <Panel
+        title="Wedding hashtag (#Kanmani)"
+        description="Official wedding hashtag for celebrations, photo sharing, and digital invitation."
+      >
+        <div className="grid gap-5 sm:grid-cols-2">
+          <AText
+            name="hashtag"
+            label="Wedding hashtag"
+            defaultValue={v(w.hashtag) || "#Kanmani"}
+            maxLength={60}
+            hint="e.g. #Kanmani"
+          />
+          <AText
+            name="hashtag_title"
+            label="Section heading"
+            defaultValue={v(w.hashtag_title) || "Celebrate With Us"}
+            maxLength={120}
+            hint="e.g. Celebrate With Us"
+          />
+          <AArea
+            name="hashtag_message"
+            label="Supporting message"
+            defaultValue={
+              v(w.hashtag_message) ||
+              "Share your favourite moments from our celebrations with our wedding hashtag."
+            }
+            maxLength={500}
+            rows={2}
+            className="sm:col-span-2"
+          />
+          <ACheck
+            name="hashtag_homepage_visible"
+            label="Display on homepage"
+            defaultChecked={w.hashtag_homepage_visible !== false}
+          />
+          <ACheck
+            name="hashtag_invitation_visible"
+            label="Display in digital invitation"
+            defaultChecked={w.hashtag_invitation_visible !== false}
+          />
+        </div>
+      </Panel>
+
+      <Panel
         title="Wedding date & countdown"
         description="Leave the ceremony time empty for a date-only countdown to the start of the wedding day. Add it later to count down to the exact time."
       >
