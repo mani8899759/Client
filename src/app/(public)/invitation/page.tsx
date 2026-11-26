@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Mail, ArrowLeft } from "lucide-react";
 import {
   getEvents,
-  getFeaturedGallery,
   getLiveStreams,
   getLocations,
   getStoryEntries,
@@ -15,7 +14,7 @@ import { weddingSchedule } from "@/lib/utils/wedding";
 import { publicEnv } from "@/lib/env";
 import { InvitationPageClient } from "@/components/invitation/InvitationPageClient";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const wedding = await getWeddingSettings();
@@ -43,12 +42,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function InvitationPage() {
-  const [wedding, story, events, venues, gallery, streams] = await Promise.all([
+  const [wedding, story, events, venues, streams] = await Promise.all([
     getWeddingSettings(),
     getStoryEntries(),
     getEvents(),
     getLocations(),
-    getFeaturedGallery(12),
     getLiveStreams(),
   ]);
 
@@ -88,7 +86,6 @@ export default async function InvitationPage() {
       story={story}
       events={events}
       venues={venues}
-      gallery={gallery}
       featuredStream={featuredStream}
       siteUrl={publicEnv.siteUrl}
     />

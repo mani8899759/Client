@@ -13,8 +13,6 @@ export function InvitationStory({
   story: StoryEntry[];
   wedding: WeddingSettings;
 }) {
-  if (!story || story.length === 0) return null;
-
   return (
     <section aria-labelledby="story-heading" className="py-14 sm:py-20 bg-[#f5ebd5]/40">
       <div className="mx-auto max-w-[920px] px-4 sm:px-6">
@@ -38,8 +36,9 @@ export function InvitationStory({
         </div>
 
         {/* Story chapters alternating */}
-        <div className="mt-12 space-y-12 sm:mt-16 sm:space-y-16">
-          {story.map((entry, index) => {
+        {story && story.length > 0 ? (
+          <div className="mt-12 space-y-12 sm:mt-16 sm:space-y-16">
+            {story.map((entry, index) => {
             const isEven = index % 2 === 1;
             const imgUrl = mediaUrl(entry.image_path) ?? "/images/wedding-shoot/optimised/photo-03.webp";
 
@@ -82,7 +81,12 @@ export function InvitationStory({
               </div>
             );
           })}
-        </div>
+          </div>
+        ) : (
+          <p className="mt-10 text-center font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033]">
+            Our story chapters will be shared here soon.
+          </p>
+        )}
 
         {wedding.story_closing ? (
           <div className="mt-12 text-center">

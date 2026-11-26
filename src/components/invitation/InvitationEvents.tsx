@@ -17,8 +17,6 @@ export function InvitationEvents({
   events: WeddingEvent[];
   timezone: string;
 }) {
-  if (!events || events.length === 0) return null;
-
   return (
     <section aria-labelledby="events-heading" className="relative overflow-hidden py-14 sm:py-20 lg:py-24 bg-[#fdf5e6]">
       {/* Background Mandala Accents */}
@@ -49,8 +47,9 @@ export function InvitationEvents({
         </div>
 
         {/* 2-Column Responsive Grid matching Blueprint */}
-        <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 lg:gap-8">
-          {events.map((event) => {
+        {events && events.length > 0 ? (
+          <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 lg:gap-8">
+            {events.map((event) => {
             const imgRef = event.image_path || pickImage(null, `event-${event.event_type}`);
             const imgUrl = mediaUrl(imgRef) ?? "/images/wedding-shoot/optimised/photo-10.webp";
             const rawTime = formatTimeRange(event.start_time, event.end_time);
@@ -121,15 +120,17 @@ export function InvitationEvents({
                     ) : null}
 
                     {/* Venue */}
-                    {venue ? (
-                      <div className="flex items-start gap-2.5">
-                        <MapPin className="size-4 shrink-0 text-[#8b1a1a] mt-0.5" />
+                    <div className="flex items-start gap-2.5">
+                      <MapPin className="size-4 shrink-0 text-[#8b1a1a] mt-0.5" />
+                      {venue ? (
                         <div>
                           <p className="font-semibold text-[#3d1c00]">{venue.name}</p>
                           <p className="text-[12px] text-[#7b6a58]">{venue.address || venue.city}</p>
                         </div>
-                      </div>
-                    ) : null}
+                      ) : (
+                        <span className="text-[#7b6a58]">Venue details coming soon</span>
+                      )}
+                    </div>
 
                     {/* Dress Code */}
                     {event.dress_code ? (
@@ -164,7 +165,12 @@ export function InvitationEvents({
               </div>
             );
           })}
-        </div>
+          </div>
+        ) : (
+          <p className="mt-10 text-center font-[family-name:var(--font-serif)] text-[18px] text-[#5c4033]">
+            Ceremony schedule details will be announced soon.
+          </p>
+        )}
       </div>
     </section>
   );

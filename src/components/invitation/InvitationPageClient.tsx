@@ -3,17 +3,15 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Gift } from "lucide-react";
-import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
+import type { LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { InvitationMotionProvider } from "./animations/InvitationMotionProvider";
 import { InvitationHero } from "./InvitationHero";
 import { InvitationAudioPlayer } from "./InvitationAudioPlayer";
 import { InvitationWelcome } from "./InvitationWelcome";
-import { InvitationCountdown } from "./InvitationCountdown";
 import { InvitationStory } from "./InvitationStory";
 import { InvitationEvents } from "./InvitationEvents";
-import { InvitationGallery } from "./InvitationGallery";
 import { InvitationLiveStream } from "./InvitationLiveStream";
 import { InvitationLocations } from "./InvitationLocations";
 import { InvitationGiftSection } from "./InvitationGiftSection";
@@ -24,7 +22,6 @@ export function InvitationPageClient({
   story,
   events,
   venues,
-  gallery,
   featuredStream,
   siteUrl,
 }: {
@@ -32,7 +29,6 @@ export function InvitationPageClient({
   story: StoryEntry[];
   events: WeddingEvent[];
   venues: Venue[];
-  gallery: GalleryMedia[];
   featuredStream?: LiveStream | null;
   siteUrl: string;
 }) {
@@ -91,25 +87,11 @@ export function InvitationPageClient({
             {/* Screen 2: Welcome and Couple introduction */}
             <InvitationWelcome wedding={wedding} />
 
-            {/* Screen 3: Events and Schedule */}
-            {wedding.invitation_section_events !== false ? (
-              <InvitationEvents events={events} timezone={wedding.timezone} />
-            ) : null}
+            {/* Screen 3: Our Love Story / A Journey Together */}
+            <InvitationStory story={story} wedding={wedding} />
 
-            {/* Screen 4: Wedding Countdown */}
-            {wedding.invitation_section_countdown !== false ? (
-              <InvitationCountdown wedding={wedding} />
-            ) : null}
-
-            {/* Screen 5: Our Story */}
-            {wedding.invitation_section_story !== false ? (
-              <InvitationStory story={story} wedding={wedding} />
-            ) : null}
-
-            {/* Screen 6: Photo Gallery */}
-            {wedding.invitation_section_gallery !== false ? (
-              <InvitationGallery media={gallery} />
-            ) : null}
+            {/* Screen 4: Sacred Ceremonies / Wedding Celebrations */}
+            <InvitationEvents events={events} timezone={wedding.timezone} />
 
             {/* Screen 8: Wedding Live Video */}
             {wedding.invitation_section_livestream !== false ? (
