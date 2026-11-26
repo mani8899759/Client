@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 const BUCKET_KEY = "wedding_interested_counter";
 const BASE_TIMESTAMP = "2026-11-20T00:00:00Z";
-const DEFAULT_INITIAL_COUNT = 142;
+const DEFAULT_INITIAL_COUNT = 0;
 
 export async function GET() {
   try {

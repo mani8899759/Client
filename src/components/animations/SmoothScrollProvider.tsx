@@ -22,8 +22,8 @@ export function useSmoothScroll() {
   return useContext(SmoothScrollContext);
 }
 
-// Routes where Lenis must NOT hijack scroll (forms, admin inputs, verification)
-const EXCLUDED_PREFIXES = ["/admin", "/register", "/verify"];
+// Routes where Lenis must NOT hijack scroll (forms, admin inputs, verification, or dedicated invitation motion provider)
+const EXCLUDED_PREFIXES = ["/admin", "/register", "/verify", "/invitation"];
 
 export function SmoothScrollProvider({
   children,
@@ -64,16 +64,16 @@ export function SmoothScrollProvider({
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Single unified Lenis instance for the public site
+    // Single unified Lenis instance for the public site (native touch preserved on mobile)
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1.0,
       touchMultiplier: 1.0,
-      syncTouch: true,
+      syncTouch: false, // Preserve native 60fps mobile touch scrolling
       autoRaf: false, // Driven by GSAP ticker for frame-perfect sync
     });
 

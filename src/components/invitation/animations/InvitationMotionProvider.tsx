@@ -52,14 +52,16 @@ export function InvitationMotionProvider({
     gsap.registerPlugin(ScrollTrigger);
 
     // Initialize Lenis smooth scroll specifically for the invitation experience
+    // Preserve native touch scrolling on mobile to avoid stutter/lag
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.25,
+      touchMultiplier: 1.0,
+      syncTouch: false,
       autoRaf: false, // Explicitly false: driven by GSAP ticker for frame-perfect sync
     });
 

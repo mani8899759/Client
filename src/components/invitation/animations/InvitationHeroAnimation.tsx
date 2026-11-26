@@ -8,16 +8,19 @@ import type { WeddingSettings } from "@/types/database";
 import { coupleNames } from "@/lib/utils/names";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { InvitationToran } from "../InvitationToran";
+import { useInvitationMotion } from "./InvitationMotionProvider";
 
 export function InvitationHeroAnimation({
   wedding,
   isOpened = false,
-  isReducedMotion = false,
+  isReducedMotion: isReducedMotionProp,
 }: {
   wedding: WeddingSettings;
   isOpened?: boolean;
   isReducedMotion?: boolean;
 }) {
+  const { isReducedMotion: contextReducedMotion } = useInvitationMotion();
+  const isReducedMotion = isReducedMotionProp ?? contextReducedMotion;
   const heroRef = useRef<HTMLElement | null>(null);
   const templeBgRef = useRef<HTMLDivElement | null>(null);
   const toranRef = useRef<HTMLDivElement | null>(null);
@@ -196,44 +199,7 @@ export function InvitationHeroAnimation({
           }
         });
 
-        // Mobile configuration: gentle zoom to preserve framing and performance
-        mm.add("(max-width: 767px)", () => {
-          const scrollTlMobile = gsap.timeline({
-            scrollTrigger: {
-              id: "invitation-hero-zoom-mobile",
-              trigger: heroRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 0.6,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          if (templeBgRef.current) {
-            scrollTlMobile.to(
-              templeBgRef.current,
-              {
-                scale: 1.08,
-                y: -20,
-                transformOrigin: "center 25%",
-                ease: "none",
-              },
-              0
-            );
-          }
-
-          if (namesContainerRef.current) {
-            scrollTlMobile.to(
-              namesContainerRef.current,
-              {
-                y: -40,
-                opacity: 0.9,
-                ease: "none",
-              },
-              0
-            );
-          }
-        });
+        // Mobile (< 768px): scrub parallax intentionally disabled to guarantee 60fps native touch scrolling
       }
     }, heroRef);
 
@@ -246,10 +212,7 @@ export function InvitationHeroAnimation({
     <section
       ref={heroRef}
       aria-label="Wedding Invitation Hero"
-      className="relative min-h-[580px] w-full overflow-hidden bg-[#fdf5e6] pb-12 sm:min-h-[680px] md:min-h-[760px] lg:min-h-[840px]"
-      style={{
-        perspective: "1200px",
-      }}
+      className="relative min-h-[580px] w-full overflow-hidden bg-[#fdf5e6] pb-12 sm:min-h-[680px] md:min-h-[760px] md:[perspective:1200px] lg:min-h-[840px]"
     >
       {/* 1. Traditional Hanging Mango Leaf & Marigold Toran */}
       <div ref={toranRef} className="absolute top-0 inset-x-0 z-20">

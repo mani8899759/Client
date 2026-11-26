@@ -78,7 +78,7 @@ export function InvitationPageClient({
     <InvitationMotionProvider active={isOpened}>
       <div className="invitation-theme min-h-screen bg-[#fdf5e6] text-[#3d1c00]">
         {/* Top minimal bar to return to wedding site */}
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-[#d4a843]/40 bg-[#fffcf7]/95 px-4 backdrop-blur-md sm:px-8">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-[#d4a843]/40 bg-[#fffcf7]/98 px-4 sm:bg-[#fffcf7]/95 sm:backdrop-blur-md sm:px-8">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-[13px] font-medium text-[#8b1a1a] transition-colors hover:text-[#721515]"

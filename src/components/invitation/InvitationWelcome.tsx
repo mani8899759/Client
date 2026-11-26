@@ -36,69 +36,103 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          id: "invitation-welcome-reveal",
-          trigger: sectionRef.current,
-          start: "top 78%",
-          toggleActions: "play none none none",
-        },
-        defaults: { ease: "power3.out" },
+      const mm = gsap.matchMedia();
+
+      // Desktop (>= 768px): full staggered horizontal & scale reveal
+      mm.add("(min-width: 768px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            id: "invitation-welcome-reveal",
+            trigger: sectionRef.current,
+            start: "top 78%",
+            toggleActions: "play none none none",
+          },
+          defaults: { ease: "power3.out" },
+        });
+
+        if (topDividerRef.current) {
+          tl.fromTo(
+            topDividerRef.current,
+            { opacity: 0, scale: 0.9, y: 15 },
+            { opacity: 1, scale: 1, y: 0, duration: 0.7 }
+          );
+        }
+
+        if (headingGroupRef.current) {
+          tl.fromTo(
+            headingGroupRef.current,
+            { opacity: 0, y: 25 },
+            { opacity: 1, y: 0, duration: 0.8 },
+            "-=0.4"
+          );
+        }
+
+        if (groomCardRef.current) {
+          tl.fromTo(
+            groomCardRef.current,
+            { opacity: 0, x: -35, scale: 0.92 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.85 },
+            "-=0.4"
+          );
+        }
+
+        if (ampersandRef.current) {
+          tl.fromTo(
+            ampersandRef.current,
+            { opacity: 0, scale: 0.6 },
+            { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" },
+            "-=0.5"
+          );
+        }
+
+        if (brideCardRef.current) {
+          tl.fromTo(
+            brideCardRef.current,
+            { opacity: 0, x: 35, scale: 0.92 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.85 },
+            "-=0.6"
+          );
+        }
+
+        if (bottomDividerRef.current) {
+          tl.fromTo(
+            bottomDividerRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.7 },
+            "-=0.3"
+          );
+        }
       });
 
-      if (topDividerRef.current) {
-        tl.fromTo(
+      // Mobile (< 768px): lightweight transform + opacity reveal for smooth 60fps scrolling
+      mm.add("(max-width: 767px)", () => {
+        const tlMobile = gsap.timeline({
+          scrollTrigger: {
+            id: "invitation-welcome-reveal-mobile",
+            trigger: sectionRef.current,
+            start: "top 86%",
+            toggleActions: "play none none none",
+          },
+          defaults: { ease: "power2.out", duration: 0.45 },
+        });
+
+        const mobileTargets = [
           topDividerRef.current,
-          { opacity: 0, scale: 0.9, y: 15 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.7 }
-        );
-      }
-
-      if (headingGroupRef.current) {
-        tl.fromTo(
           headingGroupRef.current,
-          { opacity: 0, y: 25 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.4"
-        );
-      }
-
-      // Staggered couple profiles: Groom enters from left, Bride from right
-      if (groomCardRef.current) {
-        tl.fromTo(
           groomCardRef.current,
-          { opacity: 0, x: -35, scale: 0.92 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.85 },
-          "-=0.4"
-        );
-      }
-
-      if (ampersandRef.current) {
-        tl.fromTo(
           ampersandRef.current,
-          { opacity: 0, scale: 0.6 },
-          { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" },
-          "-=0.5"
-        );
-      }
-
-      if (brideCardRef.current) {
-        tl.fromTo(
           brideCardRef.current,
-          { opacity: 0, x: 35, scale: 0.92 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.85 },
-          "-=0.6"
-        );
-      }
-
-      if (bottomDividerRef.current) {
-        tl.fromTo(
           bottomDividerRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.3"
-        );
-      }
+        ].filter(Boolean);
+
+        if (mobileTargets.length) {
+          tlMobile.fromTo(
+            mobileTargets,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, stagger: 0.06 }
+          );
+        }
+      });
     }, sectionRef);
 
     return () => {

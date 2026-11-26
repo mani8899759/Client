@@ -55,7 +55,7 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
             <Eyebrow>Welcome</Eyebrow>
             <h2
               id="welcome-title"
-              className="mt-4 font-serif text-[28px] xs:text-[32px] sm:text-[36px] font-normal leading-[1.18] sm:leading-[1.12] text-dark-walnut text-balance"
+              className="family-heading mt-4 box-border w-full max-w-full px-4 text-center font-serif text-[clamp(29px,7.5vw,38px)] font-normal leading-[1.15] text-dark-walnut sm:px-0 sm:text-left sm:text-[36px] sm:leading-[1.12]"
             >
               <span className="block sm:inline">Gudla &amp; Padakanti</span>{" "}
               <span className="block sm:inline">Families</span>
@@ -238,10 +238,10 @@ export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
 
   const initialList: Array<{ id: string; ref: string | null; alt: string }> = media.length
     ? media.map((m) => ({
-        id: m.id,
-        ref: m.storage_path,
-        alt: m.alt_text ?? m.title ?? "Wedding photograph",
-      }))
+      id: m.id,
+      ref: m.storage_path,
+      alt: m.alt_text ?? m.title ?? "Wedding photograph",
+    }))
     : shootFallbacks;
 
   // Add remaining shoot photos if list is short
