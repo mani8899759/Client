@@ -23,12 +23,52 @@ import type {
 export { DEFAULT_APP_SETTINGS, DEFAULT_WEDDING } from "./defaults";
 import { DEFAULT_APP_SETTINGS, DEFAULT_WEDDING } from "./defaults";
 
-function logError(scope: string, error: { message?: string } | null) {
-  if (error) console.error(`[content:${scope}]`, error.message);
+type QueryErrorLike = { code?: string; message?: string; details?: string } | null;
+
+function classifyQueryError(error: NonNullable<QueryErrorLike>): "rls_denied" | "network_error" | "query_error" {
+  const msg = error.message ?? "";
+  if (error.code === "42501" || /permission denied|row-level security/i.test(msg)) {
+    return "rls_denied";
+  }
+  if (/fetch failed|network|timeout|ECONNREFUSED|ENOTFOUND/i.test(msg)) {
+    return "network_error";
+  }
+  return "query_error";
+}
+
+function getConfiguredDb(scope: string) {
+  const db = getPublicSupabase();
+  if (!db) {
+    console.error(
+      `[content:${scope}] config_missing: NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY is not configured`,
+    );
+    return null;
+  }
+  return db;
+}
+
+function logError(scope: string, error: QueryErrorLike) {
+  if (!error) return;
+  const kind = classifyQueryError(error);
+  console.error(`[content:${scope}] ${kind}:`, error.code ? `[${error.code}]` : "", error.message ?? "Unknown error");
+}
+
+function logArrayResult(scope: string, data: unknown, error: QueryErrorLike) {
+  if (error) {
+    logError(scope, error);
+    return;
+  }
+  if (!Array.isArray(data)) {
+    console.error(`[content:${scope}] invalid_data: expected array result`);
+    return;
+  }
+  if (data.length === 0) {
+    console.info(`[content:${scope}] empty_published: query succeeded with 0 published rows`);
+  }
 }
 
 export const getWeddingSettings = cache(async (): Promise<WeddingSettings> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("wedding");
   if (!db) return DEFAULT_WEDDING;
   const { data, error } = await db.from("wedding_settings").select("*").maybeSingle<WeddingSettings>();
   logError("wedding", error);
@@ -42,7 +82,7 @@ export const getWeddingSettings = cache(async (): Promise<WeddingSettings> => {
 });
 
 export const getAppSettings = cache(async (): Promise<AppSettings> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("app");
   if (!db) return DEFAULT_APP_SETTINGS;
   const { data, error } = await db.from("app_settings").select("*").maybeSingle<AppSettings>();
   logError("app", error);
@@ -50,7 +90,7 @@ export const getAppSettings = cache(async (): Promise<AppSettings> => {
 });
 
 export const getStoryEntries = cache(async (): Promise<StoryEntry[]> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("story");
   if (!db) return [];
   const { data, error } = await db
     .from("story_entries")
@@ -58,14 +98,14 @@ export const getStoryEntries = cache(async (): Promise<StoryEntry[]> => {
     .eq("is_published", true)
     .order("sort_order", { ascending: true })
     .order("entry_date", { ascending: true, nullsFirst: false });
-  logError("story", error);
-  return (data as StoryEntry[] | null) ?? [];
+  logArrayResult("story", data, error);
+  return Array.isArray(data) ? (data as StoryEntry[]) : [];
 });
 
 const EVENT_SELECT = "*, venue:venues(*)";
 
 export const getEvents = cache(async (): Promise<WeddingEvent[]> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("events");
   if (!db) return [];
   const { data, error } = await db
     .from("events")
@@ -74,13 +114,13 @@ export const getEvents = cache(async (): Promise<WeddingEvent[]> => {
     .order("sort_order", { ascending: true })
     .order("event_date", { ascending: true, nullsFirst: false })
     .order("start_time", { ascending: true, nullsFirst: false });
-  logError("events", error);
-  return (data as WeddingEvent[] | null) ?? [];
+  logArrayResult("events", data, error);
+  return Array.isArray(data) ? (data as WeddingEvent[]) : [];
 });
 
 export const getEventBySlug = cache(async (slug: string): Promise<WeddingEvent | null> => {
   if (!/^[a-z0-9-]{1,80}$/.test(slug)) return null;
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("event");
   if (!db) return null;
   const { data, error } = await db
     .from("events")
@@ -108,15 +148,15 @@ export const getLocations = cache(async (): Promise<VenueWithEvents[]> => {
 });
 
 export const getGalleryCategories = cache(async (): Promise<GalleryCategory[]> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("gallery-categories");
   if (!db) return [];
   const { data, error } = await db
     .from("gallery_categories")
     .select("*")
     .eq("is_published", true)
     .order("sort_order", { ascending: true });
-  logError("gallery-categories", error);
-  return (data as GalleryCategory[] | null) ?? [];
+  logArrayResult("gallery-categories", data, error);
+  return Array.isArray(data) ? (data as GalleryCategory[]) : [];
 });
 
 export type GalleryFilter = { category?: string | null; type?: "photo" | "video" | null };
@@ -126,7 +166,7 @@ export async function getGalleryPage(
   offset = 0,
   limit = GALLERY_PAGE_SIZE,
 ): Promise<{ items: GalleryMedia[]; hasMore: boolean }> {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("gallery");
   if (!db) return { items: [], hasMore: false };
   let q = db
     .from("gallery_media")
@@ -138,13 +178,13 @@ export async function getGalleryPage(
   if (filter.type) q = q.eq("media_type", filter.type);
   if (filter.category) q = q.eq("category_id", filter.category);
   const { data, error } = await q;
-  logError("gallery", error);
-  const rows = (data as GalleryMedia[] | null) ?? [];
+  logArrayResult("gallery", data, error);
+  const rows = Array.isArray(data) ? (data as GalleryMedia[]) : [];
   return { items: rows.slice(0, limit), hasMore: rows.length > limit };
 }
 
 export const getFeaturedGallery = cache(async (limit = 6): Promise<GalleryMedia[]> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("gallery-featured");
   if (!db) return [];
   const { data, error } = await db
     .from("gallery_media")
@@ -154,12 +194,12 @@ export const getFeaturedGallery = cache(async (limit = 6): Promise<GalleryMedia[
     .order("is_featured", { ascending: false })
     .order("sort_order", { ascending: true })
     .limit(limit);
-  logError("gallery-featured", error);
-  return (data as GalleryMedia[] | null) ?? [];
+  logArrayResult("gallery-featured", data, error);
+  return Array.isArray(data) ? (data as GalleryMedia[]) : [];
 });
 
 export const getLiveStreams = cache(async (): Promise<LiveStream[]> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("streams");
   if (!db) return [];
   const { data, error } = await db
     .from("live_streams")
@@ -167,8 +207,8 @@ export const getLiveStreams = cache(async (): Promise<LiveStream[]> => {
     .eq("is_published", true)
     .order("sort_order", { ascending: true })
     .order("scheduled_at", { ascending: true, nullsFirst: false });
-  logError("streams", error);
-  return (data as LiveStream[] | null) ?? [];
+  logArrayResult("streams", data, error);
+  return Array.isArray(data) ? (data as LiveStream[]) : [];
 });
 
 /** The stream to feature: live first, then the next upcoming, then the latest replay. */
@@ -182,7 +222,7 @@ export function pickFeaturedStream(streams: LiveStream[]): LiveStream | null {
 }
 
 export const getPublicWinners = cache(async (): Promise<PublicWinners> => {
-  const db = getPublicSupabase();
+  const db = getConfiguredDb("winners");
   if (!db) return { status: "pending" };
   const { data, error } = await db.rpc("get_public_winners");
   logError("winners", error);
