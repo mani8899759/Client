@@ -26,6 +26,7 @@ export function InvitationHeroAnimation({
   const toranRef = useRef<HTMLDivElement | null>(null);
   const invocationRef = useRef<HTMLParagraphElement | null>(null);
   const dividerTopRef = useRef<HTMLDivElement | null>(null);
+  const familyHeadingRef = useRef<HTMLParagraphElement | null>(null);
   const groomContainerRef = useRef<HTMLDivElement | null>(null);
   const groomNameRef = useRef<HTMLHeadingElement | null>(null);
   const ampersandRef = useRef<HTMLDivElement | null>(null);
@@ -89,6 +90,15 @@ export function InvitationHeroAnimation({
             { opacity: 0, scaleX: 0.6 },
             { opacity: 1, scaleX: 1, duration: 0.7, ease: "power2.out" },
             0.35
+          );
+        }
+
+        if (familyHeadingRef.current) {
+          revealTl.fromTo(
+            familyHeadingRef.current,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+            0.38
           );
         }
 
@@ -212,17 +222,17 @@ export function InvitationHeroAnimation({
     <section
       ref={heroRef}
       aria-label="Wedding Invitation Hero"
-      className="relative min-h-[580px] w-full overflow-hidden bg-[#fdf5e6] pb-12 sm:min-h-[680px] md:min-h-[760px] md:[perspective:1200px] lg:min-h-[840px]"
+      className="relative min-h-[600px] w-full overflow-hidden bg-[#fdf5e6] pb-8 sm:min-h-[680px] md:min-h-[740px] md:[perspective:1200px] lg:min-h-[780px]"
     >
       {/* 1. Traditional Hanging Mango Leaf & Marigold Toran */}
       <div ref={toranRef} className="absolute top-0 inset-x-0 z-20">
         <InvitationToran />
       </div>
 
-      {/* 2. Grand South Indian Watercolor Temple Gopuram Background */}
+      {/* 2. Grand South Indian Watercolor Temple Gopuram Background (scaled ~15% smaller below top headings) */}
       <div
         ref={templeBgRef}
-        className="absolute inset-0 z-0 overflow-hidden will-change-transform"
+        className="absolute inset-x-0 top-[96px] bottom-0 z-0 overflow-hidden will-change-transform sm:top-[128px] lg:top-[152px]"
       >
         <picture>
           <source
@@ -240,63 +250,58 @@ export function InvitationHeroAnimation({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center sm:object-top"
+            className="object-cover object-bottom sm:object-[center_85%]"
           />
         </picture>
 
-        {/* Soft, warm cream vignettes to blend top and bottom naturally into #FDF5E6 */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#fdf5e6]/90 via-[#fdf5e6]/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#fdf5e6] via-[#fdf5e6]/70 to-transparent" />
+        {/* Subtle edge-only cream blend so top sky is seamless without fading the Gopuram spire */}
+        <div className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-[#fdf5e6] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#fdf5e6] via-[#fdf5e6]/65 to-transparent" />
       </div>
 
-      {/* 3. Couple Names Spread Outward Flanking the Temple (Transparent Background) */}
-      <div className="relative z-10 mx-auto flex min-h-[580px] w-full max-w-[1450px] flex-col items-center justify-center px-4 pt-16 pb-8 text-center sm:min-h-[680px] sm:px-8 md:min-h-[760px] lg:min-h-[840px] lg:px-12">
-        <div
-          ref={namesContainerRef}
-          className="relative w-full text-center will-change-transform"
-        >
-          {/* Top: Auspicious Invocation Header */}
-          <div className="mb-3 sm:mb-6">
-            <p
-              ref={invocationRef}
-              className="font-[family-name:var(--font-script)] text-[30px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[38px]"
-            >
-              {wedding.invitation_cover_heading || "A Special Invitation"}
-            </p>
+      {/* 3. Balanced Hero Composition: Top Headings above Gopuram + Clean Couple Names Flanking Temple */}
+      <div className="relative z-10 mx-auto flex min-h-[600px] w-full max-w-[1450px] flex-col items-center justify-between px-4 pt-12 pb-6 text-center sm:min-h-[680px] sm:px-8 sm:pt-14 sm:pb-8 md:min-h-[740px] lg:min-h-[780px] lg:px-12">
+        {/* Top Group: A Special Invitation + GUDLA & PADAKANTI FAMILIES */}
+        <div className="w-full pt-1 sm:pt-2">
+          <p
+            ref={invocationRef}
+            className="font-[family-name:var(--font-script)] text-[28px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[36px]"
+          >
+            {wedding.invitation_cover_heading || "A Special Invitation"}
+          </p>
 
-            <div
-              ref={dividerTopRef}
-              className="mx-auto my-2 flex items-center justify-center gap-3 sm:my-3"
-            >
-              <span className="h-px w-12 bg-[#d4a843]" />
-              <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
-              <span className="h-px w-12 bg-[#d4a843]" />
-            </div>
-
-            {/* Family Invitation Branding */}
-            <div className="mt-2">
-              <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
-                {wedding.family_heading || "Gudla & Padakanti Families"}
-              </p>
-              <p className="mt-0.5 font-serif text-[12px] sm:text-[14px] italic text-[#5c4033] drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
-                cordially invite you to celebrate
-              </p>
-            </div>
+          <div
+            ref={dividerTopRef}
+            className="mx-auto my-1.5 flex items-center justify-center gap-3 sm:my-2"
+          >
+            <span className="h-px w-10 bg-[#d4a843]" />
+            <span className="size-1.5 rounded-full bg-[#8b1a1a]" />
+            <span className="h-px w-10 bg-[#d4a843]" />
           </div>
 
-          {/* Grand 3-Column Outward Flanking Layout: GROOM (Left) — & (Center) — BRIDE (Right) */}
+          <p
+            ref={familyHeadingRef}
+            className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]"
+          >
+            {wedding.family_heading || "Gudla & Padakanti Families"}
+          </p>
+        </div>
+
+        {/* Lower-Middle Group: MANIKANTA & SRAVIKA + Announcement & Date */}
+        <div
+          ref={namesContainerRef}
+          className="relative mt-auto w-full pt-16 text-center will-change-transform sm:pt-20 lg:pt-24"
+        >
+          {/* Grand 3-Column Outward Flanking Layout: MANIKANTA (Left) — & (Center) — SRAVIKA (Right) */}
           <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-[1400px] mx-auto">
-            {/* LEFT: MANIKANTA (Groom) — Spread towards the left flank */}
+            {/* LEFT: MANIKANTA */}
             <div
               ref={groomContainerRef}
               className="justify-self-end text-right pr-2 xs:pr-4 sm:pr-8 md:pr-[clamp(30px,6vw,120px)] lg:pr-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
             >
-              <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.18em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
-                The Groom
-              </p>
               <h1
                 ref={groomNameRef}
-                className="mt-0.5 sm:mt-1 font-[family-name:var(--font-playfair)] text-[20px] xs:text-[26px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.04em] sm:tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
+                className="font-[family-name:var(--font-playfair)] text-[20px] xs:text-[26px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[74px] font-bold tracking-[0.04em] sm:tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
               >
                 {names.groom}
               </h1>
@@ -307,22 +312,19 @@ export function InvitationHeroAnimation({
               ref={ampersandRef}
               className="justify-self-center text-center px-1.5 xs:px-2 sm:px-4 bg-transparent border-0 shadow-none"
             >
-              <span className="font-[family-name:var(--font-script)] text-[26px] xs:text-[34px] sm:text-[52px] md:text-[62px] lg:text-[76px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_5px_rgba(61,28,0,0.3)]">
+              <span className="font-[family-name:var(--font-script)] text-[26px] xs:text-[34px] sm:text-[52px] md:text-[62px] lg:text-[74px] font-normal leading-none text-[#d4a843] drop-shadow-[0_2px_5px_rgba(61,28,0,0.3)]">
                 &amp;
               </span>
             </div>
 
-            {/* RIGHT: SRAVIKA (Bride) — Spread towards the right flank */}
+            {/* RIGHT: SRAVIKA */}
             <div
               ref={brideContainerRef}
               className="justify-self-start text-left pl-2 xs:pl-4 sm:pl-8 md:pl-[clamp(30px,6vw,120px)] lg:pl-[clamp(40px,7vw,140px)] bg-transparent border-0 shadow-none backdrop-blur-none"
             >
-              <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.18em] sm:tracking-[0.24em] text-[#996515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,0.95)]">
-                The Bride
-              </p>
               <h1
                 ref={brideNameRef}
-                className="mt-0.5 sm:mt-1 font-[family-name:var(--font-playfair)] text-[20px] xs:text-[26px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[76px] font-bold tracking-[0.04em] sm:tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
+                className="font-[family-name:var(--font-playfair)] text-[20px] xs:text-[26px] sm:text-[46px] md:text-[54px] lg:text-[66px] xl:text-[74px] font-bold tracking-[0.04em] sm:tracking-[0.06em] text-[#8b1a1a] drop-shadow-[0_2px_6px_rgba(253,245,230,0.95)] uppercase leading-none"
               >
                 {names.bride}
               </h1>
@@ -332,7 +334,7 @@ export function InvitationHeroAnimation({
           {/* Announcement and Main Date */}
           <div
             ref={dividerBottomRef}
-            className="mx-auto mt-6 max-w-[540px] border-t border-[#d4a843]/60 pt-5 sm:mt-10"
+            className="mx-auto mt-5 max-w-[540px] border-t border-[#d4a843]/60 pt-4 sm:mt-8 sm:pt-5"
           >
             <p
               ref={marryingTextRef}
