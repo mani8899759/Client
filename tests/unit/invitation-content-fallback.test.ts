@@ -104,4 +104,38 @@ describe("Authoritative Invitation Content & Fallback System", () => {
     const eventIds = FALLBACK_EVENTS.map((e) => e.id);
     expect(new Set(eventIds).size).toBe(eventIds.length);
   });
+
+  it("verifies all 5 Gemini Ghibli event illustrations exist in public/images/events/illustrations", () => {
+    const illustrationDir = path.join(process.cwd(), "public/images/events/illustrations");
+    const requiredFiles = ["mehndi.webp", "haldi.webp", "sangeet.webp", "wedding.webp", "reception.webp", "manifest.json"];
+
+    for (const f of requiredFiles) {
+      expect(fs.existsSync(path.join(illustrationDir, f)), `File ${f} must exist`).toBe(true);
+    }
+
+    const manifest = JSON.parse(fs.readFileSync(path.join(illustrationDir, "manifest.json"), "utf8"));
+    expect(manifest.illustrations).toHaveLength(5);
+    expect(manifest.illustrations.map((i: { eventSlug: string }) => i.eventSlug)).toEqual([
+      "mehndi",
+      "haldi",
+      "sangeet",
+      "wedding-ceremony",
+      "reception",
+    ]);
+  });
+
+  it("filters out engagement ceremony for the invitation route while keeping 5 events", () => {
+    const invitationEvents = FALLBACK_EVENTS
+      .filter((e) => e.slug !== "engagement")
+      .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+
+    expect(invitationEvents).toHaveLength(5);
+    expect(invitationEvents.map((e) => e.slug)).toEqual([
+      "mehndi",
+      "haldi",
+      "sangeet",
+      "wedding-ceremony",
+      "reception",
+    ]);
+  });
 });

@@ -352,7 +352,7 @@ export function InvitationHeroAnimation({
             </div>
             <p
               ref={timezoneRef}
-              className="mt-2 text-[12px] font-medium tracking-wide text-[#3d1c00] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)]"
+              className="mt-6 text-[12px] font-medium tracking-wide text-[#3d1c00] drop-shadow-[0_1px_2px_rgba(253,245,230,0.9)] sm:mt-2"
             >
               Asia / Kolkata (IST)
             </p>

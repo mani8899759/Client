@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { ArrowLeft, Gift } from "lucide-react";
-import type { LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
+import type { LiveStream, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { InvitationMotionProvider } from "./animations/InvitationMotionProvider";
 import { InvitationHero } from "./InvitationHero";
 import { InvitationAudioPlayer } from "./InvitationAudioPlayer";
 import { InvitationWelcome } from "./InvitationWelcome";
-import { InvitationStory } from "./InvitationStory";
 import { InvitationEvents } from "./InvitationEvents";
 import { InvitationLiveStream } from "./InvitationLiveStream";
 import { InvitationLocations } from "./InvitationLocations";
@@ -19,14 +18,12 @@ import { InvitationClosing } from "./InvitationClosing";
 
 export function InvitationPageClient({
   wedding,
-  story,
   events,
   venues,
   featuredStream,
   siteUrl,
 }: {
   wedding: WeddingSettings;
-  story: StoryEntry[];
   events: WeddingEvent[];
   venues: Venue[];
   featuredStream?: LiveStream | null;
@@ -37,6 +34,13 @@ export function InvitationPageClient({
     ? mediaUrl(wedding.invitation_music_path)
     : "/audio/priya-arjun-wedding-music.m4a";
   const invitationUrl = `${siteUrl}/invitation`;
+
+  // Invitation-only event filtering: exclude engagement and preserve chronological order
+  const invitationEvents = useMemo(() => {
+    return (events ?? [])
+      .filter((event) => event.slug !== "engagement")
+      .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+  }, [events]);
 
   // If visitor arrives with a section hash, scroll smoothly to it
   useEffect(() => {
@@ -87,11 +91,8 @@ export function InvitationPageClient({
             {/* Screen 2: Welcome and Couple introduction */}
             <InvitationWelcome wedding={wedding} />
 
-            {/* Screen 3: Our Love Story / A Journey Together */}
-            <InvitationStory story={story} wedding={wedding} />
-
-            {/* Screen 4: Sacred Ceremonies / Wedding Celebrations */}
-            <InvitationEvents events={events} timezone={wedding.timezone} />
+            {/* Screen 3: Sacred Ceremonies / Wedding Celebrations */}
+            <InvitationEvents events={invitationEvents} timezone={wedding.timezone} />
 
             {/* Screen 8: Wedding Live Video */}
             {wedding.invitation_section_livestream !== false ? (

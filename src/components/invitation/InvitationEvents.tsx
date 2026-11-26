@@ -14,6 +14,14 @@ import { cn } from "@/lib/utils/cn";
 import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
 import { MandalaDecoration } from "./MandalaDecoration";
 
+const INVITATION_EVENT_ARTWORK: Record<string, string> = {
+  mehndi: "/images/events/illustrations/mehndi.webp",
+  haldi: "/images/events/illustrations/haldi.webp",
+  sangeet: "/images/events/illustrations/sangeet.webp",
+  "wedding-ceremony": "/images/events/illustrations/wedding.webp",
+  reception: "/images/events/illustrations/reception.webp",
+};
+
 export function InvitationEvents({
   events,
   timezone: _timezone,
@@ -108,8 +116,9 @@ export function InvitationEvents({
         {events && events.length > 0 ? (
           <div className="relative mt-12 space-y-10 pl-5 before:absolute before:top-3 before:bottom-3 before:left-1.5 before:w-px before:bg-[#c5a36b]/45 sm:mt-16 lg:space-y-14 lg:pl-0 lg:before:hidden">
             {events.map((event, idx) => {
-              const imgRef = event.image_path || pickImage(null, `event-${event.event_type}`);
-              const imgUrl = mediaUrl(imgRef) ?? "/images/wedding-shoot/optimised/photo-10.webp";
+              const artworkPath = INVITATION_EVENT_ARTWORK[event.slug];
+              const imgRef = artworkPath || event.image_path || pickImage(null, `event-${event.event_type}`);
+              const imgUrl = mediaUrl(imgRef) ?? artworkPath ?? "/images/wedding-shoot/optimised/photo-10.webp";
               const rawTime = formatTimeRange(event.start_time, event.end_time);
               const timeStr = event.time_label || (rawTime ? `${rawTime} (IST)` : null);
               const venue = event.venue;
@@ -145,19 +154,19 @@ export function InvitationEvents({
                     )}
                   />
 
-                  {/* Event Photograph */}
+                  {/* Event Photograph / Illustration */}
                   <div
                     className={cn(
-                      "relative aspect-[16/10] w-full overflow-hidden rounded-[12px] border border-[#e5d5bd] bg-[#f7f0e4] lg:col-span-6",
+                      "relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-[#e5d5bd] bg-[#f7f0e4] lg:col-span-6",
                       flipDesktop && "lg:order-2",
                     )}
                   >
                     <Image
                       src={imgUrl}
-                      alt={event.image_alt || event.name}
+                      alt={event.image_alt || `${event.name} celebration illustration`}
                       fill
                       sizes="(max-width: 1023px) 100vw, 500px"
-                      className="object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#493628]/45 via-transparent to-transparent" />
                     <span className="absolute top-3 left-3 rounded-full border border-[#c5a36b]/60 bg-[#8b1a1a]/95 px-3 py-1 text-[11px] font-semibold tracking-wider text-[#fdf5e6] uppercase">

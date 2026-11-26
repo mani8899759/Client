@@ -5,7 +5,6 @@ import {
   getEvents,
   getLiveStreams,
   getLocations,
-  getStoryEntries,
   getWeddingSettings,
   pickFeaturedStream,
 } from "@/services/content";
@@ -42,9 +41,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function InvitationPage() {
-  const [wedding, story, events, venues, streams] = await Promise.all([
+  const [wedding, events, venues, streams] = await Promise.all([
     getWeddingSettings(),
-    getStoryEntries(),
     getEvents(),
     getLocations(),
     getLiveStreams(),
@@ -83,7 +81,6 @@ export default async function InvitationPage() {
   return (
     <InvitationPageClient
       wedding={wedding}
-      story={story}
       events={events}
       venues={venues}
       featuredStream={featuredStream}

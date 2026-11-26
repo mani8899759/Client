@@ -1,0 +1,91 @@
+{
+  "title": "Manikanta & Sravika Wedding Events — Ghibli Storybook Illustrations",
+  "generatedWith": "Gemini (Antigravity)",
+  "style": "Ghibli-inspired hand-painted watercolor storybook aesthetic",
+  "palette": [
+    "#F7F0E4",
+    "#FFF9F0",
+    "#C5A36B",
+    "#A28A62",
+    "#493628",
+    "#A34836",
+    "#899078"
+  ],
+  "illustrations": [
+    {
+      "eventSlug": "mehndi",
+      "eventName": "Mehndi Ceremony",
+      "originalGeneratedFile": "C:\\Users\\MANI-33\\.gemini\\antigravity\\brain\\da2efacf-2b03-4f34-9e63-26432e27850d\\mehndi_1795714641211.jpg",
+      "optimizedFile": "/images/events/illustrations/mehndi.webp",
+      "width": 1200,
+      "height": 896,
+      "aspectRatio": "4:3",
+      "sourceModel": "Gemini",
+      "aiGenerated": true,
+      "placeholder": false,
+      "purpose": "invitation event illustration",
+      "altText": "Traditional South Indian Mehndi ceremony watercolor illustration in Ghibli storybook style",
+      "generationDate": "2026-11-26T17:40:18.675Z"
+    },
+    {
+      "eventSlug": "haldi",
+      "eventName": "Haldi Ceremony",
+      "originalGeneratedFile": "C:\\Users\\MANI-33\\.gemini\\antigravity\\brain\\da2efacf-2b03-4f34-9e63-26432e27850d\\haldi_1795714651813.jpg",
+      "optimizedFile": "/images/events/illustrations/haldi.webp",
+      "width": 1200,
+      "height": 896,
+      "aspectRatio": "4:3",
+      "sourceModel": "Gemini",
+      "aiGenerated": true,
+      "placeholder": false,
+      "purpose": "invitation event illustration",
+      "altText": "Joyful traditional Haldi celebration watercolor illustration in Ghibli storybook style",
+      "generationDate": "2026-11-26T17:40:18.846Z"
+    },
+    {
+      "eventSlug": "sangeet",
+      "eventName": "Sangeet Ceremony",
+      "originalGeneratedFile": "C:\\Users\\MANI-33\\.gemini\\antigravity\\brain\\da2efacf-2b03-4f34-9e63-26432e27850d\\sangeet_1795714721678.jpg",
+      "optimizedFile": "/images/events/illustrations/sangeet.webp",
+      "width": 1200,
+      "height": 896,
+      "aspectRatio": "4:3",
+      "sourceModel": "Gemini",
+      "aiGenerated": true,
+      "placeholder": false,
+      "purpose": "invitation event illustration",
+      "altText": "Enchanting evening Sangeet musical celebration watercolor illustration in Ghibli storybook style",
+      "generationDate": "2026-11-26T17:40:19.017Z"
+    },
+    {
+      "eventSlug": "wedding-ceremony",
+      "eventName": "Wedding Ceremony",
+      "originalGeneratedFile": "C:\\Users\\MANI-33\\.gemini\\antigravity\\brain\\da2efacf-2b03-4f34-9e63-26432e27850d\\wedding_1795714673600.jpg",
+      "optimizedFile": "/images/events/illustrations/wedding.webp",
+      "width": 1200,
+      "height": 896,
+      "aspectRatio": "4:3",
+      "sourceModel": "Gemini",
+      "aiGenerated": true,
+      "placeholder": false,
+      "purpose": "invitation event illustration",
+      "altText": "Sacred South Indian temple-courtyard wedding mandap watercolor illustration in Ghibli storybook style",
+      "generationDate": "2026-11-26T17:40:19.190Z"
+    },
+    {
+      "eventSlug": "reception",
+      "eventName": "Wedding Reception",
+      "originalGeneratedFile": "C:\\Users\\MANI-33\\.gemini\\antigravity\\brain\\da2efacf-2b03-4f34-9e63-26432e27850d\\reception_1795714684722.jpg",
+      "optimizedFile": "/images/events/illustrations/reception.webp",
+      "width": 1200,
+      "height": 896,
+      "aspectRatio": "4:3",
+      "sourceModel": "Gemini",
+      "aiGenerated": true,
+      "placeholder": false,
+      "purpose": "invitation event illustration",
+      "altText": "Elegant wedding reception celebration stage watercolor illustration in Ghibli storybook style",
+      "generationDate": "2026-11-26T17:40:19.368Z"
+    }
+  ]
+}
