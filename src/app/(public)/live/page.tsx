@@ -30,6 +30,7 @@ export default async function LivePage() {
   const featured = pickFeaturedStream(visible);
   const others = visible.filter((s) => s.id !== featured?.id);
   const featuredUrl = featured ? playableUrl(featured) : null;
+  const hasValidFeatured = !!(featured && getYouTubeId(featured.youtube_url));
   const tz = wedding.timezone;
   const logoUrl = mediaUrl(wedding.logo_path) ?? OFFICIAL_LOGO.src;
   const showLogoPlaceholder = wedding.logo_youtube_enabled !== false && !!logoUrl;
@@ -38,12 +39,12 @@ export default async function LivePage() {
     <>
       <PageHeader
         eyebrow="Live Stream"
-        title="Watch from wherever you are"
-        intro="Ceremonies are streamed on YouTube. Upcoming streams appear here before they begin; replays stay available afterwards."
+        title="Watch Our Celebration Live"
+        intro="Our wedding celebration will be shared here. Stay connected and be part of our special moments."
       />
       <section aria-label="Live streams" className="pb-20 lg:pb-28">
         <Container width="wide">
-          {featured ? (
+          {hasValidFeatured && featured ? (
             <Reveal preset="zoom-reveal" className="grid gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-8">
                 {featuredUrl && getYouTubeId(featuredUrl) ? (
@@ -77,25 +78,35 @@ export default async function LivePage() {
               </div>
             </Reveal>
           ) : showLogoPlaceholder ? (
-            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-gradient-to-b from-soft-cream/70 via-card-surface to-warm-ivory/60 px-6 py-12 text-center shadow-[var(--shadow-lift)] sm:px-14 sm:py-16">
-              <div className="flex w-full max-w-[360px] items-center justify-center rounded-[var(--radius-control)] border border-soft-border/80 bg-warm-ivory/70 px-6 py-8 sm:max-w-[440px] sm:px-10 sm:py-10">
+            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-soft-cream/60 px-6 py-10 text-center sm:px-14 sm:py-14">
+              <div className="flex w-full max-w-[340px] items-center justify-center py-4 sm:max-w-[420px] sm:py-6">
                 <Image
                   src={logoUrl}
                   alt={OFFICIAL_LOGO.alt}
                   width={OFFICIAL_LOGO.width}
                   height={OFFICIAL_LOGO.height}
-                  className="h-auto w-full max-w-[320px] object-contain"
+                  className="h-auto w-full object-contain"
                 />
               </div>
-              <h2 className="mt-8 font-serif text-[28px] text-dark-walnut sm:text-[32px]">
-                Watch Our Celebration Live
-              </h2>
-              <p className="mx-auto mt-3 max-w-[52ch] text-body text-secondary-text text-pretty">
-                Our wedding celebration will be shared here. Stay connected and be part of our special moments.
+              <p className="mt-5 text-[14px] text-secondary-text">
+                Live streaming details will be available soon.
               </p>
             </div>
           ) : (
-            <EmptyState title="No live stream scheduled yet" description="Stream links for each ceremony will be published here closer to the day." />
+            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-soft-cream/60 px-6 py-10 text-center sm:px-14 sm:py-14">
+              <div className="relative aspect-[3/2] w-full max-w-[540px] overflow-hidden rounded-[var(--radius-control)] border border-soft-border bg-warm-ivory">
+                <Image
+                  src="/images/wedding-shoot/optimised/photo-13.webp"
+                  alt="Manikanta & Sravika — Real Wedding Shoot Photograph"
+                  width={2304}
+                  height={1536}
+                  className="h-full w-full object-cover object-[center_25%]"
+                />
+              </div>
+              <p className="mt-5 text-[14px] text-secondary-text">
+                Live streaming details will be available soon.
+              </p>
+            </div>
           )}
 
           {others.length ? (

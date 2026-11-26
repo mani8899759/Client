@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Play, Volume2, VolumeX, Maximize2, ExternalLink, Calendar, Video } from "lucide-react";
+import { Play, Volume2, VolumeX, ExternalLink, Calendar } from "lucide-react";
 import { Container, Section } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/typography/Headings";
 import { StreamStatusBadge } from "@/components/media/StreamStatusBadge";
@@ -10,6 +10,13 @@ import { OFFICIAL_LOGO } from "@/config/logo";
 import { formatDateTimeInZone } from "@/lib/utils/datetime";
 import { getYouTubeId, youTubeThumbnail } from "@/lib/utils/youtube";
 import type { LiveStream } from "@/types/database";
+
+const FALLBACK_COUPLE_PHOTO = {
+  src: "/images/wedding-shoot/optimised/photo-13.webp",
+  alt: "Manikanta & Sravika — Real Wedding Shoot Photograph",
+  width: 2304,
+  height: 1536,
+} as const;
 
 export function WatchCelebrationLiveSection({
   stream,
@@ -26,6 +33,7 @@ export function WatchCelebrationLiveSection({
 }) {
   const [isMuted, setIsMuted] = useState(true);
   const [manualPlay, setManualPlay] = useState(false);
+  const [logoFailed, setLogoFailed] = useState(false);
 
   const videoUrl = stream
     ? stream.status === "ended"
@@ -53,9 +61,9 @@ export function WatchCelebrationLiveSection({
           <SectionHeading
             eyebrow="Broadcast"
             title={<span id="watch-live-title">Watch Our Celebration Live</span>}
-            intro="Be part of our special moments, wherever you are. Join us as we celebrate this beautiful occasion."
+            intro="Our wedding celebration will be shared here. Stay connected and be part of our special moments."
           />
-          {stream?.status === "live" ? (
+          {stream && ytId && stream.status === "live" ? (
             <div className="flex items-center gap-2 self-center sm:self-end">
               <span className="relative flex size-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
@@ -65,14 +73,14 @@ export function WatchCelebrationLiveSection({
                 Broadcasting Live Now
               </span>
             </div>
-          ) : stream ? (
+          ) : stream && ytId ? (
             <div className="self-center sm:self-end">
               <StreamStatusBadge status={stream.status} />
             </div>
           ) : null}
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-[var(--radius-surface)] border border-soft-border bg-card-surface shadow-[var(--shadow-lift)] sm:mt-12">
+        <div className="mt-10 overflow-hidden rounded-[var(--radius-surface)] border border-soft-border bg-card-surface sm:mt-12">
           {stream && ytId ? (
             <div>
               {/* Media Player Area */}
@@ -175,28 +183,34 @@ export function WatchCelebrationLiveSection({
               </div>
             </div>
           ) : (
-            /* Official Wedding Logo Placeholder when no published YouTube URL is configured */
-            <div className="flex flex-col items-center justify-center bg-gradient-to-b from-soft-cream/70 via-card-surface to-warm-ivory/60 px-6 py-12 text-center sm:px-14 sm:py-16">
-              {logoEnabled && logoUrl ? (
-                <div className="flex w-full max-w-[360px] items-center justify-center rounded-[var(--radius-control)] border border-soft-border/80 bg-warm-ivory/70 px-6 py-8 shadow-[0_6px_24px_-18px_rgb(73_54_40/0.25)] sm:max-w-[440px] sm:px-10 sm:py-10">
+            /* Official Wedding Logo Placeholder (with real couple photo fallback) when no published YouTube URL exists */
+            <div className="flex flex-col items-center justify-center bg-soft-cream/60 px-6 py-10 text-center sm:px-14 sm:py-14">
+              {logoEnabled && logoUrl && !logoFailed ? (
+                <div className="flex w-full max-w-[340px] items-center justify-center py-4 sm:max-w-[420px] sm:py-6">
                   <Image
                     src={logoUrl}
                     alt={OFFICIAL_LOGO.alt}
                     width={OFFICIAL_LOGO.width}
                     height={OFFICIAL_LOGO.height}
-                    className="h-auto w-full max-w-[320px] object-contain"
+                    onError={() => setLogoFailed(true)}
+                    className="h-auto w-full object-contain"
                   />
                 </div>
               ) : (
-                <div className="flex size-16 items-center justify-center rounded-full border border-champagne-gold/40 bg-soft-cream text-muted-gold">
-                  <Video className="size-7" strokeWidth={1.5} />
+                <div className="relative aspect-[3/2] w-full max-w-[540px] overflow-hidden rounded-[var(--radius-control)] border border-soft-border bg-warm-ivory">
+                  <Image
+                    src={FALLBACK_COUPLE_PHOTO.src}
+                    alt={FALLBACK_COUPLE_PHOTO.alt}
+                    width={FALLBACK_COUPLE_PHOTO.width}
+                    height={FALLBACK_COUPLE_PHOTO.height}
+                    className="h-full w-full object-cover object-[center_25%]"
+                  />
                 </div>
               )}
-              <p className="mt-8 text-meta uppercase tracking-[0.14em] text-muted-gold">Live Celebration</p>
-              <p className="mx-auto mt-3 max-w-[52ch] text-body text-secondary-text text-pretty">
-                Our wedding celebration will be shared here. Stay connected and be part of our special moments.
+              <p className="mt-5 text-[14px] text-secondary-text">
+                Live streaming details will be available soon.
               </p>
-              <div className="mt-7 flex items-center gap-2 rounded-full border border-soft-border bg-soft-cream px-4 py-2 text-support text-dark-walnut">
+              <div className="mt-4 flex items-center gap-2 rounded-full border border-soft-border bg-warm-ivory/80 px-4 py-1.5 text-support text-dark-walnut">
                 <Calendar className="size-4 text-muted-gold" />
                 <span>Wedding Date: {weddingDateLabel}</span>
               </div>
