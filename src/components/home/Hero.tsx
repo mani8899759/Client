@@ -30,10 +30,24 @@ export function Hero({ wedding, app }: { wedding: WeddingSettings; app: AppSetti
         <HeroText>
           <HeroTextItem>
             <div className="mb-2 sm:mb-3">
-              <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-muted-gold">
-                {wedding.family_heading || "Gudla & Padakanti Families"}
-              </p>
-              <p className="mt-0.5 font-serif text-[13px] xs:text-[14px] sm:text-[15px] italic text-secondary-text">
+              {(() => {
+                const heading = (wedding.family_heading || "Gudla & Padakanti Families").trim();
+                const match = heading.match(/^(.+?)\s+(Families)$/i);
+                if (match) {
+                  return (
+                    <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-muted-gold leading-[1.45] sm:leading-normal">
+                      <span className="block whitespace-nowrap sm:inline">{match[1]}</span>{" "}
+                      <span className="block whitespace-nowrap sm:inline">{match[2]}</span>
+                    </p>
+                  );
+                }
+                return (
+                  <p className="font-sans text-[11px] xs:text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] uppercase text-muted-gold">
+                    {heading}
+                  </p>
+                );
+              })()}
+              <p className="mt-1 font-serif text-[13px] xs:text-[14px] sm:text-[15px] italic text-secondary-text">
                 cordially invite you to celebrate
               </p>
             </div>
