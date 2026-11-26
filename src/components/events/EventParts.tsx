@@ -4,6 +4,7 @@ import { EVENT_TYPE_LABEL } from "@/config/site";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { ButtonLink } from "@/components/buttons/Button";
 import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
+import { EventInterestedButton } from "./EventInterestedButton";
 import { Reveal, ImageReveal } from "@/components/motion/Reveal";
 import { dateOnlyParts, formatDateOnly, formatTimeRange } from "@/lib/utils/datetime";
 import { cn } from "@/lib/utils/cn";
@@ -190,6 +191,7 @@ export function EventFeature({ event, index }: { event: WeddingEvent; index: num
         </dl>
 
         <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <EventInterestedButton eventId={event.id} eventName={event.name} />
           <ButtonLink href={`/events/${event.slug}`} variant="primary">
             Event details
           </ButtonLink>

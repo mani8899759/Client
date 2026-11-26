@@ -7,6 +7,7 @@ import { Eyebrow } from "@/components/typography/Headings";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { ButtonLink } from "@/components/buttons/Button";
 import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
+import { EventInterestedButton } from "@/components/events/EventInterestedButton";
 import { Reveal, ImageReveal } from "@/components/motion/Reveal";
 import { directionsUrl, eventImage } from "@/components/events/EventParts";
 import { pickAlt } from "@/lib/storage/imagery";
@@ -85,7 +86,8 @@ export default async function EventDetailPage({ params }: Props) {
               {event.contact_info ? <Detail label="Contact">{event.contact_info}</Detail> : null}
             </dl>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <EventInterestedButton eventId={event.id} eventName={event.name} />
               {directions ? (
                 <ButtonLink href={directions} external variant="filled">
                   Get directions
