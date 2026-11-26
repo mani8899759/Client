@@ -90,6 +90,55 @@ body:has(.invitation-theme) footer {
   display: none;
 }
 
+/* ── Family Heading: Explicit 2-line mobile composition ─────────────────── */
+.family-heading {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: #493628;
+  box-sizing: border-box;
+}
+
+@media (max-width: 639px) {
+  .family-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 8px;
+    font-size: clamp(23px, 6.5vw, 34px);
+    line-height: 1.12;
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .family-heading-line-one,
+  .family-heading-line-two {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+@media (min-width: 640px) {
+  .family-heading {
+    text-align: left;
+    font-size: 36px;
+    line-height: 1.12;
+  }
+
+  .family-heading-line-one,
+  .family-heading-line-two {
+    display: inline;
+  }
+}
+
 /* ── Typography hierarchy ───────────────────────────────────────────────── */
 @utility text-display {
   font-family: var(--font-serif);

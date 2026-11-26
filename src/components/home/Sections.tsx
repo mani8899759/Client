@@ -55,10 +55,14 @@ export function WelcomeSection({ wedding }: { wedding: WeddingSettings }) {
             <Eyebrow>Welcome</Eyebrow>
             <h2
               id="welcome-title"
-              className="family-heading mt-4 box-border w-full max-w-full px-4 text-center font-serif text-[clamp(29px,7.5vw,38px)] font-normal leading-[1.15] text-dark-walnut sm:px-0 sm:text-left sm:text-[36px] sm:leading-[1.12]"
+              className="family-heading mt-4"
             >
-              <span className="block sm:inline">Gudla &amp; Padakanti</span>{" "}
-              <span className="block sm:inline">Families</span>
+              <span className="family-heading-line-one">
+                Gudla &amp; Padakanti
+              </span>{" "}
+              <span className="family-heading-line-two">
+                Families
+              </span>
             </h2>
             {wedding.welcome_message ? <Paragraphs text={wedding.welcome_message} className="mt-6 text-body text-secondary-text" /> : null}
             {wedding.invitation_message ? (
