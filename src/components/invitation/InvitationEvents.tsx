@@ -15,11 +15,11 @@ import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
 import { MandalaDecoration } from "./MandalaDecoration";
 
 const INVITATION_EVENT_ARTWORK: Record<string, string> = {
-  mehndi: "/images/events/illustrations/mehndi.webp",
-  haldi: "/images/events/illustrations/haldi.webp",
-  sangeet: "/images/events/illustrations/sangeet.webp",
-  "wedding-ceremony": "/images/events/illustrations/wedding.webp",
-  reception: "/images/events/illustrations/reception.webp",
+  mehndi: "/images/events/realistic/mehndi.webp",
+  haldi: "/images/events/realistic/haldi.webp",
+  sangeet: "/images/events/realistic/sangeet.webp",
+  "wedding-ceremony": "/images/events/realistic/wedding.webp",
+  reception: "/images/events/realistic/reception.webp",
 };
 
 export function InvitationEvents({
@@ -163,7 +163,7 @@ export function InvitationEvents({
                   >
                     <Image
                       src={imgUrl}
-                      alt={event.image_alt || `${event.name} celebration illustration`}
+                      alt={event.image_alt || `${event.name} celebration photograph`}
                       fill
                       sizes="(max-width: 1023px) 100vw, 500px"
                       className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"

@@ -105,17 +105,19 @@ describe("Authoritative Invitation Content & Fallback System", () => {
     expect(new Set(eventIds).size).toBe(eventIds.length);
   });
 
-  it("verifies all 5 Gemini Ghibli event illustrations exist in public/images/events/illustrations", () => {
-    const illustrationDir = path.join(process.cwd(), "public/images/events/illustrations");
+  it("verifies all 5 Gemini photorealistic event photographs exist in public/images/events/realistic", () => {
+    const realisticDir = path.join(process.cwd(), "public/images/events/realistic");
     const requiredFiles = ["mehndi.webp", "haldi.webp", "sangeet.webp", "wedding.webp", "reception.webp", "manifest.json"];
 
     for (const f of requiredFiles) {
-      expect(fs.existsSync(path.join(illustrationDir, f)), `File ${f} must exist`).toBe(true);
+      expect(fs.existsSync(path.join(realisticDir, f)), `File ${f} must exist`).toBe(true);
     }
 
-    const manifest = JSON.parse(fs.readFileSync(path.join(illustrationDir, "manifest.json"), "utf8"));
-    expect(manifest.illustrations).toHaveLength(5);
-    expect(manifest.illustrations.map((i: { eventSlug: string }) => i.eventSlug)).toEqual([
+    const manifest = JSON.parse(fs.readFileSync(path.join(realisticDir, "manifest.json"), "utf8"));
+    expect(manifest.is_photorealistic).toBe(true);
+    expect(manifest.is_illustration).toBe(false);
+    expect(manifest.events).toHaveLength(5);
+    expect(manifest.events.map((i: { eventSlug: string }) => i.eventSlug)).toEqual([
       "mehndi",
       "haldi",
       "sangeet",

@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-11-26T18:16:40.403Z",
+  "style": "ultra_photorealistic",
+  "is_ai_generated": true,
+  "is_photorealistic": true,
+  "is_illustration": false,
+  "camera_profile": "Sony A7R V / Canon EOS R5 prime editorial photography",
+  "palette": [
+    "#F7F0E4",
+    "#FFF9F0",
+    "#C5A36B",
+    "#A28A62",
+    "#493628",
+    "#8B1A1A",
+    "#899078"
+  ],
+  "aspect_ratio": "4:3",
+  "events": [
+    {
+      "eventSlug": "mehndi",
+      "name": "Mehndi Ceremony",
+      "fileName": "mehndi.webp",
+      "path": "/images/events/realistic/mehndi.webp",
+      "width": 1600,
+      "height": 1200,
+      "sizeBytes": 260780,
+      "format": "webp",
+      "description": "Macro editorial photograph of South Indian bride hands adorned with intricate dark-brown henna, ivory and gold silk cushion, brass katori bowls, marigold petals and jasmine buds in warm afternoon sunlight."
+    },
+    {
+      "eventSlug": "haldi",
+      "name": "Haldi Ceremony",
+      "fileName": "haldi.webp",
+      "path": "/images/events/realistic/haldi.webp",
+      "width": 1600,
+      "height": 1200,
+      "sizeBytes": 229574,
+      "format": "webp",
+      "description": "Vibrant sunlit morning courtyard photograph of hammered brass Urli platter with freshly ground turmeric paste, silver sandalwood cup, marigold garlands, and banana leaves."
+    },
+    {
+      "eventSlug": "sangeet",
+      "name": "Sangeet Evening",
+      "fileName": "sangeet.webp",
+      "path": "/images/events/realistic/sangeet.webp",
+      "width": 1600,
+      "height": 1200,
+      "sizeBytes": 353476,
+      "format": "webp",
+      "description": "Atmospheric evening festive celebration photograph with warm fairy lights, hanging brass lanterns, guests dancing joyfully in silk lehengas and sherwanis."
+    },
+    {
+      "eventSlug": "wedding-ceremony",
+      "name": "Sacred Wedding Ceremony",
+      "fileName": "wedding.webp",
+      "path": "/images/events/realistic/wedding.webp",
+      "width": 1600,
+      "height": 1200,
+      "sizeBytes": 389658,
+      "format": "webp",
+      "description": "Sacred South Indian traditional wedding Mandap with carved wooden pillars, jasmine garlands, glowing brass Nilavilakku oil lamps, and a temple Gopuram silhouette in morning light."
+    },
+    {
+      "eventSlug": "reception",
+      "name": "Grand Wedding Reception",
+      "fileName": "reception.webp",
+      "path": "/images/events/realistic/reception.webp",
+      "width": 1600,
+      "height": 1200,
+      "sizeBytes": 400376,
+      "format": "webp",
+      "description": "Luxury champagne-gold and ivory arched reception stage decorated with ivory roses, champagne orchids, hydrangeas, hanging crystals, and glowing brass lamps."
+    }
+  ]
+}
