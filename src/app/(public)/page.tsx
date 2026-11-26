@@ -9,6 +9,8 @@ import {
 } from "@/components/home/Sections";
 import { WatchCelebrationLiveSection } from "@/components/home/WatchCelebrationLiveSection";
 import { PhotoAccessSection } from "@/components/home/PhotoAccessSection";
+import { OFFICIAL_LOGO } from "@/config/logo";
+import { mediaUrl } from "@/lib/storage/media";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import {
   getAppSettings,
@@ -57,12 +59,14 @@ export default async function HomePage() {
       {/* 6. Wedding Venue / Locations and Get Directions */}
       <VenuePreviewSection wedding={wedding} venues={venues} />
 
-      {/* 7. YouTube Live Wedding Video */}
+      {/* 7. YouTube Live Wedding Video (shows official logo until YouTube URL is configured) */}
       {app.live_section_visible ? (
         <WatchCelebrationLiveSection
           stream={featuredStream}
           timezone={wedding.timezone}
           weddingDateLabel={schedule?.dateOnlyLabel ?? "December 13, 2026"}
+          logoUrl={mediaUrl(wedding.logo_path) ?? OFFICIAL_LOGO.src}
+          logoEnabled={wedding.logo_youtube_enabled !== false}
         />
       ) : null}
 

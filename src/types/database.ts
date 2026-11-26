@@ -95,6 +95,14 @@ export interface WeddingSettings {
   photo_access_cta_label?: string | null;
   photo_access_supporting_text?: string | null;
   photo_access_qr_visible?: boolean;
+  logo_path?: string | null;
+  logo_header_enabled?: boolean;
+  logo_mobile_floating_enabled?: boolean;
+  logo_youtube_enabled?: boolean;
+  logo_header_size?: number;
+  logo_mobile_size?: number;
+  logo_mobile_bottom?: number;
+  logo_mobile_right?: number;
   updated_at?: string;
 }
 

@@ -87,6 +87,14 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   photo_access_supporting_text:
     "Access the complete wedding photo collection through our official photo gallery.",
   photo_access_qr_visible: true,
+  logo_path: "/images/wedding-logo.webp",
+  logo_header_enabled: true,
+  logo_mobile_floating_enabled: true,
+  logo_youtube_enabled: true,
+  logo_header_size: 28,
+  logo_mobile_size: 108,
+  logo_mobile_bottom: 16,
+  logo_mobile_right: 16,
 };
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {

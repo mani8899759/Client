@@ -64,6 +64,8 @@ export function buildObjectPath(purpose: MediaPurpose, mime: string): string {
 const STORAGE_REF = /^(wedding-images|wedding-videos)\/[a-z]+\/\d{4}\/[0-9a-f-]{36}\.(jpg|png|webp|mp4|pdf|mp3|wav|m4a|aac|ogg)$/;
 /** Repository-bundled AI illustrations, served from /public/images/ai. */
 const STATIC_AI_REF = /^static\/ai\/[a-z0-9]+(-[a-z0-9]+)*\.(webp|avif|jpg|png|pdf|mp3)$/;
+/** Bundled local public image paths (e.g. /images/wedding-logo.webp). */
+const LOCAL_PUBLIC_IMAGE_REF = /^\/images\/[a-zA-Z0-9/_-]+\.(webp|png|jpg|jpeg)$/;
 
 export function isStorageRef(ref: string | null | undefined): ref is string {
   return !!ref && STORAGE_REF.test(ref);
@@ -75,7 +77,7 @@ export function isAiRef(ref: string | null | undefined): ref is string {
 }
 
 export function isValidMediaRef(ref: string | null | undefined): ref is string {
-  return isStorageRef(ref) || isAiRef(ref);
+  return isStorageRef(ref) || isAiRef(ref) || (!!ref && LOCAL_PUBLIC_IMAGE_REF.test(ref));
 }
 
 /** Public URL for a media reference (Supabase Storage, bundled AI asset, or absolute/relative URL), or null. */

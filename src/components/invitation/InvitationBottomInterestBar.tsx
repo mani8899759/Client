@@ -67,6 +67,7 @@ export function InvitationBottomInterestBar() {
     // Automatically close and slide away after brief thank-you feedback (1.8 seconds)
     setTimeout(() => {
       setIsVisible(false);
+      window.dispatchEvent(new Event("wedding:interest-bar-resolved"));
     }, 1800);
   }
 
@@ -81,6 +82,7 @@ export function InvitationBottomInterestBar() {
 
     // Immediately close so it never appears again on any page
     setIsVisible(false);
+    window.dispatchEvent(new Event("wedding:interest-bar-resolved"));
   }
 
   // If not mounted or already resolved, render nothing

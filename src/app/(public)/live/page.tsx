@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -7,6 +8,8 @@ import { StreamStatusBadge } from "@/components/media/StreamStatusBadge";
 import { EmptyState } from "@/components/feedback/States";
 import { ButtonLink } from "@/components/buttons/Button";
 import { Reveal } from "@/components/motion/Reveal";
+import { OFFICIAL_LOGO } from "@/config/logo";
+import { mediaUrl } from "@/lib/storage/media";
 import { getAppSettings, getLiveStreams, getWeddingSettings, pickFeaturedStream } from "@/services/content";
 import { formatDateTimeInZone } from "@/lib/utils/datetime";
 import { getYouTubeId } from "@/lib/utils/youtube";
@@ -28,6 +31,8 @@ export default async function LivePage() {
   const others = visible.filter((s) => s.id !== featured?.id);
   const featuredUrl = featured ? playableUrl(featured) : null;
   const tz = wedding.timezone;
+  const logoUrl = mediaUrl(wedding.logo_path) ?? OFFICIAL_LOGO.src;
+  const showLogoPlaceholder = wedding.logo_youtube_enabled !== false && !!logoUrl;
 
   return (
     <>
@@ -71,6 +76,24 @@ export default async function LivePage() {
                 {featured.description ? <p className="mt-5 text-body text-secondary-text">{featured.description}</p> : null}
               </div>
             </Reveal>
+          ) : showLogoPlaceholder ? (
+            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-gradient-to-b from-soft-cream/70 via-card-surface to-warm-ivory/60 px-6 py-12 text-center shadow-[var(--shadow-lift)] sm:px-14 sm:py-16">
+              <div className="flex w-full max-w-[360px] items-center justify-center rounded-[var(--radius-control)] border border-soft-border/80 bg-warm-ivory/70 px-6 py-8 sm:max-w-[440px] sm:px-10 sm:py-10">
+                <Image
+                  src={logoUrl}
+                  alt={OFFICIAL_LOGO.alt}
+                  width={OFFICIAL_LOGO.width}
+                  height={OFFICIAL_LOGO.height}
+                  className="h-auto w-full max-w-[320px] object-contain"
+                />
+              </div>
+              <h2 className="mt-8 font-serif text-[28px] text-dark-walnut sm:text-[32px]">
+                Watch Our Celebration Live
+              </h2>
+              <p className="mx-auto mt-3 max-w-[52ch] text-body text-secondary-text text-pretty">
+                Our wedding celebration will be shared here. Stay connected and be part of our special moments.
+              </p>
+            </div>
           ) : (
             <EmptyState title="No live stream scheduled yet" description="Stream links for each ceremony will be published here closer to the day." />
           )}

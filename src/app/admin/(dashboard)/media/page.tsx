@@ -3,6 +3,7 @@ import Image from "next/image";
 import { requireAdminPage } from "@/lib/auth/admin";
 import { AdminPageHeader, Badge, Panel } from "@/components/admin/ui";
 import { SiteImageSlot } from "./SiteImageSlot";
+import { LogoSettingsForm } from "./LogoSettingsForm";
 import { AI_SLOTS, AI_STYLE, aiAsset, aiRef } from "@/config/ai-assets";
 import { DEFAULT_WEDDING } from "@/services/content/defaults";
 import { isAiRef, mediaUrl } from "@/lib/storage/media";
@@ -41,6 +42,14 @@ export default async function MediaPage() {
           </Link>
         }
       />
+
+      <Panel
+        title="Official wedding logo"
+        className="mb-6"
+        description="Manage the official wedding logo across the website header, mobile bottom-right floating badge, and YouTube Live placeholder."
+      >
+        <LogoSettingsForm wedding={w} />
+      </Panel>
 
       <Panel title="Site images" description="Upload a real photograph to replace the illustration. Clearing an image falls back to the illustration (or a labelled placeholder).">
         <ul className="grid gap-5 lg:grid-cols-2">

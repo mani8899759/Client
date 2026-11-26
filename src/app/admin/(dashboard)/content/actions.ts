@@ -5,6 +5,7 @@ import { fail, ok, revalidatePublic, str, withAdmin, type ActionState } from "@/
 import { mediaRefField, removeMedia, replacedRefs } from "@/lib/admin/media";
 import { safeTimeZone, zonedLocalToUtcIso } from "@/lib/utils/datetime";
 import { friendlyDbError } from "@/lib/auth/errors";
+import { OFFICIAL_LOGO } from "@/config/logo";
 import type { SocialLink, WeddingSettings } from "@/types/database";
 
 const opt = (max: number) => z.string().max(max, `Must be ${max} characters or fewer.`).nullable();
@@ -180,5 +181,43 @@ export async function setSiteImage(_: ActionState, fd: FormData): Promise<Action
     await removeMedia(supabase, replacedRefs(before, update as Partial<WeddingSettings>, [field]));
     revalidatePublic();
     return ok(r.value ? "Image updated on the website." : "Image cleared — the illustration or placeholder is shown again.");
+  });
+}
+
+const logoSettingsSchema = z.object({
+  logo_header_size: z.coerce.number().int().min(18, "Minimum 18px.").max(48, "Maximum 48px."),
+  logo_mobile_size: z.coerce.number().int().min(64, "Minimum 64px.").max(180, "Maximum 180px."),
+  logo_mobile_bottom: z.coerce.number().int().min(8, "Minimum 8px.").max(120, "Maximum 120px."),
+  logo_mobile_right: z.coerce.number().int().min(8, "Minimum 8px.").max(64, "Maximum 64px."),
+});
+
+/** Media manager: update official wedding logo asset, visibility toggles, sizing and mobile placement. */
+export async function updateLogoSettings(_: ActionState, fd: FormData): Promise<ActionState> {
+  return withAdmin(async ({ supabase }) => {
+    const parsed = logoSettingsSchema.safeParse({
+      logo_header_size: str(fd, "logo_header_size") ?? String(OFFICIAL_LOGO.defaultHeaderSize),
+      logo_mobile_size: str(fd, "logo_mobile_size") ?? String(OFFICIAL_LOGO.defaultMobileSize),
+      logo_mobile_bottom: str(fd, "logo_mobile_bottom") ?? String(OFFICIAL_LOGO.defaultMobileBottom),
+      logo_mobile_right: str(fd, "logo_mobile_right") ?? String(OFFICIAL_LOGO.defaultMobileRight),
+    });
+    if (!parsed.success) return fail("Please correct the highlighted logo sizing values.", z.flattenError(parsed.error).fieldErrors);
+
+    const logoRef = mediaRefField(str(fd, "logo_path"));
+    if (!logoRef.ok) return fail("Invalid logo file reference.", { logo_path: ["Please upload a valid PNG, JPG or WebP logo."] });
+
+    const { data: before } = await supabase.from("wedding_settings").select("*").single<WeddingSettings>();
+    const update: Partial<WeddingSettings> = {
+      logo_path: logoRef.value || OFFICIAL_LOGO.src,
+      logo_header_enabled: fd.get("logo_header_enabled") === "on",
+      logo_mobile_floating_enabled: fd.get("logo_mobile_floating_enabled") === "on",
+      logo_youtube_enabled: fd.get("logo_youtube_enabled") === "on",
+      ...parsed.data,
+    };
+
+    const { error } = await supabase.from("wedding_settings").update(update).eq("id", true);
+    if (error) return fail(friendlyDbError(error));
+    await removeMedia(supabase, replacedRefs(before, update, ["logo_path"]));
+    revalidatePublic();
+    return ok("Wedding logo settings saved.");
   });
 }

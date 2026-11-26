@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { PRIMARY_CTA } from "@/config/site";
+import { OFFICIAL_LOGO } from "@/config/logo";
 import { ButtonLink } from "@/components/buttons/Button";
 import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { cn } from "@/lib/utils/cn";
@@ -34,6 +36,8 @@ export function ResponsiveNavigation({
   ctaLabel,
   invitationUrl,
   invitationType,
+  logoUrl = OFFICIAL_LOGO.src,
+  logoEnabled = true,
 }: {
   pathname: string;
   brand: string;
@@ -41,6 +45,8 @@ export function ResponsiveNavigation({
   ctaLabel: string;
   invitationUrl?: string | null;
   invitationType?: "pdf" | "image" | null;
+  logoUrl?: string | null;
+  logoEnabled?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -124,15 +130,26 @@ export function ResponsiveNavigation({
                 >
                   {/* Top Bar: Brand on left, Close button on right */}
                   <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6 border-b border-soft-border/80 bg-warm-ivory/95 backdrop-blur-sm sticky top-0 z-10 box-border">
-                    <div className="flex flex-col min-w-0 pr-2">
-                      {familyHeading ? (
-                        <span className="font-sans text-[10px] tracking-[0.16em] uppercase text-muted-gold leading-tight truncate">
-                          {familyHeading}
-                        </span>
+                    <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                      {logoEnabled && logoUrl ? (
+                        <Image
+                          src={logoUrl}
+                          alt={OFFICIAL_LOGO.alt}
+                          width={OFFICIAL_LOGO.width}
+                          height={OFFICIAL_LOGO.height}
+                          className="h-[18px] w-auto shrink-0 object-contain"
+                        />
                       ) : null}
-                      <span className="font-serif text-[18px] xs:text-[20px] sm:text-[24px] leading-tight text-dark-walnut font-medium truncate">
-                        {brand}
-                      </span>
+                      <div className="flex flex-col min-w-0">
+                        {familyHeading ? (
+                          <span className="font-sans text-[10px] tracking-[0.16em] uppercase text-muted-gold leading-tight truncate">
+                            {familyHeading}
+                          </span>
+                        ) : null}
+                        <span className="font-serif text-[17px] xs:text-[19px] sm:text-[24px] leading-tight text-dark-walnut font-medium truncate">
+                          {brand}
+                        </span>
+                      </div>
                     </div>
                     <button
                       type="button"

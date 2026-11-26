@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { PRIMARY_CTA, PUBLIC_NAV } from "@/config/site";
+import { OFFICIAL_LOGO } from "@/config/logo";
 import { ButtonLink } from "@/components/buttons/Button";
 import { ViewInvitationButton } from "@/components/invitation/ViewInvitationButton";
 import { ResponsiveNavigation } from "./ResponsiveNavigation";
@@ -20,6 +22,9 @@ export function SiteHeader({
   ctaLabel,
   invitationUrl,
   invitationType,
+  logoUrl = OFFICIAL_LOGO.src,
+  logoEnabled = true,
+  logoHeight = OFFICIAL_LOGO.defaultHeaderSize,
 }: {
   brand: string;
   coupleLabel: string;
@@ -27,9 +32,13 @@ export function SiteHeader({
   ctaLabel: string;
   invitationUrl?: string | null;
   invitationType?: "pdf" | "image" | null;
+  logoUrl?: string | null;
+  logoEnabled?: boolean;
+  logoHeight?: number;
 }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const clampedLogoHeight = Math.min(48, Math.max(18, logoHeight ?? OFFICIAL_LOGO.defaultHeaderSize));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -56,16 +65,32 @@ export function SiteHeader({
       <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-3 px-4 box-border sm:px-6 lg:h-[76px] lg:px-10">
         <Link
           href="/"
-          className="group flex flex-1 min-w-0 items-center overflow-hidden"
+          className="group flex flex-1 min-w-0 items-center gap-2 sm:gap-3 overflow-hidden"
           aria-label={`${coupleLabel} — home`}
         >
+          {logoEnabled && logoUrl ? (
+            <>
+              <span className="flex shrink-0 items-center">
+                <Image
+                  src={logoUrl}
+                  alt={OFFICIAL_LOGO.alt}
+                  width={OFFICIAL_LOGO.width}
+                  height={OFFICIAL_LOGO.height}
+                  priority
+                  className="w-auto object-contain h-[18px] xs:h-[20px] sm:h-[24px] lg:h-[var(--header-logo-h,28px)]"
+                  style={{ "--header-logo-h": `${clampedLogoHeight}px` } as CSSProperties}
+                />
+              </span>
+              <span aria-hidden className="hidden sm:inline-block h-5 w-px bg-champagne-gold/50 shrink-0" />
+            </>
+          ) : null}
           <div className="flex flex-col min-w-0">
             {familyHeading ? (
               <span className="hidden xl:inline-block font-sans text-[10px] tracking-[0.16em] uppercase text-muted-gold leading-tight">
                 {familyHeading}
               </span>
             ) : null}
-            <span className="truncate font-serif text-[20px] xs:text-[22px] sm:text-[26px] leading-none text-dark-walnut transition-colors group-hover:text-primary">
+            <span className="truncate font-serif text-[16px] xs:text-[19px] sm:text-[26px] leading-none text-dark-walnut transition-colors group-hover:text-primary">
               {brand}
             </span>
           </div>
@@ -112,6 +137,8 @@ export function SiteHeader({
             ctaLabel={ctaLabel}
             invitationUrl={invitationUrl}
             invitationType={invitationType}
+            logoUrl={logoUrl}
+            logoEnabled={logoEnabled}
           />
         </div>
       </div>
