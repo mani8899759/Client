@@ -49,6 +49,9 @@ export default async function InvitationPage() {
   ]);
 
   const featuredStream = pickFeaturedStream(streams);
+  const invitationEvents = events
+    .filter((e) => e.slug !== "engagement")
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
 
   // Graceful state if invitation is marked unpublished by admin
   if (wedding.invitation_published === false) {
@@ -81,7 +84,7 @@ export default async function InvitationPage() {
   return (
     <InvitationPageClient
       wedding={wedding}
-      events={events}
+      events={invitationEvents}
       venues={venues}
       featuredStream={featuredStream}
       siteUrl={publicEnv.siteUrl}
