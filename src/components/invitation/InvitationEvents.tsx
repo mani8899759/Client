@@ -187,9 +187,9 @@ export function InvitationEvents({
                       {event.name}
                     </h3>
 
-                    {event.short_description ? (
+                    {event.description || event.short_description ? (
                       <p className="mt-3 text-[15px] leading-relaxed text-[#7b6a58]">
-                        {event.short_description}
+                        {event.description || event.short_description}
                       </p>
                     ) : null}
 
@@ -209,12 +209,10 @@ export function InvitationEvents({
                         </span>
                       </div>
 
-                      {timeStr ? (
-                        <div className="flex items-center gap-2.5">
-                          <Clock className="size-4 shrink-0 text-[#8b1a1a]" aria-hidden />
-                          <span className="text-[#7b6a58]">{timeStr}</span>
-                        </div>
-                      ) : null}
+                      <div className="flex items-center gap-2.5">
+                        <Clock className="size-4 shrink-0 text-[#8b1a1a]" aria-hidden />
+                        <span className="text-[#7b6a58]">{timeStr || "Time to be announced"}</span>
+                      </div>
 
                       <div className="flex items-start gap-2.5">
                         <MapPin className="mt-0.5 size-4 shrink-0 text-[#8b1a1a]" aria-hidden />
@@ -228,7 +226,7 @@ export function InvitationEvents({
                             ) : null}
                           </div>
                         ) : (
-                          <span className="text-[#7b6a58]">Venue details coming soon</span>
+                          <span className="text-[#7b6a58]">Venue details to be announced</span>
                         )}
                       </div>
 

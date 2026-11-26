@@ -22,6 +22,8 @@ import type {
 
 export { DEFAULT_APP_SETTINGS, DEFAULT_WEDDING } from "./defaults";
 import { DEFAULT_APP_SETTINGS, DEFAULT_WEDDING } from "./defaults";
+export { FALLBACK_EVENTS, FALLBACK_STORY_ENTRIES } from "@/config/invitation-content";
+import { FALLBACK_EVENTS, FALLBACK_STORY_ENTRIES } from "@/config/invitation-content";
 
 type QueryErrorLike = { code?: string; message?: string; details?: string } | null;
 
@@ -91,7 +93,10 @@ export const getAppSettings = cache(async (): Promise<AppSettings> => {
 
 export const getStoryEntries = cache(async (): Promise<StoryEntry[]> => {
   const db = getConfiguredDb("story");
-  if (!db) return [];
+  if (!db) {
+    console.info("[content:story] using approved fallback story entries (Supabase not configured)");
+    return FALLBACK_STORY_ENTRIES;
+  }
   const { data, error } = await db
     .from("story_entries")
     .select("*")
@@ -99,14 +104,21 @@ export const getStoryEntries = cache(async (): Promise<StoryEntry[]> => {
     .order("sort_order", { ascending: true })
     .order("entry_date", { ascending: true, nullsFirst: false });
   logArrayResult("story", data, error);
-  return Array.isArray(data) ? (data as StoryEntry[]) : [];
+  if (error || !Array.isArray(data) || data.length === 0) {
+    console.info("[content:story] using approved fallback story entries (no published rows or query error)");
+    return FALLBACK_STORY_ENTRIES;
+  }
+  return data as StoryEntry[];
 });
 
 const EVENT_SELECT = "*, venue:venues(*)";
 
 export const getEvents = cache(async (): Promise<WeddingEvent[]> => {
   const db = getConfiguredDb("events");
-  if (!db) return [];
+  if (!db) {
+    console.info("[content:events] using approved fallback events (Supabase not configured)");
+    return FALLBACK_EVENTS;
+  }
   const { data, error } = await db
     .from("events")
     .select(EVENT_SELECT)
@@ -115,13 +127,19 @@ export const getEvents = cache(async (): Promise<WeddingEvent[]> => {
     .order("event_date", { ascending: true, nullsFirst: false })
     .order("start_time", { ascending: true, nullsFirst: false });
   logArrayResult("events", data, error);
-  return Array.isArray(data) ? (data as WeddingEvent[]) : [];
+  if (error || !Array.isArray(data) || data.length === 0) {
+    console.info("[content:events] using approved fallback events (no published rows or query error)");
+    return FALLBACK_EVENTS;
+  }
+  return data as WeddingEvent[];
 });
 
 export const getEventBySlug = cache(async (slug: string): Promise<WeddingEvent | null> => {
   if (!/^[a-z0-9-]{1,80}$/.test(slug)) return null;
   const db = getConfiguredDb("event");
-  if (!db) return null;
+  if (!db) {
+    return FALLBACK_EVENTS.find((e) => e.slug === slug) ?? null;
+  }
   const { data, error } = await db
     .from("events")
     .select(EVENT_SELECT)
@@ -129,7 +147,10 @@ export const getEventBySlug = cache(async (slug: string): Promise<WeddingEvent |
     .eq("is_published", true)
     .maybeSingle<WeddingEvent>();
   logError("event", error);
-  return data ?? null;
+  if (error || !data) {
+    return FALLBACK_EVENTS.find((e) => e.slug === slug) ?? null;
+  }
+  return data;
 });
 
 export type VenueWithEvents = Venue & { events: Pick<WeddingEvent, "id" | "slug" | "name" | "event_date" | "start_time">[] };
