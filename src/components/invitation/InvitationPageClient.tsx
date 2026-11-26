@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Gift } from "lucide-react";
 import type { GalleryMedia, LiveStream, StoryEntry, Venue, WeddingEvent, WeddingSettings } from "@/types/database";
 import { mediaUrl } from "@/lib/storage/media";
 import { weddingSchedule } from "@/lib/utils/wedding";
 import { InvitationMotionProvider } from "./animations/InvitationMotionProvider";
-import { InvitationCover } from "./InvitationCover";
 import { InvitationHero } from "./InvitationHero";
 import { InvitationAudioPlayer } from "./InvitationAudioPlayer";
 import { InvitationWelcome } from "./InvitationWelcome";
@@ -37,45 +36,26 @@ export function InvitationPageClient({
   featuredStream?: LiveStream | null;
   siteUrl: string;
 }) {
-  const [isOpened, setIsOpened] = useState(false);
-  const [musicTrigger, setMusicTrigger] = useState(false);
-  const mainContentRef = useRef<HTMLDivElement | null>(null);
-
   const schedule = weddingSchedule(wedding);
   const audioUrl = wedding.invitation_music_path
     ? mediaUrl(wedding.invitation_music_path)
     : "/audio/priya-arjun-wedding-music.m4a";
   const invitationUrl = `${siteUrl}/invitation`;
 
-  // If visitor arrives with hash, auto-open invitation
+  // If visitor arrives with a section hash, scroll smoothly to it
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash;
-    if (hash) {
-      setIsOpened(true);
-      setMusicTrigger(true);
-      if (hash !== "#invitation-card" && hash !== "#official-invitation") {
-        setTimeout(() => {
-          const el = document.querySelector(hash);
-          el?.scrollIntoView({ behavior: "smooth" });
-        }, 400);
-      }
+    if (hash && hash !== "#invitation-card" && hash !== "#official-invitation") {
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        el?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
     }
   }, []);
 
-  function handleStartOpen() {
-    setMusicTrigger(true);
-  }
-
-  function handleOpenComplete() {
-    setIsOpened(true);
-    setTimeout(() => {
-      mainContentRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  }
-
   return (
-    <InvitationMotionProvider active={isOpened}>
+    <InvitationMotionProvider active={true}>
       <div className="invitation-theme min-h-screen bg-[#fdf5e6] text-[#3d1c00]">
         {/* Top minimal bar to return to wedding site */}
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-[#d4a843]/40 bg-[#fffcf7]/98 px-4 sm:bg-[#fffcf7]/95 sm:backdrop-blur-md sm:px-8">
@@ -102,21 +82,11 @@ export function InvitationPageClient({
           </div>
         </header>
 
-        {/* Screen 1: Cover Experience */}
-        {!isOpened ? (
-          <InvitationCover
-            wedding={wedding}
-            onStartOpen={handleStartOpen}
-            onComplete={handleOpenComplete}
-            isOpened={isOpened}
-          />
-        ) : null}
-
-        {/* Screen 2–11: Invitation Content Revealed */}
-        <div ref={mainContentRef}>
+        {/* Complete Digital Wedding Invitation Content */}
+        <div>
           <main>
             {/* Screen 1: Top Hero South Indian Gopuram Background + Toran + Names */}
-            <InvitationHero wedding={wedding} isOpened={isOpened} />
+            <InvitationHero wedding={wedding} isOpened={true} />
 
             {/* Screen 2: Welcome and Couple introduction */}
             <InvitationWelcome wedding={wedding} />
@@ -169,7 +139,7 @@ export function InvitationPageClient({
         <InvitationAudioPlayer
           audioUrl={audioUrl}
           title={wedding.invitation_music_title}
-          autoPlayTrigger={musicTrigger}
+          autoPlayTrigger={wedding.invitation_auto_play_on_open !== false}
           enabled={wedding.invitation_music_enabled !== false}
           defaultVolume={Number(wedding.invitation_music_volume ?? 0.7)}
         />
