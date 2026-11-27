@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { getServiceSupabase } from "@/lib/supabase/service";
 import { consumeRateLimit, logSecurityEvent } from "@/lib/security/rate-limit";
 import { clientIp, hashIdentifier, isSameOrigin } from "@/lib/security/request";
@@ -52,6 +53,9 @@ export async function POST(request: Request) {
   const normalizedMobile = normalizeIndianMobile(input.mobile)!;
   const app = await getAppSettings();
 
+  const cookieStore = await cookies();
+  const visitorId = cookieStore.get("wedding_visitor_id")?.value;
+
   const { data, error } = await supabase.rpc("register_participant", {
     p_full_name: input.fullName,
     p_mobile_number: input.mobile,
@@ -64,6 +68,7 @@ export async function POST(request: Request) {
     p_consent: input.consent,
     p_consent_policy_version: app.consent_policy_version,
     p_request_id: input.requestId,
+    p_visitor_id: visitorId || null,
   });
 
   if (error) {

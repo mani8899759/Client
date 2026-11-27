@@ -1,42 +1,52 @@
 import Link from "next/link";
 import { requireAdminPage } from "@/lib/auth/admin";
-import { AdminPageHeader, Panel, StatCard } from "@/components/admin/ui";
+import { AdminPageHeader, Pagination, Panel, StatCard } from "@/components/admin/ui";
 import { ToggleSetting } from "@/components/admin/ToggleSetting";
-import { ParticipantTable } from "@/components/admin/ParticipantTable";
+import { ParticipantFilterBar, ParticipantTable } from "@/components/admin/ParticipantTable";
 import { ButtonLink } from "@/components/buttons/Button";
-import { EmptyState } from "@/components/feedback/States";
-import { listParticipants, parseParticipantFilters } from "@/services/admin/participants";
+import { EmptyState, ErrorState } from "@/components/feedback/States";
+import { ADMIN_PAGE_SIZE } from "@/config/site";
+import { filtersToQuery, listParticipants, parseParticipantFilters } from "@/services/admin/participants";
 import { cn } from "@/lib/utils/cn";
 import type { AppSettings, DashboardStats } from "@/types/database";
 
-export const metadata = { title: "Registrations" };
+export const metadata = { title: "Registrations — Guest Management" };
 
-export default async function RegistrationsPage() {
+type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
+
+export default async function RegistrationsPage({ searchParams }: Props) {
   const { supabase } = await requireAdminPage();
-  const recentFilters = { ...parseParticipantFilters({}), sort: "registered_at" as const, dir: "desc" as const };
-  const [appRes, statsRes, recent, tzRes] = await Promise.all([
+  const rawParams = await searchParams;
+  const filters = parseParticipantFilters(rawParams);
+
+  const [appRes, statsRes, listRes, tzRes] = await Promise.all([
     supabase.from("app_settings").select("*").single<AppSettings>(),
     supabase.rpc("admin_dashboard_stats"),
-    listParticipants(supabase, recentFilters),
+    listParticipants(supabase, filters),
     supabase.from("wedding_settings").select("timezone").single(),
   ]);
+
   const app = appRes.data;
   const s = statsRes.data as DashboardStats | null;
   const open = app?.registration_open ?? false;
   const tz = (tzRes.data as { timezone: string } | null)?.timezone ?? "Asia/Kolkata";
+  const { rows, count, error } = listRes;
+  const pageCount = Math.max(1, Math.ceil(count / ADMIN_PAGE_SIZE));
+  const exportQuery = filtersToQuery({ ...filters, page: 1 });
+  const sep = exportQuery ? "&" : "?";
 
   return (
     <>
       <AdminPageHeader
         eyebrow="Guests"
         title="Registrations"
-        description="Control public guest registration. Closing registration is enforced on the server — the form shows a closed notice and new submissions are rejected. Existing records are always kept."
+        description="Comprehensive guest registration management. Closing registration is enforced on the server — the form displays a closed notice and new submissions are rejected while existing records are preserved."
         actions={
           <>
-            <ButtonLink href="/api/admin/participants/export?format=csv" variant="primary" size="sm">
+            <ButtonLink href={`/api/admin/participants/export${exportQuery}${sep}format=csv`} variant="primary" size="sm">
               Export CSV
             </ButtonLink>
-            <ButtonLink href="/api/admin/participants/export?format=xlsx" variant="primary" size="sm">
+            <ButtonLink href={`/api/admin/participants/export${exportQuery}${sep}format=xlsx`} variant="primary" size="sm">
               Export Excel
             </ButtonLink>
           </>
@@ -54,18 +64,20 @@ export default async function RegistrationsPage() {
           <p id="reg-status" className="text-meta text-secondary-text">
             Registration Status
           </p>
-          <p className={cn("mt-2 font-serif text-[48px] leading-none", open ? "text-[#5b634d]" : "text-secondary")}>{open ? "OPEN" : "CLOSED"}</p>
+          <p className={cn("mt-2 font-serif text-[48px] leading-none", open ? "text-[#5b634d]" : "text-secondary")}>
+            {open ? "OPEN" : "CLOSED"}
+          </p>
           <p className="mt-3 text-[14px] text-secondary-text">
             {open ? (
               <>
                 Guests can register at{" "}
-                <Link href="/register" target="_blank" className="underline underline-offset-4">
+                <Link href="/register" target="_blank" className="underline underline-offset-4 text-dark-walnut font-medium">
                   /register
                 </Link>{" "}
                 without signing in.
               </>
             ) : (
-              "The public form shows that registration is closed."
+              "The public registration form displays that registration is currently closed."
             )}
           </p>
         </div>
@@ -82,44 +94,43 @@ export default async function RegistrationsPage() {
         </div>
       </section>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatCard label="Total registrations" value={s?.total_registered ?? "—"} href="/admin/participants" />
-        <StatCard label="Bride Side" value={s?.bride_registered ?? "—"} href="/admin/participants?side=bride" />
-        <StatCard label="Groom Side" value={s?.groom_registered ?? "—"} href="/admin/participants?side=groom" />
-        <StatCard label="Verified" value={s?.total_verified ?? "—"} tone="accent" href="/admin/verification?verification=verified" />
+      {/* Summary metric cards */}
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <StatCard label="Total Registrations" value={s?.total_registered ?? "—"} href="/admin/registrations" />
+        <StatCard label="Verified" value={s?.total_verified ?? "—"} tone="accent" href="/admin/registrations?verification=verified" />
+        <StatCard label="Pending" value={s?.total_pending ?? "—"} href="/admin/registrations?verification=pending" />
+        <StatCard label="Bride Side" value={s?.bride_registered ?? "—"} href="/admin/registrations?side=bride" />
+        <StatCard label="Groom Side" value={s?.groom_registered ?? "—"} href="/admin/registrations?side=groom" />
       </div>
 
+      {/* Full registration records table with filters and pagination */}
       <Panel
-        title="Latest registrations"
+        title={`All Registered Guests (${count})`}
+        description="Private registrations with contact information, family side, verification status, and timestamps."
         className="mt-6"
-        actions={
-          <form method="get" action="/admin/participants" role="search" className="flex gap-2">
-            <label htmlFor="reg-q" className="sr-only">
-              Search participants
-            </label>
-            <input
-              id="reg-q"
-              name="q"
-              placeholder="Search name or mobile"
-              className="h-9 w-48 rounded-[var(--radius-control)] border border-soft-border bg-card-surface px-3 text-[14px] focus:border-primary focus:outline-none sm:w-60"
-            />
-            <button type="submit" className="h-9 rounded-[var(--radius-control)] bg-dark-walnut px-4 text-[13px] text-soft-cream">
-              Search
-            </button>
-          </form>
-        }
       >
-        {recent.rows.length ? (
+        <ParticipantFilterBar filters={filters} basePath="/admin/registrations" />
+
+        {error ? (
+          <ErrorState title="Registrations could not be loaded" />
+        ) : rows.length ? (
           <>
-            <ParticipantTable rows={recent.rows.slice(0, 10)} filters={recentFilters} basePath="/admin/participants" timezone={tz} />
-            <div className="mt-4 text-right">
-              <Link href="/admin/participants" className="text-[13px] underline underline-offset-4">
-                All {recent.count} participants →
-              </Link>
-            </div>
+            <ParticipantTable rows={rows} filters={filters} basePath="/admin/registrations" timezone={tz} />
+            <Pagination
+              page={filters.page}
+              pageCount={pageCount}
+              makeHref={(p) => `/admin/registrations${filtersToQuery(filters, { page: p })}`}
+            />
           </>
         ) : (
-          <EmptyState title="No registrations yet" description="New registrations will appear here as soon as guests sign up." />
+          <EmptyState
+            title="No registrations found"
+            description={
+              filters.q || filters.side || filters.verification
+                ? "Try adjusting your search query or clearing your filter criteria."
+                : "Guest registrations will appear here as soon as guests submit the form."
+            }
+          />
         )}
       </Panel>
     </>

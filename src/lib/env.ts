@@ -5,7 +5,7 @@
  */
 const DEFAULT_SITE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://sraneel-sd.vercel.app"
+    ? "https://kanmani-sd.vercel.app"
     : "http://localhost:3000";
 
 export const publicEnv = {

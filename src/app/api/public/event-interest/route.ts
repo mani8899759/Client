@@ -84,11 +84,24 @@ export async function POST(request: Request) {
     const existingVisitorId = cookieStore.get(VISITOR_COOKIE)?.value;
     const visitorId = isValidVisitorId(existingVisitorId) ? existingVisitorId : crypto.randomUUID();
 
+    // Check if this visitor is already a registered participant
+    const { data: participantRow } = await supabase
+      .from("participants")
+      .select("id")
+      .eq("visitor_id", visitorId)
+      .maybeSingle();
+
+    const participantId = participantRow?.id ?? null;
+
     // Upsert with ignoreDuplicates enforces uniqueness without inflating counts on repeat clicks
     const { error: insertErr } = await supabase
       .from("event_interests")
       .upsert(
-        { event_id: eventId, visitor_id: visitorId },
+        {
+          event_id: eventId,
+          visitor_id: visitorId,
+          ...(participantId ? { participant_id: participantId } : {}),
+        },
         { onConflict: "event_id,visitor_id", ignoreDuplicates: true },
       );
 

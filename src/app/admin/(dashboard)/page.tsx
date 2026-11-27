@@ -29,7 +29,7 @@ export default async function AdminOverview() {
   const { supabase, profile } = await requireAdminPage();
   const today = new Date().toISOString().slice(0, 10);
 
-  const [statsRes, eventsRes, streamsRes, settingsRes, auditRes, weddingRes, cfgRes] = await Promise.all([
+  const [statsRes, eventsRes, streamsRes, settingsRes, auditRes, weddingRes, cfgRes, interestRes] = await Promise.all([
     supabase.rpc("admin_dashboard_stats"),
     supabase
       .from("events")
@@ -42,6 +42,7 @@ export default async function AdminOverview() {
     supabase.from("audit_logs").select("*").order("created_at", { ascending: false }).limit(6),
     supabase.from("wedding_settings").select("timezone").single(),
     supabase.from("lucky_draw_config").select("winner_count, eligibility_rule").single(),
+    supabase.rpc("admin_event_interests_summary"),
   ]);
 
   const s = (statsRes.data as DashboardStats | null) ?? null;
@@ -54,6 +55,7 @@ export default async function AdminOverview() {
   const eligible = s ? (cfg?.eligibility_rule === "all_registered" ? s.total_registered : s.total_verified) : null;
   const liveNow = streams.find((x) => x.status === "live" && x.is_published);
   const nextStream = liveNow ?? streams.find((x) => x.status === "upcoming" && x.is_published) ?? null;
+  const totalInterested = (interestRes.data as { total_unique_interested?: number } | null)?.total_unique_interested ?? 0;
 
   return (
     <>
@@ -65,25 +67,13 @@ export default async function AdminOverview() {
         </p>
       ) : null}
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-6 lg:gap-4">
         <StatCard label="Total registrations" value={s?.total_registered ?? "—"} href="/admin/registrations" />
-        <StatCard label="Bride Side" value={s?.bride_registered ?? "—"} href="/admin/participants?side=bride" />
-        <StatCard label="Groom Side" value={s?.groom_registered ?? "—"} href="/admin/participants?side=groom" />
-        <StatCard
-          label="Registration"
-          value={app ? (app.registration_open ? "Open" : "Closed") : "—"}
-          tone={app?.registration_open ? "accent" : "default"}
-          href="/admin/registrations"
-        />
+        <StatCard label="People Interested" value={totalInterested} tone="accent" hint="Deduplicated visitors" href="/admin/interested" />
         <StatCard label="Verified" value={s?.total_verified ?? "—"} tone="accent" href="/admin/verification?verification=verified" />
         <StatCard label="Pending" value={s?.total_pending ?? "—"} href="/admin/verification" />
-        <StatCard
-          label="Draw-eligible"
-          value={eligible ?? "—"}
-          hint={cfg ? `${cfg.winner_count} winners · ${cfg.eligibility_rule === "verified_only" ? "verified only" : "all registered"}` : undefined}
-          href="/admin/lucky-draw"
-        />
-        <StatCard label="Lucky draw winners" value={s?.winner_count ?? "—"} href="/admin/winners" />
+        <StatCard label="Bride Side" value={s?.bride_registered ?? "—"} href="/admin/participants?side=bride" />
+        <StatCard label="Groom Side" value={s?.groom_registered ?? "—"} href="/admin/participants?side=groom" />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">

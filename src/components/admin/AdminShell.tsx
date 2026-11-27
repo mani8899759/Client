@@ -10,6 +10,7 @@ import {
   FileText,
   ClipboardList,
   Gift,
+  Heart,
   Home,
   MapPin,
   Images,
@@ -47,6 +48,7 @@ const NAV: Array<{ group: string | null; items: NavItem[] }> = [
     group: "Guests",
     items: [
       { href: "/admin/registrations", label: "Registrations", icon: ClipboardList },
+      { href: "/admin/interested", label: "I'm Interested", icon: Heart },
       { href: "/admin/participants", label: "Participants", icon: Users },
       { href: "/admin/verification", label: "QR & Verification", icon: QrCode },
     ],

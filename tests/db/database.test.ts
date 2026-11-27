@@ -42,8 +42,8 @@ describe("migrations", () => {
       "select bride_name, groom_name, wedding_date, timezone, wedding_time_confirmed from wedding_settings",
     );
     expect(w.rows[0]).toMatchObject({ bride_name: "Priya", groom_name: "Arjun", timezone: "Asia/Kolkata", wedding_time_confirmed: false });
-    // Midnight 1 December 2026 in India = 18:30 UTC on 30 November.
-    expect(new Date(w.rows[0]!.wedding_date).toISOString()).toBe("2026-11-30T18:30:00.000Z");
+    // Midnight 13 December 2026 in India = 18:30 UTC on 12 December.
+    expect(new Date(w.rows[0]!.wedding_date).toISOString()).toBe("2026-12-12T18:30:00.000Z");
     const cfg = await db.query<{ winner_count: number; eligibility_rule: string }>(
       "select winner_count, eligibility_rule from lucky_draw_config",
     );
@@ -419,11 +419,12 @@ describe("content RLS", () => {
     const admin = await createAdmin(db, "admin");
     await asRole(db, "authenticated", admin, (tx) =>
       tx.query(
-        `insert into events (slug, name, event_type, is_published) values ('haldi', 'Haldi', 'haldi', true), ('draft', 'Draft', 'other', false)`,
+        `insert into events (slug, name, event_type, is_published) values ('test-custom', 'Test Custom', 'other', true), ('draft', 'Draft', 'other', false)`,
       ),
     );
     const pub = await asRole(db, "anon", null, (tx) => tx.query<{ slug: string }>("select slug from events"));
-    expect(pub.rows.map((r) => r.slug)).toEqual(["haldi"]);
+    expect(pub.rows.map((r) => r.slug)).toContain("test-custom");
+    expect(pub.rows.map((r) => r.slug)).not.toContain("draft");
 
     const denied = await errorOf(
       asRole(db, "anon", null, (tx) => tx.query("insert into events (slug, name) values ('x', 'X')")),
