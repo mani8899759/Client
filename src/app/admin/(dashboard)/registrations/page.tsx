@@ -35,6 +35,11 @@ export default async function RegistrationsPage({ searchParams }: Props) {
   const exportQuery = filtersToQuery({ ...filters, page: 1 });
   const sep = exportQuery ? "&" : "?";
 
+  const totalReg = s?.total_registered ?? 0;
+  const totalVer = s?.total_verified ?? 0;
+  const totalPen = s?.total_pending ?? 0;
+  const completionRate = totalReg > 0 ? Math.round((totalVer / totalReg) * 100) : 0;
+
   return (
     <>
       <AdminPageHeader
@@ -95,10 +100,11 @@ export default async function RegistrationsPage({ searchParams }: Props) {
       </section>
 
       {/* Summary metric cards */}
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        <StatCard label="Total Registrations" value={s?.total_registered ?? "—"} href="/admin/registrations" />
-        <StatCard label="Verified" value={s?.total_verified ?? "—"} tone="accent" href="/admin/registrations?verification=verified" />
-        <StatCard label="Pending" value={s?.total_pending ?? "—"} href="/admin/registrations?verification=pending" />
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <StatCard label="Total Registrations" value={totalReg} href="/admin/registrations" />
+        <StatCard label="Successfully Verified" value={totalVer} tone="accent" href="/admin/registrations?verification=verified" />
+        <StatCard label="Pending Verification" value={totalPen} href="/admin/registrations?verification=pending" />
+        <StatCard label="Completion Rate" value={`${completionRate}%`} tone="accent" hint={`${totalVer} of ${totalReg} verified`} />
         <StatCard label="Bride Side" value={s?.bride_registered ?? "—"} href="/admin/registrations?side=bride" />
         <StatCard label="Groom Side" value={s?.groom_registered ?? "—"} href="/admin/registrations?side=groom" />
       </div>

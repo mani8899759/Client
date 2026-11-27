@@ -47,7 +47,7 @@ function sanitize(q: string): string {
 }
 
 export const PARTICIPANT_COLUMNS =
-  "id, full_name, mobile_number, normalized_mobile, email, normalized_email, gender, address, side, consent, consent_timestamp, consent_policy_version, registration_status, verification_status, registered_at, verified_at";
+  "id, full_name, mobile_number, normalized_mobile, email, normalized_email, gender, address, side, consent, consent_timestamp, consent_policy_version, registration_status, verification_status, registered_at, verified_at, verification_method";
 
 /** Admin participant query. RLS restricts this to active administrators. */
 export async function listParticipants(

@@ -9,9 +9,20 @@ export function normalizeIndianMobile(input: string): string | null {
   const raw = input.trim();
   if (!raw || raw.length > 32 || !/^[\d\s()+.-]+$/.test(raw)) return null;
   let digits = raw.replace(/\D/g, "");
-  if (digits.length === 12 && digits.startsWith("91")) digits = digits.slice(2);
-  else if (digits.length === 13 && digits.startsWith("091")) digits = digits.slice(3);
-  else if (digits.length === 11 && digits.startsWith("0")) digits = digits.slice(1);
+  // Strip leading 0s if length > 10
+  while (digits.startsWith("0") && digits.length > 10) {
+    digits = digits.slice(1);
+  }
+  // Strip country code 91 if 12 digits
+  if (digits.length === 12 && digits.startsWith("91")) {
+    digits = digits.slice(2);
+  } else if (digits.length === 13 && digits.startsWith("091")) {
+    digits = digits.slice(3);
+  }
+  // Final check for 11 digits starting with 0
+  if (digits.length === 11 && digits.startsWith("0")) {
+    digits = digits.slice(1);
+  }
   if (!/^[6-9]\d{9}$/.test(digits)) return null;
   return `+91${digits}`;
 }

@@ -61,6 +61,7 @@ export function ParticipantTable({
           <SortHeader label="Registered" column="registered_at" filters={filters} basePath={basePath} />
           <th className={th}>Verification</th>
           <SortHeader label="Verified at" column="verified_at" filters={filters} basePath={basePath} />
+          <th className={th}>Method</th>
           {actions ? (
             <th className={th}>
               <span className="sr-only">Actions</span>
@@ -89,6 +90,21 @@ export function ParticipantTable({
               <Badge tone={p.verification_status === "verified" ? "success" : "neutral"}>{p.verification_status === "verified" ? "Verified" : "Pending"}</Badge>
             </td>
             <td className={`${td} whitespace-nowrap text-secondary-text`}>{p.verified_at ? formatDateTimeInZone(p.verified_at, timezone) : "—"}</td>
+            <td className={`${td} whitespace-nowrap text-secondary-text`}>
+              {p.verification_status === "verified" ? (
+                p.verification_method === "sms_otp" ? (
+                  <Badge tone="success">SMS OTP</Badge>
+                ) : p.verification_method === "staff_assisted" ? (
+                  <Badge tone="warning">Staff Assisted</Badge>
+                ) : p.verification_method === "admin_manual" ? (
+                  <Badge tone="dark">Manual Admin</Badge>
+                ) : (
+                  <Badge tone="neutral">QR Match</Badge>
+                )
+              ) : (
+                "—"
+              )}
+            </td>
             {actions ? <td className={`${td} text-right whitespace-nowrap`}>{actions(p)}</td> : null}
           </tr>
         ))}

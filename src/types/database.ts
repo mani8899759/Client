@@ -234,6 +234,7 @@ export interface Participant {
   verification_status: VerificationStatus;
   registered_at: string;
   verified_at: string | null;
+  verification_method?: string | null;
 }
 
 export interface Checkin {
