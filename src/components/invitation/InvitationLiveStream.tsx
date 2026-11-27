@@ -6,6 +6,7 @@ import { Play, Volume2, VolumeX, Maximize2, ExternalLink, Calendar, Video, Radio
 import type { LiveStream } from "@/types/database";
 import { getYouTubeId, youTubeThumbnail } from "@/lib/utils/youtube";
 import { formatDateTimeInZone } from "@/lib/utils/datetime";
+import { OFFICIAL_LOGO } from "@/config/logo";
 import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
 
 export function InvitationLiveStream({
@@ -164,16 +165,39 @@ export function InvitationLiveStream({
               </div>
             </div>
           ) : (
-            <div className="p-8 text-center sm:p-12">
-              <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-[#f5ebd5] text-[#8b1a1a]">
-                <Radio className="size-7" />
+            <div className="relative aspect-video w-full overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#F7F0E4] to-[#EFE7D8] flex flex-col items-center justify-center p-6 text-center select-none sm:p-10">
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/60 via-transparent to-transparent pointer-events-none"
+              />
+              <div className="relative z-10 flex flex-col items-center justify-center max-w-[500px] w-full px-4">
+                <div className="relative w-full max-w-[240px] xs:max-w-[280px] sm:max-w-[360px] flex items-center justify-center py-2 sm:py-4">
+                  <Image
+                    src={OFFICIAL_LOGO.src}
+                    alt={OFFICIAL_LOGO.alt}
+                    width={OFFICIAL_LOGO.width}
+                    height={OFFICIAL_LOGO.height}
+                    priority
+                    className="h-auto w-full object-contain filter drop-shadow-xs"
+                  />
+                </div>
+
+                <div className="mt-2.5 sm:mt-4 flex items-center gap-2">
+                  <span className="h-px w-6 sm:w-12 bg-[#d4a843]" />
+                  <span className="text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.2em] text-[#8b1a1a] font-medium">
+                    Live Stream Schedule
+                  </span>
+                  <span className="h-px w-6 sm:w-12 bg-[#d4a843]" />
+                </div>
+
+                <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-[20px] font-semibold text-[#3d1c00] sm:text-[24px]">
+                  Celebration Broadcast Coming Soon
+                </h3>
+
+                <p className="mx-auto mt-1.5 max-w-[48ch] font-[family-name:var(--font-serif)] text-[14px] text-[#5c4033] sm:text-[16px]">
+                  The wedding broadcast channel will be linked closer to {weddingDateLabel}. Guests around the world will be able to watch our ceremony live right here.
+                </p>
               </div>
-              <h3 className="font-[family-name:var(--font-playfair)] text-[22px] font-semibold text-[#3d1c00]">
-                Live Stream Schedule
-              </h3>
-              <p className="mx-auto mt-2 max-w-[50ch] font-[family-name:var(--font-serif)] text-[16px] text-[#5c4033]">
-                The wedding broadcast channel will be linked closer to {weddingDateLabel}. Guests around the world will be able to watch our ceremony live right here.
-              </p>
             </div>
           )}
         </div>

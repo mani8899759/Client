@@ -76,35 +76,40 @@ export default async function LivePage() {
                 {featured.description ? <p className="mt-5 text-body text-secondary-text">{featured.description}</p> : null}
               </div>
             </Reveal>
-          ) : showLogoPlaceholder ? (
-            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-soft-cream/60 px-6 py-10 text-center sm:px-14 sm:py-14">
-              <div className="flex w-full max-w-[340px] items-center justify-center py-4 sm:max-w-[420px] sm:py-6">
-                <Image
-                  src={logoUrl}
-                  alt={OFFICIAL_LOGO.alt}
-                  width={OFFICIAL_LOGO.width}
-                  height={OFFICIAL_LOGO.height}
-                  className="h-auto w-full object-contain"
-                />
-              </div>
-              <p className="mt-5 text-[14px] text-secondary-text">
-                Live streaming details will be available soon.
-              </p>
-            </div>
           ) : (
-            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-soft-cream/60 px-6 py-10 text-center sm:px-14 sm:py-14">
-              <div className="relative aspect-[3/2] w-full max-w-[540px] overflow-hidden rounded-[var(--radius-control)] border border-soft-border bg-warm-ivory">
-                <Image
-                  src="/images/wedding-shoot/optimised/photo-13.webp"
-                  alt="Manikanta & Sravika — Real Wedding Shoot Photograph"
-                  width={2304}
-                  height={1536}
-                  className="h-full w-full object-cover object-[center_25%]"
-                />
+            <div className="flex flex-col items-center justify-center rounded-[var(--radius-surface)] border border-soft-border bg-gradient-to-b from-[#FAF7F2] via-[#F7F0E4] to-[#EFE7D8] px-6 py-12 text-center select-none sm:px-14 sm:py-16 shadow-xs">
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/60 via-transparent to-transparent pointer-events-none"
+              />
+              <div className="relative z-10 flex flex-col items-center justify-center max-w-[540px] w-full px-4">
+                <div className="relative w-full max-w-[260px] xs:max-w-[320px] sm:max-w-[420px] md:max-w-[480px] flex items-center justify-center py-2 sm:py-5">
+                  <Image
+                    src={logoUrl || OFFICIAL_LOGO.src}
+                    alt={OFFICIAL_LOGO.alt}
+                    width={OFFICIAL_LOGO.width}
+                    height={OFFICIAL_LOGO.height}
+                    priority
+                    className="h-auto w-full object-contain filter drop-shadow-xs"
+                  />
+                </div>
+
+                <div className="mt-3 sm:mt-5 flex items-center gap-2">
+                  <span className="h-px w-8 sm:w-16 bg-champagne-gold/60" />
+                  <span className="text-[11px] sm:text-[13px] font-sans uppercase tracking-[0.2em] text-[#8b1a1a] font-medium">
+                    Official Wedding Livestream
+                  </span>
+                  <span className="h-px w-8 sm:w-16 bg-champagne-gold/60" />
+                </div>
+
+                <p className="mt-2 sm:mt-3 max-w-[42ch] font-serif text-[16px] sm:text-[20px] text-dark-walnut leading-relaxed">
+                  Live broadcast will stream here on the wedding day.
+                </p>
+
+                <p className="mt-2 text-[14px] text-secondary-text">
+                  The livestream player will automatically activate once broadcasting begins.
+                </p>
               </div>
-              <p className="mt-5 text-[14px] text-secondary-text">
-                Live streaming details will be available soon.
-              </p>
             </div>
           )}
 
