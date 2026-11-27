@@ -3,50 +3,51 @@
 -- Venue 2: 'P' Conventions, Visakhapatnam, Andhra Pradesh (Reception venue)
 -- Event: Reception on December 15, 2026, 12:00 PM onwards
 
-UPDATE venues
-SET address_line1 = 'Kandukuru',
+UPDATE public.venues
+SET address = 'Kandukuru',
     city = 'Kandukuru',
     state = 'Telangana',
-    display_order = 1
+    country = 'India'
 WHERE id = 'e1000000-0000-0000-0000-000000000001';
 
-INSERT INTO venues (
-    id, name, slug, address_line1, city, state, postal_code, country,
-    display_order, is_active
+INSERT INTO public.venues (
+    id, name, address, city, state, country, latitude, longitude, google_maps_url
 ) VALUES (
     'e2000000-0000-0000-0000-000000000002',
     '''P'' Conventions',
-    'p-conventions',
     'Visakhapatnam',
     'Visakhapatnam',
     'Andhra Pradesh',
-    '530001',
     'India',
-    2,
-    true
+    17.686800,
+    83.218500,
+    'https://maps.google.com/?q=P+Conventions+Visakhapatnam'
 )
 ON CONFLICT (id) DO UPDATE SET
-    name = '''P'' Conventions',
-    address_line1 = 'Visakhapatnam',
-    city = 'Visakhapatnam',
-    state = 'Andhra Pradesh',
-    display_order = 2,
-    is_active = true;
+    name = excluded.name,
+    address = excluded.address,
+    city = excluded.city,
+    state = excluded.state,
+    country = excluded.country,
+    latitude = excluded.latitude,
+    longitude = excluded.longitude,
+    google_maps_url = excluded.google_maps_url;
 
-UPDATE events
-SET title = 'Reception',
+UPDATE public.events
+SET name = 'Reception',
+    event_type = 'reception',
     event_date = '2026-12-15',
     start_time = '12:00:00',
     time_label = '12:00 PM onwards',
     venue_id = 'e2000000-0000-0000-0000-000000000002',
     is_published = true,
-    sort_order = 5
+    sort_order = 60
 WHERE slug = 'reception';
 
-UPDATE events
+UPDATE public.events
 SET is_published = false
-WHERE slug = 'wedding-reception';
+WHERE slug in ('wedding-reception', 'pre-wedding-celebration', 'wedding-dinner-reception', 'post-wedding-celebration');
 
-UPDATE wedding_settings
+UPDATE public.wedding_settings
 SET secondary_image_path = '/images/venues/eco-villagio-resorts.webp',
     secondary_image_alt = 'Eco Villagio Resorts wedding venue';

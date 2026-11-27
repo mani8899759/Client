@@ -1,193 +1,229 @@
+-- Seed Master for Manikanta & Sravika Wedding Website
+-- Authoritative Venues, Events, Story Entries, and Settings
+
 -- 1. Venues
 insert into public.venues (id, name, address, city, state, country, latitude, longitude, google_maps_url, notes)
-values (
-  '11111111-1111-1111-1111-111111111111',
-  'The Raj Palace Heritage Grand',
-  'Amber Palace Road, Chokhi Dhani Enclave',
-  'Jaipur',
-  'Rajasthan',
-  'India',
-  26.9855,
-  75.8513,
-  'https://www.google.com/maps/dir/?api=1&destination=26.9855,75.8513',
-  'Main palace lawns, ballroom and courtyard'
-)
-on conflict (id) do update
-set name = excluded.name,
-    address = excluded.address,
-    city = excluded.city,
-    state = excluded.state,
-    latitude = excluded.latitude,
-    longitude = excluded.longitude,
-    google_maps_url = excluded.google_maps_url;
-
--- 2. Story entries (5 primary sections requested)
-delete from public.story_entries;
-
-insert into public.story_entries (chapter, title, date_label, description, image_path, image_alt, sort_order, is_published)
 values
 (
-  'Chapter 01',
-  'Every Story Has a Beginning',
-  'How We Met',
-  'Every beautiful journey begins with a simple moment. Our story began with an introduction that slowly turned into meaningful conversations and a connection that brought two families and two lives closer.',
-  'static/ai/story-first-meeting.webp',
-  'Quiet moment of introduction and conversation',
+  'e1000000-0000-0000-0000-000000000001',
+  'Eco Villagio Resorts',
+  'Kandukuru',
+  'Kandukuru',
+  'Telangana',
+  'India',
+  17.062000,
+  78.498000,
+  'https://maps.google.com/?q=Eco+Villagio+Resorts+Kandukuru+Telangana',
+  'Main wedding ceremony venue'
+),
+(
+  'e2000000-0000-0000-0000-000000000002',
+  '''P'' Conventions',
+  'Visakhapatnam',
+  'Visakhapatnam',
+  'Andhra Pradesh',
+  'India',
+  17.686800,
+  83.218500,
+  'https://maps.google.com/?q=P+Conventions+Visakhapatnam',
+  'Grand wedding reception venue'
+)
+on conflict (id) do update set
+  name = excluded.name,
+  address = excluded.address,
+  city = excluded.city,
+  state = excluded.state,
+  country = excluded.country,
+  latitude = excluded.latitude,
+  longitude = excluded.longitude,
+  google_maps_url = excluded.google_maps_url,
+  notes = excluded.notes;
+
+-- 2. Story Entries (4 Approved Milestones)
+delete from public.story_entries;
+
+insert into public.story_entries (
+  id, chapter, title, date_label, entry_date, description,
+  image_path, image_alt, sort_order, is_published
+) values
+(
+  '10000000-0000-0000-0000-000000000001',
+  'Our Beginning',
+  'A Beautiful Beginning',
+  'Our Beginning',
+  null,
+  'Every beautiful journey begins with a special moment. Our story is a collection of memories, meaningful moments and the people who made this journey special.',
+  '/images/wedding-shoot/optimised/photo-01.webp',
+  'Manikanta & Sravika — A Beautiful Beginning',
   10,
   true
 ),
 (
-  'Chapter 02',
-  'The Little Moments',
-  'Getting to Know Each Other',
-  'With every conversation and every shared moment, we discovered more about each other. The simplest experiences became memories that made this journey even more special.',
-  'static/ai/couple-prewedding.webp',
-  'The couple sharing a walk at sunset',
+  '10000000-0000-0000-0000-000000000002',
+  'Shared Memories',
+  'Moments That Became Memories',
+  'Shared Memories',
+  null,
+  'Every photograph holds a memory, every moment becomes a story, and every step brings us closer to a beautiful new beginning.',
+  '/images/wedding-shoot/optimised/photo-03.webp',
+  'Manikanta & Sravika — Moments That Became Memories',
   20,
   true
 ),
 (
-  'Chapter 03',
-  'A Promise for Forever',
-  'The Engagement',
-  'An important milestone in our journey, the engagement brought our families together and marked the beginning of an exciting new chapter.',
-  'static/ai/engagement-editorial.webp',
-  'Detail of the engagement rings',
+  '10000000-0000-0000-0000-000000000003',
+  'A Special Bond',
+  'A Celebration of Togetherness',
+  'A Special Bond',
+  null,
+  'With the love and blessings of our families, we look forward to celebrating this beautiful journey with everyone who has been part of our lives.',
+  '/images/wedding-shoot/optimised/photo-08.webp',
+  'Manikanta & Sravika — A Celebration of Togetherness',
   30,
   true
 ),
 (
-  'Chapter 04',
-  'Counting Down to Our Big Day',
-  'The Pre-Wedding Journey',
-  'As the wedding day approaches, we look forward to celebrating this wonderful occasion with our families, friends and everyone who has been part of our journey.',
-  'static/ai/story-portrait.webp',
-  'Priya and Arjun portrait at dusk',
-  40,
-  true
-),
-(
-  'Chapter 05',
-  'A New Chapter Begins',
+  '10000000-0000-0000-0000-000000000004',
+  'Our New Beginning',
+  'Forever Begins',
   'December 13, 2026',
-  'December 13, 2026, marks the beginning of a new chapter. We are excited to share this special occasion and create beautiful memories with the people who matter most.',
-  'static/ai/wedding-ceremony.webp',
-  'Sacred wedding ceremony beneath the mandap',
-  50,
+  '2026-12-13',
+  'On December 13, 2026, we begin a new chapter together. We cannot wait to share this special day with our family, friends and loved ones.',
+  '/images/wedding-shoot/optimised/photo-11.webp',
+  'Manikanta & Sravika — Forever Begins',
+  40,
   true
 );
 
--- 3. Five primary events
+-- 3. Events (6 Approved Celebrations)
 delete from public.events;
 
 insert into public.events (
   slug, event_type, name, short_description, description,
-  event_date, start_time, end_time, venue_id, dress_code,
-  image_path, image_alt, sort_order, is_published
-)
-values
+  event_date, start_time, end_time, time_period, time_label,
+  dress_code, image_path, image_alt, venue_id, sort_order, is_published
+) values
 (
   'engagement',
   'engagement',
-  'Engagement',
-  'A special occasion bringing two families together.',
-  'A special occasion bringing two families together to celebrate the beginning of a beautiful journey.',
+  'Engagement Ceremony',
+  'A beautiful beginning to our wedding celebrations, bringing our families together to share a special milestone filled with happiness and blessings.',
+  'A beautiful beginning to our wedding celebrations, bringing our families together to share a special milestone filled with happiness and blessings.',
+  '2026-12-04',
   null,
   null,
   null,
-  '11111111-1111-1111-1111-111111111111',
-  'Festive Indian Formals',
-  'static/ai/engagement-celebration.webp',
-  'Engagement celebration with ivory florals',
+  'To be announced',
+  null,
+  '/images/wedding-shoot/optimised/photo-02.webp',
+  'Engagement Ceremony celebration imagery',
+  null,
   10,
   true
 ),
 (
-  'pre-wedding-celebration',
-  'other',
-  'Pre-Wedding Celebration',
-  'Joyful moments, music and family celebration.',
-  'A gathering filled with joyful moments, photographs, family celebrations and anticipation for the big day.',
+  'mehndi',
+  'mehendi',
+  'Mehndi Ceremony',
+  'An evening filled with beautiful Mehndi designs, music, laughter and joyful moments as our families and friends come together.',
+  'An evening filled with beautiful Mehndi designs, music, laughter and joyful moments as our families and friends come together.',
+  '2026-12-11',
+  '19:00:00',
   null,
+  'evening',
+  '7:00 PM onwards',
   null,
-  null,
-  '11111111-1111-1111-1111-111111111111',
-  'Vibrant Traditional Attire',
-  'static/ai/couple-prewedding.webp',
-  'Pre-wedding celebration and memories',
+  '/images/wedding-shoot/optimised/photo-07.webp',
+  'Mehndi Ceremony celebration imagery',
+  'e1000000-0000-0000-0000-000000000001',
   20,
+  true
+),
+(
+  'haldi',
+  'haldi',
+  'Haldi Ceremony',
+  'A joyful traditional Haldi celebration filled with family moments, blessings, colours and happiness as we prepare for the wedding.',
+  'A joyful traditional Haldi celebration filled with family moments, blessings, colours and happiness as we prepare for the wedding.',
+  '2026-12-12',
+  null,
+  null,
+  'morning',
+  'Morning',
+  null,
+  '/images/wedding-shoot/optimised/photo-04.webp',
+  'Haldi Ceremony celebration imagery',
+  'e1000000-0000-0000-0000-000000000001',
+  30,
+  true
+),
+(
+  'sangeet',
+  'sangeet',
+  'Sangeet Ceremony',
+  'An evening of music, dance, performances and unforgettable celebrations with our families and loved ones.',
+  'An evening of music, dance, performances and unforgettable celebrations with our families and loved ones.',
+  '2026-12-12',
+  null,
+  null,
+  'evening',
+  'Evening',
+  null,
+  '/images/wedding-shoot/optimised/photo-09.webp',
+  'Sangeet Ceremony celebration imagery',
+  'e1000000-0000-0000-0000-000000000001',
+  40,
   true
 ),
 (
   'wedding-ceremony',
   'wedding',
   'Wedding Ceremony',
-  'The most special day as Priya & Arjun begin their journey.',
-  'The most special day, as Priya and Arjun begin their new journey together surrounded by family and friends.',
+  'The most special day of our journey, as Manikanta and Sravika begin their new life together with the blessings of their families.',
+  'The most special day of our journey, as Manikanta and Sravika begin their new life together with the blessings of their families.',
   '2026-12-13',
-  '18:00',
-  '22:00',
-  '11111111-1111-1111-1111-111111111111',
-  'Traditional Royal Indian',
-  'static/ai/wedding-ceremony.webp',
-  'Sacred pheras and floral mandap',
-  30,
-  true
-),
-(
-  'wedding-dinner-reception',
-  'reception',
-  'Wedding Dinner / Reception',
-  'An evening of togetherness and delicious celebrations.',
-  'An evening of togetherness, delicious food and celebrations with everyone who joins us for this special occasion.',
+  '08:08:00',
   null,
-  null,
-  null,
-  '11111111-1111-1111-1111-111111111111',
-  'Formal Evening Attire',
-  'static/ai/reception-celebration.webp',
-  'Candlelit wedding reception banquet',
-  40,
-  true
-),
-(
-  'post-wedding-celebration',
-  'other',
-  'Post-Wedding Celebration',
-  'Continuing the celebration with family and friends.',
-  'Continuing the celebration with family, friends and beautiful memories from the wedding.',
-  null,
-  null,
-  null,
-  '11111111-1111-1111-1111-111111111111',
-  'Elegant Contemporary Casuals',
-  'static/ai/venue-courtyard.webp',
-  'Palace courtyard celebration with lanterns',
+  'morning',
+  '08:08 AM (Muhurtham)',
+  'Traditional Festive',
+  '/images/wedding-shoot/optimised/photo-10.webp',
+  'Wedding Ceremony celebration imagery',
+  'e1000000-0000-0000-0000-000000000001',
   50,
   true
-);
-
--- 4. Live Stream
-delete from public.live_streams;
-
-insert into public.live_streams (
-  title, description, event_id, youtube_url, scheduled_at, status, sort_order, is_published
-)
-values (
-  'Priya & Arjun Wedding Ceremony Live',
-  'Join us live as Priya and Arjun tie the knot in Jaipur, Rajasthan.',
-  (select id from public.events where slug = 'wedding-ceremony'),
-  'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-  '2026-12-13 18:00:00+05:30',
-  'upcoming',
-  10,
+),
+(
+  'reception',
+  'reception',
+  'Reception',
+  'Join us as we celebrate our new beginning with family, friends, joy and togetherness at ''P'' Conventions, Visakhapatnam.',
+  'Join us as we celebrate our new beginning with family, friends, joy and togetherness at ''P'' Conventions, Visakhapatnam.',
+  '2026-12-15',
+  '12:00:00',
+  null,
+  'afternoon',
+  '12:00 PM onwards',
+  null,
+  '/images/wedding-shoot/optimised/photo-12.webp',
+  'Wedding Reception celebration imagery',
+  'e2000000-0000-0000-0000-000000000002',
+  60,
   true
 );
 
--- 5. Update website settings for Priya & Arjun
+-- 4. Website Settings for Manikanta & Sravika
 update public.wedding_settings
-set cta_primary_label = 'Win a Special Gift',
-    cta_secondary_label = 'View Our Story',
-    story_intro = 'Every beautiful journey begins with a simple moment. Here are the cherished memories and milestones leading up to our big day.',
-    story_closing = 'We cannot wait to celebrate our love and begin this new chapter together with you on December 13, 2026.'
+set bride_name = 'Sravika',
+    groom_name = 'Manikanta',
+    website_title = 'Manikanta & Sravika — Wedding Celebrations',
+    website_subtitle = 'December 13, 2026',
+    welcome_title = 'Gudla & Padakanti Families',
+    secondary_image_path = '/images/venues/eco-villagio-resorts.webp',
+    secondary_image_alt = 'Eco Villagio Resorts wedding venue',
+    hashtag = '#Kanmani',
+    hashtag_title = 'Celebrate With Us',
+    hashtag_message = 'Share your favourite moments from our celebrations with our wedding hashtag.',
+    hashtag_homepage_visible = true,
+    hashtag_invitation_visible = true
 where id = true;
