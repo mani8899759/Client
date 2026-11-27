@@ -59,7 +59,7 @@ export function DateBlock({ date, className }: { date: string | null; className?
   );
 }
 
-/** Compact editorial row for the homepage events preview. */
+/** Compact editorial row for the homepage events preview. Fully clickable and accessible. */
 export function EventRow({ event, index }: { event: WeddingEvent; index: number }) {
   const time = event.time_label || formatTimeRange(event.start_time, event.end_time);
   const venue = venueLine(event.venue);
@@ -67,42 +67,45 @@ export function EventRow({ event, index }: { event: WeddingEvent; index: number 
     <Reveal as="li" preset="fade-up" delay={index * 0.06} className="border-t border-soft-border last:border-b">
       <Link
         href={`/events/${event.slug}`}
-        className="group grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4 py-8 sm:grid-cols-[120px_1fr_auto] lg:grid-cols-[160px_1fr_240px_40px] lg:gap-x-10"
+        aria-label={`View full details for ${event.name}`}
+        className="group -mx-4 block rounded-[var(--radius-card)] px-4 py-8 transition-colors duration-300 hover:bg-card-surface/75 active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:-mx-6 sm:px-6 cursor-pointer"
       >
-        <DateBlock date={event.event_date} />
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <p className="text-meta text-muted-gold">{EVENT_TYPE_LABEL[event.event_type] ?? "Ceremony"}</p>
-            {event.time_period ? (
-              <span className="text-[11px] font-medium uppercase tracking-wider text-muted-gold/80">
-                · {event.time_period}
-              </span>
-            ) : null}
+        <div className="grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4 sm:grid-cols-[120px_1fr_auto] lg:grid-cols-[160px_1fr_240px_40px] lg:gap-x-10">
+          <DateBlock date={event.event_date} />
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <p className="text-meta text-muted-gold">{EVENT_TYPE_LABEL[event.event_type] ?? "Ceremony"}</p>
+              {event.time_period ? (
+                <span className="text-[11px] font-medium uppercase tracking-wider text-muted-gold/80">
+                  · {event.time_period}
+                </span>
+              ) : null}
+            </div>
+            <h3 className="mt-2 font-serif text-[28px] leading-tight text-dark-walnut transition-colors group-hover:text-primary sm:text-[30px]">
+              {event.name}
+            </h3>
+            <div className="mt-3 flex flex-col gap-1 text-support text-secondary-text sm:flex-row sm:flex-wrap sm:gap-x-6">
+              {time ? <span>{time}</span> : null}
+              {venue ? <span>{venue}</span> : <span>Venue details coming soon</span>}
+            </div>
           </div>
-          <h3 className="mt-2 font-serif text-[28px] leading-tight text-dark-walnut transition-colors group-hover:text-primary sm:text-[30px]">
-            {event.name}
-          </h3>
-          <div className="mt-3 flex flex-col gap-1 text-support text-secondary-text sm:flex-row sm:flex-wrap sm:gap-x-6">
-            {time ? <span>{time}</span> : null}
-            {venue ? <span>{venue}</span> : <span>Venue details coming soon</span>}
+          <div className="col-span-2 hidden sm:col-span-1 sm:block">
+            <ImageFrame
+              mediaRef={eventImage(event)}
+              alt={pickAlt(eventImage(event), event.image_alt, event.name)}
+              ratio="4/3"
+              sizes="240px"
+              placeholderLabel={event.name}
+              className="w-full sm:w-[180px] lg:w-[240px]"
+              imageClassName="transition-transform duration-[1.2s] ease-[var(--ease-editorial)] group-hover:scale-[1.03]"
+            />
           </div>
-        </div>
-        <div className="col-span-2 hidden sm:col-span-1 sm:block">
-          <ImageFrame
-            mediaRef={eventImage(event)}
-            alt={pickAlt(eventImage(event), event.image_alt, event.name)}
-            ratio="4/3"
-            sizes="240px"
-            placeholderLabel={event.name}
-            className="w-full sm:w-[180px] lg:w-[240px]"
-            imageClassName="transition-transform duration-[1.2s] ease-[var(--ease-editorial)] group-hover:scale-[1.03]"
+          <ArrowUpRight
+            aria-hidden
+            className="col-span-2 size-5 justify-self-end text-muted-gold transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary sm:col-span-1"
+            strokeWidth={1.5}
           />
         </div>
-        <ArrowUpRight
-          aria-hidden
-          className="col-span-2 size-5 justify-self-end text-muted-gold transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:col-span-1"
-          strokeWidth={1.5}
-        />
       </Link>
     </Reveal>
   );

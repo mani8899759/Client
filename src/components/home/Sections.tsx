@@ -192,11 +192,8 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
 }
 
 export function EventsPreviewSection({ events }: { events: WeddingEvent[] }) {
-  // Homepage-specific filtering: Exclude Engagement and Reception ceremonies
-  // (Main /events page and /invitation retain their respective event lists)
-  const homepageEvents = events.filter(
-    (e) => e.slug !== "engagement" && e.slug !== "reception" && e.event_type !== "reception"
-  );
+  // Homepage-specific filtering: Exclude Engagement preview; display Mehndi, Haldi, Sangeet, Wedding Ceremony, and Reception as the concluding 5th celebration
+  const homepageEvents = events.filter((e) => e.slug !== "engagement");
   const shown = homepageEvents.slice(0, 5);
   return (
     <Section tone="cream" labelledBy="events-preview-title">
@@ -296,9 +293,16 @@ export function GalleryPreviewSection({ media }: { media: GalleryMedia[] }) {
 }
 
 export function VenuePreviewSection({ wedding, venues }: { wedding: WeddingSettings; venues: VenueWithEvents[] }) {
-  const v = venues[0] ?? null;
-  const ref = pickImage(wedding.secondary_image_path, "wedding-environment");
+  // Eco Villagio Resorts in Kandukuru, Telangana is the primary wedding ceremony venue
+  const v =
+    venues.find(
+      (venue) =>
+        venue.name.toLowerCase().includes("eco villagio") ||
+        venue.events.some((e) => e.slug === "wedding-ceremony")
+    ) ?? venues[0] ?? null;
+  const ref = pickImage(wedding.secondary_image_path, "/images/venues/eco-villagio-resorts.webp");
   const directions = directionsUrl(v);
+  const altText = pickAlt(ref, wedding.secondary_image_alt, "Eco Villagio Resorts wedding venue");
   return (
     <Section tone="cream" labelledBy="venue-title">
       <Container width="wide">
@@ -306,7 +310,7 @@ export function VenuePreviewSection({ wedding, venues }: { wedding: WeddingSetti
           <Reveal preset="slide-left" className="lg:col-span-7">
             <ImageFrame
               mediaRef={ref}
-              alt={pickAlt(ref, wedding.secondary_image_alt, "The wedding venue")}
+              alt={altText}
               ratio="3/2"
               sizes="(min-width: 1024px) 55vw, 100vw"
               placeholderLabel="Venue photograph"

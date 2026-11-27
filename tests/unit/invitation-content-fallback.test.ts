@@ -71,9 +71,10 @@ describe("Authoritative Invitation Content & Fallback System", () => {
     expect(wedding.venue?.name).toBe("Eco Villagio Resorts");
 
     const reception = FALLBACK_EVENTS.find((e) => e.slug === "reception")!;
-    expect(reception.event_date).toBeNull();
-    expect(reception.time_label).toBe("To be confirmed");
-    expect(reception.venue).toBeNull();
+    expect(reception.event_date).toBe("2026-12-15");
+    expect(reception.time_label).toBe("12:00 PM onwards");
+    expect(reception.venue?.name).toBe("'P' Conventions");
+    expect(reception.venue?.city).toBe("Visakhapatnam");
   });
 
   it("verifies all referenced photographs exist as real files in public/", () => {
@@ -87,12 +88,10 @@ describe("Authoritative Invitation Content & Fallback System", () => {
   });
 
   it("handles optional venues gracefully without crashing", () => {
-    const eventsWithoutVenue = FALLBACK_EVENTS.filter((e) => !e.venue);
-    expect(eventsWithoutVenue.length).toBeGreaterThan(0);
-
     const wedding = FALLBACK_EVENTS.find((e) => e.slug === "wedding-ceremony")!;
     expect(wedding.venue).toEqual(FALLBACK_VENUE_ECO_VILLAGIO);
-    expect(wedding.venue?.city).toBe("Hyderabad");
+    expect(wedding.venue?.city).toBe("Kandukuru");
+    expect(wedding.venue?.state).toBe("Telangana");
   });
 
   it("ensures no duplicate IDs or slugs exist in fallback content", () => {
@@ -142,18 +141,26 @@ describe("Authoritative Invitation Content & Fallback System", () => {
     ]);
   });
 
-  it("filters out engagement and reception ceremonies for homepage preview while keeping 4 events", () => {
+  it("filters out engagement ceremony for homepage preview while displaying all 5 celebrations including reception", () => {
     const homepageEvents = FALLBACK_EVENTS
-      .filter((e) => e.slug !== "engagement" && e.slug !== "reception" && e.event_type !== "reception")
+      .filter((e) => e.slug !== "engagement")
       .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
 
-    expect(homepageEvents).toHaveLength(4);
+    expect(homepageEvents).toHaveLength(5);
     expect(homepageEvents.map((e) => e.slug)).toEqual([
       "mehndi",
       "haldi",
       "sangeet",
       "wedding-ceremony",
+      "reception",
     ]);
+  });
+
+  it("verifies the authentic Eco Villagio Resorts venue photograph exists in public/images/venues/", () => {
+    const venueWebp = path.join(process.cwd(), "public/images/venues/eco-villagio-resorts.webp");
+    expect(fs.existsSync(venueWebp), "Eco Villagio Resorts webp photograph must exist").toBe(true);
+    expect(DEFAULT_WEDDING.secondary_image_path).toBe("/images/venues/eco-villagio-resorts.webp");
+    expect(DEFAULT_WEDDING.secondary_image_alt).toBe("Eco Villagio Resorts wedding venue");
   });
 
   it("configures official wedding hashtag #Kanmani with copy defaults", () => {
