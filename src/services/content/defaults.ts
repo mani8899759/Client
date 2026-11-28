@@ -45,7 +45,7 @@ export const DEFAULT_WEDDING: WeddingSettings = {
   contact_email: null,
   social_links: [],
   invitation_published: true,
-  invitation_cover_heading: "A Special Invitation",
+  invitation_cover_heading: "Our Wedding Invitation",
   invitation_cover_subheading: "We're Getting Married",
   invitation_cover_image_path: "/images/wedding-shoot/optimised/photo-06.webp",
   invitation_intro_heading: "Together With Our Families",
@@ -53,8 +53,7 @@ export const DEFAULT_WEDDING: WeddingSettings = {
     "With the blessings of Sri Gudla Venu Venkata Parameswara Reddy and Smt. Nagendra Lakshmi, we solicit your gracious presence with family and friends on the auspicious occasion of the marriage of their son, Chy. Neela Manikanta, with Chy. La. Sow. Lakshmi Sravika.",
   invitation_family_names: "Sri Gudla Venu Venkata Parameswara Reddy & Smt. Nagendra Lakshmi",
   invitation_closing_heading: "Your Presence Would Mean the World to Us",
-  invitation_closing_message:
-    "We look forward to celebrating this special beginning with our family and friends. We would be delighted to have you with us.",
+  invitation_closing_message: null,
   invitation_whatsapp_message:
     "You're warmly invited to celebrate the wedding of Manikanta & Sravika on December 13, 2026. We would love to have you with us!",
   invitation_music_path: "/audio/priya-arjun-wedding-music.m4a",

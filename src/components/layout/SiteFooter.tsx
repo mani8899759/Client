@@ -57,26 +57,33 @@ export function SiteFooter({ wedding }: { wedding: WeddingSettings }) {
           </nav>
 
           <div className="lg:col-span-3">
-            {wedding.contact_name || wedding.contact_phone || wedding.contact_email ? (
-              <>
-                <p className="text-meta text-champagne-gold">Contact</p>
-                <address className="mt-5 flex flex-col gap-2 text-support not-italic">
-                  {wedding.contact_name ? <span className="text-soft-cream">{wedding.contact_name}</span> : null}
-                  {wedding.contact_phone ? (
-                    <a href={`tel:${wedding.contact_phone.replace(/[^\d+]/g, "")}`} className="hover:text-soft-cream">
-                      {wedding.contact_phone}
-                    </a>
-                  ) : null}
-                  {wedding.contact_email ? (
-                    <a href={`mailto:${wedding.contact_email}`} className="break-all hover:text-soft-cream">
-                      {wedding.contact_email}
-                    </a>
-                  ) : null}
-                </address>
-              </>
-            ) : null}
+            <div>
+              <p className="text-meta text-champagne-gold">Contact</p>
+              <address className="mt-5 flex flex-col gap-2 text-support not-italic">
+                {wedding.contact_name ? <span className="text-soft-cream">{wedding.contact_name}</span> : null}
+                {wedding.contact_phone ? (
+                  <a href={`tel:${wedding.contact_phone.replace(/[^\d+]/g, "")}`} className="hover:text-soft-cream">
+                    {wedding.contact_phone}
+                  </a>
+                ) : null}
+                {wedding.contact_email ? (
+                  <a href={`mailto:${wedding.contact_email}`} className="break-all hover:text-soft-cream">
+                    {wedding.contact_email}
+                  </a>
+                ) : null}
+                <div className="mt-3 pt-3 border-t border-soft-cream/15 flex flex-col gap-1.5">
+                  <span className="text-soft-cream font-medium">Sruthi &amp; Suraj</span>
+                  <a href="tel:+919390808327" className="hover:text-soft-cream">
+                    +91 9390808327
+                  </a>
+                  <a href="tel:+918919492032" className="hover:text-soft-cream">
+                    +91 8919492032
+                  </a>
+                </div>
+              </address>
+            </div>
             {socials.length ? (
-              <div className={wedding.contact_name || wedding.contact_phone || wedding.contact_email ? "mt-8" : ""}>
+              <div className="mt-8">
                 <p className="text-meta text-champagne-gold">Follow</p>
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                   {socials.map((s) => (

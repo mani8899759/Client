@@ -77,12 +77,12 @@ export default async function LocationsPage() {
                       <div className="mt-8">
                         <p className="text-meta text-secondary-text">Hosting</p>
                         <ul className="mt-3 flex flex-col">
-                          {v.events.map((e) => (
+                          {v.events.filter((e) => !e.slug.includes("mehndi")).map((e) => (
                             <li key={e.id} className="border-b border-soft-border last:border-b-0">
                               <Link href={`/events/${e.slug}`} className="flex items-baseline justify-between gap-4 py-3 hover:text-primary">
                                 <span className="font-serif text-[22px]">{e.name}</span>
                                 <span className="text-right text-[13px] text-secondary-text">
-                                  {[formatDateOnly(e.event_date, "short"), formatTimeOnly(e.start_time)].filter(Boolean).join(" · ")}
+                                  {[formatDateOnly(e.event_date, "short"), e.time_label || formatTimeOnly(e.start_time)].filter(Boolean).join(" · ")}
                                 </span>
                               </Link>
                             </li>

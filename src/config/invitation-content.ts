@@ -2,15 +2,16 @@ import type { StoryEntry, Venue, WeddingEvent } from "@/types/database";
 
 export const FALLBACK_VENUE_ECO_VILLAGIO: Venue = {
   id: "venue-eco-villagio",
-  name: "Eco Villagio Resorts",
-  address: "Kandukuru",
-  city: "Kandukuru",
+  name: "Eco Villagio Resorts, Hyderabad",
+  address: "S.No. 132, Eco Villagio, Gummadavelly",
+  city: "Kandukur",
   state: "Telangana",
   country: "India",
   latitude: 17.062,
   longitude: 78.498,
-  google_maps_url: "https://maps.google.com/?q=Eco+Villagio+Resorts+Kandukuru+Telangana",
-  notes: null,
+  google_maps_url:
+    "https://maps.google.com?q=S.NO,%20132,%20Eco%20Villagio,%20Gummadavelly,%20Kandukur,%20Telangana,%20India&ftid=0x3bcba99ad6db6b69:0x88e11679354fa45a",
+  notes: "Hosting Haldi Ceremony, Sangeeth Ceremony, Wedding Ceremony.",
 };
 
 export const FALLBACK_VENUE_P_CONVENTIONS: Venue = {
@@ -135,7 +136,7 @@ export const FALLBACK_EVENTS: WeddingEvent[] = [
     venue_id: null,
     venue: null,
     sort_order: 20,
-    is_published: true,
+    is_published: false,
     invitation_image_path: null,
     invitation_video_path: null,
     contact_info: null,
@@ -146,10 +147,10 @@ export const FALLBACK_EVENTS: WeddingEvent[] = [
     event_type: "haldi",
     name: "Haldi Ceremony",
     event_date: "2026-12-12",
-    start_time: null,
+    start_time: "10:00:00",
     end_time: null,
     time_period: "morning",
-    time_label: "Morning",
+    time_label: "Around 10:00 AM",
     description:
       "A joyful traditional Haldi celebration filled with family moments, blessings, colours and happiness as we prepare for the wedding.",
     short_description:
@@ -157,8 +158,8 @@ export const FALLBACK_EVENTS: WeddingEvent[] = [
     image_path: "/images/wedding-shoot/optimised/photo-04.webp",
     image_alt: "Haldi Ceremony celebration imagery",
     dress_code: null,
-    venue_id: null,
-    venue: null,
+    venue_id: FALLBACK_VENUE_ECO_VILLAGIO.id,
+    venue: FALLBACK_VENUE_ECO_VILLAGIO,
     sort_order: 30,
     is_published: true,
     invitation_image_path: null,
@@ -171,19 +172,19 @@ export const FALLBACK_EVENTS: WeddingEvent[] = [
     event_type: "sangeet",
     name: "Sangeet Ceremony",
     event_date: "2026-12-12",
-    start_time: null,
+    start_time: "18:00:00",
     end_time: null,
     time_period: "evening",
-    time_label: "Evening",
+    time_label: "Around 6:00 PM",
     description:
-      "An evening of music, dance, performances and unforgettable celebrations with our families and loved ones.",
+      "Takes place following the Haldi celebrations.",
     short_description:
-      "An evening of music, dance, performances and unforgettable celebrations with our families and loved ones.",
+      "Takes place following the Haldi celebrations.",
     image_path: "/images/wedding-shoot/optimised/photo-09.webp",
     image_alt: "Sangeet Ceremony celebration imagery",
     dress_code: null,
-    venue_id: null,
-    venue: null,
+    venue_id: FALLBACK_VENUE_ECO_VILLAGIO.id,
+    venue: FALLBACK_VENUE_ECO_VILLAGIO,
     sort_order: 40,
     is_published: true,
     invitation_image_path: null,
@@ -199,7 +200,7 @@ export const FALLBACK_EVENTS: WeddingEvent[] = [
     start_time: "08:08:00",
     end_time: null,
     time_period: "morning",
-    time_label: "08:08 AM (Muhurtham)",
+    time_label: "08:08 AM",
     description:
       "The most special day of our journey, as Manikanta and Sravika begin their new life together with the blessings of their families.",
     short_description:

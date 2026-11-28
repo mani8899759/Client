@@ -142,7 +142,7 @@ export function InvitationOpeningAnimation({
           {/* Top traditional auspicious invocation */}
           <div>
             <p className="font-[family-name:var(--font-script)] text-[28px] text-[#8b1a1a] sm:text-[34px]">
-              {wedding.invitation_cover_heading || "A Special Invitation"}
+              {wedding.invitation_cover_heading || "Our Wedding Invitation"}
             </p>
 
             <div className="mx-auto my-3 flex items-center justify-center gap-3">

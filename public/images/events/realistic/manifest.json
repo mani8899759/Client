@@ -17,17 +17,6 @@
   "aspect_ratio": "4:3",
   "events": [
     {
-      "eventSlug": "mehndi",
-      "name": "Mehndi Ceremony",
-      "fileName": "mehndi.webp",
-      "path": "/images/events/realistic/mehndi.webp",
-      "width": 1600,
-      "height": 1200,
-      "sizeBytes": 260780,
-      "format": "webp",
-      "description": "Macro editorial photograph of South Indian bride hands adorned with intricate dark-brown henna, ivory and gold silk cushion, brass katori bowls, marigold petals and jasmine buds in warm afternoon sunlight."
-    },
-    {
       "eventSlug": "haldi",
       "name": "Haldi Ceremony",
       "fileName": "haldi.webp",

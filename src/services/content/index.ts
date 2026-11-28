@@ -153,7 +153,7 @@ export const getEventBySlug = cache(async (slug: string): Promise<WeddingEvent |
   return data;
 });
 
-export type VenueWithEvents = Venue & { events: Pick<WeddingEvent, "id" | "slug" | "name" | "event_date" | "start_time">[] };
+export type VenueWithEvents = Venue & { events: Pick<WeddingEvent, "id" | "slug" | "name" | "event_date" | "start_time" | "time_label">[] };
 
 /** Venues used by published events, each with its related events, in event order. */
 export const getLocations = cache(async (): Promise<VenueWithEvents[]> => {
@@ -162,7 +162,7 @@ export const getLocations = cache(async (): Promise<VenueWithEvents[]> => {
   for (const e of events) {
     if (!e.venue) continue;
     const entry = map.get(e.venue.id) ?? { ...e.venue, events: [] };
-    entry.events.push({ id: e.id, slug: e.slug, name: e.name, event_date: e.event_date, start_time: e.start_time });
+    entry.events.push({ id: e.id, slug: e.slug, name: e.name, event_date: e.event_date, start_time: e.start_time, time_label: e.time_label });
     map.set(e.venue.id, entry);
   }
   return [...map.values()];

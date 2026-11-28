@@ -75,18 +75,13 @@ export function InvitationClosing({
 
         <h2
           id="closing-heading"
-          className="mt-1 font-[family-name:var(--font-playfair)] text-[32px] font-bold text-[#3d1c00] sm:text-[44px]"
+          className="mt-1 mb-8 font-[family-name:var(--font-playfair)] text-[32px] font-bold text-[#3d1c00] sm:mb-10 sm:text-[44px]"
         >
           {wedding.invitation_closing_heading || "Your Presence Would Mean the World to Us"}
         </h2>
 
-        <p className="mx-auto mt-4 max-w-[56ch] font-[family-name:var(--font-serif)] text-[19px] leading-relaxed text-[#5c4033] sm:text-[22px]">
-          {wedding.invitation_closing_message ||
-            "We look forward to celebrating this beautiful beginning with our family and friends. Your presence and blessings would make our celebration even more special."}
-        </p>
-
         {/* Couple Signature */}
-        <div className="mt-8 border-t border-b border-[#d4a843]/40 py-5">
+        <div className="border-t border-b border-[#d4a843]/40 py-5">
           <p className="font-[family-name:var(--font-script)] text-[24px] text-[#5c4033]">
             With Love,
           </p>

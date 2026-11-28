@@ -15,7 +15,6 @@ import { TraditionalMotifDivider } from "./TraditionalMotifDivider";
 import { MandalaDecoration } from "./MandalaDecoration";
 
 const INVITATION_EVENT_ARTWORK: Record<string, string> = {
-  mehndi: "/images/events/realistic/mehndi.webp",
   haldi: "/images/events/realistic/haldi.webp",
   sangeet: "/images/events/realistic/sangeet.webp",
   "wedding-ceremony": "/images/events/realistic/wedding.webp",
@@ -127,9 +126,9 @@ export function InvitationEvents({
                   ? `${venue.latitude},${venue.longitude}`
                   : [venue.name, venue.address, venue.city, venue.state, venue.country].filter(Boolean).join(", ")
                 : null;
-              const directionsUrl = dest
-                ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`
-                : null;
+              const directionsUrl =
+                (venue?.google_maps_url && /^https?:\/\//.test(venue.google_maps_url) ? venue.google_maps_url : null) ||
+                (dest ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}` : null);
               const isMainWedding = event.event_type === "wedding" || event.slug === "wedding-ceremony";
               const flipDesktop = idx % 2 === 1;
               const numLabel = String(idx + 1).padStart(2, "0");

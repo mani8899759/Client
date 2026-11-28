@@ -192,8 +192,8 @@ export function StoryPreviewSection({ wedding, entries }: { wedding: WeddingSett
 }
 
 export function EventsPreviewSection({ events }: { events: WeddingEvent[] }) {
-  // Homepage-specific filtering: Exclude Engagement preview; display Mehndi, Haldi, Sangeet, Wedding Ceremony, and Reception as the concluding 5th celebration
-  const homepageEvents = events.filter((e) => e.slug !== "engagement");
+  // Exclude Engagement and Mehndi; display Haldi, Sangeet, Wedding Ceremony, and Reception
+  const homepageEvents = events.filter((e) => e.slug !== "engagement" && !e.slug.includes("mehndi"));
   const shown = homepageEvents.slice(0, 5);
   return (
     <Section tone="cream" labelledBy="events-preview-title">
@@ -327,7 +327,11 @@ export function VenuePreviewSection({ wedding, venues }: { wedding: WeddingSetti
                 {v.address || v.city ? (
                   <address className="mt-4 text-body text-secondary-text not-italic">{[v.address, v.city, v.state].filter(Boolean).join(", ")}</address>
                 ) : null}
-                {v.events.length ? <p className="mt-4 text-support text-secondary-text">Hosting {v.events.map((e) => e.name).join(", ")}.</p> : null}
+                {v.events.length ? (
+                  <p className="mt-4 text-support text-secondary-text">
+                    Hosting {v.events.filter((e) => !e.slug.includes("mehndi")).map((e) => e.name).join(", ")}.
+                  </p>
+                ) : null}
               </>
             ) : (
               <p className="mt-4 text-body text-secondary-text">Venue details and directions will be announced soon.</p>

@@ -265,7 +265,7 @@ export function InvitationHeroAnimation({
             ref={invocationRef}
             className="font-[family-name:var(--font-script)] text-[28px] font-semibold text-[#8b1a1a] drop-shadow-[0_1px_3px_rgba(253,245,230,0.95)] sm:text-[36px]"
           >
-            {wedding.invitation_cover_heading || "A Special Invitation"}
+            {wedding.invitation_cover_heading || "Our Wedding Invitation"}
           </p>
 
           <div
@@ -332,14 +332,16 @@ export function InvitationHeroAnimation({
           {/* Announcement and Main Date */}
           <div
             ref={dividerBottomRef}
-            className="mx-auto mt-7 max-w-[540px] border-t border-[#d4a843]/60 pt-5 sm:mt-11 sm:pt-6"
+            className="mx-auto mt-9 max-w-[540px] border-t border-[#d4a843]/60 pt-5 sm:mt-12 sm:pt-6"
           >
-            <p
-              ref={marryingTextRef}
-              className="font-[family-name:var(--font-serif)] text-[14px] xs:text-[15px] sm:text-[17px] md:text-[18px] font-bold tracking-[0.24em] sm:tracking-[0.28em] text-[#8b1a1a] uppercase drop-shadow-[0_1px_4px_rgba(253,245,230,1)]"
-            >
-              Are Getting Married
-            </p>
+            <div className="inline-block rounded-full bg-[#fdf5e6]/85 px-6 py-1.5 backdrop-blur-xs border border-[#d4a843]/40 shadow-[0_2px_8px_rgba(212,168,67,0.12)]">
+              <p
+                ref={marryingTextRef}
+                className="font-[family-name:var(--font-serif)] text-[14px] xs:text-[15px] sm:text-[17px] md:text-[18px] font-extrabold tracking-[0.28em] sm:tracking-[0.32em] text-[#721515] uppercase drop-shadow-[0_1px_2px_rgba(253,245,230,1)]"
+              >
+                Are Getting Married
+              </p>
+            </div>
             <div
               ref={dateBadgeRef}
               className="mt-3.5 inline-block rounded-full border border-[#d4a843] bg-[#fdf5e6]/75 px-7 sm:px-9 py-1.5 backdrop-blur-[4px] shadow-[0_2px_8px_rgba(212,168,67,0.15)]"

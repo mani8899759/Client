@@ -173,12 +173,6 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             Meet The Couple
           </h2>
 
-          <div className="mt-2.5">
-            <p className="font-sans text-[12px] sm:text-[14px] font-semibold tracking-[0.2em] uppercase text-[#8b1a1a]">
-              {wedding.family_heading || "Gudla & Padakanti Families"}
-            </p>
-          </div>
-
           <p className="mx-auto mt-4 max-w-[58ch] font-[family-name:var(--font-serif)] text-[18px] leading-relaxed text-[#5c4033] sm:text-[21px]">
             {wedding.family_invitation_message ||
               wedding.invitation_intro_message ||
@@ -196,7 +190,7 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
                 alt={`${names.groom} - The Groom`}
                 fill
                 sizes="(max-width: 640px) 130px, 180px"
-                className="object-cover object-[center_15%]"
+                className="scale-115 -translate-x-1.5 sm:-translate-x-2.5 object-cover object-[center_15%]"
               />
             </CoupleGarlandFrame>
             <h3 className="mt-2.5 font-[family-name:var(--font-playfair)] text-[18px] font-bold text-[#3d1c00] sm:mt-3 sm:text-[28px]">
@@ -251,7 +245,7 @@ export function InvitationWelcome({ wedding }: { wedding: WeddingSettings }) {
             <div className="mt-2.5 rounded-[8px] border border-[#d4a843]/40 bg-[#fffcf7]/90 px-3 py-2 text-[11px] leading-snug text-[#5c4033] sm:text-[13px] text-center max-w-[220px]">
               <p className="text-[10px] font-semibold tracking-wider uppercase text-[#8b1a1a]">Daughter of</p>
               <p className="mt-0.5 font-medium text-[#3d1c00]">Smt. Padakanti Saroja</p>
-              <p className="text-[#5c4033]">Wife of late Bhrahma Chari</p>
+              <p className="text-[#5c4033]">Wife of late BrahmaChary</p>
             </div>
             {wedding.bride_intro ? (
               <p className="mt-1.5 max-w-[28ch] text-[11px] leading-relaxed text-[#7b6a58] sm:mt-2 sm:text-[13px]">

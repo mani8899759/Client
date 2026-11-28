@@ -25,15 +25,15 @@ export function venueLine(v: Venue | null | undefined): string | null {
 
 export function directionsUrl(v: Venue | null | undefined): string | null {
   if (!v) return null;
+  if (v.google_maps_url && /^https?:\/\//.test(v.google_maps_url)) {
+    return v.google_maps_url;
+  }
   if (v.latitude !== null && v.longitude !== null && !isNaN(Number(v.latitude)) && !isNaN(Number(v.longitude))) {
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${v.latitude},${v.longitude}`)}`;
   }
   const dest = [v.name, v.address, v.city, v.state, v.country].filter(Boolean).join(", ");
   if (dest) {
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
-  }
-  if (v.google_maps_url && /^https:\/\//.test(v.google_maps_url)) {
-    return v.google_maps_url;
   }
   return null;
 }
